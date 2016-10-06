@@ -1,7 +1,7 @@
 # ipsen2
 SE project 2
 
-!!! Graag niks in Master schrijven, alles in eien, local branch !!!
+!!! Graag niks in Master schrijven, alles in eigen, local branch !!!
 
 Database Connection:
 
