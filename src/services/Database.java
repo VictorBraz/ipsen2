@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
 /**
  * @author Victor
  * Created by Victor on 12-9-2016.
@@ -52,7 +53,9 @@ public class Database {
         info.put("user", "postgres");
         info.put("password", "Welkom#1");
         Connection conn = DriverManager.getConnection(URL, info);
-        System.out.print("connection donee");
+        if (conn != null) {
+            System.out.print("connection donee");
+        }
         return conn;
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.Database;
+import services.QueryUpdater;
 
 import java.sql.Connection;
 
@@ -23,6 +24,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
         this.conn = Database.getInstance().getConnection();
+        if (conn != null) {
+            new QueryUpdater().update();
+        }
     }
 
 

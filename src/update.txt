@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS test (
+testcol1 VARCHAR(255),
+testcol2 VARCHAR(255)
+);
