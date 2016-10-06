@@ -1,4 +1,4 @@
-package sample;
+package Model;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +9,10 @@ import services.Database;
 
 import java.sql.Connection;
 
+/**
+ * @author Victor
+ *
+ */
 public class Main extends Application {
 
     protected Connection conn;

@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * @author Victor
  * Created by Victor on 12-9-2016.
  */
 public class Database {
     /**
-     *
+     * @author Victor
      */
     private volatile static Database connectionInstance;
     private Database() {
@@ -24,6 +25,11 @@ public class Database {
         }
 
     }
+
+    /**
+     * @author Victor
+     * @return
+     */
     public static Database getInstance() {
         if(connectionInstance == null) {
             synchronized (Database.class){
@@ -34,6 +40,12 @@ public class Database {
         }
         return connectionInstance;
     }
+
+    /**
+     * @author
+     * @return
+     * @throws SQLException
+     */
     public Connection getConnection() throws SQLException {
         String URL = "jdbc:postgresql://localhost/HubSpot";
         Properties info = new Properties();
