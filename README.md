@@ -1,6 +1,8 @@
 # ipsen2
 SE project 2
 
+!!! Graag niks in Master schrijven, alles in eien, local branch !!!
+
 Database Connection:
 
 Maak een nieuw Database in Postgresql en noem deze: HubSpot
