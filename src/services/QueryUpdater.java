@@ -10,16 +10,19 @@ import Model.Main;
 /**
  * Created by Victor on 6-10-2016.
  */
-public class QueryUpdater extends Main {
+public class QueryUpdater extends Main  {
 
         public QueryUpdater() throws IllegalAccessException, InstantiationException, SQLException {
             super();
 
         }
 
-        public void update() {
+        public void update() throws Exception{
+
+            conn = Database.getInstance().getConnection();
             String query = getQuery();
-            System.out.print(query);
+            if (conn != null){
+            System.out.print(query);}
             execute(query);
         }
 
