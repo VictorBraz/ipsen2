@@ -51,7 +51,7 @@ public class Database {
         String URL = "jdbc:postgresql://localhost:5432/HubSpot";
         Properties info = new Properties();
         info.put("user", "postgres");
-        info.put("password", "Welkom#1");
+        info.put("password", "1");
         Connection conn = DriverManager.getConnection(URL, info);
         if (conn != null) {
             System.out.print("connection donee");
