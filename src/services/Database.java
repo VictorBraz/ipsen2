@@ -48,7 +48,7 @@ public class Database {
      * @throws SQLException
      */
     public Connection getConnection() throws SQLException {
-        String URL = "jdbc:postgresql://localhost/HubSpot";
+        String URL = "jdbc:postgresql://localhost:5432/HubSpot";
         Properties info = new Properties();
         info.put("user", "postgres");
         info.put("password", "Welkom#1");
