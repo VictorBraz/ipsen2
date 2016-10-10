@@ -17,6 +17,7 @@ Om te beginnen pull master vanuit de terminal:
 
 Maak vervolgens een eigen branch aan:
   >git checkout -b "Eigen-branch-naam"
+  
 Deze branch is local en je bent de enige die hier op werkt. 
 Om de branch Remote te maken, dus op GitHub zetten zodat je je werk opslaat doe je:
   >git push -u origin "Eigen-branch-naam"
