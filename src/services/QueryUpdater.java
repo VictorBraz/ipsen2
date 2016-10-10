@@ -27,7 +27,7 @@ public class QueryUpdater extends Main  {
         }
 
         /**
-         *
+         * @author Victor
          * @param query
          */
         public void execute(String query) {
@@ -46,7 +46,8 @@ public class QueryUpdater extends Main  {
         }
 
         /**
-         * Fetch query from update.txt file.
+         *
+         * @author
          * @return query string.
          */
         public String getQuery() {
