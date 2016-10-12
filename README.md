@@ -28,7 +28,7 @@ Elke keer dat je weer verder gaat werken in die branch doe je:
 Om je branch te pushen naar de eerder aangemaakte remote doe je de volgende commando's afzonderlijk van elkaar:
   >git add .                     //deze commando voegt alle aangepaste file toe aan git zodat je deze kan commiten
   
-  >git commit -a -m "..."        //hiermee commit je al(-a) je aangepaste files op je branch. -m staat voor Message en binnen de                                          //aanhalingstekens moet je een message typen over de commit. Wat de aanpassingen/toevoegingen zijn                                      //bijvoorbeeld. Je bent verplicht een message mee te geven anders werkt je commando niet.
+  >git commit -a -m "..."        //hiermee commit je al(-a) je aangepaste files op je branch. -m staat voor Message en binnen de                                          aanhalingstekens moet je een message typen over de commit. Wat de aanpassingen/toevoegingen zijn                                      bijvoorbeeld. Je bent verplicht een message mee te geven anders werkt je commando niet.
   >git push 
 
 Zorg ervoor dat je branch altijd up-to-date is met master, dus pull master in je branch elke keer dat master verandert.
