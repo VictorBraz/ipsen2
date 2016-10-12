@@ -21,8 +21,6 @@ public class QueryUpdater extends Main  {
 
             conn = Database.getInstance().getConnection();
             String query = getQuery();
-            if (conn != null){
-            System.out.print(query);}
             execute(query);
         }
 
