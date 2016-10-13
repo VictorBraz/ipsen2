@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import Model.Main;
+import DAO.DAO;
 /**
  * Created by Victor on 6-10-2016.
  */
-public class QueryUpdater extends Main  {
+public class QueryUpdater extends DAO {
 
         public QueryUpdater() throws IllegalAccessException, InstantiationException, SQLException {
             super();
@@ -19,10 +19,7 @@ public class QueryUpdater extends Main  {
 
         public void update() throws Exception{
 
-            conn = Database.getInstance().getConnection();
             String query = getQuery();
-            if (conn != null){
-            System.out.print(query);}
             execute(query);
         }
 
