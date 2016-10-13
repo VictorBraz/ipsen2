@@ -6,11 +6,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import javafx.scene.paint.Color;
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Gebruiker on 12-10-2016.
+ * Created by Negin Nafissi on 12-10-2016.
  */
 public class MainView extends Application {
 
@@ -39,11 +38,21 @@ public class MainView extends Application {
         Button student = new Button("Student");
         Button company = new Button("Student");
         Button client = new Button("Client");
+        Button options = new Button();
 
-        Menu options = new Menu("Options");
 
-        MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(options);
+        Image background = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/option.png"),32,32,true,true);
+        options.setGraphic(new ImageView(background));
+
+//      BackgroundImage background1 = new BackgroundImage(background, null, null, null, null);
+
+//        Menu options = new Menu("Options");
+//        MenuItem menu1 = new MenuItem("bla");
+//        MenuItem menu2 = new MenuItem("blabla");
+//        MenuItem menu3 = new MenuItem("blablabla");
+//        options.getItems().addAll(menu1, menu2, menu3);
+//        MenuBar menuBar = new MenuBar();
+//        menuBar.getMenus().addAll(options);
 
         project.setStyle("-fx-background-color: #4a148c;" +"-fx-background-radius: 30; " +
                          "-fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
@@ -73,6 +82,9 @@ public class MainView extends Application {
         client.setStyle("-fx-background-color: #ba68c8;" +"-fx-background-radius: 30;" +
                         " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                         "-fx-font-size:50px; -fx-padding: 10 20 10 20;");
+        options.setStyle("-fx-background-color: #FFFFFF;" +"-fx-background-radius: 180;" +
+                " -fx-background-insets: 0,1,2,3,0; -fx-font-weight: bold; "
+                + "-fx-padding: 10 20 10 20;");
 
         hBox.setMargin(project,new Insets(0,10,0,10));
         hBox.setMargin(student,new Insets(0,10,0,10));
@@ -82,16 +94,23 @@ public class MainView extends Application {
         hBox.getChildren().addAll(project,student,company,client);
         hBox.setAlignment(Pos.CENTER);
         borderPane.setCenter(hBox);
-        borderPane.setTop(menuBar);
+        borderPane.setTop(options);
+        borderPane.setAlignment(options, Pos.TOP_RIGHT);
+        borderPane.setAlignment(hBox, Pos.CENTER);
+        borderPane.setMargin(options,new Insets(10,10,0,0));
 
+//        borderPane.setBackground();
+//        Image background1 = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/background1.jpg"));
+//        borderPane.setBackground(
+//                new Background(new BackgroundImage(background1,
+//                        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)
+//                        ));
+//    }
 
-        Image image = new Image("mediaMap/background1.jpg");
-
-        borderPane.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER, BackgroundSize.AUTO));
-
+        borderPane.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0d47a1, #e3f2fd);");
 
         Scene scene = new Scene(borderPane, 1024, 768);
+//        scene.getStylesheets().addAll(getClass().getResource("/mediaMap/background1.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
