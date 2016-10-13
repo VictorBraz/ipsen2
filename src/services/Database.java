@@ -54,7 +54,7 @@ public class Database {
         info.put("password", "1");
         Connection conn = DriverManager.getConnection(URL, info);
         if (conn != null) {
-            System.out.print("connection donee");
+            System.out.print(" connection donee ");
         }
         return conn;
     }
