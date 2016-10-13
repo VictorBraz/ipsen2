@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -86,6 +85,26 @@ public class MainView extends Application {
                 " -fx-background-insets: 0,1,2,3,0; -fx-font-weight: bold; "
                 + "-fx-padding: 10 20 10 20;");
 
+        project.setOnAction(e ->{
+            //mouse click on project button
+        });
+
+        student.setOnAction(e ->{
+            //mouse click on student button
+        });
+
+        company.setOnAction(e ->{
+            //mouse click on company button
+        });
+
+        client.setOnAction(e ->{
+            //mouse click on client button
+        });
+
+        options.setOnAction(e ->{
+            //mouse click on option button
+        });
+
         hBox.setMargin(project,new Insets(0,10,0,10));
         hBox.setMargin(student,new Insets(0,10,0,10));
         hBox.setMargin(company,new Insets(0,10,0,10));
@@ -114,5 +133,7 @@ public class MainView extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+
 
 }
