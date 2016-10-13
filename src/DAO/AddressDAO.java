@@ -12,7 +12,8 @@ public class AddressDAO {
         return null;
     }
 
-    public void create(HashMap data) {
+    public Integer create(HashMap data) {
+        return null;
     }
 
     public void update(int addressID, HashMap data) {

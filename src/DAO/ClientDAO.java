@@ -18,4 +18,11 @@ public class ClientDAO {
     public Client find(int clientID) {
         return null;
     }
+
+    public void create(HashMap data) {
+    }
+
+    public ArrayList<Client> all() {
+        return null;
+    }
 }

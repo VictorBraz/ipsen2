@@ -8,12 +8,19 @@ import java.util.HashMap;
 /**
  * Created by Bernd on 13-10-2016.
  */
-public class Address extends AddressDAO{
+public class Address {
     private int addressID;
     private String address;
     private String zipCode;
     private String city;
     private AddressDAO addressDAO;
+
+    /**
+     * Instantiates a new Address.
+     */
+    public Address() {
+
+    }
 
     /**
      * Instantiates a new Address.
@@ -42,6 +49,12 @@ public class Address extends AddressDAO{
         this.city = city;
     }
 
+
+    /**
+     * All array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Address> all() {
         return new ArrayList<Address>();
     }
@@ -51,8 +64,9 @@ public class Address extends AddressDAO{
         return address;
     }
 
-    public void create (HashMap data) {
+    public Integer create (HashMap data) {
         addressDAO.create(data);
+        return null;
     }
 
     public void update(int addressID, HashMap data) {

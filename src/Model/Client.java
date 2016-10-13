@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Created by Bernd on 12-10-2016.
  */
-public class Client extends ClientDAO {
+public class Client {
     private int clientID;
     private String firstName;
     private String lastName;
@@ -70,6 +70,11 @@ public class Client extends ClientDAO {
         this.study = study;
     }
 
+    /**
+     * All array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Client> all() {
         ArrayList<Client> clientList = clientDAO.all();
 
@@ -100,7 +105,7 @@ public class Client extends ClientDAO {
      * @param data     the data
      */
     public void editClient(int clientID, HashMap data) {
-        Client client = this.clientDAO.find(id);
+        Client client = this.clientDAO.find(clientID);
         int addressID = client.getAddress().getAddressID();
         data.put("addressID", addressID);
         new Address().update(addressID, data);

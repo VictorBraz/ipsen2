@@ -1,5 +1,7 @@
 package Controller;
 
+import javafx.scene.layout.Pane;
+
 import java.awt.*;
 import java.util.HashMap;
 
