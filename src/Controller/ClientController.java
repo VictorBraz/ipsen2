@@ -27,7 +27,6 @@ public class ClientController {
     private String telephoneNumber;
     private String study;
     private String address;
-    private String houseNumber;
     private String zipCode;
     private String city;
 
@@ -41,7 +40,6 @@ public class ClientController {
         telephoneNumber = telephoneNumberTextField.getText();
         study = studyTextField.getText();
         address = addressTextField.getText();
-        houseNumber = houseNumberTextField.getText();
         zipCode = zipCodeTextField.getText();
         city = cityTextField.getText();
 
@@ -54,7 +52,6 @@ public class ClientController {
         data.put("telephonenumber", telephoneNumber);
         data.put("study", study);
         data.put("address", address);
-        data.put("houseNumber", houseNumber);
         data.put("zipcode", zipCode);
         data.put("city", city);
 
