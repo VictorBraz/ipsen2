@@ -85,4 +85,15 @@ public class CompanyDAO extends DAO {
         "WHERE companyid=" + company.getCompanyID());
     }
 
+    public void deleteCompany(Company company){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery("")
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 }
