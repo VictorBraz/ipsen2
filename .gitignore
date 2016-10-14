@@ -1,1 +1,7 @@
 .idea/workspace.xml
+.idea/libraries/Lib.xml
+.idea/src/
+out/production/ipsen2/postgresql-9.4-1203.jdbc4.jar
+.idea/*
+out/*
+.idea/
