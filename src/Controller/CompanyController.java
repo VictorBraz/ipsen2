@@ -51,9 +51,9 @@ public class CompanyController {
     public void cmdDeleteCompany(ObservableList<Company> companies){
         try{
             for(Company company: companies){
-                dao.
+
             }
-        }
+        } catch { }
     }
 
 }

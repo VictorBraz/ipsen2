@@ -88,7 +88,7 @@ public class CompanyDAO extends DAO {
     public void deleteCompany(Company company){
         try {
             Statement stmt = conn.createStatement();
-            stmt.executeQuery("")
+            stmt.executeQuery("");
 
         }catch (Exception e){
             e.printStackTrace();
