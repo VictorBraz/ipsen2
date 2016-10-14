@@ -30,7 +30,7 @@ public class CompanyController {
      * @author
      * @return
      */
-    public ObservableList<Company> cmdGetCompanies(){
+ /*   public ObservableList<Company> cmdGetCompanies(){
         ArrayList<Company> companies = new ArrayList<>();
         try{
             companies.addAll(dao.getAllCompanies());
@@ -54,6 +54,6 @@ public class CompanyController {
 
             }
         } catch { }
-    }
+    }*/
 
 }
