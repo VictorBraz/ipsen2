@@ -40,8 +40,8 @@ public class MainView extends Application {
         Button options = new Button();
 
 
-        //Image background = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/option.png"),32,32,true,true);
-        //options.setGraphic(new ImageView(background));
+//        Image background = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/option.png"),32,32,true,true);
+//        options.setGraphic(new ImageView(background));
 
 //      BackgroundImage background1 = new BackgroundImage(background, null, null, null, null);
 

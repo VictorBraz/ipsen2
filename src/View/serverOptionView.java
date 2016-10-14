@@ -33,10 +33,8 @@ public class serverOptionView extends Application{
         Label username = new Label("Username");
         Label password = new Label("Password");
 
-        TextField[] textField = new TextField[5];
-
         vBox1.getChildren().addAll(host, port, serverName, username, password);
-        vBox2.getChildren().addAll(textField);
+
 
         hBox.getChildren().addAll(vBox1, vBox2);
 
