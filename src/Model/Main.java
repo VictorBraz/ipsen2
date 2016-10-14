@@ -23,10 +23,7 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        this.conn = Database.getInstance().getConnection();
-        if (conn != null) {
-            new QueryUpdater().update();
-        }
+        new QueryUpdater().update();
     }
 
     public static void main(String[] args) {

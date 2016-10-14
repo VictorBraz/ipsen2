@@ -1,0 +1,311 @@
+package Model;
+
+import DAO.ClientDAO;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * Created by Bernd on 12-10-2016.
+ */
+public class Client {
+    private int clientID;
+    private String firstName;
+    private String lastName;
+    private String birthDate;
+    private String emailAddress;
+    private String telephoneNumber;
+    private String study;
+    private Address address;
+    private Note note;
+    private ClientDAO clientDAO;
+
+    /**
+     * Instantiates a new Client.
+     */
+    public Client() {
+
+    }
+
+    /**
+     * Instantiates a new Client.
+     *
+     * @param clientID the client id
+     */
+    public Client(int clientID) {
+        this.clientID = clientID;
+        this.firstName = null;
+        this.lastName = null;
+        this.birthDate = null;
+        this.emailAddress = null;
+        this.telephoneNumber = null;
+        this.address =  null;
+        this.note = null;
+        this.study = null;
+    }
+
+    /**
+     * Instantiates a new Client.
+     *
+     * @param clientID        the client id
+     * @param firstName       the first name
+     * @param lastName        the last name
+     * @param birthDate       the birth date
+     * @param emailAddress    the email address
+     * @param telephoneNumber the telephone number
+     * @param addressID       the address id
+     * @param noteID          the note id
+     * @param study           the study
+     */
+    public Client(int clientID, String firstName, String lastName, String birthDate,
+                  String emailAddress, String telephoneNumber, int addressID, int noteID, String study ) {
+        this.clientID = clientID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.emailAddress = emailAddress;
+        this.telephoneNumber = telephoneNumber;
+        this.address =  new Address(addressID);
+        this.note = new Note(noteID);
+        this.study = study;
+    }
+
+    /**
+     * All array list.
+     *
+     * @return the array list
+     */
+    public ArrayList<Client> all() {
+        ArrayList<Client> clientList = clientDAO.all();
+
+        for (Client client : clientList) {
+            client.setAddress(address.find(client.getAddress().getAddressID()));
+            client.setNote(note.find(client.getNote().getNoteID()));
+        }
+        return clientList;
+    }
+
+    /**
+     * Add client.
+     *
+     * @param data the data
+     */
+    public void addClient(HashMap data) {
+        Integer addressID = this.address.create(data);
+        Integer noteID = this.note.create(data);
+        data.put("addressID", addressID);
+        data.put("noteID", noteID);
+        this.clientDAO.create(data);
+    }
+
+    /**
+     * Edit client.
+     *
+     * @param clientID the client id
+     * @param data     the data
+     */
+    public void editClient(int clientID, HashMap data) {
+        Client client = this.clientDAO.find(clientID);
+        int addressID = client.getAddress().getAddressID();
+        data.put("addressID", addressID);
+        new Address().update(addressID, data);
+        this.clientDAO.update(clientID, data);
+    }
+
+    /**
+     * Disable client.
+     *
+     * @param clientID the client id
+     */
+    public void disableClient(int clientID) {
+        Client client = clientDAO.find(clientID);
+        clientDAO.Disable(clientID);
+    }
+
+    public Client find(int clientID) {
+        Client client = clientDAO.find(clientID);
+        client.setAddress(address.find(client.getAddress().getAddressID()));
+        client.setNote(note.find(client.getNote().getNoteID()));
+        return client;
+    }
+
+    /**
+     * Gets client id.
+     *
+     * @return the client id
+     */
+    public int getClientID() {
+        return clientID;
+    }
+
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Gets birth date.
+     *
+     * @return the birth date
+     */
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * Gets email address.
+     *
+     * @return the email address
+     */
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    /**
+     * Gets telephone number.
+     *
+     * @return the telephone number
+     */
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Gets note.
+     *
+     * @return the note
+     */
+    public Note getNote() {
+        return note;
+    }
+
+    /**
+     * Gets study.
+     *
+     * @return the study
+     */
+    public String getStudy() {
+        return study;
+    }
+
+    /**
+     * Gets client dao.
+     *
+     * @return the client dao
+     */
+    public ClientDAO getClientDAO() {
+        return clientDAO;
+    }
+
+    /**
+     * Sets client id.
+     *
+     * @param clientID the client id
+     */
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Sets birth date.
+     *
+     * @param birthDate the birth date
+     */
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    /**
+     * Sets email address.
+     *
+     * @param emailAddress the email address
+     */
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    /**
+     * Sets telephone number.
+     *
+     * @param telephoneNumber the telephone number
+     */
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    /**
+     * Sets note.
+     *
+     * @param note the note
+     */
+    public void setNote(Note note) {
+        this.note = note;
+    }
+
+    /**
+     * Sets study.
+     *
+     * @param study the study
+     */
+    public void setStudy(String study) {
+        this.study = study;
+    }
+
+    /**
+     * Sets client dao.
+     *
+     * @param clientDAO the client dao
+     */
+    public void setClientDAO(ClientDAO clientDAO) {
+        this.clientDAO = clientDAO;
+    }
+}
