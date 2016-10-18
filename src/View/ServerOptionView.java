@@ -16,9 +16,10 @@ import javafx.stage.Stage;
  * Created by Negin Nafissi on 13-10-2016.
  */
 
-public class serverOptionView extends Application{
+public class ServerOptionView extends Application{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 

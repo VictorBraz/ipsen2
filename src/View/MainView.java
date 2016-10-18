@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -34,9 +36,9 @@ public class MainView extends Application {
         Button client = new Button("Client");
         Button options = new Button();
 
-        project.setStyle("-fx-background-color: #4a148c;" +"-fx-background-radius: 30; " +
-                         "-fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
-                         "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
+        Image image = new Image("/mediaMap/options.png", 50, 50, false, false);
+        ImageView imageView = new ImageView(image);
+        options.setGraphic(imageView);
 
         project.setMinWidth(200);
         project.setMinHeight(200);
@@ -50,18 +52,23 @@ public class MainView extends Application {
         client.setMinWidth(200);
         client.setMinHeight(200);
 
+        project.setStyle("-fx-background-color: #7b1fa2;" +"-fx-background-radius: 30; " +
+                         "-fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
+                         "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        student.setStyle("-fx-background-color: #7b1fa2;" +"-fx-background-radius: 30;" +
+
+        student.setStyle("-fx-background-color: #9c27b0;" +"-fx-background-radius: 30;" +
                          " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                          "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        company.setStyle("-fx-background-color: #9c27b0;" +"-fx-background-radius: 30;" +
+        company.setStyle("-fx-background-color: #ba68c8;" +"-fx-background-radius: 30;" +
                          " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                          "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        client.setStyle("-fx-background-color: #ba68c8;" +"-fx-background-radius: 30;" +
+        client.setStyle("-fx-background-color: #e1bee7;" +"-fx-background-radius: 30;" +
                         " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                         "-fx-font-size:50px; -fx-padding: 10 20 10 20;");
+
         options.setStyle("-fx-background-color: #FFFFFF;" +"-fx-background-radius: 180;" +
                 " -fx-background-insets: 0,1,2,3,0; -fx-font-weight: bold; "
                 + "-fx-padding: 10 20 10 20;");
@@ -83,7 +90,7 @@ public class MainView extends Application {
         });
 
         options.setOnAction(e ->{
-
+            System.out.println("Yes");
         });
 
         hBox.setMargin(project,new Insets(0,10,0,10));
