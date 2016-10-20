@@ -121,6 +121,7 @@ public class ClientDAO extends DAO {
                 int rowsUpdated = statement.executeUpdate();
                 if (rowsUpdated > 0) {
                     System.out.println("An existing client was updated successfully!");
+                }
             }
             System.out.println("no existing id!");
         }

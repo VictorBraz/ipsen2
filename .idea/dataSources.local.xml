@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - HubSpot@localhost" uuid="0f4f91c3-5f33-4a49-ba89-1117924eb0c0">
+    <data-source name="PostgreSQL - HubSpot@localhost" uuid="4e92f844-39b2-45d3-8f08-999326381767">
       <database-info product="PostgreSQL" version="9.6.0" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <resolve-scope>postgres:postgres,public</resolve-scope>
+      <resolve-scope>HubSpot:public,postgres</resolve-scope>
     </data-source>
   </component>
 </project>
