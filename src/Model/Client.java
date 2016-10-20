@@ -2,9 +2,6 @@ package Model;
 
 import DAO.ClientDAO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Created by Bernd on 12-10-2016.
  */
@@ -14,7 +11,7 @@ public class Client {
     private String lastName;
     private String birthDate;
     private String emailAddress;
-    private String telephoneNumber;
+    private String phoneNumber;
     private String study;
     private Address address;
     private Note note;
@@ -25,6 +22,16 @@ public class Client {
      */
     public Client() {
 
+    }
+
+    public Client(String firstName, String lastName, String birthDate, String study,
+                  String emailAddress, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.study = study;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
     }
 
     /**
@@ -38,7 +45,7 @@ public class Client {
         this.lastName = null;
         this.birthDate = null;
         this.emailAddress = null;
-        this.telephoneNumber = null;
+        this.phoneNumber = null;
         this.address =  null;
         this.note = null;
         this.study = null;
@@ -52,19 +59,19 @@ public class Client {
      * @param lastName        the last name
      * @param birthDate       the birth date
      * @param emailAddress    the email address
-     * @param telephoneNumber the telephone number
+     * @param phoneNumber the telephone number
      * @param addressID       the address id
      * @param noteID          the note id
      * @param study           the study
      */
     public Client(int clientID, String firstName, String lastName, String birthDate,
-                  String emailAddress, String telephoneNumber, int addressID, int noteID, String study ) {
+                  String emailAddress, String phoneNumber, int addressID, int noteID, String study ) {
         this.clientID = clientID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.emailAddress = emailAddress;
-        this.telephoneNumber = telephoneNumber;
+        this.phoneNumber = phoneNumber;
         this.address =  new Address(addressID);
         this.note = new Note(noteID);
         this.study = study;
@@ -120,8 +127,8 @@ public class Client {
      *
      * @return the telephone number
      */
-    public String getTelephoneNumber() {
-        return telephoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**
@@ -208,10 +215,10 @@ public class Client {
     /**
      * Sets telephone number.
      *
-     * @param telephoneNumber the telephone number
+     * @param phoneNumber the telephone number
      */
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     /**

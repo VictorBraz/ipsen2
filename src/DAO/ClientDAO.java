@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Created by Bernd on 12-10-2016.
  */
 public class ClientDAO extends DAO {
+
+    //TODO testen en notitieid toevoegen in de logica van client
 
     public ClientDAO() throws IllegalAccessException, SQLException, InstantiationException {
         super();
@@ -23,12 +26,9 @@ public class ClientDAO extends DAO {
         }
     }
 
-    public void selectAllClients() {
-        try {
-            selectAllClientsQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public ArrayList <Client> selectAllClients() throws SQLException {
+        ArrayList<Client> clients = selectAllClientsQuery();
+        return clients;
     }
 
     public void updateClient(int clientID, Client client) {
@@ -62,26 +62,24 @@ public class ClientDAO extends DAO {
         }
     }
 
-    private void selectAllClientsQuery() throws SQLException {
+    private ArrayList <Client> selectAllClientsQuery() throws SQLException {
+        ArrayList<Client> clients = new ArrayList<Client>();
         String sql = "SELECT * FROM Client";
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
 
-        int count = 0;
-
         while (result.next()) {
-            String firstName = result.getString(2);
-            String lastName = result.getString(3);
-            String birthDate = result.getString(4);
-            String study = result.getString(5);
-            String email = result.getString(6);
-            String phoneNumber = result.getString(7);
+            Client client = new Client();
+            client.setFirstName(result.getString(2));
+            client.setLastName(result.getString(3));
+            client.setBirthDate(result.getString(4));
+            client.setStudy(result.getString(5));
+            client.setEmailAddress(result.getString(6));
+            client.setPhoneNumber(result.getString(7));
 
-            String output = "client #%d: %s - %s - %s - %s - %s - %s ";
-            System.out.println(String.format(output, ++count, firstName, lastName,
-                    birthDate, study, email, phoneNumber));
+            clients.add(client);
         }
-
+        return clients;
     }
 
     private void addClientQuery(Client client) throws SQLException {
@@ -95,7 +93,7 @@ public class ClientDAO extends DAO {
         statement.setString(4, client.getBirthDate());
         statement.setString(5, client.getStudy());
         statement.setString(6, client.getEmailAddress());
-        statement.setString(7, client.getTelephoneNumber());
+        statement.setString(7, client.getPhoneNumber());
 
         int rowsInserted = statement.executeUpdate();
         if(rowsInserted > 0) {
@@ -116,7 +114,7 @@ public class ClientDAO extends DAO {
                 statement.setString(4, client.getBirthDate());
                 statement.setString(5, client.getStudy());
                 statement.setString(6, client.getEmailAddress());
-                statement.setString(7, client.getTelephoneNumber());
+                statement.setString(7, client.getPhoneNumber());
 
                 int rowsUpdated = statement.executeUpdate();
                 if (rowsUpdated > 0) {
