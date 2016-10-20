@@ -17,11 +17,11 @@ public class CompanyDAO extends DAO {
 
     /**
      * @author Victor
-     * @param id
+     * @param
      * @return
      * @throws Exception
      */
-    public Company getCompany(int id) throws Exception{
+ /*   public Company getCompany(int id) throws Exception{
 
         Company company = new Company();
         Statement stmt = conn.createStatement();
@@ -44,7 +44,7 @@ public class CompanyDAO extends DAO {
      * @return
      * @throws Exception
      */
-    public ArrayList<Company> getAllCompanies() throws Exception {
+   /* public ArrayList<Company> getAllCompanies() throws Exception {
 
         ArrayList<Company> companies = new ArrayList<>();
         Statement stmt = conn.createStatement();
@@ -60,7 +60,7 @@ public class CompanyDAO extends DAO {
         }
         return companies;
     }
-
+*/
     public void addCompany(Company company) throws Exception{
 
         Statement stmt = conn.createStatement();
@@ -83,6 +83,17 @@ public class CompanyDAO extends DAO {
         "phonenumber='" + company.getPhoneNumber()+ "'," +
         "email='" + company.getEmailAddress()+ "'," +
         "WHERE companyid=" + company.getCompanyID());
+    }
+
+    public void deleteCompany(Company company){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery("");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }
