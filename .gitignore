@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
 *.class
@@ -15,3 +16,6 @@ hs_err_pid*
 
 .gitignore
 /.idea/
+=======
+.idea/workspace.xml
+>>>>>>> parent of 24a48ab... gitignore update
