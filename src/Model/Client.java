@@ -71,65 +71,6 @@ public class Client {
     }
 
     /**
-     * All array list.
-     *
-     * @return the array list
-     */
-    public ArrayList<Client> all() {
-        ArrayList<Client> clientList = clientDAO.all();
-
-        for (Client client : clientList) {
-            client.setAddress(address.find(client.getAddress().getAddressID()));
-            client.setNote(note.find(client.getNote().getNoteID()));
-        }
-        return clientList;
-    }
-
-    /**
-     * Add client.
-     *
-     * @param data the data
-     */
-    public void addClient(HashMap data) {
-        Integer addressID = this.address.create(data);
-        Integer noteID = this.note.create(data);
-        data.put("addressID", addressID);
-        data.put("noteID", noteID);
-        this.clientDAO.create(data);
-    }
-
-    /**
-     * Edit client.
-     *
-     * @param clientID the client id
-     * @param data     the data
-     */
-    public void editClient(int clientID, HashMap data) {
-        Client client = this.clientDAO.find(clientID);
-        int addressID = client.getAddress().getAddressID();
-        data.put("addressID", addressID);
-        new Address().update(addressID, data);
-        this.clientDAO.update(clientID, data);
-    }
-
-    /**
-     * Disable client.
-     *
-     * @param clientID the client id
-     */
-    public void disableClient(int clientID) {
-        Client client = clientDAO.find(clientID);
-        clientDAO.Disable(clientID);
-    }
-
-    public Client find(int clientID) {
-        Client client = clientDAO.find(clientID);
-        client.setAddress(address.find(client.getAddress().getAddressID()));
-        client.setNote(note.find(client.getNote().getNoteID()));
-        return client;
-    }
-
-    /**
      * Gets client id.
      *
      * @return the client id
