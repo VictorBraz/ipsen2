@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
+import services.QueryUpdater;
 
 
 /**
@@ -26,6 +26,8 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        new QueryUpdater().update();
 
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();

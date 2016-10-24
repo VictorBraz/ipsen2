@@ -37,6 +37,7 @@ public class ServerOptionView extends Application{
         hBox.setMargin(vBox1, new Insets( 0, 20, 0, 40));
         hBox.setMargin(vBox2, new Insets( 0, 20, 0, 0));
 
+
         Label host = new Label("Host: ");
         Label port = new Label("Port: ");
         Label serverName = new Label("Server name: ");
