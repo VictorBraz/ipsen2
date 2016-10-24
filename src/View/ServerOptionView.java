@@ -16,19 +16,13 @@ import javafx.stage.Stage;
  * Created by Negin Nafissi on 13-10-2016.
  */
 
-public class ServerOptionView extends Application{
+public class ServerOptionView extends HBox{
 
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public ServerOptionView(){
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(primaryStage);
+        stage.initOwner(stage);
 
         HBox hBox = new HBox();
         VBox vBox1 = new VBox();

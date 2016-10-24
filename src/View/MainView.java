@@ -27,8 +27,6 @@ public class MainView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        new QueryUpdater().update();
-
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();
 
