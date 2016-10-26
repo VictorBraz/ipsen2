@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Address (
 -- Author Victor
 -- CLIENT
 
-CREATE SEQUENCE IF NOT EXISTS client_id_seq START 2000000;
+CREATE SEQUENCE IF NOT EXISTS client_id_seq;
 CREATE TABLE IF NOT EXISTS Client (
 
     clientID INTEGER PRIMARY KEY NOT NULL DEFAULT NEXTVAL('client_id_seq'),
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Client (
 CREATE TABLE IF NOT EXISTS Student (
 
     studentID SERIAL PRIMARY KEY NOT NULL,
-    userAddressID INTEGER NOT NULL REFERENCES Address (addressID),
+    studentAddressID INTEGER NOT NULL REFERENCES Address (addressID),
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     birthDate VARCHAR(255) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Student (
 -- Author Victor
 -- COMPANY
 
-CREATE SEQUENCE IF NOT EXISTS company_id_seq START 1000000;
+CREATE SEQUENCE IF NOT EXISTS company_id_seq;
 CREATE TABLE IF NOT EXISTS Company (
 
     companyID INTEGER PRIMARY KEY NOT NULL DEFAULT NEXTVAL('company_id_seq'),
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS Company (
 
 
 
--- Author Victor
+-- Author Victor, Roel
 -- DOCUMENT
 
 CREATE TABLE IF NOT EXISTS Document (
@@ -70,17 +70,19 @@ CREATE TABLE IF NOT EXISTS Document (
     ownerIDClient INTEGER NULL REFERENCES Client (clientID),
     ownerIDStudent INTEGER NULL REFERENCES Student (studentID),
     ownerIDCompany INTEGER NULL REFERENCES Company (companyID),
+    ownerIDProject INTEGER NULL REFERENCES Project (projectID),
     CONSTRAINT CK_User_Type CHECK (
          CASE WHEN ownerIDClient IS NULL THEN 0 ELSE 1 END +
          CASE WHEN ownerIDStudent IS NULL THEN 0 ELSE 1 END +
-         CASE WHEN ownerIDCompany IS NULL THEN 0 ELSE 1 END = 1
+         CASE WHEN ownerIDCompany IS NULL THEN 0 ELSE 1 END +
+         CASE WHEN ownerIDProject IS NULL THEN 0 ELSE 1 END = 1
     ),
     documentName VARCHAR(255) NOT NULL,
     date VARCHAR(255) NOT NULL
 );
 
 
--- Author Victor
+-- Author Victor, Roel
 -- NOTE
 
 CREATE TABLE IF NOT EXISTS Note (
@@ -90,15 +92,17 @@ CREATE TABLE IF NOT EXISTS Note (
     ownerIDClient INTEGER NULL REFERENCES Client (clientID),
     ownerIDStudent INTEGER NULL REFERENCES Student (studentID),
     ownerIDCompany INTEGER NULL REFERENCES Company (companyID),
+    ownerIDProject INTEGER NULL REFERENCES Project (projectID),
          CONSTRAINT CK_User_Type CHECK (
              CASE WHEN ownerIDClient IS NULL THEN 0 ELSE 1 END +
              CASE WHEN ownerIDStudent IS NULL THEN 0 ELSE 1 END +
+             CASE WHEN ownerIDProject IS NULL THEN 0 ELSE 1 END +
              CASE WHEN ownerIDCompany IS NULL THEN 0 ELSE 1 END = 1
         )
 );
 
 
--- Author Victor
+-- Author Victor, Roel
 -- PROJECT
 
 CREATE TABLE IF NOT EXISTS Project (
@@ -107,20 +111,27 @@ CREATE TABLE IF NOT EXISTS Project (
     projectName VARCHAR(255) NOT NULL,
     studentID INTEGER NULL REFERENCES Student (studentID),
     companyID INTEGER NULL REFERENCES Company (companyID),
-    clientID INTEGER NULL REFERENCES Client (clientID),
-    documentID INTEGER NULL REFERENCES Document (documentID),
-    noteID INTEGER NULL REFERENCES Note (noteID)
+    clientID INTEGER NULL REFERENCES Client (clientID)
 
 );
 
 
--- Author Victor
+-- Author Victor, Roel
 -- TAG
 
 CREATE TABLE IF NOT EXISTS Tag (
 
     tagName VARCHAR(255) NOT NULL PRIMARY KEY,
-    ownerID INTEGER NOT NULL
+    ownerIDClient INTEGER NULL REFERENCES Client (clientID),
+    ownerIDStudent INTEGER NULL REFERENCES Student (studentID),
+    ownerIDCompany INTEGER NULL REFERENCES Company (companyID),
+    ownerIDProject INTEGER NULL REFERENCES Project (projectID),
+    CONSTRAINT CK_User_Type CHECK (
+         CASE WHEN ownerIDClient IS NULL THEN 0 ELSE 1 END +
+         CASE WHEN ownerIDStudent IS NULL THEN 0 ELSE 1 END +
+         CASE WHEN ownerIDCompany IS NULL THEN 0 ELSE 1 END +
+         CASE WHEN ownerIDProject IS NULL THEN 0 ELSE 1 END = 1
+    )
 );
 
 -- Author Victor
@@ -156,12 +167,39 @@ CREATE TABLE IF NOT EXISTS ClientCompanyRelation (
     description TEXT
 );
 
+-- Author Roel
+-- STUDENT PROJECT RELATION
+
+CREATE TABLE IF NOT EXISTS ClientProjectRelation (
+
+    clientID INTEGER NOT NULL REFERENCES Student (studentID),
+    projectID INTEGER NOT NULL REFERENCES Project (projectID);
+);
+
+-- Author Roel
+-- COMPANY PROJECT RELATION
+
+CREATE TABLE IF NOT EXISTS CompanyProjectRelation (
+
+    companyID INTEGER NOT NULL REFERENCES Company (companyID),
+    projectID INTEGER NOT NULL REFERENCES Project (projectID);
+);
+
+-- Author Roel
+-- CLIENT PROJECT RELATION
+
+CREATE TABLE IF NOT EXISTS StudentProjectRelation (
+
+    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+    projectID INTEGER NOT NULL REFERENCES Project (projectID);
+);
+
 -- Author Victor
--- USER
+-- ACCOUNT
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS Account (
 
-    username VARCHAR(255) PRIMARY KEY NOT NULL,
+    accountName VARCHAR(255) PRIMARY KEY NOT NULL,
     password VARCHAR(255) NOT NULL,
     privilege INTEGER NOT NULL,
     userIDClient INTEGER NULL REFERENCES Client (clientID),
