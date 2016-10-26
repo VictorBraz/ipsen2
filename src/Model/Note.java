@@ -13,10 +13,8 @@ public class Note {
     private int noteID;
     private int ownerID;
     private String text;
-    NoteDAO noteDAO;
 
     public Note() {
-
     }
 
     public Note(int noteID) {
@@ -30,18 +28,6 @@ public class Note {
         this.ownerID = noteID;
         this.text = text;
     }
-
-    public Note find(int noteID) {
-        Note note = noteDAO.find(noteID);
-        return note;
-    }
-
-
-
-    public int create(HashMap data) {
-        return noteDAO.create(data);
-    }
-
 
     public int getNoteID() {
         return noteID;
