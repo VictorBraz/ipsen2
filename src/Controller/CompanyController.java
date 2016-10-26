@@ -1,3 +1,4 @@
+
 package Controller;
 
 import DAO.CompanyDAO;
@@ -30,10 +31,10 @@ public class CompanyController {
      * @author
      * @return
      */
- /*   public ObservableList<Company> cmdGetCompanies(){
+   public ObservableList<Company> cmdGetCompanies(){
         ArrayList<Company> companies = new ArrayList<>();
         try{
-            companies.addAll(dao.getAllCompanies());
+            companies.addAll(dao.getCompanies());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -51,9 +52,19 @@ public class CompanyController {
     public void cmdDeleteCompany(ObservableList<Company> companies){
         try{
             for(Company company: companies){
-
+                dao.deleteCompany(company);
             }
-        } catch { }
-    }*/
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void cmdUpdateCompany(Company company){
+        try{
+            dao.updateCompany(company);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }
