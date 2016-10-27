@@ -17,12 +17,13 @@ public class AddressDAO extends DAO {
         super();
     }
 
-    public void addAddress(Address address) {
+    public Address addAddress(Address address) {
         try {
-            addAddressQuery(address);
+            address = addAddressQuery(address);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return address;
     }
 
     public void updateAddress(int addressID, Address address) {
