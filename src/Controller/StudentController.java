@@ -1,35 +1,36 @@
 package Controller;
 
+import DAO.AddressDAO;
 import DAO.StudentDAO;
+import Model.Address;
 import Model.Student;
 
 import java.util.ArrayList;
 
 public class StudentController{
 
-    private StudentDAO dao;
+    private StudentDAO studentDAO;
+    private AddressDAO addressDAO;
 
     public StudentController(){
         try{
-            this.dao = new StudentDAO();
-            this.dao.prepareStatements();
+            this.studentDAO = new StudentDAO();
+            this.studentDAO.prepareStatements();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     public void deleteStudent(Student student){
-        dao.deleteStudent(student);
+        studentDAO.deleteStudent(student);
     }
 
     public ArrayList<Student> selectAllStudents(){
-        return dao.selectAllStudents();
+        return studentDAO.selectAllStudents();
     }
 
     public void addStudent(){
-        //Address address = AddressController.addAddress(fields);
-        //Note note = NoteController.addNote()
-        Student student = new Student();
+        Student student = new Student(/*fields*/);
         //Get input from fields en set student
         //student.setFirstName();
         //student.setLastName();
@@ -38,7 +39,9 @@ public class StudentController{
         //student.setEmailAddress();
         //student.setStudy();
         //student.setPhoneNumber();
-        dao.addStudent(student);
+        addressDAO.addAddress(student.getAddress());
+
+        studentDAO.addStudent(student);
     }
 
     public void updateStudent(Student student){
@@ -50,10 +53,10 @@ public class StudentController{
         //student.setEmailAddress();
         //student.setStudy();
         //student.setPhoneNumber();
-        dao.updateStudent(student);
+        studentDAO.updateStudent(student);
     }
 
     private void close(){
-        dao.close();
+        studentDAO.close();
     }
 }

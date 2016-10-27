@@ -1,6 +1,5 @@
 package Model;
 
-import DAO.StudentDAO;
 
 /**
  * Created by Roel on 12-10-2016.
@@ -15,7 +14,6 @@ public class Student{
     private String phoneNumber;
     private Address address;
     private Note note;
-    private StudentDAO studentDAO;
 
     /**
      * Instantiates a new Student.
@@ -62,11 +60,10 @@ public class Student{
      * @param study
      * @param emailAddress
      * @param phoneNumber
-     * @param addressID
      * @param noteID
      */
     public Student(int studentID, String firstName, String lastName, String birthDate, String study,
-                   String emailAddress, String phoneNumber, int addressID, int noteID) {
+                   String emailAddress, String phoneNumber, String address, String zipCode, String city, int noteID) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,7 +71,10 @@ public class Student{
         this.study = study;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
-        this.address = new Address(addressID);
+        this.address = new Address();
+        this.address.setAddress(address);
+        this.address.setCity(city);
+        this.address.setZipCode(zipCode);
         this.note = new Note(noteID);
 
     }
