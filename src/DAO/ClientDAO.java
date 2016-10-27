@@ -8,16 +8,28 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Created by Bernd on 12-10-2016.
+ * The type Client dao.
  */
 public class ClientDAO extends DAO {
 
     //TODO testen en notitieid toevoegen in de logica van client
 
+    /**
+     * Instantiates a new Client dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws SQLException           the sql exception
+     * @throws InstantiationException the instantiation exception
+     */
     public ClientDAO() throws IllegalAccessException, SQLException, InstantiationException {
         super();
     }
 
+    /**
+     * Add client.
+     *
+     * @param client the client
+     */
     public void addClient(Client client) {
         try {
             addClientQuery(client);
@@ -26,11 +38,34 @@ public class ClientDAO extends DAO {
         }
     }
 
+    /**
+     * Select client client.
+     *
+     * @param clientID the client id
+     * @return the client
+     */
+    public Client selectClient(int clientID) throws SQLException {
+        Client client = selectClientQuery(clientID);
+        return client;
+    }
+
+    /**
+     * Select all clients array list .
+     *
+     * @return the array list
+     * @throws SQLException the sql exception
+     */
     public ArrayList <Client> selectAllClients() throws SQLException {
         ArrayList<Client> clients = selectAllClientsQuery();
         return clients;
     }
 
+    /**
+     * Update client.
+     *
+     * @param clientID the client id
+     * @param client   the client
+     */
     public void updateClient(int clientID, Client client) {
         try {
             updateClientQuery(clientID, client);
@@ -39,6 +74,11 @@ public class ClientDAO extends DAO {
         }
     }
 
+    /**
+     * Delete client.
+     *
+     * @param clientID the client id
+     */
     public void deleteClient(int clientID) {
         try {
             deleteClientQuery(clientID);
@@ -62,6 +102,26 @@ public class ClientDAO extends DAO {
         }
     }
 
+    private Client selectClientQuery(int clientID) throws SQLException{
+        String sql = "SELECT * FROM client WHERE clientid = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        ResultSet result = statement.getGeneratedKeys();
+        Client client = null;
+
+        while(result.next()) {
+            if(result.equals(client)) {
+                client = new Client();
+                client.setFirstName(result.getString(2));
+                client.setLastName(result.getString(3));
+                client.setBirthDate(result.getString(4));
+                client.setStudy(result.getString(5));
+                client.setEmailAddress(result.getString(6));
+                client.setPhoneNumber(result.getString(7));
+            }
+        }
+        return client;
+    }
+
     private ArrayList <Client> selectAllClientsQuery() throws SQLException {
         ArrayList<Client> clients = new ArrayList<Client>();
         String sql = "SELECT * FROM Client";
@@ -83,8 +143,8 @@ public class ClientDAO extends DAO {
     }
 
     private void addClientQuery(Client client) throws SQLException {
-        String sql = "INSERT INTO client (clientid, clientaddressid, firstname, lastname," +
-                " birthdate, study, email, phonenumber) VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO client (clientaddressid, firstname, lastname," +
+                " birthdate, study, email, phonenumber) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         statement.setInt(1, client.getAddress().getAddressID());
@@ -121,7 +181,6 @@ public class ClientDAO extends DAO {
                     System.out.println("An existing client was updated successfully!");
                 }
             }
-            System.out.println("no existing id!");
         }
     }
 }

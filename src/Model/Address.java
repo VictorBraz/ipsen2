@@ -13,7 +13,6 @@ public class Address {
     private String address;
     private String zipCode;
     private String city;
-    private AddressDAO addressDAO;
 
     /**
      * Instantiates a new Address.
@@ -47,36 +46,6 @@ public class Address {
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
-    }
-
-
-    /**
-     * All array list.
-     *
-     * @return the array list
-     */
-    public ArrayList<Address> all() {
-        return new ArrayList<Address>();
-    }
-
-    public Address find(int addressID){
-        Address address = addressDAO.find(addressID);
-        return address;
-    }
-
-    public Integer create (HashMap data) {
-        addressDAO.create(data);
-        return null;
-    }
-
-    public void update(int addressID, HashMap data) {
-        Address address = addressDAO.find(addressID);
-        addressDAO.update(addressID, data);
-    }
-
-    public void delete(int addressID) {
-        Address address = addressDAO.find(addressID);
-        addressDAO.delete(addressID);
     }
 
     /**

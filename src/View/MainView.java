@@ -2,18 +2,14 @@ package View;
 
 
 import javafx.application.Application;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
 import javafx.stage.Stage;
-import services.QueryUpdater;
 
 
 /**
@@ -30,8 +26,6 @@ public class MainView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        new QueryUpdater().update();
-
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();
 
@@ -41,23 +35,9 @@ public class MainView extends Application {
         Button client = new Button("Client");
         Button options = new Button();
 
-
-        //Image background = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/option.png"),32,32,true,true);
-        //options.setGraphic(new ImageView(background));
-
-//      BackgroundImage background1 = new BackgroundImage(background, null, null, null, null);
-
-//        Menu options = new Menu("Options");
-//        MenuItem menu1 = new MenuItem("bla");
-//        MenuItem menu2 = new MenuItem("blabla");
-//        MenuItem menu3 = new MenuItem("blablabla");
-//        options.getItems().addAll(menu1, menu2, menu3);
-//        MenuBar menuBar = new MenuBar();
-//        menuBar.getMenus().addAll(options);
-
-        project.setStyle("-fx-background-color: #4a148c;" +"-fx-background-radius: 30; " +
-                         "-fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
-                         "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
+        Image image = new Image("/mediaMap/options.png", 50, 50, false, false);
+        ImageView imageView = new ImageView(image);
+        options.setGraphic(imageView);
 
         project.setMinWidth(200);
         project.setMinHeight(200);
@@ -71,18 +51,23 @@ public class MainView extends Application {
         client.setMinWidth(200);
         client.setMinHeight(200);
 
+        project.setStyle("-fx-background-color: #7b1fa2;" +"-fx-background-radius: 30; " +
+                         "-fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
+                         "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        student.setStyle("-fx-background-color: #7b1fa2;" +"-fx-background-radius: 30;" +
+
+        student.setStyle("-fx-background-color: #9c27b0;" +"-fx-background-radius: 30;" +
                          " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                          "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        company.setStyle("-fx-background-color: #9c27b0;" +"-fx-background-radius: 30;" +
+        company.setStyle("-fx-background-color: #ba68c8;" +"-fx-background-radius: 30;" +
                          " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                          "-fx-font-size: 50px; -fx-padding: 10 20 10 20;");
 
-        client.setStyle("-fx-background-color: #ba68c8;" +"-fx-background-radius: 30;" +
+        client.setStyle("-fx-background-color: #e1bee7;" +"-fx-background-radius: 30;" +
                         " -fx-background-insets: 0,1,2,3,0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; " +
                         "-fx-font-size:50px; -fx-padding: 10 20 10 20;");
+
         options.setStyle("-fx-background-color: #FFFFFF;" +"-fx-background-radius: 180;" +
                 " -fx-background-insets: 0,1,2,3,0; -fx-font-weight: bold; "
                 + "-fx-padding: 10 20 10 20;");
@@ -104,7 +89,7 @@ public class MainView extends Application {
         });
 
         options.setOnAction(e ->{
-            //mouse click on option button
+            System.out.println("Yes");
         });
 
         hBox.setMargin(project,new Insets(0,10,0,10));
@@ -120,18 +105,9 @@ public class MainView extends Application {
         borderPane.setAlignment(hBox, Pos.CENTER);
         borderPane.setMargin(options,new Insets(10,10,0,0));
 
-//        borderPane.setBackground();
-//        Image background1 = new Image(getClass().getClassLoader().getResourceAsStream("mediaMap/background1.jpg"));
-//        borderPane.setBackground(
-//                new Background(new BackgroundImage(background1,
-//                        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)
-//                        ));
-//    }
-
-        borderPane.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0d47a1, #e3f2fd);");
+        borderPane.setStyle("-fx-background-color: linear-gradient(from 50% 50% to 5% 5%,  #3498db , #e3f2fd);");
 
         Scene scene = new Scene(borderPane, 1024, 768);
-//        scene.getStylesheets().addAll(getClass().getResource("/mediaMap/background1.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
