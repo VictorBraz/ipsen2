@@ -81,6 +81,7 @@ public class CompanyDAO extends DAO {
         stmt.setString(4, company.getPhoneNumber());
         stmt.setString(5, company.getEmailAddress());
 
+        //TestDing...
         int rowsInserted = stmt.executeUpdate();
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
