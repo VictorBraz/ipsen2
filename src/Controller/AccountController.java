@@ -46,7 +46,7 @@ public class AccountController {
             e.printStackTrace();
         }
     }
-
+/**
     public Account cmdSelectAccount(Account account){
         Account acc = new Account();
         try{
@@ -56,7 +56,7 @@ public class AccountController {
         }
         return acc;
     }
-
+*/
     public ArrayList<Account> cmdSelectAllAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         try{

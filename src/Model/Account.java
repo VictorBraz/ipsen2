@@ -7,6 +7,7 @@ public class Account {
     private String userName;
     private String password;
     private String rightName;
+    private int userId;
 
     public Account(){
         userName = "";
@@ -42,5 +43,13 @@ public class Account {
 
     public void setRightName(String rightName) {
         this.rightName = rightName;
+    }
+
+    public void setUserID(int userId){
+        this.userId = userId;
+    }
+
+    public  int getUserId(){
+        return this.userId;
     }
 }
