@@ -39,7 +39,7 @@ public class StudentController{
         //student.setEmailAddress();
         //student.setStudy();
         //student.setPhoneNumber();
-        addressDAO.addAddress(student.getAddress());
+        student.setAddress(addressDAO.addAddress(student.getAddress()));
 
         studentDAO.addStudent(student);
     }
