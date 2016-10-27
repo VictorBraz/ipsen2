@@ -17,12 +17,13 @@ public class AddressDAO extends DAO {
         super();
     }
 
-    public void addAddress(Address address) {
+    public Address addAddress(Address address) {
         try {
-            addAddressQuery(address);
+            address = addAddressQuery(address);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return address;
     }
 
     public void updateAddress(int addressID, Address address) {
@@ -51,19 +52,21 @@ public class AddressDAO extends DAO {
 //    }
 
 
-    private void addAddressQuery(Address address) throws SQLException {
+    private Address addAddressQuery(Address address) throws SQLException {
         String sql = "INSERT INTO address (address, zipcode, city) VALUES (?,?,?)";
-
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, address.getAddress());
         statement.setString(2, address.getZipCode());
         statement.setString(3, address.getCity());
+        ResultSet rs = statement.getGeneratedKeys();
+        address.setAddressID(rs.getInt(1));
 
         int rowInserted = statement.executeUpdate();
         if (rowInserted > 0) {
             System.out.println("A new address was inserted succesfully!");
         }
+        return address;
     }
 
     private void updateAddressQuery(int addressID, Address address) throws SQLException {
