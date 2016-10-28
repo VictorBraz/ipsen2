@@ -81,6 +81,7 @@ public class CompanyDAO extends DAO {
         stmt.setString(4, company.getPhoneNumber());
         stmt.setString(5, company.getEmailAddress());
 
+        //TestDing...
         int rowsInserted = stmt.executeUpdate();
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
@@ -136,11 +137,12 @@ public class CompanyDAO extends DAO {
     }
     private ArrayList<Company> getCompaniesQuery()throws  Exception{
         String sql = "SELECT * FROM company";
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery(sql);
+        PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        ResultSet resultSet = stmt.getGeneratedKeys();
 
         while(resultSet.next()){
             Company company = new Company();
+            company.setCompanyID(resultSet.getInt(1));
             company.setCompanyAddressid(resultSet.getInt(2));
             company.setCompanyName(resultSet.getString(3));
             company.setContactPerson(resultSet.getString(4));

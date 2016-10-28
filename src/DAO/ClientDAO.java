@@ -157,7 +157,7 @@ public class ClientDAO extends DAO {
 
         int rowsInserted = statement.executeUpdate();
         if(rowsInserted > 0) {
-            System.out.println("A new client was inserted succesfully!");
+            System.out.println("A new document was inserted succesfully!");
         }
     }
 

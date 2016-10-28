@@ -61,8 +61,6 @@ public class LoginView extends Application{
         hBox.getChildren().add(signIn);
         pane.add(hBox, 1, 4);
 
-        pane.setStyle("-fx-background-color: linear-gradient(from 50% 50% to 5% 5%,  #3498db , #e3f2fd);");
-
         Scene scene = new Scene(pane, 350, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
