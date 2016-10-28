@@ -1,5 +1,7 @@
 package Model;
 
+import DAO.DocumentDAO;
+
 /**
  * Created by Negin Nafissi on 27-10-2016.
  */
@@ -9,17 +11,21 @@ public class Document {
     private int ownerID;
     private String date;
     private String ownerName;
+    private String location;
+    private DocumentDAO documentDAO;
 
     public Document(){
 
     }
+
     public Document(int documentID, String documentName, int ownerID,
-                    String date, String ownerName){
+                    String date, String ownerName, String location){
         this.documentID = documentID;
         this.documentName = documentName;
         this.ownerID = ownerID;
         this.date = date;
         this.ownerName = ownerName;
+        this.location = location;
     }
 
     public int getDocumentID() {
@@ -60,5 +66,21 @@ public class Document {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public DocumentDAO getDocumentDAO() {
+        return documentDAO;
+    }
+
+    public void setDocumentDAO(DocumentDAO documentDAO) {
+        this.documentDAO = documentDAO;
     }
 }
