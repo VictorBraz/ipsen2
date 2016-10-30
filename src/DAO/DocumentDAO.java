@@ -1,16 +1,19 @@
 package DAO;
 
 import Model.Document;
+import javafx.stage.FileChooser;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
  * Created by Negin Nafissi on 27-10-2016.
  */
 public class DocumentDAO extends DAO{
+
+    private File file = null;
+    private FileInputStream fis;
 
     public DocumentDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
@@ -24,12 +27,12 @@ public class DocumentDAO extends DAO{
         }
     }
 
-    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException{
+    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = selectAllDocumentsQuery(ownerID);
         return documents;
     }
 
-    public Document selectDocument(int documentID) throws SQLException{
+    public Document selectDocument(int documentID) throws SQLException, IOException {
         Document document = selectDocumentQuery(documentID);
         return document;
     }
@@ -44,21 +47,28 @@ public class DocumentDAO extends DAO{
     }
 
 
-    private void addDocumentQuery(Document document) throws SQLException {
-        String sql = "INSERT INTO document (documentname, ownerid," +
-                " date, ownername) VALUES (?, ?, ?, ?)";
+    private void addDocumentQuery(Document document) throws SQLException, IOException {
+        String sql = "INSERT INTO document (documentname, ownerid" +
+                " date, ownername, pdffile) VALUES (?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         statement.setString(1, document.getDocumentName());
         statement.setInt(2, document.getOwnerID());
         statement.setString(3, document.getDate());
         statement.setString(4, document.getOwnerName());
-
+        if (file != null){
+            fis = new FileInputStream(file);
+            statement.setBinaryStream(5, fis);
+            fis.close();
+        } else {
+            statement.setNull(5, Types.OTHER);
+        }
+        statement.execute();
         statement.close();
     }
 
 
-    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException {
+    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT * FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -75,7 +85,7 @@ public class DocumentDAO extends DAO{
         return documents;
     }
 
-    private Document selectDocumentQuery(int documentID) throws SQLException {
+    private Document selectDocumentQuery(int documentID) throws SQLException, IOException {
         String sql = "SELECT * FROM document WHERE documenttid = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.getGeneratedKeys();
@@ -110,5 +120,4 @@ public class DocumentDAO extends DAO{
         }
         statement.close();
     }
-
 }
