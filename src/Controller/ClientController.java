@@ -2,16 +2,11 @@ package Controller;
 
 import DAO.ClientDAO;
 import Model.Client;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
 
-import java.awt.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Bernd on 12-10-2016.

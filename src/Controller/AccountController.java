@@ -13,7 +13,7 @@ public class AccountController {
     private AccountDAO accountDAO;
 //    private AccountView accountView;
 //    private AccountCreatorView accountCreatorView;
-//    private LoginView loginView;
+//    private LoginView.fxml loginView;
 
     private AccountController(){
         try{

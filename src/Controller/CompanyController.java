@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class CompanyController {
 
-    //private final MainController mainController;
+    //private final MainMenuController mainController;
     private CompanyDAO dao;
 
     public CompanyController() {

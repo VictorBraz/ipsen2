@@ -2,15 +2,42 @@ package Controller;
 
 import DAO.AddressDAO;
 import DAO.StudentDAO;
-import Model.Address;
 import Model.Student;
+import Model.TableViewItem;
+import contentloader.ContentLoader;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class StudentController{
+public class StudentController extends ContentLoader implements Initializable{
+
+    @FXML private TableView<TableViewItem> tableView;
+    @FXML private TableColumn checkBoxColumn;
+    @FXML private TableColumn<?, ?> firstNameColumn;
+    @FXML private TableColumn<?, ?> lastNameColumn;
+    @FXML private TableColumn<?, ?> birthDateColumn;
+    @FXML private TableColumn<?, ?> adresColumn;
+    @FXML private TableColumn zipCodeColumn;
+    @FXML private TableColumn<?, ?> cityColum;
+    @FXML private TableColumn<?, ?> emailColumn;
+    @FXML private TableColumn<?, ?> studyColum;
+    @FXML private TableColumn<?, ?> phoneNumberColumn;
+    @FXML private TableColumn<?, ?> tagColumn;
+
+    private int selectedStudentID;
+    private ObservableList<TableViewItem> studentData;
+
 
     private StudentDAO studentDAO;
     private AddressDAO addressDAO;
+    private ResourceBundle resources;
 
     public StudentController(){
         try{
@@ -20,6 +47,30 @@ public class StudentController{
             e.printStackTrace();
         }
     }
+
+
+
+
+    @FXML
+    void handleAddButton(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleDeleteButton(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleZoominButton(MouseEvent event) {
+
+    }
+
+
+
+
+
+
 
     public void deleteStudent(Student student){
         studentDAO.deleteStudent(student);
@@ -58,5 +109,11 @@ public class StudentController{
 
     private void close(){
         studentDAO.close();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.resources = resources;
+        setMainFrameTitle(resources.getString("STUDENT_TITLE"));
     }
 }
