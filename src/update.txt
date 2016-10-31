@@ -73,7 +73,7 @@ projectName VARCHAR(255) NOT NULL,
 );
 
 
--- Author Victor, Roel
+-- Author Victor, Roel, Negin
 -- DOCUMENT
 
 CREATE TABLE IF NOT EXISTS Document (
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS Document (
     ownerID INTEGER NOT NULL,
     documentName VARCHAR(255) NOT NULL,
     date VARCHAR(255) NOT NULL,
-    location VARCHAR(255) NOT NULL
+    pdffile bytea,
 );
 
 
