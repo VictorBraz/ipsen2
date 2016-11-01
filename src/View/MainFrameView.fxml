@@ -32,8 +32,22 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="1164.0" layoutY="14.0" styleClass="buttonWithoutHover" />
-            <Pane layoutX="1101.0" layoutY="20.0" styleClass="buttonWithoutHover" />
+            <Pane layoutX="1309.0" layoutY="17.0" styleClass="buttonWithoutHover">
+               <children>
+                  <ImageView fx:id="closeButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/CloseButton.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Pane layoutX="1263.0" layoutY="21.0" styleClass="buttonWithoutHover">
+               <children>
+                  <ImageView fx:id="minimizeButton" fitHeight="32.0" fitWidth="36.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/MinimizeButton.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
             <Pane layoutX="34.0" layoutY="16.0" styleClass="buttonWithoutHover">
                <children>
                   <ImageView fx:id="menuButton" fitHeight="67.0" fitWidth="57.0" layoutX="-14.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true">
@@ -43,26 +57,16 @@
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fx:id="closeButton" fitHeight="43.0" fitWidth="43.0" layoutX="1309.0" layoutY="22.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../mediaMap/CloseButton.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="minimizeButton" fitHeight="32.0" fitWidth="36.0" layoutX="1270.0" layoutY="26.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../mediaMap/MinimizeButton.png" />
-               </image>
-            </ImageView>
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" height="95.63" radius="23.4075" width="0.0" />
          </effect>
       </AnchorPane>
-      <AnchorPane fx:id="navigationMenu" layoutX="1.0" layoutY="81.0" maxHeight="1.7976931348623157E308" prefHeight="869.0" prefWidth="279.0" translateX="-276.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.topAnchor="81.0">
+      <AnchorPane fx:id="navigationMenu" layoutX="-3.0" layoutY="98.0" maxHeight="1.7976931348623157E308" prefHeight="708.0" prefWidth="266.0" style="-fx-opacity: 0.9;" stylesheets="@../mediaMap/styles.css" translateX="-276.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.topAnchor="98.0">
          <children>
-            <ImageView fitHeight="751.0" fitWidth="281.0" layoutX="-1.0" layoutY="-5.0" pickOnBounds="true">
+            <ImageView fitHeight="751.0" fitWidth="264.0" layoutX="-1.0" layoutY="-5.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/NavigatieMenu.png" />
+                  <Image url="@../mediaMap/NavigatieMenu.png" />
                </image>
             </ImageView>
             <Pane fx:id="homeNav" layoutX="1.0" layoutY="18.0" onMouseClicked="#handleNavButton" prefHeight="64.0" prefWidth="264.0" styleClass="pane">
@@ -74,32 +78,22 @@
                   </Label>
                   <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="12.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/HomeNavIcon.png" />
+                        <Image url="@../mediaMap/HomeNavIcon.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
             <Pane fx:id="studentsNav" layoutY="71.0" onMouseClicked="#handleNavButton" prefHeight="67.0" prefWidth="266.0" styleClass="pane">
                <children>
-                  <Label layoutX="84.0" layoutY="25.0" text="Studenten" textFill="WHITE">
+                  <Label layoutX="86.0" layoutY="21.0" prefHeight="32.0" prefWidth="109.0" text="Studenten" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="51.0" fitWidth="42.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/GuestNavIcon.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="clientsNav" layoutX="-3.0" layoutY="138.0" onMouseClicked="#handleNavButton" prefHeight="60.0" prefWidth="268.0" styleClass="pane">
                <children>
-                  <ImageView fitHeight="59.0" fitWidth="58.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/WineNavIcon.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="86.0" layoutY="20.0" text="Clienten" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
@@ -109,11 +103,6 @@
             </Pane>
             <Pane fx:id="companiesNav" layoutY="213.0" onMouseClicked="#handleNavButton" prefHeight="52.0" prefWidth="264.0" styleClass="pane">
                <children>
-                  <ImageView fitHeight="52.0" fitWidth="186.0" layoutX="17.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/OrderNavIcon.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="84.0" layoutY="11.0" text="Bedrijven" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
@@ -123,11 +112,6 @@
             </Pane>
             <Pane fx:id="projectsNav" layoutX="1.0" layoutY="278.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" styleClass="pane">
                <children>
-                  <ImageView fitHeight="58.0" fitWidth="257.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Desktop/Lions-Club-Wijnfestijn-master/src/IPSEN2/images/EventNavIcon.png" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="82.0" layoutY="13.0" text="Projecten" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
