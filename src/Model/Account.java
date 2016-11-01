@@ -6,19 +6,20 @@ package Model;
 public class Account {
     private String userName;
     private String password;
-    private String rightName;
+    private int privilege;
     private int userId;
 
     public Account(){
         userName = "";
         password = "";
-        rightName = "";
+        privilege = 0;
     }
 
-    public Account(String userName, String password, String rightName){
+    public Account(String userName, String password, int privilege, int userId){
         this.userName = userName;
         this.password = password;
-        this.rightName = rightName;
+        this.privilege = privilege;
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -37,12 +38,12 @@ public class Account {
         this.password = password;
     }
 
-    public String getRightName() {
-        return rightName;
+    public int getRightName() {
+        return privilege;
     }
 
-    public void setRightName(String rightName) {
-        this.rightName = rightName;
+    public void setRightName(int rightName) {
+        this.privilege = rightName;
     }
 
     public void setUserID(int userId){
