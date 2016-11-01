@@ -51,17 +51,20 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
-
-
     @FXML
     void handleAddButton(MouseEvent event) {
         addContent(new AddClientController(), resources.getString("EDIT_CLIENT_DIALOG"));
-
     }
 
     @FXML
     void handleDeleteButton(MouseEvent event) {
-
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> clientDAO.deleteClient(row));
+            clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
+            addContent(resources.getString("CLIENTS"));
+        } else {
+            System.out.println("geen client geselecteerd");
+        }
     }
 
     @FXML
@@ -111,6 +114,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     public void openEditMenu() {
 
     }
+
     private void showTable() {
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();

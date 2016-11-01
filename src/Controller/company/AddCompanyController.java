@@ -1,12 +1,8 @@
-package Controller.client;
-
-/**
- * Created by Bernd on 31-10-2016.
- */
+package Controller.company;
 
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
-import DAO.ClientDAO;
+import DAO.CompanyDAO;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -21,30 +17,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddClientController extends ContentLoader implements Initializable, TableViewListener {
+public class AddCompanyController extends ContentLoader implements Initializable, TableViewListener {
 
-    @FXML private JFXTextField firstNameTextField;
-    @FXML private JFXTextField lastNameTextField;
-    @FXML private JFXTextField birthDateTextfield;
-    @FXML private JFXTextField adresTextField;
-    @FXML private JFXTextField zipCodeTextField;
+    @FXML private JFXTextField companyNameTextField;
+    @FXML private JFXTextField addressNameTextField;
+    @FXML private JFXTextField zipCodeTextfield;
     @FXML private JFXTextField cityTextField;
-    @FXML private JFXTextField studyTextField;
-    @FXML private JFXTextField emailTextfield;
-    @FXML private JFXTextField phoneTextField;
-    @FXML private JFXTextField tagsTextField;
+    @FXML private JFXTextField contactPersonTextField;
+    @FXML private JFXTextField phoneNumberTextField;
+    @FXML private JFXTextField emailTextField;
     @FXML private JFXTextArea noteTextField;
-
+    @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+
     @FXML private TableView<TableViewItem> tableView;
-    @FXML private TableColumn<?, ?> checkBoxColumn;
-    @FXML private TableColumn<?, ?> documentIDColumn;
-    @FXML private TableColumn<?, ?> fileNameColumn;
+    @FXML private TableColumn checkBoxColumn;
+    @FXML private TableColumn documentIDColumn;
+    @FXML private TableColumn fileNameColumn;
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
@@ -54,10 +47,9 @@ public class AddClientController extends ContentLoader implements Initializable,
     private ArrayList<Integer> selectedRows;
     private CheckBox selectAllCheckBox;
 
-    private ClientDAO clientDAO;
+    private CompanyDAO companyDAO;
     private AddressDAO addressDAO;
     private ResourceBundle resources;
-
 
     @FXML
     void handleAddFileButton(MouseEvent event) {
@@ -66,7 +58,7 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleCancelButton(MouseEvent event) {
-        addContent(resources.getString("STUDENTS"));
+        addContent(resources.getString("COMPANIES"));
 
     }
 
@@ -95,23 +87,15 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         try {
-            this.clientDAO = new ClientDAO();
+            this.companyDAO = new CompanyDAO();
             this.addressDAO = new AddressDAO();
-
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
     }
 }

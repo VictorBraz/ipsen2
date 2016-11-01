@@ -1,12 +1,8 @@
-package Controller.client;
-
-/**
- * Created by Bernd on 31-10-2016.
- */
+package Controller.Student;
 
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
-import DAO.ClientDAO;
+import DAO.StudentDAO;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -25,7 +21,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddClientController extends ContentLoader implements Initializable, TableViewListener {
+/**
+ * Created by Bernd on 1-11-2016.
+ */
+public class AddStudentController extends ContentLoader implements Initializable, TableViewListener {
+
 
     @FXML private JFXTextField firstNameTextField;
     @FXML private JFXTextField lastNameTextField;
@@ -36,15 +36,15 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML private JFXTextField studyTextField;
     @FXML private JFXTextField emailTextfield;
     @FXML private JFXTextField phoneTextField;
-    @FXML private JFXTextField tagsTextField;
     @FXML private JFXTextArea noteTextField;
-
+    @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+
     @FXML private TableView<TableViewItem> tableView;
-    @FXML private TableColumn<?, ?> checkBoxColumn;
-    @FXML private TableColumn<?, ?> documentIDColumn;
-    @FXML private TableColumn<?, ?> fileNameColumn;
+    @FXML private TableColumn checkBoxColumn;
+    @FXML private TableColumn documentIDColumn;
+    @FXML private TableColumn fileNameColumn;
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
@@ -54,10 +54,9 @@ public class AddClientController extends ContentLoader implements Initializable,
     private ArrayList<Integer> selectedRows;
     private CheckBox selectAllCheckBox;
 
-    private ClientDAO clientDAO;
+    private StudentDAO studentDAO;
     private AddressDAO addressDAO;
     private ResourceBundle resources;
-
 
     @FXML
     void handleAddFileButton(MouseEvent event) {
@@ -95,22 +94,19 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         try {
-            this.clientDAO = new ClientDAO();
+            this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();
-
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
 
 
     }
