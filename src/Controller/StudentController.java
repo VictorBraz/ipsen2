@@ -8,6 +8,7 @@ import contentloader.ContentLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -20,20 +21,21 @@ public class StudentController extends ContentLoader implements Initializable{
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
-    @FXML private TableColumn<?, ?> firstNameColumn;
-    @FXML private TableColumn<?, ?> lastNameColumn;
-    @FXML private TableColumn<?, ?> birthDateColumn;
-    @FXML private TableColumn<?, ?> adresColumn;
+    @FXML private TableColumn firstNameColumn;
+    @FXML private TableColumn lastNameColumn;
+    @FXML private TableColumn birthDateColumn;
+    @FXML private TableColumn adresColumn;
     @FXML private TableColumn zipCodeColumn;
-    @FXML private TableColumn<?, ?> cityColum;
-    @FXML private TableColumn<?, ?> emailColumn;
-    @FXML private TableColumn<?, ?> studyColum;
-    @FXML private TableColumn<?, ?> phoneNumberColumn;
-    @FXML private TableColumn<?, ?> tagColumn;
+    @FXML private TableColumn cityColum;
+    @FXML private TableColumn emailColumn;
+    @FXML private TableColumn studyColum;
+    @FXML private TableColumn phoneNumberColumn;
+    @FXML private TableColumn tagColumn;
 
     private int selectedStudentID;
     private ObservableList<TableViewItem> studentData;
-
+    private ArrayList<Integer> selectedRows;
+    private CheckBox selectAllCheckBox;
 
     private StudentDAO studentDAO;
     private AddressDAO addressDAO;

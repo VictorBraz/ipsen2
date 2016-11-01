@@ -27,7 +27,6 @@ public class TableViewSelectHandler extends ContentLoader {
 
     /**
      * Instantiates a new Table view select handler.
-     *
      * @param tableView the table view
      * @param listener  the listener
      */
@@ -37,6 +36,8 @@ public class TableViewSelectHandler extends ContentLoader {
         selectedRows = new ArrayList();
         handleTableRows();
     }
+
+
 
     /**
      * Handles items that are being clicked inside TableView object<br><br>

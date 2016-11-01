@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StudentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StudentController">
    <children>
-      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="23.0" layoutY="72.0" prefHeight="641.0" prefWidth="1035.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
             <TableColumn fx:id="checkBoxColumn" prefWidth="25.0" />
           <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Voornaam" />
@@ -19,39 +19,36 @@
             <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="111.0" text="Adres" />
             <TableColumn fx:id="zipCodeColumn" prefWidth="71.0" text="Postcode" />
             <TableColumn fx:id="cityColum" prefWidth="111.0" text="Woonplaats" />
-            <TableColumn fx:id="emailColumn" prefWidth="96.0" text="Email" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="75.0" text="Studie" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="107.0" text="Telefoon" />
-            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="151.0" text="Tags" />
+            <TableColumn fx:id="emailColumn" prefWidth="165.0" text="Email" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="138.0" text="Studie" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="144.0" text="Telefoon" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="237.0" text="Tags" />
         </columns>
       </TableView>
-      <Group layoutX="862.0" layoutY="680.0">
+      <Group layoutX="862.0" layoutY="680.0" />
+      <Pane layoutX="1175.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
          <children>
-             <Pane onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
-                 <children>
-                     <ImageView fitHeight="69.0" fitWidth="72.0" layoutX="-12.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-                         <image>
-                             <Image url="@../mediaMap/AddButton.png" />
-                         </image>
-                     </ImageView>
-                 </children>
-             </Pane>
-         </children>
-      </Group>
-      <Pane layoutX="934.0" layoutY="681.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
-         <children>
-            <ImageView fitHeight="69.0" fitWidth="72.0" layoutX="-21.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../mediaMap/zoominButton.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-       <Pane layoutX="978.0" layoutY="664.0" onMouseClicked="#handleDeleteButton" prefHeight="87.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+       <Pane layoutX="1245.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
          <children>
-               <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                    <image>
                        <Image url="@../mediaMap/deleteButton.png" />
+                   </image>
+               </ImageView>
+         </children>
+       </Pane>
+       <Pane layoutX="1105.0" layoutY="700.0" onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+         <children>
+               <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../mediaMap/AddButton.png" />
                    </image>
                </ImageView>
          </children>
