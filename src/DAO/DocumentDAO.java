@@ -1,7 +1,9 @@
 package DAO;
 
 import Model.Document;
-import javafx.stage.FileChooser;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 
 import java.io.*;
 import java.sql.*;
@@ -14,6 +16,7 @@ public class DocumentDAO extends DAO{
 
     private File file = null;
     private FileInputStream fis;
+    private String outputStream;
 
     public DocumentDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
@@ -27,12 +30,12 @@ public class DocumentDAO extends DAO{
         }
     }
 
-    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
+    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException, DocumentException {
         ArrayList<Document> documents = selectAllDocumentsQuery(ownerID);
         return documents;
     }
 
-    public Document selectDocument(int documentID) throws SQLException, IOException {
+    public Document selectDocument(int documentID) throws SQLException, IOException, DocumentException {
         Document document = selectDocumentQuery(documentID);
         return document;
     }
@@ -51,7 +54,7 @@ public class DocumentDAO extends DAO{
         String sql = "INSERT INTO document (documentname, ownerid" +
                 " date, ownername, pdffile) VALUES (?, ?, ?, ?, ?)";
 
-        PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, document.getDocumentName());
         statement.setInt(2, document.getOwnerID());
         statement.setString(3, document.getDate());
@@ -68,7 +71,7 @@ public class DocumentDAO extends DAO{
     }
 
 
-    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException {
+    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException, DocumentException {
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT * FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -76,29 +79,53 @@ public class DocumentDAO extends DAO{
 
             while (result.next()) {
                 Document document = new Document();
-                document.setDocumentName(result.getString(2));
-                document.setOwnerID(result.getInt(3));
-                document.setDate(result.getString(4));
-                document.setOwnerName(result.getString(5));
+                document.setDocumentName(result.getString(1));
+                document.setOwnerID(result.getInt(2));
+                document.setDate(result.getString(3));
+                document.setOwnerName(result.getString(4));
+                InputStream input = result.getBinaryStream(5);
+
+                DataInputStream d = new DataInputStream(input);
+                DataOutputStream out = new DataOutputStream(new FileOutputStream("src/test.pdf"));
+
+                outputStream = "src/test.pdf";
+                PdfReader pdfReader = new PdfReader(input);
+                PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(outputStream));
+                pdfStamper.close();
+
+                documents.add(document);
             }
         statement.close();
         return documents;
     }
 
-    private Document selectDocumentQuery(int documentID) throws SQLException, IOException {
+    private Document selectDocumentQuery(int documentID) throws SQLException, IOException, DocumentException {
         String sql = "SELECT * FROM document WHERE documenttid = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet result = statement.getGeneratedKeys();
+        ResultSet result = statement.executeQuery();
         Document document = null;
 
         while(result.next()) {
             if(result.equals(document)) {
                 document = new Document();
-                document.setDocumentName(result.getString(2));
-                document.setOwnerID(result.getInt(3));
-                document.setDate(result.getString(4));
-                document.setOwnerName(result.getString(5));
+                document.setDocumentName(result.getString(1));
+                document.setOwnerID(result.getInt(2));
+                document.setDate(result.getString(3));
+                document.setOwnerName(result.getString(4));
+                InputStream input = result.getBinaryStream(5);
+                file = new File("src/test.pdf");
+                FileOutputStream fos = new FileOutputStream(file);
+                byte[] buffer = new byte[1];
+                while (input.read(buffer) > 0) {
+                    fos.write(buffer);
+                }
+                fos.close();
             }
+
+//                outputStream = "src\\test.pdf";
+//                PdfReader pdfReader = new PdfReader(input);
+//                PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(outputStream));
+//                pdfStamper.close();
         }
         statement.close();
         return document;
