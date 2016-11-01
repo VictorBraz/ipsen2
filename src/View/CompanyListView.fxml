@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
-    <center>
-        <TableView prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn maxWidth="1024.0" prefWidth="512.0" text="Companies" />
-                <TableColumn maxWidth="1024.0" minWidth="0.0" prefWidth="512.0" text="E-mail address" />
-            </columns>
-        </TableView>
-    </center>
-    <top>
-        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT">
-            <buttons>
-                <Button maxWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Home" textOverrun="CLIP" />
-                <Region prefHeight="200.0" prefWidth="900.0" />
-                <Button maxWidth="70.0" mnemonicParsing="false" prefWidth="70.0" text="Edit" />
-            </buttons>
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-            </BorderPane.margin>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-        </ButtonBar>
-    </top>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CompanyController">
+   <children>
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
+        <columns>
+            <TableColumn fx:id="checkBoxColumn" prefWidth="25.0" />
+          <TableColumn fx:id="companyNameColumn" prefWidth="150.00003051757812" text="Bedrijfsnaam" />
+          <TableColumn fx:id="addressColumn" prefWidth="148.0" text="Adres" />
+            <TableColumn fx:id="zipCodeColumn" prefWidth="116.0" text="Postcode" />
+            <TableColumn fx:id="cityColumn" minWidth="3.0" prefWidth="153.0" text="Woonplaats" />
+            <TableColumn fx:id="contactPersonColumn" prefWidth="186.0" text="Contactpersoon" />
+            <TableColumn fx:id="phoneNumberColum" prefWidth="123.0" text="Telefoon" />
+            <TableColumn fx:id="emailColumn" prefWidth="153.0" text="Email" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="215.0" text="Tags" />
+        </columns>
+      </TableView>
+      <Group layoutX="862.0" layoutY="680.0" />
+      <Pane layoutX="1175.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+         <children>
+            <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../mediaMap/zoominButton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+       <Pane layoutX="1245.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
+         <children>
+               <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../mediaMap/deleteButton.png" />
+                   </image>
+               </ImageView>
+         </children>
+       </Pane>
+       <Pane layoutX="1105.0" layoutY="700.0" onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+         <children>
+               <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../mediaMap/AddButton.png" />
+                   </image>
+               </ImageView>
+         </children>
+       </Pane>
+   </children>
+</AnchorPane>

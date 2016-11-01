@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="1232.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.menu.MainMenuController">
+   <children>
+      <GridPane layoutX="145.0" layoutY="305.0" prefHeight="258.0" prefWidth="1004.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="245.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="245.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="245.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="245.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="495.0" minHeight="10.0" prefHeight="469.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane fx:id="companyButton" layoutX="427.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleShortcutButton" prefHeight="212.0" prefWidth="274.0" styleClass="buttonWithoutHover" GridPane.columnIndex="2">
+               <children>
+               <ImageView fitHeight="193.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../mediaMap/companyButton.jpg" />
+                  </image>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" />
+                     </effect>
+               </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="projectButton" layoutX="709.0" layoutY="111.0" onMouseClicked="#handleShortcutButton" prefHeight="196.0" prefWidth="156.0" styleClass="buttonWithoutHover" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fitHeight="193.0" fitWidth="193.0" onMouseClicked="#handleShortcutButton" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/projectButton.jpg" />
+                     </image>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="studentButton" layoutX="148.0" layoutY="115.0" onMouseClicked="#handleShortcutButton" styleClass="buttonWithoutHover">
+               <children>
+                  <ImageView fitHeight="193.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/studentButton.jpg" />
+                     </image>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="clientButton" onMouseClicked="#handleShortcutButton" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fitHeight="193.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/clientButton.jpg" />
+                     </image>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
