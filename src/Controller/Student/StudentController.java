@@ -56,7 +56,7 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent(new AddStudentController(), resources.getString("EDIT_STUDENT_DIALOG"));
+        addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
 
     }
 

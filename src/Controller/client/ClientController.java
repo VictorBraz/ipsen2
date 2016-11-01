@@ -17,7 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn<Client, String> studyColum;
     @FXML private TableColumn<Client, String> phoneNumberColumn;
     @FXML private TableColumn tagColumn;
-    @FXML private Pane removeButton;
+
 
     public int selectedClientID;
     private ObservableList<Client> clientData;
@@ -53,7 +52,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent(new AddClientController(), resources.getString("EDIT_CLIENT_DIALOG"));
+        addContent(new AddClientController(), resources.getString("NEW_CLIENT_DIALOG"));
     }
 
     @FXML
@@ -69,6 +68,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @FXML
     void handleZoominButton(MouseEvent event) {
+        if (this.selectedClientID != 0) {
+            addContent(new EditClientController(selectedClientID), resources.getString("EDIT_CLIENT_DIALOG"));
+        }
 
     }
 
@@ -102,11 +104,12 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
+        this.selectedClientID = selectedClientID;
 
     }
 
@@ -140,7 +143,6 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("helloooo");
         this.resources = resources;
         setMainFrameTitle(resources.getString("CLIENT_TITLE"));
         selectedRows = new ArrayList<>();

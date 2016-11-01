@@ -48,7 +48,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent(new AddCompanyController(), resources.getString("EDIT_COMPANY_DIALOG"));
+        addContent(new AddCompanyController(), resources.getString("NEW_COMPANY_DIALOG"));
 
     }
 
