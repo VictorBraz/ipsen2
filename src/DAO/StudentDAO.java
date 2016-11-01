@@ -79,6 +79,7 @@ public class StudentDAO extends DAO {
             ResultSet result = selectAllStudentsQuery.executeQuery();
             while (result.next()) {
                 Student student = new Student();
+                student.setStudentID(result.getInt(1));
                 student.setFirstName(result.getString(2));
                 student.setLastName(result.getString(3));
                 student.setBirthDate(result.getString(4));

@@ -117,6 +117,15 @@ public class Student{
     }
 
     /**
+     * Sets student IS
+     *
+     * @param studentID
+     */
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
+    /**
      * Gets first name
      *
      * @return the first name
