@@ -15,6 +15,9 @@ public class MainMenuController extends ContentLoader implements Initializable {
     @FXML private Pane projectButton;
     @FXML private Pane studentButton;
     @FXML private Pane clientButton;
+    @FXML private Pane searchButton;
+    @FXML private Pane settingsButton;
+
 
     private ResourceBundle resources;
 
@@ -28,6 +31,10 @@ public class MainMenuController extends ContentLoader implements Initializable {
             addContent(resources.getString("COMPANIES"));
         }else if (selectedPane == projectButton) {
             addContent(resources.getString("PROJECTS"));
+        } else if (selectedPane == searchButton) {
+            addContent(resources.getString("SEARCH"));
+        } else if (selectedPane == settingsButton) {
+            addContent(resources.getString("SETTINGS"));
         }
 
     }
