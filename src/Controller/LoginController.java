@@ -38,9 +38,6 @@ public class LoginController extends ContentLoader implements Initializable {
         String password = passwordTextField.getText();
         controller = new AccountController();
 
-        Account test = new Account("Victor", "test", 1,1 );
-        controller.cmdCreateAccount(test);
-
         accounts = controller.cmdSelectAllAccounts();
 
         for(Account account : accounts){
