@@ -14,6 +14,7 @@ public class Student{
     private String phoneNumber;
     private Address address;
     private Note note;
+    private String tag;
 
     /**
      * Instantiates a new Student.
@@ -23,7 +24,7 @@ public class Student{
     }
 
     public Student(int studentID, String firstName, String lastName, String birthDate, String study,
-                   String emailAddress, String phoneNumber) {
+                   String emailAddress, String phoneNumber, String tag) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +32,7 @@ public class Student{
         this.study = study;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.tag = tag;
     }
 
     /**
@@ -48,6 +50,7 @@ public class Student{
         this.phoneNumber = null;
         this.address = null;
         this.note = null;
+        this.tag = null;
     }
 
     /**
@@ -63,7 +66,7 @@ public class Student{
      * @param noteID
      */
     public Student(int studentID, String firstName, String lastName, String birthDate, String study,
-                   String emailAddress, String phoneNumber, String address, String zipCode, String city, int noteID) {
+                   String emailAddress, String phoneNumber, String address, String zipCode, String city, int noteID, String tag) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -76,6 +79,7 @@ public class Student{
         this.address.setCity(city);
         this.address.setZipCode(zipCode);
         this.note = new Note(noteID);
+        this.tag = tag;
 
     }
 
@@ -218,5 +222,15 @@ public class Student{
         this.phoneNumber = phoneNumber;
     }
 
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 }

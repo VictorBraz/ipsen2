@@ -66,7 +66,7 @@ public class DocumentDAO extends DAO{
         } else {
             statement.setNull(5, Types.OTHER);
         }
-        statement.execute();
+        statement.executeUpdate();
         statement.close();
     }
 
@@ -145,6 +145,7 @@ public class DocumentDAO extends DAO{
                 }
             }
         }
+        statement.executeUpdate();
         statement.close();
     }
 }

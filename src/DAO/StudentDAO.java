@@ -24,8 +24,8 @@ public class StudentDAO extends DAO {
 
     public void prepareStatements(){
         try{
-            addStudentQuery = conn.prepareStatement("insert into Student(firstname,lastname,birthdate,study,email,phoneNumber, userAddressID) VALUES(?,?,?,?,?,?,?);");
-            updateStudentQuery = conn.prepareStatement("UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,userAddressID=? WHERE studentID=?");
+            addStudentQuery = conn.prepareStatement("insert into Student(firstname,lastname,birthdate,study,email,phoneNumber,userAddressID,tag) VALUES(?,?,?,?,?,?,?,?);");
+            updateStudentQuery = conn.prepareStatement("UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,userAddressID=?, tag=? WHERE studentID=?");
             deleteStudentQuery = conn.prepareStatement("DELETE FROM Student WHERE studentID=?");
             selectAllStudentsQuery = conn.prepareStatement("SELECT * FROM Student");
         }catch (Exception e){
@@ -42,6 +42,7 @@ public class StudentDAO extends DAO {
             addStudentQuery.setString(5, student.getEmailAddress());
             addStudentQuery.setString(6, student.getPhoneNumber());
             addStudentQuery.setInt(7, student.getAddress().getAddressID());
+            addStudentQuery.setString(8, student.getTag());
             addStudentQuery.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -58,6 +59,7 @@ public class StudentDAO extends DAO {
             updateStudentQuery.setString(6, student.getPhoneNumber());
             updateStudentQuery.setInt(7, student.getAddress().getAddressID());
             updateStudentQuery.setInt(8,student.getStudentID());
+            updateStudentQuery.setString(9, student.getTag());
             updateStudentQuery.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -85,6 +87,7 @@ public class StudentDAO extends DAO {
                 student.setStudy(result.getString(5));
                 student.setEmailAddress(result.getString(6));
                 student.setPhoneNumber(result.getString(7));
+                student.setTag(result.getString(8));
                 students.add(student);
             }
         } catch (Exception e) {

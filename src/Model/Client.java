@@ -16,7 +16,7 @@ public class Client {
     private Address address;
     private Note note;
     private ClientDAO clientDAO;
-
+    private String tag;
     /**
      * Instantiates a new Client.
      */
@@ -25,13 +25,14 @@ public class Client {
     }
 
     public Client(String firstName, String lastName, String birthDate, String study,
-                  String emailAddress, String phoneNumber) {
+                  String emailAddress, String phoneNumber, String tag) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.study = study;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.tag = tag;
     }
 
     /**
@@ -49,6 +50,7 @@ public class Client {
         this.address =  null;
         this.note = null;
         this.study = null;
+        this.tag = null;
     }
 
     /**
@@ -65,7 +67,7 @@ public class Client {
      * @param study           the study
      */
     public Client(int clientID, String firstName, String lastName, String birthDate,
-                  String emailAddress, String phoneNumber, int addressID, int noteID, String study ) {
+                  String emailAddress, String phoneNumber, int addressID, int noteID, String study, String tag ) {
         this.clientID = clientID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,6 +77,7 @@ public class Client {
         this.address =  new Address(addressID);
         this.note = new Note(noteID);
         this.study = study;
+        this.tag = tag;
     }
 
     /**
@@ -255,5 +258,13 @@ public class Client {
      */
     public void setClientDAO(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

@@ -72,16 +72,16 @@ public class CompanyDAO extends DAO {
      * @throws Exception
      */
     private void addCompanyQuery(Company company)throws Exception{
-        String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email)"+
-                "VALUES (null,?,?,?,?,?)";
+        String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
+                "VALUES (null,?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddressid());
         stmt.setString(2, company.getCompanyName());
         stmt.setString(3, company.getContactPerson());
         stmt.setString(4, company.getPhoneNumber());
         stmt.setString(5, company.getEmailAddress());
+        stmt.setString(6, company.getTag());
 
-        //TestDing...
         int rowsInserted = stmt.executeUpdate();
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
@@ -95,7 +95,7 @@ public class CompanyDAO extends DAO {
      * @throws Exception
      */
     private void updateCompanyQuery(int companyID, Company company)throws Exception{
-        String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?" +
+        String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?, tag=?" +
                 "WHERE companyid =?";
         PreparedStatement stmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = stmt.getGeneratedKeys();
@@ -106,6 +106,7 @@ public class CompanyDAO extends DAO {
                 stmt.setString(3, company.getContactPerson());
                 stmt.setString(4, company.getPhoneNumber());
                 stmt.setString(5, company.getEmailAddress());
+                stmt.setString(6, company.getTag());
 
                 int rowUpdated = stmt.executeUpdate();
                 if(rowUpdated > 0){
@@ -147,7 +148,8 @@ public class CompanyDAO extends DAO {
             company.setCompanyName(resultSet.getString(3));
             company.setContactPerson(resultSet.getString(4));
             company.setPhoneNumber(resultSet.getString(5));
-            company.setEmailAddress((resultSet.getString(6)));
+            company.setEmailAddress(resultSet.getString(6));
+            company.setTag(resultSet.getString(7));
 
             companies.add(company);
         }

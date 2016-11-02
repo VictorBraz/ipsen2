@@ -6,7 +6,6 @@ import DAO.AddressDAO;
 import DAO.ClientDAO;
 import Model.Address;
 import Model.Client;
-import Model.Document;
 import Model.TableViewItem;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
@@ -31,6 +30,7 @@ import java.util.ResourceBundle;
 public class ClientController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML  TableView<TableViewItem> tableView;
+//    @FXML  TableView<Client> tableView;
     @FXML private TableColumn checkBoxColumn;
     @FXML private TableColumn<Client, String> firstNameColumn;
     @FXML private TableColumn<Client, String> lastNameColumn;
@@ -53,8 +53,6 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
-
-    //IOException toegevoegd
     @FXML
     void handleAddButton(MouseEvent event) throws IOException {
         addContent(new AddClientController(), resources.getString("NEW_CLIENT_DIALOG"));
