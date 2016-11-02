@@ -3,7 +3,6 @@ package Controller.search;
 import Controller.handlers.TableViewListener;
 import DAO.ClientDAO;
 import DAO.CompanyDAO;
-import DAO.StudentDAO;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -86,7 +85,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("SEARCH_TITLE"));
-        try {
+            try {
             this.companyDAO = new CompanyDAO();
             this.clientDAO = new ClientDAO();
             this.studentDAO = new StudentDAO();

@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class AccountDAO extends DAO{
 
-    ArrayList<Account> accounts;
-    PreparedStatement stmt;
+    ArrayList<Account> accounts = new ArrayList<>();
+    PreparedStatement stmt = null;
 
     public AccountDAO() throws Exception{
         super();
@@ -54,7 +54,7 @@ public class AccountDAO extends DAO{
                 if(resultSet.equals(account.getUserId())){
                     stmt.setString(1, account.getUserName());
                     stmt.setString(2, account.getPassword());
-                    stmt.setString(3, account.getRightName());
+                    stmt.setInt(3, account.getRightName());
                 }
             }
         }catch (Exception e){
@@ -64,24 +64,26 @@ public class AccountDAO extends DAO{
 
     public ArrayList<Account> getAllAccounts() {
 
-        try {
-            String sql = "SELECT * FROM account";
-            stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ResultSet resultSet = stmt.getGeneratedKeys();
+        String sql = "SELECT * FROM account";
 
+        try {
+            stmt = conn.prepareStatement(sql);
+            ResultSet resultSet = stmt.executeQuery();
             while(resultSet.next()){
                 Account account = new Account();
-                account.setUserID(resultSet.getInt(1));
-                account.setUserName(resultSet.getString(2));
-                account.setPassword(resultSet.getString(3));
-                account.setRightName(resultSet.getString(4));
+                account.setUserName(resultSet.getString(1));
+                account.setPassword(resultSet.getString(2));
+                account.setRightName(resultSet.getInt(3));
+                account.setUserID(resultSet.getInt(4));
 
                 accounts.add(account);
+
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
         return accounts;
 
     }
@@ -93,7 +95,7 @@ public class AccountDAO extends DAO{
         stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setString(1, account.getUserName());
         stmt.setString(2, account.getPassword());
-        stmt.setString(3, account.getRightName());
+        stmt.setInt(3, account.getRightName());
         stmt.setInt(4, account.getUserId());
 
         int rowInserted = stmt.executeUpdate();

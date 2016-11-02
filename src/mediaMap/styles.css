@@ -16,7 +16,7 @@
         -fx-background-color: white;
         -fx-background-insets: 0;
         -fx-box-border: #ffffff;
-        -fx-font: 20px Roboto;
+        -fx-font: 13px Roboto;
         -fx-text-alignment: center;
         -fx-table-cell-border-color: transparent;
         -fx-table-header-border-color: transparent;
@@ -24,19 +24,28 @@
 
     .table-view .column-header{
         -fx-background-color: white;
+        -fx-cell-size: 64px;
+
 
     }
+
+
+    .table-column {
+        -fx-alignment: center-left;
+    }
+
     .column-header .label {
         -fx-font: 12px Roboto-medium;
         -fx-text-fill: #999999;
         -fx-alignment: center-left;
-        -fx-height:64px;
+        -fx-pref-height: 56px;
+
     }
     .column-header-background {
         -fx-background-color: white;
     }
     .table-row-cell {
-        -fx-cell-size: 40px;
+        -fx-cell-size: 48px;
         -fx-background-color: transparent;
         -fx-border-color:
                 transparent
@@ -45,6 +54,7 @@
                 transparent;
 
         -fx-margin-top: 10px;
+        -fx-alignment: center-left;
 
     }
 
@@ -62,8 +72,9 @@
     }
 
     .check-box *.box {
-        -fx-pref-width: 20px;
-        -fx-pref-height: 20px;
+        -fx-pref-width: 16px;
+        -fx-pref-height: 16px;
+
 
     }
 
@@ -80,7 +91,7 @@
     }
 
     .table-view .column-header .checkBoxColumn .check-box {
-        -fx-alignment: center;
+        -fx-alignment: top-right;
     }
 
     .deleteButton {

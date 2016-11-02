@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 
-public class TableViewSelectHandler extends ContentLoader {
+public class  TableViewSelectHandler extends ContentLoader {
 
     private TableView<TableViewItem> tableView;
     private TableViewItem item;
@@ -36,6 +36,7 @@ public class TableViewSelectHandler extends ContentLoader {
         selectedRows = new ArrayList();
         handleTableRows();
     }
+
 
 
 

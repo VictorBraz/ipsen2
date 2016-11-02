@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CompanyDAO extends DAO {
 
     ArrayList<Company> companies;
+    PreparedStatement stmt;
 
     public CompanyDAO() throws Exception{
         super();
@@ -61,9 +62,29 @@ public class CompanyDAO extends DAO {
      * @return
      * @throws Exception
      */
-    public ArrayList<Company> getCompanies() throws Exception{
+    public ArrayList<Company> getCompanies() {
 
-        return getCompaniesQuery();
+        String sql = "SELECT * FROM company";
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                Company company = new Company();
+                company.setCompanyID(resultSet.getInt(1));
+                company.setCompanyAddressid(resultSet.getInt(2));
+                company.setCompanyName(resultSet.getString(3));
+                company.setContactPerson(resultSet.getString(4));
+                company.setPhoneNumber(resultSet.getString(5));
+                company.setEmailAddress((resultSet.getString(6)));
+
+                companies.add(company);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return companies;
     }
 
     /**

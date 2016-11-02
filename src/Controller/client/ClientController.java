@@ -30,23 +30,23 @@ import java.util.ResourceBundle;
 public class ClientController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML  TableView<TableViewItem> tableView;
-//    @FXML  TableView<Client> tableView;
     @FXML private TableColumn checkBoxColumn;
-    @FXML private TableColumn<Client, String> firstNameColumn;
-    @FXML private TableColumn<Client, String> lastNameColumn;
-    @FXML private TableColumn<Client, String> birthDateColumn;
-    @FXML private TableColumn<Client, String> adresColumn;
-    @FXML private TableColumn<Client, String> zipCodeColumn;
-    @FXML private TableColumn<Client, String> cityColum;
-    @FXML private TableColumn<Client, String> emailColumn;
-    @FXML private TableColumn<Client, String> studyColum;
-    @FXML private TableColumn<Client, String> phoneNumberColumn;
+    @FXML private TableColumn firstNameColumn;
+    @FXML private TableColumn lastNameColumn;
+    @FXML private TableColumn birthDateColumn;
+    @FXML private TableColumn adresColumn;
+    @FXML private TableColumn zipCodeColumn;
+    @FXML private TableColumn cityColum;
+    @FXML private TableColumn emailColumn;
+    @FXML private TableColumn studyColum;
+    @FXML private TableColumn  phoneNumberColumn;
     @FXML private TableColumn tagColumn;
 
 
     public int selectedClientID;
-    private ObservableList<Client> clientData;
+    private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
+    private ArrayList<Client> clientdata;
     private CheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
@@ -62,7 +62,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     void handleDeleteButton(MouseEvent event) {
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> clientDAO.deleteClient(row));
-            clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
+            //clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
             addContent(resources.getString("CLIENTS"));
         } else {
             System.out.println("geen client geselecteerd");
@@ -93,17 +93,17 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 //
 //    }
 
-    public void cmdAddClient(Client client) {
-        clientDAO.addClient(client);
-    }
-
-    public void cmdDeleteClient(int clientID) {
-        this.clientDAO.deleteClient(clientID);
-    }
-
-    public void cmdEditClient(int clientID, Client client) {
-        this.clientDAO.updateClient(clientID, client);
-    }
+//    public void cmdAddClient(Client client) {
+//        clientDAO.addClient(client);
+//    }
+//
+//    public void cmdDeleteClient(int clientID) {
+//        this.clientDAO.deleteClient(clientID);
+//    }
+//
+//    public void cmdEditClient(int clientID, Client client) {
+//        this.clientDAO.updateClient(clientID, client);
+//    }
 
 
     @Override
@@ -128,19 +128,22 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
 
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("firstname"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("lastname"));
-        birthDateColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("birthdate"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("lastName"));
+        birthDateColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
         adresColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
         zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("zipcode"));
         cityColum.setCellValueFactory(new PropertyValueFactory<Client, String>("city"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("email"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("emailAddress"));
         studyColum.setCellValueFactory(new PropertyValueFactory<Client, String>("study"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phonenumber"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phoneNumber"));
 
         //TODO werkt nog niet
-//        tableView.setItems(clientData);
+        tableView.setItems(clientData);
 
+
+        System.out.println(firstNameColumn.getCellValueFactory().toString());
+        System.out.println(clientData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
 
 
@@ -150,11 +153,12 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("CLIENT_TITLE"));
-        selectedRows = new ArrayList<>();
+
         try {
             clientDAO = new ClientDAO();
             addressDAO = new AddressDAO();
-            clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
+            selectedRows = new ArrayList<>();
+
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -162,6 +166,8 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+        clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
+        showTable();
 
 
     }
