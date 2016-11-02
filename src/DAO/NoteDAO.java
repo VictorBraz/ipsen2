@@ -16,8 +16,13 @@ public class NoteDAO extends DAO{
         super();
     }
     
-    public Note addNote(Note note) throws SQLException{
-        return addNoteQuery(note);
+    public Note addNote(Note note){
+        try{
+            note = addNoteQuery(note);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return note;
     }
     
     public Note update(Note note) throws SQLException{
@@ -35,7 +40,7 @@ public class NoteDAO extends DAO{
 
 
     private Note addNoteQuery(Note note) throws SQLException{
-        String sql = "INSERT INTO note(note, ownerid) VALUES(?,?)";
+        String sql = "INSERT INTO note(note, ownerID) VALUES(?,?)";
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, note.getText());
@@ -72,7 +77,7 @@ public class NoteDAO extends DAO{
     }
 
     private Note selectNoteQuery(int ownerID) throws SQLException{
-        String sql = "SELECT note WHERE ownerID=?";
+        String sql = "SELECT * FROM note WHERE ownerID=?";
         PreparedStatement statement = conn.prepareStatement(sql);
         Note note = new Note();
 

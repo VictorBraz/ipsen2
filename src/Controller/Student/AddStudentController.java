@@ -2,6 +2,7 @@ package Controller.Student;
 
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
+import DAO.NoteDAO;
 import DAO.StudentDAO;
 import Model.Address;
 import Model.Note;
@@ -59,6 +60,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     private StudentDAO studentDAO;
     private AddressDAO addressDAO;
+    private NoteDAO noteDAO;
     private ResourceBundle resources;
 
     @FXML
@@ -71,7 +73,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         addContent(resources.getString("STUDENTS"));
     }
 
-    private void addStudent(){
+    private void addStudent() {
         Address address = new Address();
         Student student = new Student();
         Note note = new Note();
@@ -87,6 +89,9 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setStudy(studyTextField.getText());
         student.setStudentID(studentDAO.addStudent(student).getStudentID());
         System.out.println(student.getStudentID());
+        note.setOwnerID(student.getStudentID());
+        note.setText(noteTextField.getText());
+        noteDAO.addNote(note);
         // note, documents en tags nog toevoegen.
         // relatie nog volledig doen.
 
