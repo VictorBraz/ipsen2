@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,8 +63,12 @@ public class AddClientController extends ContentLoader implements Initializable,
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
-    private DocumentDAO dao;
-    private Document document;
+    private DocumentDAO documentDAO;
+    private Document document = new Document();
+
+    public AddClientController() throws IOException {
+        this.document = document;
+    }
 
 
     @FXML
@@ -78,12 +83,13 @@ public class AddClientController extends ContentLoader implements Initializable,
          if(selectedFile != null){
             document.setFile(selectedFile);
              try {
-                 dao.addDocument(document);
+                 documentDAO.addDocument(document);
              } catch (SQLException e) {
                  e.printStackTrace();
              }
-             System.out.println("Hij doet het!");
+             System.out.println("Document opgeslagen!");
          }
+
     }
 
     @FXML
@@ -124,6 +130,7 @@ public class AddClientController extends ContentLoader implements Initializable,
         try {
             this.clientDAO = new ClientDAO();
             this.addressDAO = new AddressDAO();
+            this.documentDAO = new DocumentDAO();
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@ import DAO.AddressDAO;
 import DAO.ClientDAO;
 import Model.Address;
 import Model.Client;
+import Model.Document;
 import Model.TableViewItem;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,8 +53,10 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
+
+    //IOException toegevoegd
     @FXML
-    void handleAddButton(MouseEvent event) {
+    void handleAddButton(MouseEvent event) throws IOException {
         addContent(new AddClientController(), resources.getString("NEW_CLIENT_DIALOG"));
     }
 
