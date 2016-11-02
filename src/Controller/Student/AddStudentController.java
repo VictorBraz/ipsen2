@@ -87,6 +87,8 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setStudy(studyTextField.getText());
         student.setStudentID(studentDAO.addStudent(student).getStudentID());
         System.out.println(student.getStudentID());
+        // note, documents en tags nog toevoegen.
+        // relatie nog volledig doen.
 
     }
 
