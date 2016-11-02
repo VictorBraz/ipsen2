@@ -6,12 +6,12 @@ import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import Model.Company;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -39,7 +39,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
     public int selectedCompanyID;
     private ObservableList<TableViewItem> companyData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private CompanyDAO dao;
     private AddressDAO addressDAO;

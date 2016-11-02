@@ -1,7 +1,5 @@
 package Model;
 
-import DAO.ClientDAO;
-
 /**
  * Created by Bernd on 12-10-2016.
  */
@@ -15,7 +13,8 @@ public class Client extends TableViewItem {
     private String study;
     private Address address;
     private Note note;
-    private ClientDAO clientDAO;
+
+    private int clientAddressid;
 
     /**
      * Instantiates a new Client.
@@ -159,15 +158,6 @@ public class Client extends TableViewItem {
     }
 
     /**
-     * Gets client dao.
-     *
-     * @return the client dao
-     */
-    public ClientDAO getClientDAO() {
-        return clientDAO;
-    }
-
-    /**
      * Sets client id.
      *
      * @param clientID the client id
@@ -248,12 +238,12 @@ public class Client extends TableViewItem {
         this.study = study;
     }
 
-    /**
-     * Sets client dao.
-     *
-     * @param clientDAO the client dao
-     */
-    public void setClientDAO(ClientDAO clientDAO) {
-        this.clientDAO = clientDAO;
+
+    public int getClientAddressid() {
+        return clientAddressid;
+    }
+
+    public void setClientAddressid(int clientAddressid) {
+        this.clientAddressid = clientAddressid;
     }
 }

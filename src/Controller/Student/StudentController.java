@@ -5,11 +5,11 @@ import DAO.AddressDAO;
 import DAO.StudentDAO;
 import Model.Student;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -36,7 +36,7 @@ public class StudentController extends ContentLoader implements Initializable, T
     private int selectedStudentID;
     private ObservableList<TableViewItem> studentData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private StudentDAO studentDAO;
     private AddressDAO addressDAO;

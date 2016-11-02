@@ -33,12 +33,13 @@ public class ClientDAO extends DAO {
      *
      * @param client the client
      */
-    public void addClient(Client client) {
+    public Client addClient(Client client) {
         try {
             addClientQuery(client);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return client;
     }
 
     /**
@@ -162,7 +163,7 @@ public class ClientDAO extends DAO {
         return clients;
     }
 
-    private void addClientQuery(Client client) throws SQLException {
+    private Client addClientQuery(Client client) throws SQLException {
         String sql = "INSERT INTO client (clientaddressid, firstname, lastname," +
                 " birthdate, study, email, phonenumber) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -179,6 +180,7 @@ public class ClientDAO extends DAO {
         if(rowsInserted > 0) {
             System.out.println("A new document was inserted succesfully!");
         }
+        return client;
     }
 
     private void updateClientQuery(int clientID, Client client) throws Exception {
