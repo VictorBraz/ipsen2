@@ -20,20 +20,18 @@ import java.util.ResourceBundle;
 
 public class MainFrameController extends ContentLoader implements Initializable {
 
-    @FXML private AnchorPane root;
     @FXML private StackPane contentHolder;
     @FXML private Pane contentCover;
-    @FXML private AnchorPane actionBar;
     @FXML private Label titelLabel;
     @FXML private ImageView menuButton;
-    @FXML private ImageView closeButton;
-    @FXML private ImageView minimizeButton;
     @FXML private AnchorPane navigationMenu;
     @FXML private Pane homeNav;
     @FXML private Pane studentsNav;
     @FXML private Pane clientsNav;
     @FXML private Pane projectsNav;
     @FXML private Pane companiesNav;
+    @FXML private Pane searchNav;
+    @FXML private Pane settingsNav;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
@@ -80,6 +78,10 @@ public class MainFrameController extends ContentLoader implements Initializable 
             addContent(resources.getString("COMPANIES"));
         } else if (selectedPane == projectsNav) {
             addContent(resources.getString("PROJECTS"));
+        } else if (selectedPane == searchNav) {
+            addContent(resources.getString("SEARCH"));
+        } else if (selectedPane == settingsNav) {
+            addContent(resources.getString("SETTINGS"));
         }
         closeNavMenu();
         }
