@@ -10,7 +10,6 @@ import java.util.HashMap;
  * Created by Roel on 12-10-2016.
  */
 public class StudentDAO extends DAO {
-    private PreparedStatement updateStudentQuery;
     private PreparedStatement deleteStudentQuery;
     private PreparedStatement selectAllStudentsQuery;
 
@@ -20,7 +19,6 @@ public class StudentDAO extends DAO {
 
     public void prepareStatements(){
         try{
-            updateStudentQuery = conn.prepareStatement("UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,userAddressID=? WHERE studentID=?");
             deleteStudentQuery = conn.prepareStatement("DELETE FROM Student WHERE studentID=?");
             selectAllStudentsQuery = conn.prepareStatement("SELECT * FROM Student");
         }catch (Exception e){
@@ -62,29 +60,52 @@ public class StudentDAO extends DAO {
         return student;
     }
 
-    public void updateStudent(Student student){
-        try {
-            updateStudentQuery.setString(1, student.getFirstName());
-            updateStudentQuery.setString(2, student.getLastName());
-            updateStudentQuery.setString(3, student.getBirthDate());
-            updateStudentQuery.setString(4, student.getStudy());
-            updateStudentQuery.setString(5, student.getEmailAddress());
-            updateStudentQuery.setString(6, student.getPhoneNumber());
-            updateStudentQuery.setInt(7, student.getAddress().getAddressID());
-            updateStudentQuery.setInt(8,student.getStudentID());
-            updateStudentQuery.executeUpdate();
-        }catch (Exception e){
+    public void updateStudent(Student student) throws  SQLException{
+        try{
+            updateStudentQuery(student);
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    private void updateStudentQuery(Student student) throws SQLException{
+        String sql = "UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,userAddressID=? WHERE studentID=?";
+        PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+        statement.setString(1, student.getFirstName());
+        statement.setString(2, student.getLastName());
+        statement.setString(3, student.getBirthDate());
+        statement.setString(4, student.getStudy());
+        statement.setString(5, student.getEmailAddress());
+        statement.setString(6, student.getPhoneNumber());
+        statement.setInt(7, student.getAddress().getAddressID());
+        statement.setInt(8,student.getStudentID());
+        statement.executeUpdate();
+        statement.close();
+    }
+
     public void deleteStudent(Student student){
         try {
-            deleteStudentQuery.setInt(1,student.getStudentID());
-            deleteStudentQuery.executeUpdate();
+            deleteStudentQuery(student);
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void deleteStudentQuery(Student student)throws SQLException{
+        String sql = "DELETE FROM Student WHERE studentID=?";
+        String sql2 = "DELETE FROM Address WHERE addressID=?";
+        //sql 3 note
+        //sql 4 documents
+        PreparedStatement statement = conn.prepareStatement(sql);
+        PreparedStatement statement2 = conn.prepareStatement(sql2);
+
+        statement2.setInt(1,student.getAddress().getAddressID());
+        statement.setInt(1,student.getStudentID());
+        statement2.executeUpdate();
+        statement.executeUpdate();
+        statement2.close();
+        statement.close();
     }
 
     public ArrayList<Student> selectAllStudents(){
@@ -109,8 +130,6 @@ public class StudentDAO extends DAO {
 
     public void close(){
         try{
-
-            updateStudentQuery.close();
             deleteStudentQuery.close();
             selectAllStudentsQuery.close();
         }catch (Exception e){
