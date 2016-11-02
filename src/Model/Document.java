@@ -1,6 +1,8 @@
 package Model;
 
 import DAO.DocumentDAO;
+import java.io.*;
+
 
 /**
  * Created by Negin Nafissi on 27-10-2016.
@@ -11,21 +13,22 @@ public class Document {
     private int ownerID;
     private String date;
     private String ownerName;
-    private String location;
     private DocumentDAO documentDAO;
+    private File file;
 
-    public Document(){
 
+    public Document() throws IOException {
     }
 
     public Document(int documentID, String documentName, int ownerID,
-                    String date, String ownerName, String location){
+                    String date, String ownerName, File file) throws IOException {
+
         this.documentID = documentID;
         this.documentName = documentName;
         this.ownerID = ownerID;
         this.date = date;
         this.ownerName = ownerName;
-        this.location = location;
+        this.file = file;
     }
 
     public int getDocumentID() {
@@ -68,19 +71,19 @@ public class Document {
         this.ownerName = ownerName;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public DocumentDAO getDocumentDAO() {
         return documentDAO;
     }
 
     public void setDocumentDAO(DocumentDAO documentDAO) {
         this.documentDAO = documentDAO;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

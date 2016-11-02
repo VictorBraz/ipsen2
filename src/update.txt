@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Address (
 );
 
 
--- Author Victor
+-- Author Victor, Negin
 -- STUDENT
 CREATE SEQUENCE IF NOT EXISTS id_seq_student START WITH	 1;
 CREATE TABLE IF NOT EXISTS Student (
@@ -22,12 +22,13 @@ CREATE TABLE IF NOT EXISTS Student (
     birthDate VARCHAR(255) NOT NULL,
     study VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phoneNumber VARCHAR(255)
+    phoneNumber VARCHAR(255),
+    tag VARCHAR(255)
 
 );
 
 
--- Author Victor
+-- Author Victor, Negin
 -- COMPANY
 CREATE SEQUENCE IF NOT EXISTS id_seq_company START WITH 1000000;
 CREATE TABLE IF NOT EXISTS Company (
@@ -37,11 +38,12 @@ CREATE TABLE IF NOT EXISTS Company (
     companyName VARCHAR(255) NOT NULL,
     contactPerson VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(255),
-    email VARCHAR(255)
+    email VARCHAR(255),
+    tag VARCHAR(255)
 );
 
 
--- Author Victor
+-- Author Victor, Negin
 -- CLIENT
 
 CREATE SEQUENCE IF NOT EXISTS id_seq_client START WITH 2000000;
@@ -54,26 +56,28 @@ CREATE TABLE IF NOT EXISTS Client (
     birthDate VARCHAR(255) NOT NULL,
     study VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phoneNumber VARCHAR(255)
+    phoneNumber VARCHAR(255),
+    tag VARCHAR(255)
 );
 
 
 
--- Author Victor, Roel
+-- Author Victor, Roel, Negin
 -- PROJECT
 
 CREATE SEQUENCE IF NOT EXISTS id_seq_project START WITH 3000000;
 CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
 projectName VARCHAR(255) NOT NULL,
-    studentID INTEGER NOT NULL REFERENCES Student (studentID),
-    companyID INTEGER NOT NULL REFERENCES Company (companyID),
-    clientID INTEGER NOT NULL REFERENCES Client (clientID)
+--    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+--    companyID INTEGER NOT NULL REFERENCES Company (companyID),
+--    clientID INTEGER NOT NULL REFERENCES Client (clientID),
+    tag VARCHAR(255)
     
 );
 
 
--- Author Victor, Roel
+-- Author Victor, Roel, Negin
 -- DOCUMENT
 
 CREATE TABLE IF NOT EXISTS Document (
@@ -82,7 +86,7 @@ CREATE TABLE IF NOT EXISTS Document (
     ownerID INTEGER NOT NULL,
     documentName VARCHAR(255) NOT NULL,
     date VARCHAR(255) NOT NULL,
-location VARCHAR(255) NOT NULL
+    pdffile bytea
 );
 
 
@@ -102,11 +106,11 @@ CREATE TABLE IF NOT EXISTS Note (
 -- Author Victor, Roel
 -- TAG
 
-CREATE TABLE IF NOT EXISTS Tag (
+--CREATE TABLE IF NOT EXISTS Tag (
 
-    tagName VARCHAR(255) NOT NULL PRIMARY KEY,
-    ownerID INTEGER NOT NULL    
-);
+--    tagName VARCHAR(255) NOT NULL PRIMARY KEY,
+--    ownerID INTEGER NOT NULL
+--);
 
 
 -- Author Victor
