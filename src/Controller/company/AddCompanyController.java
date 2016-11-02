@@ -3,6 +3,9 @@ package Controller.company;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
+import Model.Account;
+import Model.Address;
+import Model.Company;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -54,6 +57,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML
     void handleAddFileButton(MouseEvent event) {
 
+
     }
 
     @FXML
@@ -65,6 +69,27 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML
     void handleComfirmButton(MouseEvent event) {
 
+        Company company = new Company();
+        Address address = new Address();
+
+        try {
+            companyDAO = new CompanyDAO();
+            AddressDAO addressDAO = new AddressDAO();
+            company.setCompanyName(companyNameTextField.getText());
+            company.setContactPerson(contactPersonTextField.getText());
+            company.setPhoneNumber(phoneNumberTextField.getText());
+            company.setEmailAddress(emailTextField.getText());
+
+            address.setAddress(addressNameTextField.getText());
+            address.setCity(cityTextField.getText());
+            address.setZipCode(zipCodeTextfield.getText());
+            addressDAO.addAddress(address);
+            company.setCompanyAddressid(address.getAddressID());
+            companyDAO.addCompany(company);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
