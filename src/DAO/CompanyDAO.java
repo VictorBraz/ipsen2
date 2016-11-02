@@ -93,16 +93,16 @@ public class CompanyDAO extends DAO {
      * @throws Exception
      */
     private void addCompanyQuery(Company company)throws Exception{
-        String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email)"+
-                "VALUES (nextval('id_seq_company'),?,?,?,?,?)";
+        String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
+                "VALUES (nextval('id_seq_company'),?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddressid());
         stmt.setString(2, company.getCompanyName());
         stmt.setString(3, company.getContactPerson());
         stmt.setString(4, company.getPhoneNumber());
         stmt.setString(5, company.getEmailAddress());
+        stmt.setString(6, company.getTag());
 
-        //TestDing...
         int rowsInserted = stmt.executeUpdate();
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
@@ -116,7 +116,7 @@ public class CompanyDAO extends DAO {
      * @throws Exception
      */
     private void updateCompanyQuery(int companyID, Company company)throws Exception{
-        String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?" +
+        String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?, tag=?" +
                 "WHERE companyid =?";
         PreparedStatement stmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = stmt.getGeneratedKeys();
@@ -127,6 +127,7 @@ public class CompanyDAO extends DAO {
                 stmt.setString(3, company.getContactPerson());
                 stmt.setString(4, company.getPhoneNumber());
                 stmt.setString(5, company.getEmailAddress());
+                stmt.setString(6, company.getTag());
 
                 int rowUpdated = stmt.executeUpdate();
                 if(rowUpdated > 0){
@@ -155,6 +156,25 @@ public class CompanyDAO extends DAO {
                     System.out.println("Company deleted!");
             }
         }
+    }
+    private ArrayList<Company> getCompaniesQuery()throws  Exception{
+        String sql = "SELECT * FROM company";
+        PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        ResultSet resultSet = stmt.getGeneratedKeys();
+
+        while(resultSet.next()){
+            Company company = new Company();
+            company.setCompanyID(resultSet.getInt(1));
+            company.setCompanyAddressid(resultSet.getInt(2));
+            company.setCompanyName(resultSet.getString(3));
+            company.setContactPerson(resultSet.getString(4));
+            company.setPhoneNumber(resultSet.getString(5));
+            company.setEmailAddress(resultSet.getString(6));
+            company.setTag(resultSet.getString(7));
+
+            companies.add(company);
+        }
+        return companies;
     }
 
 }

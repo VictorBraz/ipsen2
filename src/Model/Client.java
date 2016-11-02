@@ -14,7 +14,10 @@ public class Client extends TableViewItem {
     private Address address;
     private Note note;
 
+
     private int clientAddressid;
+
+    private String tag;
 
     /**
      * Instantiates a new Client.
@@ -24,13 +27,14 @@ public class Client extends TableViewItem {
     }
 
     public Client(String firstName, String lastName, String birthDate, String study,
-                  String emailAddress, String phoneNumber) {
+                  String emailAddress, String phoneNumber, String tag) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.study = study;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.tag = tag;
     }
 
     /**
@@ -48,6 +52,7 @@ public class Client extends TableViewItem {
         this.address =  null;
         this.note = null;
         this.study = null;
+        this.tag = null;
     }
 
     /**
@@ -64,7 +69,7 @@ public class Client extends TableViewItem {
      * @param study           the study
      */
     public Client(int clientID, String firstName, String lastName, String birthDate,
-                  String emailAddress, String phoneNumber, int addressID, int noteID, String study ) {
+                  String emailAddress, String phoneNumber, int addressID, int noteID, String study, String tag ) {
         this.clientID = clientID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,6 +79,7 @@ public class Client extends TableViewItem {
         this.address =  new Address(addressID);
         this.note = new Note(noteID);
         this.study = study;
+        this.tag = tag;
     }
 
     /**
@@ -245,5 +251,13 @@ public class Client extends TableViewItem {
 
     public void setClientAddressid(int clientAddressid) {
         this.clientAddressid = clientAddressid;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
