@@ -15,7 +15,7 @@ public class AccountController {
 //    private AccountCreatorView accountCreatorView;
 //    private LoginView.fxml loginView;
 
-    private AccountController(){
+    public AccountController(){
         try{
             accountDAO = new AccountDAO();
         }catch(Exception e){
