@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Address (
 );
 
 
--- Author Victor, Negin
+-- Author Victor
 -- STUDENT
 CREATE SEQUENCE IF NOT EXISTS id_seq_student START WITH	 1;
 CREATE TABLE IF NOT EXISTS Student (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Student (
 );
 
 
--- Author Victor, Negin
+-- Author Victor
 -- COMPANY
 CREATE SEQUENCE IF NOT EXISTS id_seq_company START WITH 1000000;
 CREATE TABLE IF NOT EXISTS Company (
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Company (
 );
 
 
--- Author Victor, Negin
+-- Author Victor
 -- CLIENT
 
 CREATE SEQUENCE IF NOT EXISTS id_seq_client START WITH 2000000;
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Client (
 CREATE SEQUENCE IF NOT EXISTS id_seq_project START WITH 3000000;
 CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
-projectName VARCHAR(255) NOT NULL,
+    projectName VARCHAR(255) NOT NULL,
 --    studentID INTEGER NOT NULL REFERENCES Student (studentID),
 --    companyID INTEGER NOT NULL REFERENCES Company (companyID),
 --    clientID INTEGER NOT NULL REFERENCES Client (clientID),
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS Document (
     documentID SERIAL NOT NULL PRIMARY KEY,
     ownerID INTEGER NOT NULL,
     documentName VARCHAR(255) NOT NULL,
-    date VARCHAR(255) NOT NULL,
+    documentDate VARCHAR(255) NOT NULL,
     pdffile bytea
 );
 

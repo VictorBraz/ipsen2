@@ -40,7 +40,6 @@ public class DocumentDAO extends DAO{
         return document;
     }
 
-    //Document ook meegeven voor delete document
     public void deleteDocument(int documentID) throws SQLException{
         try {
             deleteDocumentQuery(documentID);
@@ -51,20 +50,18 @@ public class DocumentDAO extends DAO{
 
 
     private void addDocumentQuery(Document document) throws SQLException, IOException {
-        String sql = "INSERT INTO document (documentname, ownerid" +
-                " date, ownername, pdffile) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO document (documentname, ownerid, documentdate, pdffile) VALUES (?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, document.getDocumentName());
         statement.setInt(2, document.getOwnerID());
         statement.setString(3, document.getDate());
-        statement.setString(4, document.getOwnerName());
         if (file != null){
             fis = new FileInputStream(file);
-            statement.setBinaryStream(5, fis);
+            statement.setBinaryStream(4, fis);
             fis.close();
         } else {
-            statement.setNull(5, Types.OTHER);
+            statement.setNull(4, Types.OTHER);
         }
         statement.executeUpdate();
         statement.close();
@@ -73,27 +70,13 @@ public class DocumentDAO extends DAO{
 
     public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException, DocumentException {
         ArrayList<Document> documents = new ArrayList<Document>();
-            String sql = "SELECT * FROM document WHERE ownerid = ?";
+            String sql = "SELECT documentname FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
                 Document document = new Document();
                 document.setDocumentName(result.getString(1));
-                document.setOwnerID(result.getInt(2));
-                document.setDate(result.getString(3));
-                document.setOwnerName(result.getString(4));
-                InputStream input = result.getBinaryStream(5);
-
-                DataInputStream d = new DataInputStream(input);
-                DataOutputStream out = new DataOutputStream(new FileOutputStream("src/test.pdf"));
-
-                outputStream = "src/test.pdf";
-                PdfReader pdfReader = new PdfReader(input);
-                PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(outputStream));
-                pdfStamper.close();
-
-                documents.add(document);
             }
         statement.close();
         return documents;
@@ -111,8 +94,7 @@ public class DocumentDAO extends DAO{
                 document.setDocumentName(result.getString(1));
                 document.setOwnerID(result.getInt(2));
                 document.setDate(result.getString(3));
-                document.setOwnerName(result.getString(4));
-                InputStream input = result.getBinaryStream(5);
+                InputStream input = result.getBinaryStream(4);
                 file = new File("src/test.pdf");
                 FileOutputStream fos = new FileOutputStream(file);
                 byte[] buffer = new byte[1];
@@ -121,11 +103,6 @@ public class DocumentDAO extends DAO{
                 }
                 fos.close();
             }
-
-//                outputStream = "src\\test.pdf";
-//                PdfReader pdfReader = new PdfReader(input);
-//                PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(outputStream));
-//                pdfStamper.close();
         }
         statement.close();
         return document;

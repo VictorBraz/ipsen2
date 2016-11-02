@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AddClientController extends ContentLoader implements Initializable, TableViewListener {
@@ -80,8 +82,13 @@ public class AddClientController extends ContentLoader implements Initializable,
                 new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
          if(selectedFile != null){
             document.setFile(selectedFile);
+            document.setDocumentName(String.valueOf(selectedFile));
+            document.setDate(date);
+             document.setOwnerID(123);
              try {
                  documentDAO.addDocument(document);
              } catch (SQLException e) {

@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Created by Gebruiker on 2-11-2016.
+ * Created by Negin Nafissi on 2-11-2016.
  */
 public class ProjectDAO extends DAO {
 
