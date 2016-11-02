@@ -1,10 +1,5 @@
 package Model;
 
-import DAO.AddressDAO;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Created by Bernd on 13-10-2016.
  */
@@ -119,4 +114,6 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
+
+
 }

@@ -7,6 +7,9 @@ package Controller.client;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
+import Model.Address;
+import Model.Client;
+import Model.Note;
 import DAO.DocumentDAO;
 import Model.Document;
 import Model.TableViewItem;
@@ -37,7 +40,7 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML private JFXTextField firstNameTextField;
     @FXML private JFXTextField lastNameTextField;
     @FXML private JFXTextField birthDateTextfield;
-    @FXML private JFXTextField adresTextField;
+    @FXML private JFXTextField addressTextField;
     @FXML private JFXTextField zipCodeTextField;
     @FXML private JFXTextField cityTextField;
     @FXML private JFXTextField studyTextField;
@@ -107,6 +110,24 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
+
+        Client client = new Client();
+        Address address = new Address();
+        Note note = new Note();
+
+        address.setAddress(addressTextField.getText());
+        address.setZipCode(zipCodeTextField.getText());
+        address.setCity(cityTextField.getText());
+        client.setAddress(addressDAO.addAddress(address));
+        client.setFirstName(firstNameTextField.getText());
+        client.setLastName(lastNameTextField.getText());
+        client.setBirthDate(birthDateTextfield.getText());
+        client.setStudy(studyTextField.getText());
+        client.setEmailAddress(emailTextfield.getText());
+        client.setPhoneNumber(phoneTextField.getText());
+        client.setClientID(clientDAO.addClient(client).getClientID());
+
+        addContent(resources.getString("CLIENTS"));
 
     }
 
