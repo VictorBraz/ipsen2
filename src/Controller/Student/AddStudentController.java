@@ -3,6 +3,9 @@ package Controller.Student;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.StudentDAO;
+import Model.Address;
+import Model.Note;
+import Model.Student;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -66,12 +69,40 @@ public class AddStudentController extends ContentLoader implements Initializable
     @FXML
     void handleCancelButton(MouseEvent event) {
         addContent(resources.getString("STUDENTS"));
+    }
+
+    private void addStudent(){
+        Address address = new Address();
+        Student student = new Student();
+        Note note = new Note();
+        address.setAddress(adresTextField.getText());
+        address.setZipCode(zipCodeTextField.getText());
+        address.setCity(cityTextField.getText());
+        student.setAddress(addressDAO.addAddress(address));
+        student.setFirstName(firstNameTextField.getText());
+        student.setLastName(lastNameTextField.getText());
+        student.setBirthDate(birthDateTextfield.getText());
+        student.setEmailAddress(emailTextfield.getText());
+        student.setPhoneNumber(phoneTextField.getText());
+        student.setStudy(studyTextField.getText());
+        student.setStudentID(studentDAO.addStudent(student).getStudentID());
+        System.out.println(student.getStudentID());
 
     }
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
+        if (firstNameTextField.getText().trim() != "" || lastNameTextField.getText().trim() != "" ||
+            birthDateTextfield.getText().trim() != "" || emailTextfield.getText().trim() != "" ||
+            studyTextField.getText().trim() != "" || phoneTextField.getText().trim() != "" ||
+            adresTextField.getText().trim() != "" || cityTextField.getText().trim() != ""||
+            zipCodeTextField.getText().trim() != ""){
+            //melding
 
+        } else {
+            addStudent();
+            addContent(resources.getString("STUDENTS"));
+        }
     }
 
     @FXML

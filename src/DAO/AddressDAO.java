@@ -59,14 +59,19 @@ public class AddressDAO extends DAO {
         statement.setString(1, address.getAddress());
         statement.setString(2, address.getZipCode());
         statement.setString(3, address.getCity());
-        ResultSet rs = statement.getGeneratedKeys();
-        address.setAddressID(rs.getInt(1));
 
         int rowInserted = statement.executeUpdate();
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            address.setAddressID(id);
+        }
+
         if (rowInserted > 0) {
             System.out.println("A new address was inserted succesfully!");
         }
         return address;
+
     }
 
     private void updateAddressQuery(int addressID, Address address) throws SQLException {
