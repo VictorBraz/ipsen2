@@ -231,10 +231,6 @@ public class Student{
         this.phoneNumber = phoneNumber;
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
-    }
-
     public String getTag() {
         return tag;
     }

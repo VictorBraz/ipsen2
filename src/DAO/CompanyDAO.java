@@ -94,7 +94,7 @@ public class CompanyDAO extends DAO {
      */
     private void addCompanyQuery(Company company)throws Exception{
         String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
-                "VALUES (null,?,?,?,?,?,?)";
+                "VALUES (nextval('id_seq_company'),?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddressid());
         stmt.setString(2, company.getCompanyName());

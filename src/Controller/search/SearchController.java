@@ -3,6 +3,7 @@ package Controller.search;
 import Controller.handlers.TableViewListener;
 import DAO.ClientDAO;
 import DAO.CompanyDAO;
+import DAO.StudentDAO;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
