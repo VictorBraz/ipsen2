@@ -5,7 +5,7 @@ import DAO.ClientDAO;
 /**
  * Created by Bernd on 12-10-2016.
  */
-public class Client {
+public class Client extends TableViewItem {
     private int clientID;
     private String firstName;
     private String lastName;

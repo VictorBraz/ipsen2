@@ -39,6 +39,7 @@ public class TableViewSelectHandler extends ContentLoader {
 
 
 
+
     /**
      * Handles items that are being clicked inside TableView object<br><br>
      *

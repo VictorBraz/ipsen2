@@ -86,7 +86,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("SEARCH_TITLE"));
-        try {
+            try {
             this.companyDAO = new CompanyDAO();
             this.clientDAO = new ClientDAO();
             this.studentDAO = new StudentDAO();
