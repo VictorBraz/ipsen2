@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
+         <children>
+            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Client toevoegen">
+               <font>
+                  <Font name="Roboto Light" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="68.0" layoutY="111.0" prefHeight="530.0" prefWidth="1133.0" stylesheets="@../mediaMap/styles.css">
+               <children>
+                  <Label layoutX="64.0" layoutY="45.0" prefHeight="10.0" prefWidth="85.0" text="Voornaam">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="90.0" prefHeight="19.0" prefWidth="97.0" text="Achternaam">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="firstNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="39.0" maxWidth="259.0" minWidth="259.0" prefHeight="37.0" prefWidth="259.0" promptText="Voornaam" />
+                  <JFXTextField fx:id="lastNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="85.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Achternaam" />
+                  <Label layoutX="22.0" layoutY="135.0" prefHeight="27.0" prefWidth="127.0" text="Geboortedatum">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="103.0" layoutY="180.0" prefHeight="27.0" prefWidth="46.0" text="Adres">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="77.0" layoutY="225.0" prefHeight="27.0" prefWidth="74.0" text="Postcode">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="98.0" layoutY="315.0" prefHeight="27.0" prefWidth="53.0" text="Studie">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="54.0" layoutY="270.0" prefHeight="27.0" prefWidth="97.0" text="Woonplaats">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="106.0" layoutY="360.0" prefHeight="27.0" prefWidth="46.0" text="Email">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="80.0" layoutY="405.0" prefHeight="27.0" prefWidth="74.0" text="Telefoon">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="593.0" layoutY="45.0" prefHeight="27.0" prefWidth="40.0" text="Tags">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="birthDateTextfield" focusColor="#b2ebf2" layoutX="190.0" layoutY="130.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Geboortedatum" />
+                  <JFXTextField fx:id="adresTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="175.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Adres" />
+                  <JFXTextField fx:id="zipCodeTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="220.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Postcode" />
+                  <JFXTextField fx:id="cityTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="265.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Woonplaats" />
+                  <JFXTextField fx:id="studyTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="310.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Studie" />
+                  <JFXTextField fx:id="emailTextfield" focusColor="#b2ebf2" layoutX="190.0" layoutY="355.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Emailadres" />
+                  <JFXTextField fx:id="phoneTextField" layoutX="190.0" layoutY="400.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Telefoonnummer" />
+                  <JFXTextArea fx:id="noteTextField" layoutX="670.0" layoutY="295.0" maxWidth="523.0" minWidth="442.0" prefHeight="131.0" prefWidth="442.0">
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
+                     </effect>
+                  </JFXTextArea>
+                  <Label layoutX="561.0" layoutY="289.0" prefHeight="27.0" prefWidth="65.0" text="Notities">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="551.0" layoutY="149.0" prefHeight="27.0" prefWidth="85.0" text="Bestanden">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="tagsTextField" focusColor="#b2ebf2" layoutX="670.0" layoutY="40.0" maxWidth="442.0" minWidth="259.0" prefHeight="37.0" prefWidth="442.0" promptText="Tags" />
+                  <JFXButton fx:id="fileAddButton" buttonType="RAISED" layoutX="669.0" layoutY="115.0" onMouseClicked="#handleAddFileButton" style="-fx-background-color: #00BCD4;" text="Toevoegen" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="deleteFileButton" buttonType="RAISED" layoutX="667.0" layoutY="165.0" onMouseClicked="#handleDeleteFileButton" style="-fx-background-color: #00BCD4;" text="Verwijderen" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <TableView fx:id="tableView" layoutX="800.0" layoutY="110.0" prefHeight="155.0" prefWidth="311.0">
+                    <columns>
+                        <TableColumn fx:id="checkBoxColumn" prefWidth="28.0" />
+                      <TableColumn fx:id="documentIDColumn" prefWidth="55.0" text="Nummer" />
+                      <TableColumn fx:id="fileNameColumn" prefWidth="279.0" text="Bestandnaam" />
+                    </columns>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
+                     </effect>
+                  </TableView>
+                  <JFXButton fx:id="cancelButton" layoutX="892.0" layoutY="457.0" onMouseClicked="#handleCancelButton" prefHeight="51.0" prefWidth="128.0" text="ANNULEREN" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" layoutX="1021.0" layoutY="457.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" text="GEREED" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

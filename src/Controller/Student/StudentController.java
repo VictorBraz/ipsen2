@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Student;
 
+import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.StudentDAO;
 import Model.Student;
@@ -17,7 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class StudentController extends ContentLoader implements Initializable{
+public class StudentController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
@@ -55,6 +56,7 @@ public class StudentController extends ContentLoader implements Initializable{
 
     @FXML
     void handleAddButton(MouseEvent event) {
+        addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
 
     }
 
@@ -112,6 +114,24 @@ public class StudentController extends ContentLoader implements Initializable{
     private void close(){
         studentDAO.close();
     }
+
+
+
+    @Override
+    public void setSelectedRows(ArrayList selectedRows) {
+
+    }
+
+    @Override
+    public void setSelectedItem(int selectedItemId) {
+
+    }
+
+    @Override
+    public void openEditMenu() {
+
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,5 +1,5 @@
 
-package Controller;
+package Controller.company;
 
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
@@ -48,7 +48,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent(this, resources.getString("EDIT_COMPANY_DIALOG"));
+        addContent(new AddCompanyController(), resources.getString("NEW_COMPANY_DIALOG"));
 
     }
 

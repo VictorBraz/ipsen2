@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.search.SearchController">
+   <children>
+      <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
+         <children>
+            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Zoeken op tags">
+               <font>
+                  <Font name="Roboto Light" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="68.0" layoutY="111.0" prefHeight="530.0" prefWidth="1133.0" stylesheets="@../mediaMap/styles.css">
+               <children>
+                  <JFXTextField fx:id="searchTextField" focusColor="#b2ebf2" layoutX="36.0" layoutY="39.0" maxWidth="582.0" minWidth="259.0" prefHeight="37.0" prefWidth="406.0" promptText="vul hier een tag in om te zoeken" />
+                  <TableView fx:id="studentTableView" layoutX="44.0" layoutY="188.0" prefHeight="239.0" prefWidth="311.0">
+                    <columns>
+                        <TableColumn fx:id="checkBoxStudentColumn" prefWidth="28.0" />
+                      <TableColumn fx:id="studentLastnameColumn" prefWidth="104.0" text="Achternaam" />
+                        <TableColumn fx:id="studentTagsColumn" prefWidth="178.0" text="Tags" />
+                    </columns>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
+                     </effect>
+                  </TableView>
+                  <JFXButton fx:id="cancelButton" layoutX="875.0" layoutY="457.0" onMouseClicked="#handleCancelButton" prefHeight="51.0" prefWidth="128.0" text="ANNULEREN" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" layoutX="1014.0" layoutY="457.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="97.0" text="OPENEN" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <TableView fx:id="clientTableView" layoutX="411.0" layoutY="188.0" prefHeight="239.0" prefWidth="311.0">
+                     <columns>
+                        <TableColumn fx:id="checkBoxClientColumn" prefWidth="28.0" />
+                        <TableColumn fx:id="clientLastnameColumn" prefWidth="95.0" text="Achternaam" />
+                        <TableColumn fx:id="clientTagsColumn" prefWidth="187.0" text="Tags" />
+                     </columns>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
+                     </effect>
+                  </TableView>
+                  <TableView fx:id="companyTableView" layoutX="783.0" layoutY="188.0" prefHeight="239.0" prefWidth="311.0">
+                     <columns>
+                        <TableColumn fx:id="checkBoxCompanyColumn" prefWidth="28.0" />
+                        <TableColumn fx:id="companyNameColumn" prefWidth="100.0" text="Bedrijfsnaam" />
+                        <TableColumn fx:id="companyTagsColumn" prefWidth="182.0" text="Tags" />
+                     </columns>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
+                     </effect>
+                  </TableView>
+                  <Label layoutX="44.0" layoutY="126.0" prefHeight="62.0" prefWidth="152.0" text="Studenten">
+                     <font>
+                        <Font name="Roboto" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="411.0" layoutY="126.0" prefHeight="62.0" prefWidth="152.0" text="Cliënten">
+                     <font>
+                        <Font name="Roboto" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="783.0" layoutY="126.0" prefHeight="62.0" prefWidth="152.0" text="Bedrijven">
+                     <font>
+                        <Font name="Roboto" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton buttonType="RAISED" layoutX="479.0" layoutY="42.0" onMousePressed="#handleSearchButton" style="-fx-background-color: #00BCD4;" text="Zoeken" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
