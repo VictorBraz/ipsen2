@@ -84,7 +84,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
             address.setCity(cityTextField.getText());
             address.setZipCode(zipCodeTextfield.getText());
             addressDAO.addAddress(address);
-            company.setCompanyAddressid(address.getAddressID());
+            company.setCompanyAddressid(address);
             companyDAO.addCompany(company);
             addContent(resources.getString("COMPANIES"));
 

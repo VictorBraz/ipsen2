@@ -66,6 +66,7 @@ public class CompanyDAO extends DAO {
     public ArrayList<Company> getCompanies() {
 
         String sql = "SELECT * FROM company";
+        companies = new ArrayList<>();
 
         try {
             stmt = conn.prepareStatement(sql);
@@ -73,7 +74,7 @@ public class CompanyDAO extends DAO {
             while (resultSet.next()) {
                 Company company = new Company();
                 company.setCompanyID(resultSet.getInt(1));
-                company.setCompanyAddressid(new Address(resultSet.getInt("clientaddressid")));
+                company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
                 company.setCompanyName(resultSet.getString(3));
                 company.setContactPerson(resultSet.getString(4));
                 company.setPhoneNumber(resultSet.getString(5));

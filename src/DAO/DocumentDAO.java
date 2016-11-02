@@ -27,12 +27,12 @@ public class DocumentDAO extends DAO{
         }
     }
 
-    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException, DocumentException {
+    public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = selectAllDocumentsQuery(ownerID);
         return documents;
     }
 
-    public Document selectDocument(int documentID) throws SQLException, IOException, DocumentException {
+    public Document selectDocument(int documentID) throws SQLException, IOException {
         Document document = selectDocumentQuery(documentID);
         return document;
     }
@@ -65,7 +65,7 @@ public class DocumentDAO extends DAO{
     }
 
 
-    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException, DocumentException {
+    public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT documentname FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class DocumentDAO extends DAO{
         return documents;
     }
 
-    private Document selectDocumentQuery(int documentID) throws SQLException, IOException, DocumentException {
+    private Document selectDocumentQuery(int documentID) throws SQLException, IOException {
         String sql = "SELECT * FROM document WHERE documenttid = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.executeQuery();
