@@ -69,7 +69,6 @@ public class AccountDAO extends DAO{
         try {
             stmt = conn.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
-            System.out.println(resultSet.next());
             while(resultSet.next()){
                 Account account = new Account();
                 account.setUserName(resultSet.getString(1));
@@ -77,16 +76,12 @@ public class AccountDAO extends DAO{
                 account.setRightName(resultSet.getInt(3));
                 account.setUserID(resultSet.getInt(4));
 
-                System.out.println("working with more then 2");
-                System.out.println(account.getUserName());
-
                 accounts.add(account);
 
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            System.out.print("!!!!");
         }
 
         return accounts;

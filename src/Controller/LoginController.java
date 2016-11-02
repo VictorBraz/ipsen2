@@ -31,7 +31,11 @@ public class LoginController extends ContentLoader implements Initializable {
     private ArrayList<Account> accounts = new ArrayList<>();
     private AccountController controller;
 
-
+    /**
+     * @author Bernd, Victor
+     * @param event
+     * @throws Exception
+     */
     @FXML
     public void cmdLogin(ActionEvent event) throws Exception {
         String username = userNameTextField.getText();
@@ -40,8 +44,8 @@ public class LoginController extends ContentLoader implements Initializable {
 
         accounts = controller.cmdSelectAllAccounts();
 
-        for(Account account : accounts){
-            if(username.equals(account.getUserName()) && password.equals(account.getPassword())){
+        for(Account account : accounts) {
+            if (username.equals(account.getUserName()) && password.equals(account.getPassword())) {
                 addContent(resources.getString("MAINMENU"));
                 System.out.println("Welcome");
             }

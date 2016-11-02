@@ -29,8 +29,6 @@ public class QueryUpdater extends DAO {
          */
         public void execute(String query) {
             if (conn != null) {
-                System.out.print("niet null");
-
                 try {
                     Statement stmt = conn.createStatement();
                     boolean result = stmt.execute(query);
@@ -38,7 +36,6 @@ public class QueryUpdater extends DAO {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
             }
         }
 
