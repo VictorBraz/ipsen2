@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class DocumentDAO extends DAO{
 
-    private File file = null;
+    private File file;
     private FileInputStream fis;
     private String outputStream;
 

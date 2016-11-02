@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.DocumentDAO;
 import Model.Document;
+import com.itextpdf.text.DocumentException;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
@@ -27,11 +28,11 @@ public class DocumentController {
                 new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         //TODO:stage meegeven
-        File selectedFile = fileChooser.showOpenDialog();
-         if(selectedFile != null){
-            document.setFile(selectedFile);
-            dao.addDocument(document);
-        }
+//        File selectedFile = fileChooser.showOpenDialog();
+//         if(selectedFile != null){
+//            document.setFile(selectedFile);
+//            dao.addDocument(document);
+//        }
 
     }
 
@@ -39,7 +40,7 @@ public class DocumentController {
         dao.deleteDocument(documentID);
     }
 
-    public void cmdSelectDocument(int documentID) throws SQLException, IOException {
+    public void cmdSelectDocument(int documentID) throws SQLException, IOException, DocumentException {
         dao.selectDocument(documentID);
     }
 }

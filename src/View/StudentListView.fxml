@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StudentController">
    <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
             <TableColumn fx:id="checkBoxColumn" prefWidth="25.0" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Voornaam" />
-          <TableColumn fx:id="lastNameColumn" prefWidth="91.0" text="Achternaam" />
+            <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Voornaam" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="91.0" text="Achternaam" />
             <TableColumn fx:id="birthDateColumn" prefWidth="96.0" text="Geboortedatum" />
             <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="111.0" text="Adres" />
             <TableColumn fx:id="zipCodeColumn" prefWidth="71.0" text="Postcode" />

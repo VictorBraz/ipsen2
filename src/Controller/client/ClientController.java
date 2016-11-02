@@ -4,6 +4,7 @@ import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
+import Model.Address;
 import Model.Client;
 import Model.TableViewItem;
 import contentloader.ContentLoader;
@@ -29,6 +30,7 @@ import java.util.ResourceBundle;
 public class ClientController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML  TableView<TableViewItem> tableView;
+//    @FXML  TableView<Client> tableView;
     @FXML private TableColumn checkBoxColumn;
     @FXML private TableColumn<Client, String> firstNameColumn;
     @FXML private TableColumn<Client, String> lastNameColumn;
@@ -68,6 +70,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     void handleZoominButton(MouseEvent event) {
 
     }
+
 
 
 //TODO clientenlijst ophalen uit de dao
@@ -112,6 +115,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     }
     private void showTable() {
+
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
@@ -127,7 +131,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phonenumber"));
 
         //TODO werkt nog niet
-     //   tableView.setItems(clientData);
+//        tableView.setItems(clientData);
 
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
 
