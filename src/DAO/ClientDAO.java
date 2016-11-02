@@ -59,17 +59,17 @@ public class ClientDAO extends DAO {
      * @throws SQLException the sql exception
      */
     public ArrayList <Client> selectAllClients() {
-        ArrayList<Client> clients;
-        clients = selectAllClientsQuery();
+        ArrayList<Client> clients = selectAllClientsQuery();
 
-//        for(Client client: clients) {
-//            try {
-//                client.setAddress(this.addressDAO.selectAddress(client.getAddress().getAddressID()));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        for(Client client: clients) {
+            try {
+                client.setAddress(this.addressDAO.selectAddress(client.getAddress().getAddressID()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return clients;
+
     }
 
     /**
@@ -117,7 +117,7 @@ public class ClientDAO extends DAO {
     private Client selectClientQuery(int clientID) throws SQLException{
         String sql = "SELECT * FROM client WHERE clientid = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet result = statement.getGeneratedKeys();
+        ResultSet result = statement.executeQuery();
         Client client = null;
 
         while(result.next()) {
@@ -135,21 +135,24 @@ public class ClientDAO extends DAO {
     }
 
     private ArrayList <Client> selectAllClientsQuery()  {
-        ArrayList<Client> clients = new ArrayList<>();
-        String sql = "SELECT * FROM Client";
+        ArrayList<Client> clients = new ArrayList<Client>();
+        String sql = "SELECT clientid, clientaddressid, firstname," +
+                " lastname, birthdate, study, email, phonenumber, clientaddressid FROM client";
         try {
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Client client = new Client();
-                client.setFirstName(result.getString(2));
-                client.setLastName(result.getString(3));
-                client.setBirthDate(result.getString(4));
-                client.setStudy(result.getString(5));
-                client.setEmailAddress(result.getString(6));
-                client.setPhoneNumber(result.getString(7));
-                client.setAddress(new Address(result.getInt("addressid")));
+                client.setFirstName(result.getString("firstname"));
+                client.setLastName(result.getString("lastname"));
+                client.setBirthDate(result.getString("birthdate"));
+                client.setStudy(result.getString("study"));
+                client.setEmailAddress(result.getString("email"));
+                client.setPhoneNumber(result.getString("phoneNumber"));
+                client.setAddress(new Address(result.getInt("clientaddressid")));
+
+
 
                 clients.add(client);
             }
