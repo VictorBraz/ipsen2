@@ -1,9 +1,6 @@
 package DAO;
 
 import Model.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
 
 import java.io.*;
 import java.sql.*;

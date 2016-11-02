@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.Address;
 import Model.Company;
 
 import java.sql.PreparedStatement;
@@ -72,7 +73,7 @@ public class CompanyDAO extends DAO {
             while (resultSet.next()) {
                 Company company = new Company();
                 company.setCompanyID(resultSet.getInt(1));
-                company.setCompanyAddressid(resultSet.getInt(2));
+                company.setCompanyAddressid(new Address(resultSet.getInt("clientaddressid")));
                 company.setCompanyName(resultSet.getString(3));
                 company.setContactPerson(resultSet.getString(4));
                 company.setPhoneNumber(resultSet.getString(5));
@@ -96,7 +97,7 @@ public class CompanyDAO extends DAO {
         String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
                 "VALUES (nextval('id_seq_company'),?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        stmt.setInt(1, company.getCompanyAddressid());
+        stmt.setInt(1, company.getCompanyAddressid().getAddressID());
         stmt.setString(2, company.getCompanyName());
         stmt.setString(3, company.getContactPerson());
         stmt.setString(4, company.getPhoneNumber());
@@ -122,7 +123,7 @@ public class CompanyDAO extends DAO {
         ResultSet resultSet = stmt.getGeneratedKeys();
         while(resultSet.next()){
             if(resultSet.equals(companyID)){
-                stmt.setInt(1, company.getCompanyAddressid());
+                stmt.setInt(1, company.getCompanyAddressid().getAddressID());
                 stmt.setString(2, company.getCompanyName());
                 stmt.setString(3, company.getContactPerson());
                 stmt.setString(4, company.getPhoneNumber());
@@ -165,7 +166,7 @@ public class CompanyDAO extends DAO {
         while(resultSet.next()){
             Company company = new Company();
             company.setCompanyID(resultSet.getInt(1));
-            company.setCompanyAddressid(resultSet.getInt(2));
+            company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
             company.setCompanyName(resultSet.getString(3));
             company.setContactPerson(resultSet.getString(4));
             company.setPhoneNumber(resultSet.getString(5));
