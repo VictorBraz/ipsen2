@@ -93,11 +93,6 @@ public class AddClientController extends ContentLoader implements Initializable,
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
             documents.add(document);
-//             try {
-//                 documentDAO.addDocument(document);
-//             } catch (SQLException e) {
-//                 e.printStackTrace();
-//             }
          }
         documentData = FXCollections.observableArrayList(documents);
         showTable();
@@ -112,17 +107,9 @@ public class AddClientController extends ContentLoader implements Initializable,
         tableViewSelectHandler.createSelectAllCheckBox();
 
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
-
-
-        //TODO werkt nog niet
         tableView.setItems(documentData);
-
-
-        System.out.println(documentIDColumn.getCellValueFactory().toString());
         System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
-
-
     }
 
     @FXML
@@ -166,7 +153,9 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
-//        documentDAO.deleteDocument(document.getDocumentID());
+        documents.clear();
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
     }
 
     @Override
