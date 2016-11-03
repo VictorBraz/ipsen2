@@ -52,13 +52,10 @@ public class StudentController extends ContentLoader implements Initializable, T
         }
     }
 
-
-
-
     @FXML
-    void handleAddButton(MouseEvent event) throws IOException {
-        addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
 
+    void handleAddButton(MouseEvent event) {
+        addContent(resources.getString("NEW_STUDENT_DIALOG"));
     }
 
     @FXML
@@ -85,32 +82,6 @@ public class StudentController extends ContentLoader implements Initializable, T
         return studentDAO.selectAllStudents();
     }
 
-    public void addStudent(){
-        Student student = new Student(/*fields*/);
-        //Get input from fields en set student
-        //student.setFirstName();
-        //student.setLastName();
-        //student.setBirthDate();
-        //student.setAddress();
-        //student.setEmailAddress();
-        //student.setStudy();
-        //student.setPhoneNumber();
-        student.setAddress(addressDAO.addAddress(student.getAddress()));
-
-        studentDAO.addStudent(student);
-    }
-
-    public void updateStudent(Student student){
-        //Get input from fields en set student
-        //student.setFirstName();
-        //student.setLastName();
-        //student.setBirthDate();
-        //student.setAddress();
-        //student.setEmailAddress();
-        //student.setStudy();
-        //student.setPhoneNumber();
-        studentDAO.updateStudent(student);
-    }
 
     private void close(){
         studentDAO.close();

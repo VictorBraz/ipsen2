@@ -3,6 +3,8 @@ package Controller.Student;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
+import DAO.NoteDAO;
+
 import DAO.StudentDAO;
 import Model.*;
 import com.jfoenix.controls.JFXButton;
@@ -62,6 +64,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     private StudentDAO studentDAO;
     private AddressDAO addressDAO;
+    private NoteDAO noteDAO;
     private ResourceBundle resources;
 
     private DocumentDAO documentDAO;
@@ -101,7 +104,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         addContent(resources.getString("STUDENTS"));
     }
 
-    private void addStudent(){
+    private void addStudent() {
         Address address = new Address();
         Student student = new Student();
         Note note = new Note();
@@ -117,6 +120,9 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setStudy(studyTextField.getText());
         student.setStudentID(studentDAO.addStudent(student).getStudentID());
         System.out.println(student.getStudentID());
+        note.setOwnerID(student.getStudentID());
+        note.setText(noteTextField.getText());
+        note.setNoteID(noteDAO.addNote(note).getNoteID());
         // note, documents en tags nog toevoegen.
         // relatie nog volledig doen.
 
@@ -124,17 +130,8 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
-        if (firstNameTextField.getText().trim() != "" || lastNameTextField.getText().trim() != "" ||
-            birthDateTextfield.getText().trim() != "" || emailTextfield.getText().trim() != "" ||
-            studyTextField.getText().trim() != "" || phoneTextField.getText().trim() != "" ||
-            adresTextField.getText().trim() != "" || cityTextField.getText().trim() != ""||
-            zipCodeTextField.getText().trim() != ""){
-            //melding
-
-        } else {
-            addStudent();
-            addContent(resources.getString("STUDENTS"));
-        }
+        addStudent();
+        addContent(resources.getString("STUDENTS"));
     }
 
     @FXML
@@ -164,6 +161,7 @@ public class AddStudentController extends ContentLoader implements Initializable
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();
             this.documentDAO = new DocumentDAO();
+            this.noteDAO = new NoteDAO();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

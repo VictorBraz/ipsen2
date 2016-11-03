@@ -148,14 +148,14 @@ public class ClientDAO extends DAO {
             while (result.next()) {
                 Client client = new Client();
 
-                client.setFirstName(result.getString(2));
-                client.setLastName(result.getString(3));
-                client.setBirthDate(result.getString(4));
-                client.setStudy(result.getString(5));
-                client.setEmailAddress(result.getString(6));
-                client.setPhoneNumber(result.getString(7));
+                client.setFirstName(result.getString(3));
+                client.setLastName(result.getString(4));
+                client.setBirthDate(result.getString(5));
+                client.setStudy(result.getString(6));
+                client.setEmailAddress(result.getString(7));
+                client.setPhoneNumber(result.getString(8));
                 client.setAddress(new Address(result.getInt("clientaddressid")));
-                client.setTag(result.getString(8));
+                client.setTag(result.getString(9));
 
                 clients.add(client);
             }
