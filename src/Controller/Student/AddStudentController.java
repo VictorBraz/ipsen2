@@ -91,7 +91,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         System.out.println(student.getStudentID());
         note.setOwnerID(student.getStudentID());
         note.setText(noteTextField.getText());
-        noteDAO.addNote(note);
+        note.setNoteID(noteDAO.addNote(note).getNoteID());
         // note, documents en tags nog toevoegen.
         // relatie nog volledig doen.
 
@@ -99,17 +99,8 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
-        if (firstNameTextField.getText().trim() != "" || lastNameTextField.getText().trim() != "" ||
-            birthDateTextfield.getText().trim() != "" || emailTextfield.getText().trim() != "" ||
-            studyTextField.getText().trim() != "" || phoneTextField.getText().trim() != "" ||
-            adresTextField.getText().trim() != "" || cityTextField.getText().trim() != ""||
-            zipCodeTextField.getText().trim() != ""){
-            //melding
-
-        } else {
-            addStudent();
-            addContent(resources.getString("STUDENTS"));
-        }
+        addStudent();
+        addContent(resources.getString("STUDENTS"));
     }
 
     @FXML
@@ -138,6 +129,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         try {
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();
+            this.noteDAO = new NoteDAO();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

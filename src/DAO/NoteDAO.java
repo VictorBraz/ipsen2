@@ -19,7 +19,7 @@ public class NoteDAO extends DAO{
     public Note addNote(Note note){
         try{
             note = addNoteQuery(note);
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return note;
@@ -44,7 +44,7 @@ public class NoteDAO extends DAO{
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, note.getText());
-        statement.setInt(1, note.getOwnerID());
+        statement.setInt(2, note.getOwnerID());
 
         int rowInserted = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
