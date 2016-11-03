@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,14 +58,12 @@ public class StudentController extends ContentLoader implements Initializable, T
         tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
 
         tableView.setItems(studentData);
-
     }
 
-
     @FXML
+
     void handleAddButton(MouseEvent event) {
         addContent(resources.getString("NEW_STUDENT_DIALOG"));
-
     }
 
     @FXML

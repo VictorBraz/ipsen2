@@ -5,6 +5,7 @@ package Controller.client;
  */
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import Model.Address;
@@ -14,15 +15,18 @@ import DAO.DocumentDAO;
 import Model.Document;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
@@ -53,8 +57,8 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML private JFXButton deleteFileButton;
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn<?, ?> checkBoxColumn;
-    @FXML private TableColumn<?, ?> documentIDColumn;
-    @FXML private TableColumn<?, ?> fileNameColumn;
+    @FXML private TableColumn<Document, String> documentIDColumn;
+    @FXML private TableColumn<Document, String> fileNameColumn;
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
@@ -62,22 +66,21 @@ public class AddClientController extends ContentLoader implements Initializable,
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
     private DocumentDAO documentDAO;
-    private Document document = new Document();
-
-    public AddClientController() throws IOException {
-        this.document = document;
-    }
-
+    private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
-    void handleAddFileButton(MouseEvent event) {
+    void handleAddFileButton(MouseEvent event) throws IOException {
+        Document document = new Document();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
@@ -85,31 +88,38 @@ public class AddClientController extends ContentLoader implements Initializable,
                 new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String date = sdf.format(new Date());
          if(selectedFile != null){
             document.setFile(selectedFile);
-            document.setDocumentName(String.valueOf(selectedFile));
+            document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-             document.setOwnerID(123);
-             try {
-                 documentDAO.addDocument(document);
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-             System.out.println("Document opgeslagen!");
+            documents.add(document);
          }
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
 
+
+    }
+
+    private void showTable() {
+
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        tableView.setItems(documentData);
+        System.out.println(documentData);
+        tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
     @FXML
     void handleCancelButton(MouseEvent event) {
-        addContent(resources.getString("STUDENTS"));
+        addContent(resources.getString("CLIENTS"));
 
     }
 
     @FXML
-    void handleComfirmButton(MouseEvent event) {
+    void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
 
         Client client = new Client();
         Address address = new Address();
@@ -125,15 +135,27 @@ public class AddClientController extends ContentLoader implements Initializable,
         client.setStudy(studyTextField.getText());
         client.setEmailAddress(emailTextfield.getText());
         client.setPhoneNumber(phoneTextField.getText());
+
         client.setId(clientDAO.addClient(client).getId());
+        System.out.println(client.getId());
+
+        for(int i =0; i < documents.size(); i++) {
+            documents.get(i).setOwnerID(client.getId());
+            System.out.println(documents.get(i).getOwnerID());
+            documentDAO.addDocument(documents.get(i));
+        }
+
+        documents.clear();
 
         addContent(resources.getString("CLIENTS"));
 
     }
 
     @FXML
-    void handleDeleteFileButton(MouseEvent event) {
-
+    void handleDeleteFileButton(MouseEvent event) throws SQLException {
+        documents.clear();
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
     }
 
     @Override
@@ -167,8 +189,5 @@ public class AddClientController extends ContentLoader implements Initializable,
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
