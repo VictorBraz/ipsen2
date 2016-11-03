@@ -34,7 +34,7 @@ public class StudentDAO extends DAO {
     }
 
     public Student addStudentQuery(Student student) throws SQLException{
-        String sql = "insert into Student(firstname,lastname,birthdate,study,email,phoneNumber, studentaddressid) VALUES(?,?,?,?,?,?,?);";
+        String sql = "insert into Student(firstname,lastname,birthdate,study,email,phoneNumber, studentaddressid, tag) VALUES(?,?,?,?,?,?,?,?);";
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, student.getFirstName());
@@ -44,6 +44,7 @@ public class StudentDAO extends DAO {
         statement.setString(5, student.getEmailAddress());
         statement.setString(6, student.getPhoneNumber());
         statement.setInt(7, student.getAddress().getAddressID());
+        statement.setString(8, student.getTag());
 
         int rowInserted = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
