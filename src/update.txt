@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Student (
     study VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(255),
-    tag VARCHAR(255)
+    tag TEXT
 
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Company (
     contactPerson VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(255),
     email VARCHAR(255),
-    tag VARCHAR(255)
+    tag TEXT
 );
 
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Client (
     study VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(255),
-    tag VARCHAR(255)
+    tag TEXT
 );
 
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Project (
 --    studentID INTEGER NOT NULL REFERENCES Student (studentID),
 --    companyID INTEGER NOT NULL REFERENCES Company (companyID),
 --    clientID INTEGER NOT NULL REFERENCES Client (clientID),
-    tag VARCHAR(255)
+    tag TEXT
     
 );
 
