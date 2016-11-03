@@ -8,24 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Student.StudentController">
     <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
-            <TableColumn fx:id="checkBoxColumn" prefWidth="25.0" />
-            <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Voornaam" />
-            <TableColumn fx:id="lastNameColumn" prefWidth="91.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" prefWidth="96.0" text="Geboortedatum" />
-            <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="111.0" text="Adres" />
-            <TableColumn fx:id="zipCodeColumn" prefWidth="71.0" text="Postcode" />
-            <TableColumn fx:id="cityColum" prefWidth="111.0" text="Woonplaats" />
-            <TableColumn fx:id="emailColumn" prefWidth="165.0" text="Email" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="138.0" text="Studie" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="144.0" text="Telefoon" />
-            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="237.0" text="Tags" />
+            <TableColumn fx:id="checkBoxColumn" prefWidth="45.999969482421875" />
+            <TableColumn fx:id="firstNameColumn" prefWidth="97.00003051757812" text="Voornaam" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="152.0" text="Achternaam" />
+            <TableColumn fx:id="birthDateColumn" minWidth="0.0" prefWidth="255.0" text="Geboortedatum" />
+            <TableColumn fx:id="emailColumn" prefWidth="248.0" text="Email" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="142.0" text="Telefoon" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="168.0" text="Studie" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="162.0" text="Tags" />
         </columns>
       </TableView>
       <Group layoutX="862.0" layoutY="680.0" />

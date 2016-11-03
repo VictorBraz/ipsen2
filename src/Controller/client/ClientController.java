@@ -4,7 +4,6 @@ import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
-import Model.Address;
 import Model.Client;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXCheckBox;
@@ -41,6 +40,8 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn studyColum;
     @FXML private TableColumn  phoneNumberColumn;
     @FXML private TableColumn tagColumn;
+    @FXML private TableColumn clientIdColumn;
+
 
 
     public int selectedClientID;
@@ -63,6 +64,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> clientDAO.deleteClient(row));
             //clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
+            System.out.println(selectedRows.toString());
             addContent(resources.getString("CLIENTS"));
         } else {
             System.out.println("geen client geselecteerd");
@@ -109,6 +111,8 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
+
+
     }
 
     @Override
@@ -119,6 +123,10 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @Override
     public void openEditMenu() {
+        if (this.selectedClientID != 0) {
+            addContent(new EditClientController(selectedClientID), resources.getString("CLIENT_EDIT_VIEW"));
+
+        }
 
     }
 
@@ -127,6 +135,8 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
+
+        //checkBoxColumn.setCellFactory(new PropertyValueFactory<Client, Integer>("clientID"));
 
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("lastName"));
@@ -137,6 +147,8 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("emailAddress"));
         studyColum.setCellValueFactory(new PropertyValueFactory<Client, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phoneNumber"));
+        clientIdColumn.setCellValueFactory(new PropertyValueFactory<Client, Integer>("clientID"));
+//        clientIdColumn.setVisible(false);
 
         //TODO werkt nog niet
         tableView.setItems(clientData);

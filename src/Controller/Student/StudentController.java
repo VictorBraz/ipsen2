@@ -1,20 +1,24 @@
 package Controller.Student;
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.StudentDAO;
 import Model.Student;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -25,9 +29,6 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn firstNameColumn;
     @FXML private TableColumn lastNameColumn;
     @FXML private TableColumn birthDateColumn;
-    @FXML private TableColumn adresColumn;
-    @FXML private TableColumn zipCodeColumn;
-    @FXML private TableColumn cityColum;
     @FXML private TableColumn emailColumn;
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
@@ -42,16 +43,22 @@ public class StudentController extends ContentLoader implements Initializable, T
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
-    public StudentController(){
-        try{
-            this.studentDAO = new StudentDAO();
-            this.studentDAO.prepareStatements();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    private void showTable(){
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
+        birthDateColumn.setCellValueFactory(new PropertyValueFactory<Student,String>("birthDate"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("emailAddress"));
+        studyColum.setCellValueFactory(new PropertyValueFactory<Student, String>("study"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("phoneNumber"));
+        tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
+
+        tableView.setItems(studentData);
+
     }
-
-
 
 
     @FXML
@@ -111,5 +118,18 @@ public class StudentController extends ContentLoader implements Initializable, T
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("STUDENT_TITLE"));
+
+        try{
+            studentDAO = new StudentDAO();
+            selectedRows = new ArrayList<>();
+        }catch (IllegalAccessException e){
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        studentData = FXCollections.observableArrayList(studentDAO.selectAllStudents());
+        showTable();
     }
 }
