@@ -1,6 +1,7 @@
 package Controller.Student;
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
@@ -12,11 +13,14 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
@@ -88,13 +92,22 @@ public class AddStudentController extends ContentLoader implements Initializable
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-//            try {
-//                documentDAO.addDocument(document);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
+            documents.add(document);
         }
-        documents.add(document);
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
+    }
+
+    private void showTable() {
+
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        tableView.setItems(documentData);
+        System.out.println(documentData);
+        tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
     @FXML
@@ -125,6 +138,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
         System.out.println(student.getStudentID());
+
         for(int i= 0; i < documents.size(); i++ ) {
             document.setOwnerID(student.getStudentID());
             documentDAO.addDocument(document);
@@ -143,8 +157,10 @@ public class AddStudentController extends ContentLoader implements Initializable
     }
 
     @FXML
-    void handleDeleteFileButton(MouseEvent event) {
-
+    void handleDeleteFileButton(MouseEvent event) throws SQLException {
+        documents.clear();
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
     }
 
     @Override
