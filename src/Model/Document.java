@@ -86,4 +86,6 @@ public class Document extends TableViewItem {
     public void setFile(File file) {
         this.file = file;
     }
+
+
 }

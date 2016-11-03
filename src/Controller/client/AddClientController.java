@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -72,15 +73,14 @@ public class AddClientController extends ContentLoader implements Initializable,
     private ResourceBundle resources;
 
     private DocumentDAO documentDAO;
-    private Document document = new Document();
-
-    public AddClientController() throws IOException {
-        this.document = document;
-    }
-
+    private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
-    void handleAddFileButton(MouseEvent event) {
+    void handleAddFileButton(MouseEvent event) throws IOException {
+        Document document = new Document();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
@@ -88,20 +88,20 @@ public class AddClientController extends ContentLoader implements Initializable,
                 new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String date = sdf.format(new Date());
          if(selectedFile != null){
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-            document.setOwnerID(123);
-             try {
-                 documentDAO.addDocument(document);
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-             System.out.println("Document opgeslagen!");
+            documents.add(document);
+//             try {
+//                 documentDAO.addDocument(document);
+//             } catch (SQLException e) {
+//                 e.printStackTrace();
+//             }
          }
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
+
 
     }
 
@@ -111,7 +111,6 @@ public class AddClientController extends ContentLoader implements Initializable,
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
 
-        documentIDColumn.setCellValueFactory(new PropertyValueFactory<>("documentID"));
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
 
 
@@ -128,12 +127,12 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleCancelButton(MouseEvent event) {
-        addContent(resources.getString("STUDENTS"));
+        addContent(resources.getString("CLIENTS"));
 
     }
 
     @FXML
-    void handleComfirmButton(MouseEvent event) {
+    void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
 
         Client client = new Client();
         Address address = new Address();
@@ -150,6 +149,14 @@ public class AddClientController extends ContentLoader implements Initializable,
         client.setEmailAddress(emailTextfield.getText());
         client.setPhoneNumber(phoneTextField.getText());
         client.setClientID(clientDAO.addClient(client).getClientID());
+        System.out.println(client.getClientID());
+        for(int i =0; i < documents.size(); i++) {
+            documents.get(i).setOwnerID(client.getClientID());
+            System.out.println(documents.get(i).getOwnerID());
+            documentDAO.addDocument(documents.get(i));
+        }
+
+        documents.clear();
 
         addContent(resources.getString("CLIENTS"));
 
@@ -157,7 +164,7 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
-        documentDAO.deleteDocument(document.getDocumentID());
+//        documentDAO.deleteDocument(document.getDocumentID());
     }
 
     @Override
@@ -191,8 +198,5 @@ public class AddClientController extends ContentLoader implements Initializable,
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }

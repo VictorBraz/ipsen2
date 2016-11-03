@@ -68,35 +68,33 @@ public class AddStudentController extends ContentLoader implements Initializable
     private ResourceBundle resources;
 
     private DocumentDAO documentDAO;
-    private Document document = new Document();
-
-    public AddStudentController() throws IOException {
-        this.document = document;
-    }
+    private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
-    void handleAddFileButton(MouseEvent event) {
+    void handleAddFileButton(MouseEvent event) throws IOException {
+        Document document = new Document();
+
         FileChooser fileChooser = new FileChooser();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
+
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
                 new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String date = sdf.format(new Date());
         if(selectedFile != null){
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-            document.setOwnerID(123);
-            try {
-                documentDAO.addDocument(document);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Document opgeslagen!");
+//            try {
+//                documentDAO.addDocument(document);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
+        documents.add(document);
     }
 
     @FXML
@@ -104,10 +102,12 @@ public class AddStudentController extends ContentLoader implements Initializable
         addContent(resources.getString("STUDENTS"));
     }
 
-    private void addStudent() {
+    private void addStudent() throws IOException, SQLException {
         Address address = new Address();
         Student student = new Student();
         Note note = new Note();
+        Document document = new Document();
+
         address.setAddress(adresTextField.getText());
         address.setZipCode(zipCodeTextField.getText());
         address.setCity(cityTextField.getText());
@@ -123,13 +123,20 @@ public class AddStudentController extends ContentLoader implements Initializable
         note.setOwnerID(student.getStudentID());
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
+        System.out.println(student.getStudentID());
+        for(int i= 0; i < documents.size(); i++ ) {
+            document.setOwnerID(student.getStudentID());
+            documentDAO.addDocument(document);
+        }
+        documents.clear();
+
         // note, documents en tags nog toevoegen.
         // relatie nog volledig doen.
 
     }
 
     @FXML
-    void handleComfirmButton(MouseEvent event) {
+    void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
         addStudent();
         addContent(resources.getString("STUDENTS"));
     }

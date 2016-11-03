@@ -3,8 +3,10 @@ package Controller.company;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
+import DAO.DocumentDAO;
 import Model.Address;
 import Model.Company;
+import Model.Document;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -17,9 +19,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AddCompanyController extends ContentLoader implements Initializable, TableViewListener {
@@ -52,11 +60,32 @@ public class AddCompanyController extends ContentLoader implements Initializable
     private CompanyDAO companyDAO;
     private AddressDAO addressDAO;
     private ResourceBundle resources;
+    private DocumentDAO documentDAO;
 
     @FXML
-    void handleAddFileButton(MouseEvent event) {
+    void handleAddFileButton(MouseEvent event) throws IOException {
+        Document document = new Document();
+        FileChooser fileChooser = new FileChooser();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
 
-
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
+                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        if(selectedFile != null){
+            document.setFile(selectedFile);
+            document.setDocumentName(selectedFile.getName());
+            document.setDate(date);
+            try {
+                documentDAO.addDocument(document);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Document opgeslagen!");
+        }
     }
 
     @FXML
@@ -66,10 +95,11 @@ public class AddCompanyController extends ContentLoader implements Initializable
     }
 
     @FXML
-    void handleComfirmButton(MouseEvent event) {
+    void handleComfirmButton(MouseEvent event) throws IOException {
 
         Company company = new Company();
         Address address = new Address();
+        Document document = new Document();
 
         try {
             companyDAO = new CompanyDAO();
@@ -85,6 +115,9 @@ public class AddCompanyController extends ContentLoader implements Initializable
             addressDAO.addAddress(address);
             company.setCompanyAddressid(address);
             companyDAO.addCompany(company);
+            System.out.println(company.getCompanyID());
+            document.setOwnerID(company.getCompanyID());
+
             addContent(resources.getString("COMPANIES"));
 
         }catch (Exception e){
@@ -118,6 +151,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
         try {
             this.companyDAO = new CompanyDAO();
             this.addressDAO = new AddressDAO();
+            this.documentDAO = new DocumentDAO();
         } catch (Exception e) {
             e.printStackTrace();
         }

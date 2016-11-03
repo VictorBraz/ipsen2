@@ -18,12 +18,13 @@ public class DocumentDAO extends DAO{
         super();
     }
 
-    public void addDocument(Document document) throws SQLException{
+    public Document addDocument(Document document) throws SQLException{
         try {
             addDocumentQuery(document);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return document;
     }
 
     public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
