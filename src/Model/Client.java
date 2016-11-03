@@ -4,7 +4,7 @@ package Model;
  * Created by Bernd on 12-10-2016.
  */
 public class Client extends TableViewItem {
-    private int clientID;
+    private int id;
     private String firstName;
     private String lastName;
     private String birthDate;
@@ -40,10 +40,10 @@ public class Client extends TableViewItem {
     /**
      * Instantiates a new Client.
      *
-     * @param clientID the client id
+     * @param id the client id
      */
-    public Client(int clientID) {
-        this.clientID = clientID;
+    public Client(int id) {
+        this.id = id;
         this.firstName = null;
         this.lastName = null;
         this.birthDate = null;
@@ -58,7 +58,7 @@ public class Client extends TableViewItem {
     /**
      * Instantiates a new Client.
      *
-     * @param clientID        the client id
+     * @param id        the client id
      * @param firstName       the first name
      * @param lastName        the last name
      * @param birthDate       the birth date
@@ -68,9 +68,9 @@ public class Client extends TableViewItem {
      * @param noteID          the note id
      * @param study           the study
      */
-    public Client(int clientID, String firstName, String lastName, String birthDate,
+    public Client(int id, String firstName, String lastName, String birthDate,
                   String emailAddress, String phoneNumber, int addressID, int noteID, String study, String tag ) {
-        this.clientID = clientID;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -87,8 +87,8 @@ public class Client extends TableViewItem {
      *
      * @return the client id
      */
-    public int getClientID() {
-        return clientID;
+    public int getId() {
+        return id;
     }
 
     /**
@@ -166,10 +166,10 @@ public class Client extends TableViewItem {
     /**
      * Sets client id.
      *
-     * @param clientID the client id
+     * @param id the client id
      */
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

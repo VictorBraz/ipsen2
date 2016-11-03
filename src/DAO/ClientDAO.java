@@ -51,7 +51,9 @@ public class ClientDAO extends DAO {
      */
     public Client selectClient(int clientID) throws SQLException {
         Client client = selectClientQuery(clientID);
+        System.out.println(client.toString());
         return client;
+
     }
 
     /**
@@ -104,16 +106,17 @@ public class ClientDAO extends DAO {
     private void deleteClientQuery(int clientID) throws Exception {
         String sql = "DELETE FROM Client WHERE clientid=?";
         PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet keyResultSet = statement.getGeneratedKeys();
+        statement.setInt(1, clientID);
+        statement.executeUpdate();
 
-        while (keyResultSet.next()) {
-            if(keyResultSet.equals(clientID)) {
-                int rowsDeleted = statement.executeUpdate();
-                if(rowsDeleted > 0) {
-                    System.out.println("A Client was deleted succesfully");
-                }
-            }
-        }
+//        while (keyResultSet.next()) {
+//            if(keyResultSet.equals(clientID)) {
+//                int rowsDeleted = statement.executeUpdate();
+//                if(rowsDeleted > 0) {
+//                    System.out.println("A Client was deleted succesfully");
+//                }
+//            }
+//        }
     }
 
     private Client selectClientQuery(int clientID) throws SQLException{
@@ -147,6 +150,8 @@ public class ClientDAO extends DAO {
 
             while (result.next()) {
                 Client client = new Client();
+
+                client.setId(result.getInt(1));
 
                 client.setFirstName(result.getString(3));
                 client.setLastName(result.getString(4));
@@ -185,7 +190,7 @@ public class ClientDAO extends DAO {
         ResultSet rs = statement.getGeneratedKeys();
         if (rs.next()) {
             int id = rs.getInt(1);
-            client.setClientID(id);
+            client.setId(id);
         }
 
         if(rowsInserted > 0) {

@@ -51,7 +51,7 @@ public class  TableViewSelectHandler extends ContentLoader {
             TableRow row = new TableRow<>();
             row.getStyleClass().add("pane");
 
-            Duration maxTimeBetweenSequentialClicks = Duration.millis(300);
+            Duration maxTimeBetweenSequentialClicks = Duration.millis(200);
 
             PauseTransition clickTimer = new PauseTransition(maxTimeBetweenSequentialClicks);
             final IntegerProperty sequentialClickCount = new SimpleIntegerProperty(0);

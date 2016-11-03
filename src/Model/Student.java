@@ -4,7 +4,7 @@ package Model;
 /**
  * Created by Roel on 12-10-2016.
  */
-public class Student{
+public class Student extends TableViewItem{
     private int studentID;
     private String firstName;
     private String lastName;
