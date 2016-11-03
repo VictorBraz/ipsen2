@@ -87,12 +87,13 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setEmailAddress(emailTextfield.getText());
         student.setPhoneNumber(phoneTextField.getText());
         student.setStudy(studyTextField.getText());
+        student.setTag(tagsTextField.getText());
         student.setStudentID(studentDAO.addStudent(student).getStudentID());
         System.out.println(student.getStudentID());
         note.setOwnerID(student.getStudentID());
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
-        // note, documents en tags nog toevoegen.
+        //documents en tags nog toevoegen.
         // relatie nog volledig doen.
 
     }
