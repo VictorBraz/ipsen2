@@ -115,8 +115,8 @@ public class AddCompanyController extends ContentLoader implements Initializable
             addressDAO.addAddress(address);
             company.setCompanyAddressid(address);
             companyDAO.addCompany(company);
-            System.out.println(company.getCompanyID());
-            document.setOwnerID(company.getCompanyID());
+            System.out.println(company.getId());
+            document.setOwnerID(company.getId());
 
             addContent(resources.getString("COMPANIES"));
 
