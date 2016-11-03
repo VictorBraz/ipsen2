@@ -148,19 +148,17 @@ public class AddClientController extends ContentLoader implements Initializable,
         client.setStudy(studyTextField.getText());
         client.setEmailAddress(emailTextfield.getText());
         client.setPhoneNumber(phoneTextField.getText());
-<<<<<<< HEAD
+
         client.setId(clientDAO.addClient(client).getId());
-=======
-        client.setClientID(clientDAO.addClient(client).getClientID());
-        System.out.println(client.getClientID());
+        System.out.println(client.getId());
+
         for(int i =0; i < documents.size(); i++) {
-            documents.get(i).setOwnerID(client.getClientID());
+            documents.get(i).setOwnerID(client.getId());
             System.out.println(documents.get(i).getOwnerID());
             documentDAO.addDocument(documents.get(i));
         }
 
         documents.clear();
->>>>>>> d81845bd0aaf7f43003cf83ae071701c55d3a25f
 
         addContent(resources.getString("CLIENTS"));
 

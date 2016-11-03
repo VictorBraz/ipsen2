@@ -151,10 +151,8 @@ public class ClientDAO extends DAO {
             while (result.next()) {
                 Client client = new Client();
 
-<<<<<<< HEAD
                 client.setId(result.getInt(1));
-=======
->>>>>>> d81845bd0aaf7f43003cf83ae071701c55d3a25f
+
                 client.setFirstName(result.getString(3));
                 client.setLastName(result.getString(4));
                 client.setBirthDate(result.getString(5));
@@ -192,7 +190,7 @@ public class ClientDAO extends DAO {
         ResultSet rs = statement.getGeneratedKeys();
         if (rs.next()) {
             int id = rs.getInt(1);
-            client.setClientID(id);
+            client.setId(id);
         }
 
         if(rowsInserted > 0) {

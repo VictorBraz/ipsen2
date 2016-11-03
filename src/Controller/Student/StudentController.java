@@ -58,7 +58,6 @@ public class StudentController extends ContentLoader implements Initializable, T
         tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
 
         tableView.setItems(studentData);
-
     }
 
     @FXML
