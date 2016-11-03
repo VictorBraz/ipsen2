@@ -2,9 +2,7 @@ package Controller;
 
 import DAO.DocumentDAO;
 import Model.Document;
-import com.itextpdf.text.DocumentException;
 import javafx.stage.FileChooser;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -40,7 +38,7 @@ public class DocumentController {
         dao.deleteDocument(documentID);
     }
 
-    public void cmdSelectDocument(int documentID) throws SQLException, IOException, DocumentException {
+    public void cmdSelectDocument(int documentID) throws SQLException, IOException {
         dao.selectDocument(documentID);
     }
 }

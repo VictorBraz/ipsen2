@@ -5,21 +5,24 @@ package Controller.client;
  */
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import DAO.DocumentDAO;
 import Model.Document;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
@@ -50,8 +53,8 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML private JFXButton deleteFileButton;
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn<?, ?> checkBoxColumn;
-    @FXML private TableColumn<?, ?> documentIDColumn;
-    @FXML private TableColumn<?, ?> fileNameColumn;
+    @FXML private TableColumn<Document, String> documentIDColumn;
+    @FXML private TableColumn<Document, String> fileNameColumn;
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
@@ -59,7 +62,7 @@ public class AddClientController extends ContentLoader implements Initializable,
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
     private AddressDAO addressDAO;
@@ -88,7 +91,7 @@ public class AddClientController extends ContentLoader implements Initializable,
             document.setFile(selectedFile);
             document.setDocumentName(String.valueOf(selectedFile));
             document.setDate(date);
-             document.setOwnerID(123);
+            document.setOwnerID(123);
              try {
                  documentDAO.addDocument(document);
              } catch (SQLException e) {
@@ -96,6 +99,27 @@ public class AddClientController extends ContentLoader implements Initializable,
              }
              System.out.println("Document opgeslagen!");
          }
+
+    }
+
+    private void showTable() {
+
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        documentIDColumn.setCellValueFactory(new PropertyValueFactory<>("documentID"));
+        fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+
+
+        //TODO werkt nog niet
+        tableView.setItems(documentData);
+
+
+        System.out.println(documentIDColumn.getCellValueFactory().toString());
+        System.out.println(documentData);
+        tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
+
 
     }
 
@@ -111,8 +135,8 @@ public class AddClientController extends ContentLoader implements Initializable,
     }
 
     @FXML
-    void handleDeleteFileButton(MouseEvent event) {
-
+    void handleDeleteFileButton(MouseEvent event) throws SQLException {
+        documentDAO.deleteDocument(document.getDocumentID());
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.io.*;
 /**
  * Created by Negin Nafissi on 27-10-2016.
  */
-public class Document {
+public class Document extends TableViewItem {
     private int documentID;
     private String documentName;
     private int ownerID;
