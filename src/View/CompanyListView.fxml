@@ -21,6 +21,7 @@
             <TableColumn fx:id="phoneNumberColum" prefWidth="123.0" text="Telefoon" />
             <TableColumn fx:id="emailColumn" prefWidth="153.0" text="Email" />
             <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="215.0" text="Tags" />
+            <TableColumn fx:id="companyIdCol" minWidth="0.0" prefWidth="120.0" text="companyId" />
         </columns>
       </TableView>
       <Group layoutX="862.0" layoutY="680.0" />

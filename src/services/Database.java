@@ -56,9 +56,9 @@ public class Database {
         info.put("user", "postgres");
         info.put("password", "1");
         Connection conn = DriverManager.getConnection(URL, info);
-        if (conn != null) {
-            System.out.println("Succesfully connected to the database.");
-        }
+//        if (conn != null) {
+//            System.out.println("Succesfully connected to the database.");
+//        }
         return conn;
     }
 }

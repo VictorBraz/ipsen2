@@ -5,7 +5,6 @@ import Model.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -38,7 +37,7 @@ public class CompanyDAO extends DAO {
     public void updateCompany(Company company) throws Exception{
 
         try{
-            updateCompanyQuery(company.getCompanyID(), company);
+            updateCompanyQuery(company.getId(), company);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -46,16 +45,18 @@ public class CompanyDAO extends DAO {
 
     /**
      * @author Victor
-     * @param company
+     * @param id
      */
-    public void deleteCompany(Company company){
+    public void deleteCompany(int id){
+        System.out.println(id);
+        String sql = "DELETE FROM company WHERE companyid=?";
         try {
-            deleteCompanyQuery(company);
-
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -73,7 +74,7 @@ public class CompanyDAO extends DAO {
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 Company company = new Company();
-                company.setCompanyID(resultSet.getInt(1));
+                company.setId(resultSet.getInt(1));
                 company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
                 company.setCompanyName(resultSet.getString(3));
                 company.setContactPerson(resultSet.getString(4));
@@ -143,21 +144,11 @@ public class CompanyDAO extends DAO {
 
     /**
      * @author Victor
-     * @param company
+     * @param id
      * @throws Exception
      */
-    private void deleteCompanyQuery(Company company)throws Exception{
-        String sql = "DELETE FROM company WHERE companyid=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet resultSet = stmt.getGeneratedKeys();
+    private void deleteCompanyQuery(int id)throws Exception{
 
-        while(resultSet.next()){
-            if(resultSet.equals(company.getCompanyID())){
-                int rowDeleted = stmt.executeUpdate();
-                if (rowDeleted > 0)
-                    System.out.println("Company deleted!");
-            }
-        }
     }
     private ArrayList<Company> getCompaniesQuery()throws  Exception{
         String sql = "SELECT * FROM company";
@@ -166,7 +157,7 @@ public class CompanyDAO extends DAO {
 
         while(resultSet.next()){
             Company company = new Company();
-            company.setCompanyID(resultSet.getInt(1));
+            company.setId(resultSet.getInt(1));
             company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
             company.setCompanyName(resultSet.getString(3));
             company.setContactPerson(resultSet.getString(4));

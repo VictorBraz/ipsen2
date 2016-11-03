@@ -38,6 +38,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @FXML private TableColumn phoneNumberColum;
     @FXML private TableColumn emailColumn;
     @FXML private TableColumn tagColumn;
+    @FXML private TableColumn companyIdCol;
 
     public int selectedCompanyID;
     private ObservableList<TableViewItem> companyData;
@@ -58,6 +59,14 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @FXML
     void handleDeleteButton(MouseEvent event) {
 
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> dao.deleteCompany(row));
+            System.out.println(selectedRows.toString());
+            selectedRows.clear();
+            addContent(resources.getString("COMPANIES"));
+        } else {
+            System.out.println("geen bedrijf geselecteerd");
+        }
 
     }
 
@@ -66,65 +75,10 @@ public class CompanyController extends ContentLoader implements Initializable, T
         addContent(resources.getString("EDIT_COMPANY_DIALOG"));
     }
 
-
-
-    //private final MainMenuController mainController;
-
-
-    public CompanyController() {
-        //this.mainController = mainController;
-
-        try{
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * @author
-     * @return
-     */
-   public ObservableList<Company> cmdGetCompanies(){
-        ArrayList<Company> companies = new ArrayList<>();
-        try{
-            companies.addAll(dao.getCompanies());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return FXCollections.observableArrayList(companies);
-    }
-
-    public void cmdAddCompany(Company company){
-        try{
-            dao.addCompany(company);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void cmdDeleteCompany(ObservableList<Company> companies){
-        try{
-            for(Company company: companies){
-                dao.deleteCompany(company);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void cmdUpdateCompany(Company company){
-        try{
-            dao.updateCompany(company);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
+        System.out.println("rows selected:" + selectedRows);
     }
 
     @Override
@@ -135,7 +89,9 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @Override
     public void openEditMenu() {
-
+        if(this.selectedCompanyID != 0){
+            addContent(resources.getString("EDIT_COMPANY_DIALOG"));
+        }
     }
 
     private void showTable(){
@@ -151,7 +107,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
         phoneNumberColum.setCellValueFactory(new PropertyValueFactory<Company, String>("phoneNumber"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("emailAddress"));
         tagColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tags"));
-
+        companyIdCol.setCellValueFactory(new PropertyValueFactory<Company, Integer>("companyId"));
         tableView.setItems(companyData);
 
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
@@ -174,4 +130,39 @@ public class CompanyController extends ContentLoader implements Initializable, T
         showTable();
 
     }
+    /*public ObservableList<Company> cmdGetCompanies(){
+        ArrayList<Company> companies = new ArrayList<>();
+        try{
+            companies.addAll(dao.getCompanies());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return FXCollections.observableArrayList(companies);
+    }
+*/
+/*    public void cmdAddCompany(Company company){
+        try{
+            dao.addCompany(company);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    *//*public void cmdDeleteCompany(ObservableList<Company> companies){
+        try{
+            for(Company company: companies){
+                dao.deleteCompany(company);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }*//*
+
+    public void cmdUpdateCompany(Company company){
+        try{
+            dao.updateCompany(company);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }*/
 }

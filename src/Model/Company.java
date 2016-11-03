@@ -1,13 +1,11 @@
 package Model;
 
-import java.util.ArrayList;
-
 /**
  * Created by Victor on 13-10-2016.
  */
 public class Company extends TableViewItem{
 
-    private int companyID;
+    private int id;
     private String companyName;
     private Address companyAddressid;
     private String contactPerson;
@@ -17,15 +15,15 @@ public class Company extends TableViewItem{
 
     /**
      * @author Victor
-     * @param companyID
+     * @param id
      * @param companyName
      * @param contactPerson
      * @param phoneNumber
      * @param emailAddress
      */
-    public Company(int companyID, String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
+    public Company(int id, String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
 
-        this.companyID = companyID;
+        this.id = id;
         this.companyName = companyName;
         this.companyAddressid = companyAddressid;
         this.contactPerson = contactPerson;
@@ -53,7 +51,7 @@ public class Company extends TableViewItem{
     }
 
     public Company (){
-        this.companyID = 0;
+        this.id = 0;
         this.companyName = new String();
         this.companyAddressid = new Address();
         this.contactPerson = new String();
@@ -64,18 +62,18 @@ public class Company extends TableViewItem{
 
     /**
      * @author Victor
-     * @return companyID
+     * @return id
      */
-    public int getCompanyID() {
-        return companyID;
+    public int getId() {
+        return id;
     }
 
     /**
      * @author Victor
-     * @param companyID
+     * @param id
      */
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
