@@ -2,11 +2,9 @@ package Controller.Student;
 
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
+import DAO.DocumentDAO;
 import DAO.StudentDAO;
-import Model.Address;
-import Model.Note;
-import Model.Student;
-import Model.TableViewItem;
+import Model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -18,10 +16,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -61,9 +64,36 @@ public class AddStudentController extends ContentLoader implements Initializable
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
+    private DocumentDAO documentDAO;
+    private Document document = new Document();
+
+    public AddStudentController() throws IOException {
+        this.document = document;
+    }
+
     @FXML
     void handleAddFileButton(MouseEvent event) {
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
+                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
+        if(selectedFile != null){
+            document.setFile(selectedFile);
+            document.setDocumentName(selectedFile.getName());
+            document.setDate(date);
+            document.setOwnerID(123);
+            try {
+                documentDAO.addDocument(document);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Document opgeslagen!");
+        }
     }
 
     @FXML
@@ -133,6 +163,7 @@ public class AddStudentController extends ContentLoader implements Initializable
         try {
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();
+            this.documentDAO = new DocumentDAO();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

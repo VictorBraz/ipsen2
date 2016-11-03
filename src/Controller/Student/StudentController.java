@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -55,7 +56,7 @@ public class StudentController extends ContentLoader implements Initializable, T
 
 
     @FXML
-    void handleAddButton(MouseEvent event) {
+    void handleAddButton(MouseEvent event) throws IOException {
         addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
 
     }

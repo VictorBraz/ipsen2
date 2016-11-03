@@ -47,7 +47,7 @@ public class DocumentDAO extends DAO{
 
     private void addDocumentQuery(Document document) throws SQLException, IOException {
         String sql = "INSERT INTO document (documentname, ownerid, documentdate, pdffile) VALUES (?, ?, ?, ?)";
-
+        File file = document.getFile();
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, document.getDocumentName());
         statement.setInt(2, document.getOwnerID());

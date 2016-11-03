@@ -92,7 +92,7 @@ public class AddClientController extends ContentLoader implements Initializable,
         String date = sdf.format(new Date());
          if(selectedFile != null){
             document.setFile(selectedFile);
-            document.setDocumentName(String.valueOf(selectedFile));
+            document.setDocumentName(selectedFile.getName());
             document.setDate(date);
             document.setOwnerID(123);
              try {
