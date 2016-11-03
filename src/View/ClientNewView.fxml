@@ -109,9 +109,8 @@
                   </JFXButton>
                   <TableView fx:id="tableView" layoutX="800.0" layoutY="110.0" prefHeight="155.0" prefWidth="311.0">
                     <columns>
-                        <TableColumn fx:id="checkBoxColumn" prefWidth="28.0" />
-                      <TableColumn fx:id="documentIDColumn" prefWidth="55.0" text="Nummer" />
-                      <TableColumn fx:id="fileNameColumn" prefWidth="279.0" text="Bestandnaam" />
+                        <TableColumn fx:id="checkBoxColumn" prefWidth="46.0" />
+                      <TableColumn fx:id="fileNameColumn" prefWidth="261.0" text="Bestandnaam" />
                     </columns>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />

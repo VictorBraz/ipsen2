@@ -151,7 +151,10 @@ public class ClientDAO extends DAO {
             while (result.next()) {
                 Client client = new Client();
 
+<<<<<<< HEAD
                 client.setId(result.getInt(1));
+=======
+>>>>>>> d81845bd0aaf7f43003cf83ae071701c55d3a25f
                 client.setFirstName(result.getString(3));
                 client.setLastName(result.getString(4));
                 client.setBirthDate(result.getString(5));
@@ -174,6 +177,7 @@ public class ClientDAO extends DAO {
                 " birthdate, study, email, phonenumber, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
         statement.setInt(1, client.getAddress().getAddressID());
         statement.setString(2, client.getFirstName());
         statement.setString(3, client.getLastName());
@@ -184,6 +188,13 @@ public class ClientDAO extends DAO {
         statement.setString(8, client.getTag());
 
         int rowsInserted = statement.executeUpdate();
+
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            client.setClientID(id);
+        }
+
         if(rowsInserted > 0) {
             System.out.println("A new document was inserted succesfully!");
         }
