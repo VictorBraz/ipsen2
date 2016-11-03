@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * The type Client dao.
  */
 public class ClientDAO extends DAO {
+
     private AddressDAO addressDAO;
 
     //TODO testen en notitieid toevoegen in de logica van client
@@ -33,12 +34,13 @@ public class ClientDAO extends DAO {
      *
      * @param client the client
      */
-    public void addClient(Client client) {
+    public Client addClient(Client client) {
         try {
             addClientQuery(client);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return client;
     }
 
     /**
@@ -129,6 +131,7 @@ public class ClientDAO extends DAO {
                 client.setStudy(result.getString(5));
                 client.setEmailAddress(result.getString(6));
                 client.setPhoneNumber(result.getString(7));
+                client.setTag(result.getString(8));
             }
         }
         return client;
@@ -144,15 +147,15 @@ public class ClientDAO extends DAO {
 
             while (result.next()) {
                 Client client = new Client();
-                client.setFirstName(result.getString("firstname"));
-                client.setLastName(result.getString("lastname"));
-                client.setBirthDate(result.getString("birthdate"));
-                client.setStudy(result.getString("study"));
-                client.setEmailAddress(result.getString("email"));
-                client.setPhoneNumber(result.getString("phoneNumber"));
+
+                client.setFirstName(result.getString(2));
+                client.setLastName(result.getString(3));
+                client.setBirthDate(result.getString(4));
+                client.setStudy(result.getString(5));
+                client.setEmailAddress(result.getString(6));
+                client.setPhoneNumber(result.getString(7));
                 client.setAddress(new Address(result.getInt("clientaddressid")));
-
-
+                client.setTag(result.getString(8));
 
                 clients.add(client);
             }
@@ -162,9 +165,9 @@ public class ClientDAO extends DAO {
         return clients;
     }
 
-    private void addClientQuery(Client client) throws SQLException {
+    private Client addClientQuery(Client client) throws SQLException {
         String sql = "INSERT INTO client (clientaddressid, firstname, lastname," +
-                " birthdate, study, email, phonenumber) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                " birthdate, study, email, phonenumber, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         statement.setInt(1, client.getAddress().getAddressID());
@@ -174,16 +177,18 @@ public class ClientDAO extends DAO {
         statement.setString(5, client.getStudy());
         statement.setString(6, client.getEmailAddress());
         statement.setString(7, client.getPhoneNumber());
+        statement.setString(8, client.getTag());
 
         int rowsInserted = statement.executeUpdate();
         if(rowsInserted > 0) {
             System.out.println("A new document was inserted succesfully!");
         }
+        return client;
     }
 
     private void updateClientQuery(int clientID, Client client) throws Exception {
         String sql = "UPDATE client SET clientaddressid=?, firstname=?, lastname=?, " +
-                "birthdate=?, study=?, email=?, phonenumber=? WHERE clientid=?";
+                "birthdate=?, study=?, email=?, phonenumber=?, tag=? WHERE clientid=?";
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ResultSet keyResultSet = statement.getGeneratedKeys();
         while (keyResultSet.next()) {
@@ -195,6 +200,7 @@ public class ClientDAO extends DAO {
                 statement.setString(5, client.getStudy());
                 statement.setString(6, client.getEmailAddress());
                 statement.setString(7, client.getPhoneNumber());
+                statement.setString(8, client.getTag());
 
                 int rowsUpdated = statement.executeUpdate();
                 if (rowsUpdated > 0) {

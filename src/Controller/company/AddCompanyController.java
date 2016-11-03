@@ -3,15 +3,17 @@ package Controller.company;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
+import Model.Address;
+import Model.Company;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -45,7 +47,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private CompanyDAO companyDAO;
     private AddressDAO addressDAO;
@@ -53,6 +55,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
     @FXML
     void handleAddFileButton(MouseEvent event) {
+
 
     }
 
@@ -65,6 +68,28 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML
     void handleComfirmButton(MouseEvent event) {
 
+        Company company = new Company();
+        Address address = new Address();
+
+        try {
+            companyDAO = new CompanyDAO();
+            AddressDAO addressDAO = new AddressDAO();
+            company.setCompanyName(companyNameTextField.getText());
+            company.setContactPerson(contactPersonTextField.getText());
+            company.setPhoneNumber(phoneNumberTextField.getText());
+            company.setEmailAddress(emailTextField.getText());
+
+            address.setAddress(addressNameTextField.getText());
+            address.setCity(cityTextField.getText());
+            address.setZipCode(zipCodeTextfield.getText());
+            addressDAO.addAddress(address);
+            company.setCompanyAddressid(address);
+            companyDAO.addCompany(company);
+            addContent(resources.getString("COMPANIES"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

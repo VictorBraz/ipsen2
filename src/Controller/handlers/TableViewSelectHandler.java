@@ -1,13 +1,13 @@
 package Controller.handlers;
 
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -99,11 +99,11 @@ public class  TableViewSelectHandler extends ContentLoader {
      * @return returns the CallBack of the attached checkbox cell
      */
     private Callback createCheckBoxCellCallBack() {
-        Callback checkBoxCellCallBack = new Callback<TableColumn.CellDataFeatures<TableViewItem, CheckBox>, ObservableValue<CheckBox>>() {
+        Callback checkBoxCellCallBack = new Callback<TableColumn.CellDataFeatures<TableViewItem, JFXCheckBox>, ObservableValue<JFXCheckBox>>() {
 
             @Override
-            public ObservableValue<CheckBox> call(TableColumn.CellDataFeatures<TableViewItem, CheckBox> cellDataFeatures) {
-                CheckBox checkBox = new CheckBox();
+            public ObservableValue<JFXCheckBox> call(TableColumn.CellDataFeatures<TableViewItem, JFXCheckBox> cellDataFeatures) {
+                JFXCheckBox checkBox = new JFXCheckBox();
                 checkBox.setSelected(cellDataFeatures.getValue().getSelected());
                 checkBox.selectedProperty().addListener((ObservableValue<? extends Boolean> observableValue,
                                                          Boolean oldValue, Boolean newValue) -> {
@@ -129,7 +129,7 @@ public class  TableViewSelectHandler extends ContentLoader {
      * Creates a checkbox that is able to select and deselect all items in tableView
      */
     public void createSelectAllCheckBox() {
-        CheckBox selectAllCheckBox = new CheckBox();
+        JFXCheckBox selectAllCheckBox = new JFXCheckBox();
         checkBoxColumn.setGraphic(selectAllCheckBox);
         selectAllCheckBox.setOnAction(event -> {
             boolean selected = selectAllCheckBox.isSelected();

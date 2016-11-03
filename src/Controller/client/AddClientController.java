@@ -7,6 +7,11 @@ package Controller.client;
 import Controller.handlers.TableViewListener;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
+import Model.Address;
+import Model.Client;
+import Model.Note;
+import DAO.DocumentDAO;
+import Model.Document;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -19,10 +24,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AddClientController extends ContentLoader implements Initializable, TableViewListener {
@@ -30,7 +40,7 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML private JFXTextField firstNameTextField;
     @FXML private JFXTextField lastNameTextField;
     @FXML private JFXTextField birthDateTextfield;
-    @FXML private JFXTextField adresTextField;
+    @FXML private JFXTextField addressTextField;
     @FXML private JFXTextField zipCodeTextField;
     @FXML private JFXTextField cityTextField;
     @FXML private JFXTextField studyTextField;
@@ -58,9 +68,37 @@ public class AddClientController extends ContentLoader implements Initializable,
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
+    private DocumentDAO documentDAO;
+    private Document document = new Document();
+
+    public AddClientController() throws IOException {
+        this.document = document;
+    }
+
 
     @FXML
     void handleAddFileButton(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
+                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.aac"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String date = sdf.format(new Date());
+         if(selectedFile != null){
+            document.setFile(selectedFile);
+            document.setDocumentName(String.valueOf(selectedFile));
+            document.setDate(date);
+             document.setOwnerID(123);
+             try {
+                 documentDAO.addDocument(document);
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }
+             System.out.println("Document opgeslagen!");
+         }
 
     }
 
@@ -72,6 +110,24 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
+
+        Client client = new Client();
+        Address address = new Address();
+        Note note = new Note();
+
+        address.setAddress(addressTextField.getText());
+        address.setZipCode(zipCodeTextField.getText());
+        address.setCity(cityTextField.getText());
+        client.setAddress(addressDAO.addAddress(address));
+        client.setFirstName(firstNameTextField.getText());
+        client.setLastName(lastNameTextField.getText());
+        client.setBirthDate(birthDateTextfield.getText());
+        client.setStudy(studyTextField.getText());
+        client.setEmailAddress(emailTextfield.getText());
+        client.setPhoneNumber(phoneTextField.getText());
+        client.setClientID(clientDAO.addClient(client).getClientID());
+
+        addContent(resources.getString("CLIENTS"));
 
     }
 
@@ -102,6 +158,7 @@ public class AddClientController extends ContentLoader implements Initializable,
         try {
             this.clientDAO = new ClientDAO();
             this.addressDAO = new AddressDAO();
+            this.documentDAO = new DocumentDAO();
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();

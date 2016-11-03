@@ -4,20 +4,22 @@ import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
+import Model.Address;
 import Model.Client;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,14 +47,14 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
     private ArrayList<Client> clientdata;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
     private AddressDAO addressDAO;
     private ResourceBundle resources;
 
     @FXML
-    void handleAddButton(MouseEvent event) {
+    void handleAddButton(MouseEvent event) throws IOException {
         addContent(new AddClientController(), resources.getString("NEW_CLIENT_DIALOG"));
     }
 
@@ -74,6 +76,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         }
 
     }
+
 
 
 //TODO clientenlijst ophalen uit de dao
@@ -120,6 +123,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     }
 
     private void showTable() {
+
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
@@ -136,6 +140,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
         //TODO werkt nog niet
         tableView.setItems(clientData);
+
 
         System.out.println(firstNameColumn.getCellValueFactory().toString());
         System.out.println(clientData);

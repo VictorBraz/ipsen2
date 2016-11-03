@@ -1,7 +1,5 @@
 package Model;
 
-import DAO.ClientDAO;
-
 /**
  * Created by Bernd on 12-10-2016.
  */
@@ -15,7 +13,11 @@ public class Client extends TableViewItem {
     private String study;
     private Address address;
     private Note note;
-    private ClientDAO clientDAO;
+
+
+    private int clientAddressid;
+
+    private String tag;
 
     /**
      * Instantiates a new Client.
@@ -25,13 +27,14 @@ public class Client extends TableViewItem {
     }
 
     public Client(String firstName, String lastName, String birthDate, String study,
-                  String emailAddress, String phoneNumber) {
+                  String emailAddress, String phoneNumber, String tag) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.study = study;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.tag = tag;
     }
 
     /**
@@ -49,6 +52,7 @@ public class Client extends TableViewItem {
         this.address =  null;
         this.note = null;
         this.study = null;
+        this.tag = null;
     }
 
     /**
@@ -65,7 +69,7 @@ public class Client extends TableViewItem {
      * @param study           the study
      */
     public Client(int clientID, String firstName, String lastName, String birthDate,
-                  String emailAddress, String phoneNumber, int addressID, int noteID, String study ) {
+                  String emailAddress, String phoneNumber, int addressID, int noteID, String study, String tag ) {
         this.clientID = clientID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,6 +79,7 @@ public class Client extends TableViewItem {
         this.address =  new Address(addressID);
         this.note = new Note(noteID);
         this.study = study;
+        this.tag = tag;
     }
 
     /**
@@ -159,15 +164,6 @@ public class Client extends TableViewItem {
     }
 
     /**
-     * Gets client dao.
-     *
-     * @return the client dao
-     */
-    public ClientDAO getClientDAO() {
-        return clientDAO;
-    }
-
-    /**
      * Sets client id.
      *
      * @param clientID the client id
@@ -248,12 +244,20 @@ public class Client extends TableViewItem {
         this.study = study;
     }
 
-    /**
-     * Sets client dao.
-     *
-     * @param clientDAO the client dao
-     */
-    public void setClientDAO(ClientDAO clientDAO) {
-        this.clientDAO = clientDAO;
+
+    public int getClientAddressid() {
+        return clientAddressid;
+    }
+
+    public void setClientAddressid(int clientAddressid) {
+        this.clientAddressid = clientAddressid;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
