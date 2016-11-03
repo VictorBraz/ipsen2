@@ -12,20 +12,20 @@
    <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
-            <TableColumn fx:id="checkBoxColumn" prefWidth="30.999969482421875" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="86.00003051757812" text="Voornaam" />
-          <TableColumn fx:id="lastNameColumn" prefWidth="112.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" prefWidth="105.0" text="Geboortedatum" />
-            <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="132.0" text="Adres" />
-            <TableColumn fx:id="zipCodeColumn" prefWidth="97.0" text="Postcode" />
-            <TableColumn fx:id="cityColum" prefWidth="152.0" text="Woonplaats" />
-            <TableColumn fx:id="emailColumn" prefWidth="182.0" text="Email" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="194.0" text="Studie" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="178.0" text="Telefoon" />
+            <TableColumn fx:id="checkBoxColumn" prefWidth="49.000030517578125" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="81.99996948242188" text="Voornaam" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Achternaam" />
+            <TableColumn fx:id="birthDateColumn" prefWidth="114.0" text="Geboortedatum" />
+            <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="164.0" text="Adres" />
+            <TableColumn fx:id="zipCodeColumn" prefWidth="100.0" text="Postcode" />
+            <TableColumn fx:id="cityColum" prefWidth="173.0" text="Woonplaats" />
+            <TableColumn fx:id="emailColumn" prefWidth="213.0" text="Email" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="156.0" text="Studie" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="120.0" text="Telefoon" />
         </columns>
       </TableView>
       <Group layoutX="862.0" layoutY="680.0" />
-      <Pane layoutX="1175.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+      <Pane layoutX="1172.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
          <children>
             <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -34,7 +34,7 @@
             </ImageView>
          </children>
       </Pane>
-       <Pane layoutX="1245.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
+       <Pane layoutX="1240.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
          <children>
                <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                    <image>

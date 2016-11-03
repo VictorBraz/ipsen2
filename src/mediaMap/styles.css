@@ -20,6 +20,7 @@
         -fx-text-alignment: center;
         -fx-table-cell-border-color: transparent;
         -fx-table-header-border-color: transparent;
+
     }
 
     .table-view .column-header{
@@ -30,8 +31,13 @@
     }
 
 
+
     .table-column {
         -fx-alignment: center-left;
+    }
+
+    .table-row-cell:hover{
+      -fx-background-color: #E0F7FA;
     }
 
     .column-header .label {
@@ -76,6 +82,14 @@
         -fx-pref-height: 16px;
 
 
+    }
+
+    .jfx-check-box{
+        -fx-checked-color: #B2EBF2;
+        -fx-unchecked-color: BLACK;
+        -fx-pref-width: 16px;
+        -fx-pref-height: 16px;
+        -fx-border-width: 0.5px;
     }
 
     .check-box {

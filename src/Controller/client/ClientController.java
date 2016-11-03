@@ -7,12 +7,12 @@ import DAO.ClientDAO;
 import Model.Address;
 import Model.Client;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,7 +47,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
     private ArrayList<Client> clientdata;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
     private AddressDAO addressDAO;

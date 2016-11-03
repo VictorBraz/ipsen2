@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /**
  * Created by Victor on 13-10-2016.
  */
-public class Company {
+public class Company extends TableViewItem{
 
     private int companyID;
     private String companyName;
-    private int companyAddressid;
+    private Address companyAddressid;
     private String contactPerson;
     private String phoneNumber;
     private String emailAddress;
@@ -23,7 +23,7 @@ public class Company {
      * @param phoneNumber
      * @param emailAddress
      */
-    public Company(int companyID, String companyName, int companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
+    public Company(int companyID, String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
 
         this.companyID = companyID;
         this.companyName = companyName;
@@ -42,7 +42,7 @@ public class Company {
      * @param phoneNumber
      * @param emailAddress
      */
-    public Company( String companyName, int companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
+    public Company( String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
 
         this.companyName = companyName;
         this.companyAddressid = companyAddressid;
@@ -55,7 +55,7 @@ public class Company {
     public Company (){
         this.companyID = 0;
         this.companyName = new String();
-        this.companyAddressid = 0;
+        this.companyAddressid = new Address();
         this.contactPerson = new String();
         this.emailAddress = new String();
         this.phoneNumber = new String();
@@ -98,7 +98,7 @@ public class Company {
      * @author Victor
      * @return companyAddressid
      */
-    public int getCompanyAddressid() {
+    public Address getCompanyAddressid() {
         return companyAddressid;
     }
 
@@ -106,7 +106,7 @@ public class Company {
      * @author Victor
      * @param companyAddressid
      */
-    public void setCompanyAddressid(int companyAddressid) {
+    public void setCompanyAddressid(Address companyAddressid) {
         this.companyAddressid = companyAddressid;
     }
 

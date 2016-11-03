@@ -2,18 +2,21 @@
 package Controller.company;
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import Model.Company;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -39,7 +42,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
     public int selectedCompanyID;
     private ObservableList<TableViewItem> companyData;
     private ArrayList<Integer> selectedRows;
-    private CheckBox selectAllCheckBox;
+    private JFXCheckBox selectAllCheckBox;
 
     private CompanyDAO dao;
     private AddressDAO addressDAO;
@@ -120,17 +123,37 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
+        this.selectedCompanyID = selectedItemId;
 
     }
 
     @Override
     public void openEditMenu() {
 
+    }
+
+    private void showTable(){
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        companyNameColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyAddressId"));
+        zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("zipcode"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("city"));
+        contactPersonColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("contactPerson"));
+        phoneNumberColum.setCellValueFactory(new PropertyValueFactory<Company, String>("phoneNumber"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("emailAddress"));
+        tagColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tags"));
+
+        tableView.setItems(companyData);
+
+        tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
     @Override
@@ -140,11 +163,14 @@ public class CompanyController extends ContentLoader implements Initializable, T
         try {
             this.dao = new CompanyDAO();
             this.addressDAO = new AddressDAO();
+            selectedRows = new ArrayList<>();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        companyData = FXCollections.observableArrayList(dao.getCompanies());
+        showTable();
 
     }
 }
