@@ -5,7 +5,7 @@ package Model;
  * Created by Roel on 12-10-2016.
  */
 public class Student extends TableViewItem{
-    private int studentID;
+    private int id;
     private String firstName;
     private String lastName;
     private String birthDate;
@@ -23,9 +23,9 @@ public class Student extends TableViewItem{
 
     }
 
-    public Student(int studentID, String firstName, String lastName, String birthDate, String study,
+    public Student(int id, String firstName, String lastName, String birthDate, String study,
                    String emailAddress, String phoneNumber, String tag) {
-        this.studentID = studentID;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -38,10 +38,10 @@ public class Student extends TableViewItem{
     /**
      * Instantiates a new Student.
      *
-     * @param studentID the student id
+     * @param id the student id
      */
-    public Student(int studentID){
-        this.studentID = studentID;
+    public Student(int id){
+        this.id = id;
         this.firstName = null;
         this.lastName = null;
         this.birthDate = null;
@@ -56,7 +56,7 @@ public class Student extends TableViewItem{
     /**
      * Instantiates a new Student.
      *
-     * @param studentID
+     * @param id
      * @param firstName
      * @param lastName
      * @param birthDate
@@ -65,9 +65,9 @@ public class Student extends TableViewItem{
      * @param phoneNumber
      * @param noteID
      */
-    public Student(int studentID, String firstName, String lastName, String birthDate, String study,
+    public Student(int id, String firstName, String lastName, String birthDate, String study,
                    String emailAddress, String phoneNumber, String address, String zipCode, String city, int noteID, String tag) {
-        this.studentID = studentID;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -116,17 +116,17 @@ public class Student extends TableViewItem{
      *
      * @return the student ID
      */
-    public int getStudentID() {
-        return studentID;
+    public int getId() {
+        return id;
     }
 
     /**
      * Sets student id s
      *
-     * @param studentID
+     * @param id
      */
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

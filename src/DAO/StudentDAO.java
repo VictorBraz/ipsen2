@@ -4,7 +4,6 @@ import Model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Roel on 12-10-2016.
@@ -17,13 +16,6 @@ public class StudentDAO extends DAO {
         super();
     }
 
-    public void prepareStatements(){
-        try{
-            deleteStudentQuery = conn.prepareStatement("DELETE FROM Student WHERE studentID=?");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     public Student addStudent(Student student) {
         try {
             student = addStudentQuery(student);
@@ -51,7 +43,7 @@ public class StudentDAO extends DAO {
 
         if(rs.next()){
             int id = rs.getInt(1);
-            student.setStudentID(id);
+            student.setId(id);
         }
         if (rowInserted > 0) {
             System.out.println("A new Student was inserted succesfully!");
@@ -79,7 +71,7 @@ public class StudentDAO extends DAO {
         statement.setString(5, student.getEmailAddress());
         statement.setString(6, student.getPhoneNumber());
         statement.setInt(7, student.getAddress().getAddressID());
-        statement.setInt(8,student.getStudentID());
+        statement.setInt(8,student.getId());
         statement.setString(9, student.getTag());
         statement.executeUpdate();
         statement.close();
@@ -95,17 +87,17 @@ public class StudentDAO extends DAO {
 
     private void deleteStudentQuery(int studentID)throws SQLException{
         String sql = "DELETE FROM Student WHERE studentID=?";
-        String sql2 = "DELETE FROM Address WHERE addressID=?";
+//        String sql2 = "DELETE FROM Address WHERE addressID=?";
         //sql 3 note
         //sql 4 documents
         PreparedStatement statement = conn.prepareStatement(sql);
-        PreparedStatement statement2 = conn.prepareStatement(sql2);
+//        PreparedStatement statement2 = conn.prepareStatement(sql2);
 
-        statement2.setInt(1,student.getAddress().getAddressID());
+//        statement2.setInt(1,student.getAddress().getAddressID());
         statement.setInt(1,studentID);
-        statement2.executeUpdate();
+//        statement2.executeUpdate();
         statement.executeUpdate();
-        statement2.close();
+//        statement2.close();
         statement.close();
     }
 
@@ -124,7 +116,7 @@ public class StudentDAO extends DAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Student student = new Student();
-                student.setStudentID(result.getInt(1));
+                student.setId(result.getInt(1));
                 student.setFirstName(result.getString(3));
                 student.setLastName(result.getString(4));
                 student.setBirthDate(result.getString(5));

@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Address (
 CREATE SEQUENCE IF NOT EXISTS id_seq_student START WITH	 1;
 CREATE TABLE IF NOT EXISTS Student (
 
-    studentID INTEGER DEFAULT nextval('id_seq_student') PRIMARY KEY NOT NULL,
+    id INTEGER DEFAULT nextval('id_seq_student') PRIMARY KEY NOT NULL,
     studentAddressID INTEGER NOT NULL REFERENCES Address (addressID),
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
@@ -69,7 +69,7 @@ CREATE SEQUENCE IF NOT EXISTS id_seq_project START WITH 3000000;
 CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
     projectName VARCHAR(255) NOT NULL,
---    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+--    id INTEGER NOT NULL REFERENCES Student (id),
 --    id INTEGER NOT NULL REFERENCES Company (id),
 --    clientID  INTEGER NOT NULL REFERENCES Client (id),
    tag TEXT
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS Note (
 CREATE TABLE IF NOT EXISTS ClientStudentRelation (
 
     id INTEGER NOT NULL REFERENCES Client (id),
-    studenID INTEGER NOT NULL REFERENCES Student (studentID),
+    studenID INTEGER NOT NULL REFERENCES Student (id),
     description TEXT
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS ClientStudentRelation (
 CREATE TABLE IF NOT EXISTS CompanyStudentRelation (
 
     id INTEGER NOT NULL REFERENCES Company (id),
-    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+    id INTEGER NOT NULL REFERENCES Student (id),
     description TEXT
 );
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS ClientCompanyRelation (
 
 CREATE TABLE IF NOT EXISTS ClientProjectRelation (
 
-    id INTEGER NOT NULL REFERENCES Student (studentID),
+    id INTEGER NOT NULL REFERENCES Student (id),
     projectID INTEGER NOT NULL REFERENCES Project (projectID),
     description TEXT
 );
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS CompanyProjectRelation (
 
 CREATE TABLE IF NOT EXISTS StudentProjectRelation (
 
-    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+    id INTEGER NOT NULL REFERENCES Student (id),
     projectID INTEGER NOT NULL REFERENCES Project (projectID),
     description TEXT
 );

@@ -132,15 +132,15 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setPhoneNumber(phoneTextField.getText());
         student.setStudy(studyTextField.getText());
         student.setTag(tagsTextField.getText());
-        student.setStudentID(studentDAO.addStudent(student).getStudentID());
-        System.out.println(student.getStudentID());
-        note.setOwnerID(student.getStudentID());
+        student.setId(studentDAO.addStudent(student).getId());
+        System.out.println(student.getId());
+        note.setOwnerID(student.getId());
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
-        System.out.println(student.getStudentID());
+        System.out.println(student.getId());
 
         for(int i= 0; i < documents.size(); i++ ) {
-            document.setOwnerID(student.getStudentID());
+            document.setOwnerID(student.getId());
             documentDAO.addDocument(document);
         }
         documents.clear();
