@@ -101,15 +101,11 @@ public class StudentDAO extends DAO {
         PreparedStatement statement = conn.prepareStatement(sql);
 //        PreparedStatement statement2 = conn.prepareStatement(sql2);
 
-<<<<<<< HEAD
-        statement2.setInt(1,student.getAddress().getAddressID());
-        statement.setInt(1,student.getId());
-        statement2.executeUpdate();
-=======
+
 //        statement2.setInt(1,student.getAddress().getAddressID());
         statement.setInt(1,studentID);
 //        statement2.executeUpdate();
->>>>>>> 9c55ccb647b12bd30b73b7377cebd9718385480b
+
         statement.executeUpdate();
 //        statement2.close();
         statement.close();
@@ -130,7 +126,7 @@ public class StudentDAO extends DAO {
     private ArrayList<Student> selectAllStudentsQuery() throws SQLException{
         String sql ="SELECT * FROM Student";
         ArrayList<Student> students = new ArrayList<Student>();
-<<<<<<< HEAD
+
 
         PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -146,26 +142,7 @@ public class StudentDAO extends DAO {
             student.setPhoneNumber(result.getString(8));
             student.setTag(result.getString(9));
             students.add(student);
-=======
-        try {
-            PreparedStatement statement = conn.prepareStatement(sql);
 
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                Student student = new Student();
-                student.setId(result.getInt(1));
-                student.setFirstName(result.getString(3));
-                student.setLastName(result.getString(4));
-                student.setBirthDate(result.getString(5));
-                student.setStudy(result.getString(6));
-                student.setEmailAddress(result.getString(7));
-                student.setPhoneNumber(result.getString(8));
-                student.setTag(result.getString(9));
-                students.add(student);
-            }
-        }catch (SQLException esql){
-            esql.printStackTrace();
->>>>>>> 9c55ccb647b12bd30b73b7377cebd9718385480b
         }
 
         statement.close();
