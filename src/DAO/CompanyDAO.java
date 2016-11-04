@@ -95,9 +95,10 @@ public class CompanyDAO extends DAO {
      * @param company
      * @throws Exception
      */
-    private void addCompanyQuery(Company company)throws Exception{
-        String sql = "INSERT INTO company(companyid, companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
-                "VALUES (nextval('id_seq_company'),?,?,?,?,?,?)";
+    private Company addCompanyQuery(Company company)throws Exception{
+        // Hier heb ik de companyid bij insert into en nextval('id_seq_company') bij values verwijderd om document werkend te krijgen.
+        String sql = "INSERT INTO company(companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
+                "VALUES (?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddressid().getAddressID());
         stmt.setString(2, company.getCompanyName());
@@ -107,9 +108,18 @@ public class CompanyDAO extends DAO {
         stmt.setString(6, company.getTag());
 
         int rowsInserted = stmt.executeUpdate();
+
+        ResultSet rs = stmt.getGeneratedKeys();
+
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            company.setId(id);
+        }
+
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
         }
+        return company;
     }
 
     /**

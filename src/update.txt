@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS ClientStudentRelation (
 
 CREATE TABLE IF NOT EXISTS CompanyStudentRelation (
 
-    id INTEGER NOT NULL REFERENCES Company (id),
-    id INTEGER NOT NULL REFERENCES Student (id),
+--    id INTEGER NOT NULL REFERENCES Company (id),
+--    id INTEGER NOT NULL REFERENCES Student (id),
     description TEXT
 );
 
@@ -142,8 +142,8 @@ CREATE TABLE IF NOT EXISTS CompanyStudentRelation (
 
 CREATE TABLE IF NOT EXISTS ClientCompanyRelation (
 
-    id INTEGER NOT NULL REFERENCES Client (id),
-    id INTEGER NOT NULL REFERENCES Company (id),
+--    id INTEGER NOT NULL REFERENCES Client (id),
+--    id INTEGER NOT NULL REFERENCES Company (id),
     description TEXT
 );
 
