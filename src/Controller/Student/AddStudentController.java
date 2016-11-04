@@ -60,6 +60,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
+    @FXML private JFXButton editButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -132,21 +133,25 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setPhoneNumber(phoneTextField.getText());
         student.setStudy(studyTextField.getText());
         student.setTag(tagsTextField.getText());
-        student.setStudentID(studentDAO.addStudent(student).getStudentID());
-        System.out.println(student.getStudentID());
-        note.setOwnerID(student.getStudentID());
+        student.setId(studentDAO.addStudent(student).getId());
+        System.out.println(student.getId());
+        note.setOwnerID(student.getId());
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
-        System.out.println(student.getStudentID());
+        System.out.println(student.getId());
 
         for(int i= 0; i < documents.size(); i++ ) {
-            document.setOwnerID(student.getStudentID());
+            document.setOwnerID(student.getId());
             documentDAO.addDocument(document);
         }
         documents.clear();
 
         // note, documents en tags nog toevoegen.
         // relatie nog volledig doen.
+
+    }
+    @FXML
+    void handleEditButton(MouseEvent event) throws SQLException{
 
     }
 
@@ -181,6 +186,8 @@ public class AddStudentController extends ContentLoader implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
+        editButton.setVisible(false);
+        editButton.setDisable(true);
         try {
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();
