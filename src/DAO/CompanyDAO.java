@@ -54,6 +54,7 @@ public class CompanyDAO extends DAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            stmt.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,12 +81,15 @@ public class CompanyDAO extends DAO {
                 company.setContactPerson(resultSet.getString(4));
                 company.setPhoneNumber(resultSet.getString(5));
                 company.setEmailAddress((resultSet.getString(6)));
+                company.setTag(resultSet.getString(7));
 
                 companies.add(company);
             }
+            stmt.close();
         }catch (Exception e){
             e.printStackTrace();
         }
+
 
         return companies;
     }
@@ -95,10 +99,12 @@ public class CompanyDAO extends DAO {
      * @param company
      * @throws Exception
      */
+
     private Company addCompanyQuery(Company company)throws Exception{
         // Hier heb ik de companyid bij insert into en nextval('id_seq_company') bij values verwijderd om document werkend te krijgen.
         String sql = "INSERT INTO company(companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
                 "VALUES (?,?,?,?,?,?)";
+
         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddressid().getAddressID());
         stmt.setString(2, company.getCompanyName());
@@ -119,7 +125,11 @@ public class CompanyDAO extends DAO {
         if (rowsInserted > 0){
             System.out.print("New company inserted succesfully!");
         }
+
+        stmt.close();
+
         return company;
+
     }
 
     /**
@@ -149,35 +159,8 @@ public class CompanyDAO extends DAO {
             }else
                 System.out.println("No matching companyID found!");
         }
+        stmt.close();
 
-    }
-
-    /**
-     * @author Victor
-     * @param id
-     * @throws Exception
-     */
-    private void deleteCompanyQuery(int id)throws Exception{
-
-    }
-    private ArrayList<Company> getCompaniesQuery()throws  Exception{
-        String sql = "SELECT * FROM company";
-        PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        ResultSet resultSet = stmt.getGeneratedKeys();
-
-        while(resultSet.next()){
-            Company company = new Company();
-            company.setId(resultSet.getInt(1));
-            company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
-            company.setCompanyName(resultSet.getString(3));
-            company.setContactPerson(resultSet.getString(4));
-            company.setPhoneNumber(resultSet.getString(5));
-            company.setEmailAddress(resultSet.getString(6));
-            company.setTag(resultSet.getString(7));
-
-            companies.add(company);
-        }
-        return companies;
     }
 
 }
