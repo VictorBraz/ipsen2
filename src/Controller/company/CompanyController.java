@@ -106,7 +106,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
         contactPersonColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("contactPerson"));
         phoneNumberColum.setCellValueFactory(new PropertyValueFactory<Company, String>("phoneNumber"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("emailAddress"));
-        tagColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tags"));
+        tagColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tag"));
         companyIdCol.setCellValueFactory(new PropertyValueFactory<Company, Integer>("companyId"));
         tableView.setItems(companyData);
 
@@ -130,39 +130,5 @@ public class CompanyController extends ContentLoader implements Initializable, T
         showTable();
 
     }
-    /*public ObservableList<Company> cmdGetCompanies(){
-        ArrayList<Company> companies = new ArrayList<>();
-        try{
-            companies.addAll(dao.getCompanies());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return FXCollections.observableArrayList(companies);
-    }
-*/
-/*    public void cmdAddCompany(Company company){
-        try{
-            dao.addCompany(company);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
-    *//*public void cmdDeleteCompany(ObservableList<Company> companies){
-        try{
-            for(Company company: companies){
-                dao.deleteCompany(company);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }*//*
-
-    public void cmdUpdateCompany(Company company){
-        try{
-            dao.updateCompany(company);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
 }

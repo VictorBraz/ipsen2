@@ -16,7 +16,7 @@
             <buttons>
                 <Button mnemonicParsing="false" text="Home" />
                 <Region />
-                <Label alignment="CENTER" contentDisplay="CENTER" text="Student" textAlignment="CENTER" />
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Medewerker" textAlignment="CENTER" />
                 <Region prefHeight="200.0" prefWidth="200.0" />
                 <Button mnemonicParsing="false" text="Edit" />
             </buttons>

@@ -15,7 +15,7 @@
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
-            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Student toevoegen">
+            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Medewerker toevoegen">
                <font>
                   <Font name="Roboto Light" size="36.0" />
                </font>
