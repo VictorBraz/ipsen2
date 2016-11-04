@@ -68,7 +68,9 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleDeleteButton(MouseEvent event) {
-
+//        if(this.selectedStudentID != 0){
+//            deleteStudent();
+//        }
     }
 
     @FXML

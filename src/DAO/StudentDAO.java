@@ -85,15 +85,15 @@ public class StudentDAO extends DAO {
         statement.close();
     }
 
-    public void deleteStudent(Student student){
+    public void deleteStudent(int studentID){
         try {
-            deleteStudentQuery(student);
+            deleteStudentQuery(studentID);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private void deleteStudentQuery(Student student)throws SQLException{
+    private void deleteStudentQuery(int studentID)throws SQLException{
         String sql = "DELETE FROM Student WHERE studentID=?";
         String sql2 = "DELETE FROM Address WHERE addressID=?";
         //sql 3 note
@@ -102,7 +102,7 @@ public class StudentDAO extends DAO {
         PreparedStatement statement2 = conn.prepareStatement(sql2);
 
         statement2.setInt(1,student.getAddress().getAddressID());
-        statement.setInt(1,student.getStudentID());
+        statement.setInt(1,studentID);
         statement2.executeUpdate();
         statement.executeUpdate();
         statement2.close();
