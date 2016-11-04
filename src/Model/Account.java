@@ -3,11 +3,11 @@ package Model;
 /**
  * Created by Victor on 26-10-2016.
  */
-public class Account {
+public class Account extends TableViewItem {
     private String userName;
     private String password;
     private int privilege;
-    private int userId;
+    private int id;
 
     public Account(){
         userName = "";
@@ -15,11 +15,11 @@ public class Account {
         privilege = 0;
     }
 
-    public Account(String userName, String password, int privilege, int userId){
+    public Account(String userName, String password, int privilege, int id){
         this.userName = userName;
         this.password = password;
         this.privilege = privilege;
-        this.userId = userId;
+        this.id = id;
     }
 
     public String getUserName() {
@@ -47,10 +47,10 @@ public class Account {
     }
 
     public void setUserID(int userId){
-        this.userId = userId;
+        this.id = userId;
     }
 
-    public  int getUserId(){
-        return this.userId;
+    public  int getId(){
+        return this.id;
     }
 }

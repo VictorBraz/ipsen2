@@ -141,9 +141,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("lastName"));
         birthDateColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
-        adresColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
-        zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("zipcode"));
-        cityColum.setCellValueFactory(new PropertyValueFactory<Client, String>("city"));
+        //adresColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
+        //zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("zipcode"));
+        //cityColum.setCellValueFactory(new PropertyValueFactory<Client, String>("city"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("emailAddress"));
         studyColum.setCellValueFactory(new PropertyValueFactory<Client, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phoneNumber"));

@@ -1,10 +1,9 @@
 package services;
 
-import java.io.File;
-import java.io.FileInputStream;
+import contentloader.ContentLoader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -13,14 +12,27 @@ import java.util.Properties;
  * @author Victor
  * Created by Victor on 12-9-2016.
  */
-public class Database {
+public class Database extends ContentLoader {
     /**
      * @author Victor
      */
     private volatile static Database connectionInstance;
-    private Database() {
+
+    private String host;
+    private String port;
+    private String databaseName;
+    private String userName;
+    private String password;
+
+
+    public Database() {
+        super();
+
+
+
         try {
             Class.forName("org.postgresql.Driver");
+
 
         } catch (ClassNotFoundException e) {
             System.out.println("Error: Class not found");
@@ -29,6 +41,7 @@ public class Database {
         }
 
     }
+
 
     /**
      * @author Victor
@@ -51,15 +64,21 @@ public class Database {
      * @throws SQLException
      */
     public Connection getConnection() throws SQLException {
-        String URL = "jdbc:postgresql://localhost:5432/HubSpot";
+
+        //String URL = "jdbc:postgresql://localhost:5432/HubSpot";
+
+        String URL = "jdbc:postgresql://"+ getHost() +":" + getPort() +  "/" + getDatabaseName() +"";
         Properties info = new Properties();
-        info.put("user", "postgres");
-        info.put("password", "1");
+        info.put("user", getUserName());
+        info.put("password", getPassword());
         Connection conn = DriverManager.getConnection(URL, info);
         if (conn != null) {
             System.out.println("Succesfully connected to the database.");
         }
         return conn;
     }
+
+
+
 }
 
