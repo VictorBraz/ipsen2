@@ -135,6 +135,7 @@ public class AddClientController extends ContentLoader implements Initializable,
         client.setStudy(studyTextField.getText());
         client.setEmailAddress(emailTextfield.getText());
         client.setPhoneNumber(phoneTextField.getText());
+        client.setTag(tagsTextField.getText());
 
         client.setId(clientDAO.addClient(client).getId());
         System.out.println(client.getId());

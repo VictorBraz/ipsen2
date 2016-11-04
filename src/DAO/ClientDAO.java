@@ -144,7 +144,7 @@ public class ClientDAO extends DAO {
     private ArrayList <Client> selectAllClientsQuery()  {
         ArrayList<Client> clients = new ArrayList<Client>();
         String sql = "SELECT id, clientaddressid, firstname," +
-                " lastname, birthdate, study, email, phonenumber, clientaddressid FROM client";
+                " lastname, birthdate, study, email, phonenumber, tag FROM client";
         try {
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);

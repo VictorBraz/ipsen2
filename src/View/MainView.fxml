@@ -11,7 +11,7 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Student" />
+            <Button mnemonicParsing="false" text="Medewerker" />
             <Region prefHeight="200.0" prefWidth="90.0" />
             <Button mnemonicParsing="false" text="Client" />
             <Region prefHeight="200.0" prefWidth="90.0" />
