@@ -69,7 +69,13 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleDeleteButton(MouseEvent event) {
-
+        if (selectedRows.size() != 0){
+            selectedRows.forEach(row -> studentDAO.deleteStudent(row));
+            addContent(resources.getString("STUDENTS"));
+        }
+//        if(this.selectedStudentID != 0){
+//            deleteStudent();
+//        }
     }
 
     @FXML
@@ -80,8 +86,10 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     }
 
+
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
+        this.selectedRows = selectedRows;
 
     }
 

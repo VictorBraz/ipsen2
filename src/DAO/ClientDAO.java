@@ -96,6 +96,7 @@ public class ClientDAO extends DAO {
      * @param clientID the client id
      */
     public void deleteClient(int clientID) {
+        System.out.println(clientID);
         try {
             deleteClientQuery(clientID);
         } catch (Exception e) {
@@ -104,7 +105,7 @@ public class ClientDAO extends DAO {
     }
 
     private void deleteClientQuery(int clientID) throws Exception {
-        String sql = "DELETE FROM Client WHERE clientid=?";
+        String sql = "DELETE FROM Client WHERE id=?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setInt(1, clientID);
         statement.executeUpdate();
@@ -142,7 +143,7 @@ public class ClientDAO extends DAO {
 
     private ArrayList <Client> selectAllClientsQuery()  {
         ArrayList<Client> clients = new ArrayList<Client>();
-        String sql = "SELECT clientid, clientaddressid, firstname," +
+        String sql = "SELECT id, clientaddressid, firstname," +
                 " lastname, birthdate, study, email, phonenumber, clientaddressid FROM client";
         try {
             Statement statement = conn.createStatement();

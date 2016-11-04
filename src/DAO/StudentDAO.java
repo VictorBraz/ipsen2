@@ -73,6 +73,7 @@ public class StudentDAO extends DAO {
         statement.setString(5, student.getEmailAddress());
         statement.setString(6, student.getPhoneNumber());
         statement.setInt(7, student.getAddress().getAddressID());
+
         statement.setString(8, student.getTag());
         statement.setInt(9,student.getId());
         int rowInserted = statement.executeUpdate();
@@ -80,30 +81,37 @@ public class StudentDAO extends DAO {
         if (rowInserted > 0){
             System.out.println("The Student Has Been updated succesfully!");
         }
+
         statement.close();
     }
 
-    public void deleteStudent(Student student){
+    public void deleteStudent(int studentID){
         try {
-            deleteStudentQuery(student);
+            deleteStudentQuery(studentID);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private void deleteStudentQuery(Student student)throws SQLException{
+    private void deleteStudentQuery(int studentID)throws SQLException{
         String sql = "DELETE FROM Student WHERE studentID=?";
-        String sql2 = "DELETE FROM Address WHERE addressID=?";
+//        String sql2 = "DELETE FROM Address WHERE addressID=?";
         //sql 3 note
         //sql 4 documents
         PreparedStatement statement = conn.prepareStatement(sql);
-        PreparedStatement statement2 = conn.prepareStatement(sql2);
+//        PreparedStatement statement2 = conn.prepareStatement(sql2);
 
+<<<<<<< HEAD
         statement2.setInt(1,student.getAddress().getAddressID());
         statement.setInt(1,student.getId());
         statement2.executeUpdate();
+=======
+//        statement2.setInt(1,student.getAddress().getAddressID());
+        statement.setInt(1,studentID);
+//        statement2.executeUpdate();
+>>>>>>> 9c55ccb647b12bd30b73b7377cebd9718385480b
         statement.executeUpdate();
-        statement2.close();
+//        statement2.close();
         statement.close();
     }
 
@@ -122,6 +130,7 @@ public class StudentDAO extends DAO {
     private ArrayList<Student> selectAllStudentsQuery() throws SQLException{
         String sql ="SELECT * FROM Student";
         ArrayList<Student> students = new ArrayList<Student>();
+<<<<<<< HEAD
 
         PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -137,6 +146,26 @@ public class StudentDAO extends DAO {
             student.setPhoneNumber(result.getString(8));
             student.setTag(result.getString(9));
             students.add(student);
+=======
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Student student = new Student();
+                student.setId(result.getInt(1));
+                student.setFirstName(result.getString(3));
+                student.setLastName(result.getString(4));
+                student.setBirthDate(result.getString(5));
+                student.setStudy(result.getString(6));
+                student.setEmailAddress(result.getString(7));
+                student.setPhoneNumber(result.getString(8));
+                student.setTag(result.getString(9));
+                students.add(student);
+            }
+        }catch (SQLException esql){
+            esql.printStackTrace();
+>>>>>>> 9c55ccb647b12bd30b73b7377cebd9718385480b
         }
 
         statement.close();
