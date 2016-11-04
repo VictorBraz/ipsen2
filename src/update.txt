@@ -70,11 +70,9 @@ CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
     projectName VARCHAR(255) NOT NULL,
 --    id INTEGER NOT NULL REFERENCES Student (id),
-<<<<<<< HEAD
+
 --    companyID INTEGER NOT NULL REFERENCES Company (companyID),
-=======
---    id INTEGER NOT NULL REFERENCES Company (id),
->>>>>>> 9c55ccb647b12bd30b73b7377cebd9718385480b
+
 --    clientID  INTEGER NOT NULL REFERENCES Client (id),
    tag TEXT
 
