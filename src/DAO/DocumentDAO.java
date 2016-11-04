@@ -1,7 +1,6 @@
 package DAO;
 
 import Model.Document;
-
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,12 +18,13 @@ public class DocumentDAO extends DAO{
         super();
     }
 
-    public void addDocument(Document document) throws SQLException{
+    public Document addDocument(Document document) throws SQLException{
         try {
             addDocumentQuery(document);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return document;
     }
 
     public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
@@ -48,7 +48,7 @@ public class DocumentDAO extends DAO{
 
     private void addDocumentQuery(Document document) throws SQLException, IOException {
         String sql = "INSERT INTO document (documentname, ownerid, documentdate, pdffile) VALUES (?, ?, ?, ?)";
-
+        File file = document.getFile();
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, document.getDocumentName());
         statement.setInt(2, document.getOwnerID());
@@ -69,6 +69,7 @@ public class DocumentDAO extends DAO{
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT documentname FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1,ownerID);
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {

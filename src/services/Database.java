@@ -72,9 +72,9 @@ public class Database extends ContentLoader {
         info.put("user", getUserName());
         info.put("password", getPassword());
         Connection conn = DriverManager.getConnection(URL, info);
-        if (conn != null) {
-            System.out.println("Succesfully connected to the database.");
-        }
+//        if (conn != null) {
+//            System.out.println("Succesfully connected to the database.");
+//        }
         return conn;
     }
 

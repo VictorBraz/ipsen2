@@ -96,6 +96,7 @@ public class ClientDAO extends DAO {
      * @param clientID the client id
      */
     public void deleteClient(int clientID) {
+        System.out.println(clientID);
         try {
             deleteClientQuery(clientID);
         } catch (Exception e) {
@@ -104,7 +105,7 @@ public class ClientDAO extends DAO {
     }
 
     private void deleteClientQuery(int clientID) throws Exception {
-        String sql = "DELETE FROM Client WHERE clientid=?";
+        String sql = "DELETE FROM Client WHERE id=?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setInt(1, clientID);
         statement.executeUpdate();
@@ -142,7 +143,7 @@ public class ClientDAO extends DAO {
 
     private ArrayList <Client> selectAllClientsQuery()  {
         ArrayList<Client> clients = new ArrayList<Client>();
-        String sql = "SELECT clientid, clientaddressid, firstname," +
+        String sql = "SELECT id, clientaddressid, firstname," +
                 " lastname, birthdate, study, email, phonenumber, clientaddressid FROM client";
         try {
             Statement statement = conn.createStatement();
@@ -152,6 +153,7 @@ public class ClientDAO extends DAO {
                 Client client = new Client();
 
                 client.setId(result.getInt(1));
+
                 client.setFirstName(result.getString(3));
                 client.setLastName(result.getString(4));
                 client.setBirthDate(result.getString(5));
@@ -174,6 +176,7 @@ public class ClientDAO extends DAO {
                 " birthdate, study, email, phonenumber, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
         statement.setInt(1, client.getAddress().getAddressID());
         statement.setString(2, client.getFirstName());
         statement.setString(3, client.getLastName());
@@ -184,6 +187,13 @@ public class ClientDAO extends DAO {
         statement.setString(8, client.getTag());
 
         int rowsInserted = statement.executeUpdate();
+
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            client.setId(id);
+        }
+
         if(rowsInserted > 0) {
             System.out.println("A new document was inserted succesfully!");
         }

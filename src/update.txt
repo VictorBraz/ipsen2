@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Address (
 CREATE SEQUENCE IF NOT EXISTS id_seq_student START WITH	 1;
 CREATE TABLE IF NOT EXISTS Student (
 
-    studentID INTEGER DEFAULT nextval('id_seq_student') PRIMARY KEY NOT NULL,
+    id INTEGER DEFAULT nextval('id_seq_student') PRIMARY KEY NOT NULL,
     studentAddressID INTEGER NOT NULL REFERENCES Address (addressID),
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Student (
 CREATE SEQUENCE IF NOT EXISTS id_seq_company START WITH 1000000;
 CREATE TABLE IF NOT EXISTS Company (
 
-    companyID INTEGER DEFAULT nextval('id_seq_company') PRIMARY KEY NOT NULL,
+    id INTEGER DEFAULT nextval('id_seq_company') PRIMARY KEY NOT NULL,
     companyAddressID INTEGER NOT NULL REFERENCES Address (addressID),
     companyName VARCHAR(255) NOT NULL,
     contactPerson VARCHAR(255) NOT NULL,
@@ -69,8 +69,10 @@ CREATE SEQUENCE IF NOT EXISTS id_seq_project START WITH 3000000;
 CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
     projectName VARCHAR(255) NOT NULL,
---    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+--    id INTEGER NOT NULL REFERENCES Student (id),
+
 --    companyID INTEGER NOT NULL REFERENCES Company (companyID),
+
 --    clientID  INTEGER NOT NULL REFERENCES Client (id),
    tag TEXT
 
@@ -121,7 +123,7 @@ CREATE TABLE IF NOT EXISTS Note (
 CREATE TABLE IF NOT EXISTS ClientStudentRelation (
 
     id INTEGER NOT NULL REFERENCES Client (id),
-    studenID INTEGER NOT NULL REFERENCES Student (studentID),
+    studenID INTEGER NOT NULL REFERENCES Student (id),
     description TEXT
 );
 
@@ -131,8 +133,10 @@ CREATE TABLE IF NOT EXISTS ClientStudentRelation (
 
 CREATE TABLE IF NOT EXISTS CompanyStudentRelation (
 
-    companyID INTEGER NOT NULL REFERENCES Company (companyID),
-    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+
+--    id INTEGER NOT NULL REFERENCES Company (id),
+--    id INTEGER NOT NULL REFERENCES Student (id),
+
     description TEXT
 );
 
@@ -142,8 +146,8 @@ CREATE TABLE IF NOT EXISTS CompanyStudentRelation (
 
 CREATE TABLE IF NOT EXISTS ClientCompanyRelation (
 
-    id INTEGER NOT NULL REFERENCES Client (id),
-    companyID INTEGER NOT NULL REFERENCES Company (companyID),
+--    id INTEGER NOT NULL REFERENCES Client (id),
+--    id INTEGER NOT NULL REFERENCES Company (id),
     description TEXT
 );
 
@@ -153,7 +157,7 @@ CREATE TABLE IF NOT EXISTS ClientCompanyRelation (
 
 CREATE TABLE IF NOT EXISTS ClientProjectRelation (
 
-    id INTEGER NOT NULL REFERENCES Student (studentID),
+    id INTEGER NOT NULL REFERENCES Student (id),
     projectID INTEGER NOT NULL REFERENCES Project (projectID),
     description TEXT
 );
@@ -164,7 +168,7 @@ CREATE TABLE IF NOT EXISTS ClientProjectRelation (
 
 CREATE TABLE IF NOT EXISTS CompanyProjectRelation (
 
-    companyID INTEGER NOT NULL REFERENCES Company (companyID),
+    id INTEGER NOT NULL REFERENCES Company (id),
     projectID INTEGER NOT NULL REFERENCES Project (projectID),
     description TEXT
 );
@@ -174,7 +178,7 @@ CREATE TABLE IF NOT EXISTS CompanyProjectRelation (
 
 CREATE TABLE IF NOT EXISTS StudentProjectRelation (
 
-    studentID INTEGER NOT NULL REFERENCES Student (studentID),
+    id INTEGER NOT NULL REFERENCES Student (id),
     projectID INTEGER NOT NULL REFERENCES Project (projectID),
     description TEXT
 );
