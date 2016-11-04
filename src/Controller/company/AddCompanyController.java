@@ -1,6 +1,7 @@
 package Controller.company;
 
 import Controller.handlers.TableViewListener;
+import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import DAO.DocumentDAO;
@@ -13,11 +14,14 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
@@ -61,14 +65,15 @@ public class AddCompanyController extends ContentLoader implements Initializable
     private AddressDAO addressDAO;
     private ResourceBundle resources;
     private DocumentDAO documentDAO;
+    private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
-        FileChooser fileChooser = new FileChooser();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
@@ -79,13 +84,22 @@ public class AddCompanyController extends ContentLoader implements Initializable
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-            try {
-                documentDAO.addDocument(document);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Document opgeslagen!");
+            documents.add(document);
         }
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
+    }
+
+    private void showTable() {
+
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
+
+        fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        tableView.setItems(documentData);
+        System.out.println(documentData);
+        tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
     @FXML
@@ -117,8 +131,14 @@ public class AddCompanyController extends ContentLoader implements Initializable
             company.setTag(tagsTextField.getText());
             companyDAO.addCompany(company);
             System.out.println(company.getId());
-            document.setOwnerID(company.getId());
 
+            for(int i =0; i < documents.size(); i++) {
+                documents.get(i).setOwnerID(company.getId());
+                System.out.println(documents.get(i).getOwnerID());
+                documentDAO.addDocument(documents.get(i));
+            }
+
+            documents.clear();
             addContent(resources.getString("COMPANIES"));
 
         }catch (Exception e){
@@ -128,7 +148,9 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) {
-
+        documents.clear();
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
     }
 
     @Override

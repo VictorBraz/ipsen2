@@ -69,6 +69,7 @@ public class DocumentDAO extends DAO{
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT documentname FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1,ownerID);
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {

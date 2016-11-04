@@ -60,6 +60,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
+    @FXML private JFXButton editButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -149,6 +150,10 @@ public class AddStudentController extends ContentLoader implements Initializable
         // relatie nog volledig doen.
 
     }
+    @FXML
+    void handleEditButton(MouseEvent event) throws SQLException{
+
+    }
 
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
@@ -181,6 +186,8 @@ public class AddStudentController extends ContentLoader implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
+        editButton.setVisible(false);
+        editButton.setDisable(true);
         try {
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();

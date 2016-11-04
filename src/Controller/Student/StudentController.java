@@ -63,7 +63,7 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML
 
     void handleAddButton(MouseEvent event) {
-        addContent(resources.getString("NEW_STUDENT_DIALOG"));
+        addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
     }
 
     @FXML
@@ -79,23 +79,11 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleZoominButton(MouseEvent event) {
+        EditStudentController editStudentController = new EditStudentController();
+        editStudentController.setSelectedItem(selectedStudentID);
+        addContent(editStudentController, resources.getString("NEW_STUDENT_DIALOG"));
 
     }
-
-
-    public void deleteStudent(Student student){
-        studentDAO.deleteStudent(selectedStudentID);
-    }
-
-    public ArrayList<Student> selectAllStudents(){
-        return studentDAO.selectAllStudents();
-    }
-
-
-    private void close(){
-        studentDAO.close();
-    }
-
 
 
     @Override

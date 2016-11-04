@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS Project (
     projectID INTEGER DEFAULT nextval('id_seq_project') PRIMARY KEY NOT NULL,
     projectName VARCHAR(255) NOT NULL,
     tag TEXT
+
 );
 
 
