@@ -77,7 +77,10 @@ public class SearchController extends ContentLoader implements Initializable, Ta
 
     @FXML
     void handleSearchButton(MouseEvent event) {
-        System.out.println("search doet het");
+
+        studentTableView.getItems().clear();
+        clientTableView.getItems().clear();
+        companyTableView.getItems().clear();
         showCompanyTagTable();
         showStudentTagTable();
         showClientTagTable();
@@ -101,20 +104,19 @@ public class SearchController extends ContentLoader implements Initializable, Ta
 
     public void showCompanyTagTable(){
 
+        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(companyTableView, this);
+        tableViewSelectHandler.createCheckBoxColumn();
+        tableViewSelectHandler.createSelectAllCheckBox();
 
         for (Company company : companyDAO.getCompanies()){
             if(company.getTag().contains(searchTextField.getText())){
                 companies.add(company);
-                System.out.println(companies);
             }
         }
         companyNameColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyName"));
         companyTagsColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tag"));
         companyTableView.setItems(companies);
 
-        TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(companyTableView, this);
-        tableViewSelectHandler.createCheckBoxColumn();
-        tableViewSelectHandler.createSelectAllCheckBox();
     }
 
     public void showStudentTagTable(){
@@ -122,6 +124,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(studentTableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
+
         for (Student student : studentDAO.selectAllStudents()){
             if(student.getTag().contains(searchTextField.getText())){
                 students.add(student);
@@ -137,6 +140,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(clientTableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
+
         for (Client client : clientDAO.selectAllClients()){
             if(client.getTag().contains(searchTextField.getText())){
                 clients.add(client);
