@@ -70,6 +70,6 @@ public class LoginController extends ContentLoader implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
-        setMainFrameTitle(resources.getString("HOME_TITLE"));
+        setHamburgerMenuVisible(false);
     }
 }

@@ -135,4 +135,8 @@ public class MainFrameController extends ContentLoader implements Initializable 
         this.resources = resources;
         prepareSlideMenuAnimation();
     }
+
+    public void hamburgerMenuVisible(boolean editBoolean) {
+        menuButton.setVisible(editBoolean);
+    }
 }

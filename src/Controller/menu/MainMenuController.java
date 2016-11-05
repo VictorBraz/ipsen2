@@ -43,5 +43,6 @@ public class MainMenuController extends ContentLoader implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("HOME_TITLE"));
+        setHamburgerMenuVisible(true);
     }
 }

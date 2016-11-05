@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -31,13 +30,10 @@ public abstract class ContentLoader {
     /**
      * The constant primaryStage.
      */
-    public static Stage primaryStage;
+    protected static Stage primaryStage;
     private static FXMLLoader loader;
 
-    /**
-     * The constant lastWindow.
-     */
-    public static String lastWindow;
+
 
     public ContentLoader() {
         InputStream in = ContentLoader.class.getResourceAsStream("/resources/database.properties");
@@ -60,7 +56,7 @@ public abstract class ContentLoader {
      *
      * @param mainFrameController the main frame controller
      */
-    public static void setMainController(MainFrameController mainFrameController) {
+    private static void setMainController(MainFrameController mainFrameController) {
         mainController = mainFrameController;
     }
 
@@ -98,7 +94,7 @@ public abstract class ContentLoader {
 
         setMainController(mainController);
         addContent(loader.getResources().getString("LOGIN"));
-
+        mainController.hamburgerMenuVisible(false);
         return mainFrame;
     }
 
@@ -142,9 +138,8 @@ public abstract class ContentLoader {
      * @param event the event
      * @return the primary stage
      */
-    public Stage getPrimaryStage(Event event) {
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        return primaryStage;
+    protected Stage getPrimaryStage(Event event) {
+        return (Stage) ((Node) event.getSource()).getScene().getWindow();
     }
 
     /**
@@ -152,8 +147,12 @@ public abstract class ContentLoader {
      *
      * @param title the title
      */
-    public void setMainFrameTitle(String title){
+    protected void setMainFrameTitle(String title){
         mainController.setTitle(title);
+    }
+
+    protected void setHamburgerMenuVisible(boolean editBoolean) {
+        mainController.hamburgerMenuVisible(editBoolean);
     }
 
 
@@ -166,7 +165,7 @@ public abstract class ContentLoader {
     }
 
     protected void setHost(String host) {
-        this.host = host;
+        ContentLoader.host = host;
     }
 
     protected String getPort() {
@@ -174,7 +173,7 @@ public abstract class ContentLoader {
     }
 
     protected  void setPort(String port) {
-        this.port = port;
+        ContentLoader.port = port;
     }
 
     protected String getDatabaseName() {
@@ -182,7 +181,7 @@ public abstract class ContentLoader {
     }
 
     protected void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
+        ContentLoader.databaseName = databaseName;
     }
 
     protected String getUserName() {
@@ -190,7 +189,7 @@ public abstract class ContentLoader {
     }
 
     protected void setUserName(String userName) {
-        this.userName = userName;
+        ContentLoader.userName = userName;
     }
 
     protected String getPassword() {
@@ -198,7 +197,7 @@ public abstract class ContentLoader {
     }
 
     protected void setPassword(String password) {
-        this.password = password;
+        ContentLoader.password = password;
     }
 
 
