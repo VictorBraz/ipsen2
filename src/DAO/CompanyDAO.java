@@ -49,7 +49,7 @@ public class CompanyDAO extends DAO {
      */
     public void deleteCompany(int id){
         System.out.println(id);
-        String sql = "DELETE FROM company WHERE companyid=?";
+        String sql = "DELETE FROM company WHERE id=?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -140,7 +140,7 @@ public class CompanyDAO extends DAO {
      */
     private void updateCompanyQuery(int companyID, Company company)throws Exception{
         String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?, tag=?" +
-                "WHERE companyid =?";
+                "WHERE id =?";
         PreparedStatement stmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = stmt.getGeneratedKeys();
         while(resultSet.next()){
@@ -157,7 +157,7 @@ public class CompanyDAO extends DAO {
                     System.out.print("Company updated successfully!");
                 }
             }else
-                System.out.println("No matching companyID found!");
+                System.out.println("No matching ID found!");
         }
         stmt.close();
 

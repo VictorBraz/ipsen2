@@ -94,7 +94,7 @@ public class StudentDAO extends DAO {
     }
 
     private void deleteStudentQuery(int studentID)throws SQLException{
-        String sql = "DELETE FROM Student WHERE studentID=?";
+        String sql = "DELETE FROM Student WHERE id=?";
 //        String sql2 = "DELETE FROM Address WHERE addressID=?";
         //sql 3 note
         //sql 4 documents
