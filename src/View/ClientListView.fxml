@@ -12,17 +12,14 @@
    <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
-            <TableColumn fx:id="checkBoxColumn" prefWidth="49.000030517578125" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="81.99996948242188" text="Voornaam" />
-          <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" prefWidth="114.0" text="Geboortedatum" />
-            <TableColumn fx:id="adresColumn" minWidth="3.0" prefWidth="164.0" text="Adres" />
-            <TableColumn fx:id="zipCodeColumn" prefWidth="100.0" text="Postcode" />
-            <TableColumn fx:id="cityColum" prefWidth="173.0" text="Woonplaats" />
-            <TableColumn fx:id="emailColumn" prefWidth="213.0" text="Email" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="156.0" text="Studie" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="120.0" text="Telefoon" />
-            <TableColumn fx:id="clientIdColumn" minWidth="0.0" prefWidth="120.0" text="clientid" />
+            <TableColumn fx:id="checkBoxColumn" prefWidth="50.000030517578125" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="173.99996948242188" text="Voornaam" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="225.0" text="Achternaam" />
+            <TableColumn fx:id="birthDateColumn" prefWidth="137.0" text="Geboortedatum" />
+            <TableColumn fx:id="emailColumn" prefWidth="289.0" text="Email" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="220.0" text="Studie" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="174.0" text="Telefoon" />
+            <TableColumn fx:id="clientIdColumn" minWidth="0.0" prefWidth="225.0" text="Telefoon" />
         </columns>
       </TableView>
       <Group layoutX="862.0" layoutY="680.0" />

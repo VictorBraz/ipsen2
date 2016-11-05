@@ -51,7 +51,7 @@ public class AccountDAO extends DAO{
             stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ResultSet resultSet = stmt.getGeneratedKeys();
             while(resultSet.next()){
-                if(resultSet.equals(account.getUserId())){
+                if(resultSet.equals(account.getId())){
                     stmt.setString(1, account.getUserName());
                     stmt.setString(2, account.getPassword());
                     stmt.setInt(3, account.getRightName());
@@ -96,7 +96,7 @@ public class AccountDAO extends DAO{
         stmt.setString(1, account.getUserName());
         stmt.setString(2, account.getPassword());
         stmt.setInt(3, account.getRightName());
-        stmt.setInt(4, account.getUserId());
+        stmt.setInt(4, account.getId());
 
         int rowInserted = stmt.executeUpdate();
         if (rowInserted > 0){

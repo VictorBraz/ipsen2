@@ -7,8 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -18,20 +21,39 @@ import java.util.ResourceBundle;
 
 public abstract class ContentLoader {
 
+    private static String host;
+    private static String port;
+    private static String databaseName;
+    private static String userName;
+    private static String password;
+
     private static MainFrameController mainController;
     /**
      * The constant primaryStage.
      */
     public static Stage primaryStage;
     private static FXMLLoader loader;
-    /**
-     * The constant eventId.
-     */
-    public static int eventId;
+
     /**
      * The constant lastWindow.
      */
     public static String lastWindow;
+
+    public ContentLoader() {
+        InputStream in = ContentLoader.class.getResourceAsStream("/resources/database.properties");
+        Properties config = new Properties();
+        try {
+            config.load(in);
+            setHost(config.getProperty("host"));
+            setPort(config.getProperty("port"));
+            setDatabaseName(config.getProperty("databaseName"));
+            setUserName(config.getProperty("userName"));
+            setPassword(config.getProperty("password"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Sets main controller.
@@ -132,6 +154,51 @@ public abstract class ContentLoader {
      */
     public void setMainFrameTitle(String title){
         mainController.setTitle(title);
+    }
+
+
+
+
+
+
+    protected String getHost() {
+        return host;
+    }
+
+    protected void setHost(String host) {
+        this.host = host;
+    }
+
+    protected String getPort() {
+        return port;
+    }
+
+    protected  void setPort(String port) {
+        this.port = port;
+    }
+
+    protected String getDatabaseName() {
+        return databaseName;
+    }
+
+    protected void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
+    }
+
+    protected String getUserName() {
+        return userName;
+    }
+
+    protected void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    protected String getPassword() {
+        return password;
+    }
+
+    protected void setPassword(String password) {
+        this.password = password;
     }
 
 
