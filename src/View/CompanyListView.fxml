@@ -27,7 +27,7 @@
       <Group layoutX="862.0" layoutY="680.0" />
       <Pane layoutX="1175.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
          <children>
-            <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../mediaMap/zoominButton.png" />
                </image>
@@ -36,7 +36,7 @@
       </Pane>
        <Pane layoutX="1245.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
          <children>
-               <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                    <image>
                        <Image url="@../mediaMap/deleteButton.png" />
                    </image>
@@ -45,7 +45,7 @@
        </Pane>
        <Pane layoutX="1105.0" layoutY="700.0" onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
          <children>
-               <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                    <image>
                        <Image url="@../mediaMap/AddButton.png" />
                    </image>

@@ -5,6 +5,7 @@ import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import Model.Client;
+import Model.Messaging;
 import Model.TableViewItem;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
@@ -67,7 +68,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
             System.out.println(selectedRows.toString());
             addContent(resources.getString("CLIENTS"));
         } else {
-            System.out.println("geen client geselecteerd");
+            Messaging message = new Messaging();
+            message.loadDialog();
+
         }
     }
 
@@ -125,8 +128,10 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     public void openEditMenu() {
         if (this.selectedClientID != 0) {
             addContent(new EditClientController(selectedClientID), resources.getString("CLIENT_EDIT_VIEW"));
+        } else {
 
         }
+
 
     }
 

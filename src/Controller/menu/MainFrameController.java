@@ -38,6 +38,8 @@ public class MainFrameController extends ContentLoader implements Initializable 
     private ResourceBundle resources;
 
 
+
+
     public void setTitle(String titel){
         titelLabel.setText(titel);
     }
@@ -104,6 +106,7 @@ public class MainFrameController extends ContentLoader implements Initializable 
             }
         });
     }
+
 
     private void closeNavMenu() {
         contentCover.setDisable(true);

@@ -4,20 +4,23 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTogglePane?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="522.0" stylesheets="@../mediaMap/styles.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" />
       <Pane layoutX="1.0" layoutY="1.0" prefHeight="417.0" prefWidth="522.0" style="-fx-background-color: #ffffff;">
          <children>
             <JFXTextField fx:id="userNameTextField" focusColor="#b2ebf2" layoutX="100.0" layoutY="151.0" maxWidth="322.0" minWidth="186.0" prefHeight="46.0" prefWidth="322.0" promptText="Gebruikersnaam" />
             <JFXPasswordField fx:id="passwordTextField" focusColor="#b2ebf2" layoutX="102.0" layoutY="209.0" maxWidth="331.0" minWidth="217.0" prefHeight="46.0" prefWidth="322.0" promptText="Wachtwoord" />
-            <JFXButton fx:id="loginButton" buttonType="RAISED" defaultButton="true" layoutX="307.0" layoutY="284.0" onAction="#cmdLogin" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: #00BCD4;" text="Inloggen" textFill="WHITE" />
-            <JFXButton fx:id="forgotPasswordButton" layoutX="104.0" layoutY="288.0" text="Wachtwoord vergeten?" textFill="#00bcd4" />
+            <JFXButton fx:id="loginButton" buttonType="RAISED" defaultButton="true" layoutX="307.0" layoutY="284.0" onAction="#cmdLogin" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: #00BCD4; -fx-cursor: hand;" text="Inloggen" textFill="WHITE" />
+            <JFXButton fx:id="forgotPasswordButton" layoutX="104.0" layoutY="288.0" onMouseClicked="#forgotPasswordLink" style="-fx-cursor: hand;" text="Wachtwoord vergeten?" textFill="#00bcd4" />
             <JFXTogglePane layoutX="73.0" layoutY="52.0" prefWidth="259.0" />
             <Pane layoutY="-16.0" prefHeight="136.0" prefWidth="522.0" style="-fx-background-color: #00BCD4;">
                <children>
@@ -29,6 +32,29 @@
                </children>
                <effect>
                   <DropShadow blurType="GAUSSIAN" height="17.89" radius="9.2225" />
+               </effect>
+            </Pane>
+            <Pane fx:id="forgotPasswordAlert" layoutX="45.0" layoutY="148.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Label layoutX="17.0" layoutY="-6.0" onMouseClicked="#forgotPasswordLink" prefHeight="82.0" prefWidth="259.0" text="Wachtwoord vergeten?" textOverrun="CLIP">
+                     <font>
+                        <Font name="Roboto" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="17.0" layoutY="35.0" prefHeight="144.0" prefWidth="259.0" text="Neem Contact op met &#10;de beheerder van de&#10;applicatie om je wachtwoord&#10;op te vragen." textFill="#979797" textOverrun="CLIP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <Group />
+               </children>
+               <effect>
+                  <DropShadow />
                </effect>
             </Pane>
          </children>

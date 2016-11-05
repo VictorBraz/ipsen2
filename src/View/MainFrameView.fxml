@@ -34,7 +34,7 @@
             </Pane>
             <Pane layoutX="1309.0" layoutY="17.0" styleClass="buttonWithoutHover">
                <children>
-                  <ImageView fx:id="closeButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="closeButton" fitHeight="43.0" fitWidth="43.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../mediaMap/CloseButton.png" />
                      </image>
@@ -42,7 +42,7 @@
                </children></Pane>
             <Pane layoutX="1263.0" layoutY="21.0" styleClass="buttonWithoutHover">
                <children>
-                  <ImageView fx:id="minimizeButton" fitHeight="32.0" fitWidth="36.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="minimizeButton" fitHeight="32.0" fitWidth="36.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../mediaMap/MinimizeButton.png" />
                      </image>
@@ -50,7 +50,7 @@
                </children></Pane>
             <Pane layoutX="34.0" layoutY="16.0" styleClass="buttonWithoutHover">
                <children>
-                  <ImageView fx:id="menuButton" fitHeight="67.0" fitWidth="57.0" layoutX="-14.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="menuButton" fitHeight="67.0" fitWidth="57.0" layoutX="-14.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../mediaMap/MenuIcon.png" />
                      </image>
@@ -69,7 +69,7 @@
                   <Image url="@../mediaMap/NavigatieMenu.png" />
                </image>
             </ImageView>
-            <Pane fx:id="homeNav" layoutX="1.0" onMouseClicked="#handleNavButton" prefHeight="64.0" prefWidth="264.0" styleClass="pane">
+            <Pane fx:id="homeNav" layoutX="1.0" onMouseClicked="#handleNavButton" prefHeight="64.0" prefWidth="264.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="85.0" layoutY="20.0" text="Home" textFill="WHITE">
                      <font>
@@ -83,7 +83,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="studentsNav" layoutY="71.0" onMouseClicked="#handleNavButton" prefHeight="67.0" prefWidth="266.0" styleClass="pane">
+            <Pane fx:id="studentsNav" layoutY="71.0" onMouseClicked="#handleNavButton" prefHeight="67.0" prefWidth="266.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="86.0" layoutY="21.0" prefHeight="32.0" prefWidth="109.0" text="Studenten" textFill="WHITE">
                      <font>
@@ -97,7 +97,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="clientsNav" layoutX="-3.0" layoutY="138.0" onMouseClicked="#handleNavButton" prefHeight="60.0" prefWidth="268.0" styleClass="pane">
+            <Pane fx:id="clientsNav" layoutX="-3.0" layoutY="138.0" onMouseClicked="#handleNavButton" prefHeight="60.0" prefWidth="268.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="86.0" layoutY="20.0" text="Clienten" textFill="WHITE">
                      <font>
@@ -111,7 +111,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="companiesNav" layoutY="213.0" onMouseClicked="#handleNavButton" prefHeight="52.0" prefWidth="264.0" styleClass="pane">
+            <Pane fx:id="companiesNav" layoutY="213.0" onMouseClicked="#handleNavButton" prefHeight="52.0" prefWidth="264.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="84.0" layoutY="11.0" text="Bedrijven" textFill="WHITE">
                      <font>
@@ -125,7 +125,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="projectsNav" layoutX="1.0" layoutY="278.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" styleClass="pane">
+            <Pane fx:id="projectsNav" layoutX="1.0" layoutY="278.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="82.0" layoutY="13.0" text="Projecten" textFill="WHITE">
                      <font>
@@ -139,7 +139,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="projectsNav1" layoutX="1.0" layoutY="350.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" styleClass="pane">
+            <Pane fx:id="searchNav" layoutX="1.0" layoutY="350.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="82.0" layoutY="13.0" text="Zoeken" textFill="WHITE">
                      <font>
@@ -153,7 +153,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="projectsNav11" layoutX="1.0" layoutY="425.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" styleClass="pane">
+            <Pane fx:id="settingsNav" layoutX="1.0" layoutY="425.0" onMouseClicked="#handleNavButton" prefHeight="58.0" prefWidth="263.0" style="-fx-cursor: hand;" styleClass="pane">
                <children>
                   <Label layoutX="82.0" layoutY="13.0" text="Instellingen" textFill="WHITE">
                      <font>
