@@ -73,7 +73,6 @@ public class ClientDAO extends DAO {
             }
         }
         return clients;
-
     }
 
     /**
@@ -109,15 +108,7 @@ public class ClientDAO extends DAO {
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setInt(1, clientID);
         statement.executeUpdate();
-
-//        while (keyResultSet.next()) {
-//            if(keyResultSet.equals(clientID)) {
-//                int rowsDeleted = statement.executeUpdate();
-//                if(rowsDeleted > 0) {
-//                    System.out.println("A Client was deleted succesfully");
-//                }
-//            }
-//        }
+        statement.close();
     }
 
     private Client selectClientQuery(int clientID) throws SQLException{
@@ -138,6 +129,7 @@ public class ClientDAO extends DAO {
                 client.setTag(result.getString(8));
             }
         }
+        statement.close();
         return client;
     }
 
@@ -145,15 +137,14 @@ public class ClientDAO extends DAO {
         ArrayList<Client> clients = new ArrayList<Client>();
         String sql = "SELECT id, clientaddressid, firstname," +
                 " lastname, birthdate, study, email, phonenumber, tag FROM client";
+
         try {
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Client client = new Client();
-
                 client.setId(result.getInt(1));
-
                 client.setFirstName(result.getString(3));
                 client.setLastName(result.getString(4));
                 client.setBirthDate(result.getString(5));
@@ -164,6 +155,7 @@ public class ClientDAO extends DAO {
                 client.setTag(result.getString(9));
 
                 clients.add(client);
+                statement.closeOnCompletion();
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -187,22 +179,23 @@ public class ClientDAO extends DAO {
         statement.setString(8, client.getTag());
 
         int rowsInserted = statement.executeUpdate();
-
         ResultSet rs = statement.getGeneratedKeys();
+
         if (rs.next()) {
             int id = rs.getInt(1);
             client.setId(id);
         }
-
         if(rowsInserted > 0) {
             System.out.println("A new document was inserted succesfully!");
         }
+        statement.close();
         return client;
     }
 
     private void updateClientQuery(int clientID, Client client) throws Exception {
         String sql = "UPDATE client SET clientaddressid=?, firstname=?, lastname=?, " +
                 "birthdate=?, study=?, email=?, phonenumber=?, tag=? WHERE clientid=?";
+
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ResultSet keyResultSet = statement.getGeneratedKeys();
         while (keyResultSet.next()) {
@@ -217,9 +210,7 @@ public class ClientDAO extends DAO {
                 statement.setString(8, client.getTag());
 
                 int rowsUpdated = statement.executeUpdate();
-                if (rowsUpdated > 0) {
-                    System.out.println("An existing client was updated successfully!");
-                }
+                statement.close();
             }
         }
     }
