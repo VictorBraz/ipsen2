@@ -63,7 +63,7 @@ public class StudentDAO extends DAO {
     }
 
     private void updateStudentQuery(Student student) throws SQLException{
-        String sql = "UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,AddressID=?, tag=? WHERE id=?";
+        String sql = "UPDATE Student SET firstName=?, lastName=?, birthdate=?, study=?, email=?, phoneNumber=?,studentaddressID=?, tag=? WHERE id=?";
         PreparedStatement statement = conn.prepareStatement(sql);
 
         statement.setString(1, student.getFirstName());

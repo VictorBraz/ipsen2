@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -78,11 +79,12 @@ public class StudentController extends ContentLoader implements Initializable, T
     }
 
     @FXML
-    void handleZoominButton(MouseEvent event) {
-        EditStudentController editStudentController = new EditStudentController();
-        editStudentController.setSelectedItem(selectedStudentID);
-        addContent(editStudentController, resources.getString("NEW_STUDENT_DIALOG"));
-
+    void handleZoominButton(MouseEvent event){
+        ArrayList <EditStudentController> controller = new ArrayList<>();
+        controller.add(new EditStudentController());
+        controller.get(0).setSelectedItem(selectedStudentID);
+        addContent(controller.get(0), resources.getString("NEW_STUDENT_DIALOG"));
+        controller.remove(true);
     }
 
 
@@ -94,7 +96,7 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     @Override
     public void setSelectedItem(int selectedItemId) {
-
+        this.selectedStudentID = selectedItemId;
     }
 
     @Override
