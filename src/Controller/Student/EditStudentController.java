@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -57,7 +58,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
-    @FXML private TableColumn documentIDColumn;
+    @FXML private TableColumn fileIDColumn;
     @FXML private TableColumn fileNameColumn;
 
     @FXML private JFXButton cancelButton;
@@ -80,9 +81,10 @@ public class EditStudentController extends ContentLoader implements Initializabl
     private ArrayList<Integer> selectedRows;
     private JFXCheckBox selectAllCheckBox;
 
+
+
     private void fillFields(){
         currentStudent = studentDAO.selectStudent(id);
-
         firstNameTextField.setText(currentStudent.getFirstName());
         lastNameTextField.setText(currentStudent.getLastName());
         birthDateTextfield.setText(currentStudent.getBirthDate());
@@ -97,8 +99,6 @@ public class EditStudentController extends ContentLoader implements Initializabl
         try {
             currentNote = noteDAO.selectNote(currentStudent.getId());
             currentDocuments = documentDAO.selectAllDocuments(currentStudent.getId());
-
-            System.out.println(currentStudent.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e){
@@ -124,8 +124,8 @@ public class EditStudentController extends ContentLoader implements Initializabl
         tagsTextField.setEditable(editBoolean);
         fileAddButton.setDisable(!editBoolean);
         fileAddButton.setVisible(editBoolean);
-        deleteFileButton.setDisable(!editBoolean);
-        deleteFileButton.setVisible(editBoolean);
+        deleteFileButton.setDisable(editBoolean);
+        deleteFileButton.setVisible(!editBoolean);
         cancelButton.setDisable(!editBoolean);
         cancelButton.setVisible(editBoolean);
         submitButton.setDisable(!editBoolean);
@@ -163,13 +163,12 @@ public class EditStudentController extends ContentLoader implements Initializabl
     }
 
     @FXML
-    void handleAddFileButton(MouseEvent event) throws IOException {
+    void handleAddFileButton(MouseEvent event) throws IOException, SQLException {
         Document document = new Document();
-
-        FileChooser fileChooser = new FileChooser();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
@@ -180,8 +179,12 @@ public class EditStudentController extends ContentLoader implements Initializabl
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
+            document.setOwnerID(currentStudent.getId());
+            documentDAO.addDocument(document);
         }
-        refreshTable();
+        currentDocuments = documentDAO.selectAllDocuments(currentStudent.getId());
+        documentData = FXCollections.observableArrayList(currentDocuments);
+        showTable();
     }
 
     private void showTable() {
@@ -189,16 +192,10 @@ public class EditStudentController extends ContentLoader implements Initializabl
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
         System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
-    }
-
-    private void refreshTable(){
-        tableView.setItems(null);
-        tableView.setItems(documentData);
-        System.out.println("Docdate " + documentData.size());
-        tableView.refresh();
     }
 
     @FXML
@@ -224,32 +221,48 @@ public class EditStudentController extends ContentLoader implements Initializabl
     }
 
     @FXML
-    void handleDeleteFileButton(MouseEvent event) throws IOException {
-//        System.out.print(selectedRows.size());
-//        if (selectedRows.size() != 0){
-//            System.out.println(selectedRows.toString());
-//            selectedRows.forEach(integer -> {
-//                currentDocuments.remove(integer);
-//                documentData.remove(integer);
-//                System.out.println("handleDelete docsize " + documentData.size());
-//                System.out.println("handleDelete currdoc size " + currentDocuments.size());
-//                System.out.println("row " + integer);
-//                System.out.println("selected rows" + selectedRows.size());
-//            });
-//
-//        }
-//        documentData.clear();
-//        documentData = FXCollections.observableArrayList(currentDocuments);
-//        refreshTable();
-//        Document document = new Document();
-        currentDocuments.clear();
-        documentData = FXCollections.observableArrayList(currentDocuments);
-        showTable();
+    void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
+        System.out.println(selectedRows);
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    documentDAO.deleteDocument(row);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+            ArrayList <EditStudentController> controller= new ArrayList<>();
+            controller.add(new EditStudentController());
+            controller.get(0).setSelectedItem(currentStudent.getId());
+            addContent(controller.get(0),resources.getString("NEW_STUDENT_DIALOG"));
+            controller.remove(true);
+            currentDocuments = documentDAO.selectAllDocuments(currentStudent.getId());
+            documentData = FXCollections.observableArrayList(currentDocuments);
+            showTable();
+        }
     }
 
     @FXML
-    void handleOpenFileButton(MouseEvent event){
+    void handleOpenFileButton(MouseEvent event) throws IOException {
+        if (selectedRows.size() != 0) {
 
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    File file = documentDAO.selectDocument(row).getFile();
+                    System.out.println("file: " + file.toString());
+                    Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+
+//        myFile.delete();
     }
 
     @Override
@@ -259,7 +272,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
     @Override
     public void setSelectedItem(int selectedItemId) {
-        id = selectedItemId;
+        this.id = selectedItemId;
     }
 
     @Override

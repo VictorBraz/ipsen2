@@ -8,7 +8,7 @@ import java.io.*;
  * Created by Negin Nafissi on 27-10-2016.
  */
 public class Document extends TableViewItem {
-    private int documentID;
+    private int id;
     private String documentName;
     private int ownerID;
     private String date;
@@ -20,10 +20,10 @@ public class Document extends TableViewItem {
     public Document() throws IOException {
     }
 
-    public Document(int documentID, String documentName, int ownerID,
+    public Document(int id, String documentName, int ownerID,
                     String date, String ownerName, File file) throws IOException {
 
-        this.documentID = documentID;
+        this.id = id;
         this.documentName = documentName;
         this.ownerID = ownerID;
         this.date = date;
@@ -31,12 +31,12 @@ public class Document extends TableViewItem {
         this.file = file;
     }
 
-    public int getDocumentID() {
-        return documentID;
+    public int getId() {
+        return id;
     }
 
-    public void setDocumentID(int documentID) {
-        this.documentID = documentID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDocumentName() {

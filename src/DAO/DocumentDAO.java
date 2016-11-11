@@ -1,6 +1,9 @@
 package DAO;
 
 import Model.Document;
+import org.postgresql.largeobject.LargeObject;
+import sun.misc.IOUtils;
+
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class DocumentDAO extends DAO{
     private File file;
     private FileInputStream fis;
     private String outputStream;
+    File myFile;
 
     public DocumentDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
@@ -32,14 +36,14 @@ public class DocumentDAO extends DAO{
         return documents;
     }
 
-    public Document selectDocument(int documentID) throws SQLException, IOException {
-        Document document = selectDocumentQuery(documentID);
+    public Document selectDocument(int id) throws SQLException, IOException {
+        Document document = selectDocumentQuery(id);
         return document;
     }
 
-    public void deleteDocument(int documentID) throws SQLException{
+    public void deleteDocument(int id) throws SQLException{
         try {
-            deleteDocumentQuery(documentID);
+            deleteDocumentQuery(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,13 +59,14 @@ public class DocumentDAO extends DAO{
         statement.setString(3, document.getDate());
         if (file != null){
             fis = new FileInputStream(file);
-            statement.setBinaryStream(4, fis);
-            fis.close();
+            statement.setBinaryStream(4, fis, (int)file.length());
+
         } else {
             statement.setNull(4, Types.OTHER);
         }
         statement.executeUpdate();
         statement.close();
+        fis.close();
     }
 
 
@@ -74,6 +79,7 @@ public class DocumentDAO extends DAO{
 
             while (result.next()) {
                 Document document = new Document();
+                document.setId(result.getInt(1));
                 document.setDocumentName(result.getString(3));
                 documents.add(document);
             }
@@ -82,41 +88,44 @@ public class DocumentDAO extends DAO{
         return documents;
     }
 
-    private Document selectDocumentQuery(int documentID) throws SQLException, IOException {
-        String sql = "SELECT * FROM document WHERE documenttid = ?";
+    private Document selectDocumentQuery(int id) throws SQLException, IOException {
+        String sql = "SELECT * FROM document WHERE id = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1,id);
         ResultSet result = statement.executeQuery();
         Document document = null;
 
+        myFile = File.createTempFile("test",".pdf");
+        InputStream input;
+        FileOutputStream output = new FileOutputStream(myFile);
+        byte[] buffer = new byte[1024];
+
         while(result.next()) {
-            if(result.equals(document)) {
-                document = new Document();
-                document.setDocumentName(result.getString(1));
-                document.setOwnerID(result.getInt(2));
-                document.setDate(result.getString(3));
-                InputStream input = result.getBinaryStream(4);
-                file = new File("src/test.pdf");
-                FileOutputStream fos = new FileOutputStream(file);
-                byte[] buffer = new byte[1];
-                while (input.read(buffer) > 0) {
-                    fos.write(buffer);
-                }
-                fos.close();
+            document = new Document();
+            document.setDocumentName(result.getString(1));
+            document.setOwnerID(result.getInt(2));
+            document.setDate(result.getString(3));
+            input = result.getBinaryStream(5);
+            while (input.read(buffer) > 0){
+                output.write(buffer);
             }
         }
+
+        document.setFile(myFile);
+        output.close();
         statement.close();
         return document;
     }
 
 
-    private void deleteDocumentQuery(int documentID) throws SQLException {
-        String sql = "DELETE FROM document WHERE documentid=?";
+    private void deleteDocumentQuery(int id) throws SQLException {
+        String sql = "DELETE FROM document WHERE id=?";
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet keyResultSet = statement.getGeneratedKeys();
 
-        statement.setInt(1,documentID);
+        statement.setInt(1,id);
         while (keyResultSet.next()) {
-            if(keyResultSet.equals(documentID)) {
+            if(keyResultSet.equals(id)) {
                 int rowsDeleted = statement.executeUpdate();
                 if(rowsDeleted > 0) {
                     System.out.println("A document was deleted succesfully");
@@ -126,4 +135,6 @@ public class DocumentDAO extends DAO{
         statement.executeUpdate();
         statement.close();
     }
+
+
 }
