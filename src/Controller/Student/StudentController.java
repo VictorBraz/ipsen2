@@ -17,8 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,6 +33,7 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
     @FXML private TableColumn tagColumn;
+    @FXML
 
     private int selectedStudentID;
     private ObservableList<TableViewItem> studentData;
