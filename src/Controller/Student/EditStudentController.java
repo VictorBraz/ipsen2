@@ -76,6 +76,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
     private void fillFields(){
         currentStudent = studentDAO.selectStudent(id);
+
         firstNameTextField.setText(currentStudent.getFirstName());
         lastNameTextField.setText(currentStudent.getLastName());
         birthDateTextfield.setText(currentStudent.getBirthDate());
