@@ -67,15 +67,17 @@ public class DocumentDAO extends DAO{
 
     public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = new ArrayList<Document>();
-            String sql = "SELECT documentname FROM document WHERE ownerid = ?";
+            String sql = "SELECT * FROM document WHERE ownerid = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1,ownerID);
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
                 Document document = new Document();
-                document.setDocumentName(result.getString(1));
+                document.setDocumentName(result.getString(3));
+                documents.add(document);
             }
+            System.out.println(documents.size());
         statement.close();
         return documents;
     }
@@ -112,6 +114,7 @@ public class DocumentDAO extends DAO{
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet keyResultSet = statement.getGeneratedKeys();
 
+        statement.setInt(1,documentID);
         while (keyResultSet.next()) {
             if(keyResultSet.equals(documentID)) {
                 int rowsDeleted = statement.executeUpdate();

@@ -35,6 +35,7 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
     @FXML private TableColumn tagColumn;
+    @FXML private TableColumn studentIDColumn;
 
     private int selectedStudentID;
     private ObservableList<TableViewItem> studentData;
@@ -57,6 +58,7 @@ public class StudentController extends ContentLoader implements Initializable, T
         studyColum.setCellValueFactory(new PropertyValueFactory<Student, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("phoneNumber"));
         tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
+        studentIDColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("studentID"));
 
         tableView.setItems(studentData);
     }
@@ -76,6 +78,11 @@ public class StudentController extends ContentLoader implements Initializable, T
 //        if(this.selectedStudentID != 0){
 //            deleteStudent();
 //        }
+    }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event){
+
     }
 
     @FXML

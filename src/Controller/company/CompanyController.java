@@ -72,6 +72,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleZoominButton(MouseEvent event) {
+
         addContent(resources.getString("EDIT_COMPANY_DIALOG"));
     }
 
