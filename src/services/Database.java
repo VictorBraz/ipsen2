@@ -1,6 +1,6 @@
 package services;
 
-import contentloader.ContentLoader;
+import contentloader.PropertiesLoader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,23 +12,15 @@ import java.util.Properties;
  * @author Victor
  * Created by Victor on 12-9-2016.
  */
-public class Database extends ContentLoader {
+public class Database extends PropertiesLoader{
     /**
      * @author Victor
      */
-    private volatile static Database connectionInstance;
-
-    private String host;
-    private String port;
-    private String databaseName;
-    private String userName;
-    private String password;
+    private static Database connectionInstance;
 
 
-    public Database() {
+    private Database() {
         super();
-
-
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -69,12 +61,7 @@ public class Database extends ContentLoader {
 
         String URL = "jdbc:postgresql://"+ getHost() +":" + getPort() +  "/" + getDatabaseName() +"";
         Properties info = new Properties();
-        info.put("user", getUserName());
-        info.put("password", getPassword());
-        Connection conn = DriverManager.getConnection(URL, info);
-//        if (conn != null) {
-//            System.out.println("Succesfully connected to the database.");
-//        }
+        Connection conn = DriverManager.getConnection(URL, getUserName(), getPassword());
         return conn;
     }
 

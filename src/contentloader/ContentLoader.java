@@ -8,9 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -20,36 +18,12 @@ import java.util.ResourceBundle;
 
 public abstract class ContentLoader {
 
-    private static String host;
-    private static String port;
-    private static String databaseName;
-    private static String userName;
-    private static String password;
-
     private static MainFrameController mainController;
     /**
      * The constant primaryStage.
      */
     protected static Stage primaryStage;
     private static FXMLLoader loader;
-
-
-
-    public ContentLoader() {
-        InputStream in = ContentLoader.class.getResourceAsStream("/resources/database.properties");
-        Properties config = new Properties();
-        try {
-            config.load(in);
-            setHost(config.getProperty("host"));
-            setPort(config.getProperty("port"));
-            setDatabaseName(config.getProperty("databaseName"));
-            setUserName(config.getProperty("userName"));
-            setPassword(config.getProperty("password"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Sets main controller.
@@ -66,7 +40,6 @@ public abstract class ContentLoader {
      * @param fxml the fxml
      */
     public static void addContent(String fxml) {
-
         mainController.removeAllContent();
 
         try {
@@ -153,51 +126,6 @@ public abstract class ContentLoader {
 
     protected void setHamburgerMenuVisible(boolean editBoolean) {
         mainController.hamburgerMenuVisible(editBoolean);
-    }
-
-
-
-
-
-
-    protected String getHost() {
-        return host;
-    }
-
-    protected void setHost(String host) {
-        ContentLoader.host = host;
-    }
-
-    protected String getPort() {
-        return port;
-    }
-
-    protected  void setPort(String port) {
-        ContentLoader.port = port;
-    }
-
-    protected String getDatabaseName() {
-        return databaseName;
-    }
-
-    protected void setDatabaseName(String databaseName) {
-        ContentLoader.databaseName = databaseName;
-    }
-
-    protected String getUserName() {
-        return userName;
-    }
-
-    protected void setUserName(String userName) {
-        ContentLoader.userName = userName;
-    }
-
-    protected String getPassword() {
-        return password;
-    }
-
-    protected void setPassword(String password) {
-        ContentLoader.password = password;
     }
 
 
