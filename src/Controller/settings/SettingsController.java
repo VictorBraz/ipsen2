@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import contentloader.ContentLoader;
+import contentloader.PropertiesLoader;
+import contentloader.PropertiesLoaderInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,6 +47,7 @@ public class SettingsController extends ContentLoader implements Initializable, 
     private ArrayList<Integer> selectedRows;
     private ArrayList<Account> accountdata;
     private JFXCheckBox selectAllCheckBox;
+    PropertiesLoaderInterface properties;
 
     private Database database;
 
@@ -88,11 +91,11 @@ public class SettingsController extends ContentLoader implements Initializable, 
     }
 
     private void fillFields() {
-        hostAddressTextField.setText(getHost());
-        portNumberTextField.setText(getPort());
-        serverNameTextfield.setText(getDatabaseName());
-        userNameTextField.setText(getUserName());
-        passwordTextField.setText(getPassword());
+        hostAddressTextField.setText(properties.getHost());
+        portNumberTextField.setText(properties.getPort());
+        serverNameTextfield.setText(properties.getDatabaseName());
+        userNameTextField.setText(properties.getUserName());
+        passwordTextField.setText(properties.getPassword());
 
 
     }
@@ -110,11 +113,11 @@ public class SettingsController extends ContentLoader implements Initializable, 
     }
 
     private void updateSettings() {
-        setHost(hostAddressTextField.getText());
-        setPort(portNumberTextField.getText());
-        setDatabaseName(serverNameTextfield.getText());
-        setUserName(userNameTextField.getText());
-        setPassword(passwordTextField.getText());
+        properties.setHost(hostAddressTextField.getText());
+        properties.setPort(portNumberTextField.getText());
+        properties.setDatabaseName(serverNameTextfield.getText());
+        properties.setUserName(userNameTextField.getText());
+        properties.setPassword(passwordTextField.getText());
     }
 
 
@@ -139,6 +142,7 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
         this.resources = resources;
         setMainFrameTitle(resources.getString("SETTINGS_TITLE"));
+        properties = new PropertiesLoader();
 
 
 
