@@ -37,6 +37,7 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
     @FXML private TableColumn tagColumn;
+    @FXML private TableColumn studentIDColumn;
 
     @FXML private Pane deleteAlert;
     @FXML private JFXButton confirmButton;
@@ -63,6 +64,7 @@ public class StudentController extends ContentLoader implements Initializable, T
         studyColum.setCellValueFactory(new PropertyValueFactory<Student, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("phoneNumber"));
         tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
+        studentIDColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("studentID"));
 
         tableView.setItems(studentData);
     }
@@ -87,6 +89,11 @@ public class StudentController extends ContentLoader implements Initializable, T
             animation.play();
 
         }
+    }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event){
+
     }
 
     @FXML

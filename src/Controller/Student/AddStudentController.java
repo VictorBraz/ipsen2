@@ -78,11 +78,10 @@ public class AddStudentController extends ContentLoader implements Initializable
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
-
-        FileChooser fileChooser = new FileChooser();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
@@ -140,9 +139,10 @@ public class AddStudentController extends ContentLoader implements Initializable
         note.setNoteID(noteDAO.addNote(note).getNoteID());
         System.out.println(student.getId());
 
-        for(int i= 0; i < documents.size(); i++ ) {
-            document.setOwnerID(student.getId());
-            documentDAO.addDocument(document);
+        for(int i =0; i < documents.size(); i++) {
+            documents.get(i).setOwnerID(student.getId());
+            System.out.println(documents.get(i).getOwnerID());
+            documentDAO.addDocument(documents.get(i));
         }
         documents.clear();
 
@@ -166,6 +166,10 @@ public class AddStudentController extends ContentLoader implements Initializable
         documents.clear();
         documentData = FXCollections.observableArrayList(documents);
         showTable();
+    }
+    @FXML
+    void handleOpenFileButton(MouseEvent event){
+
     }
 
     @Override

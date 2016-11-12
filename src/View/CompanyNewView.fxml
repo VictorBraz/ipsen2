@@ -13,11 +13,11 @@
 
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.company.AddCompanyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
-            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Bedrijf toevoegen">
+            <Label fx:id="bedrijfLabel" layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Bedrijf Toevoegen">
                <font>
                   <Font name="Roboto Light" size="36.0" />
                </font>
@@ -118,6 +118,7 @@
                   </JFXButton>
                </children>
             </AnchorPane>
+            <JFXButton fx:id="editButton" buttonType="RAISED" disable="true" layoutX="1127.0" layoutY="68.0" onMouseClicked="#handleEditButton" style="-fx-background-color: #00BCD4;" text="Aanpassen" textFill="WHITE" visible="false" />
          </children>
       </Pane>
    </children>

@@ -26,6 +26,7 @@
             <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="142.0" text="Telefoon" />
             <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="168.0" text="Studie" />
             <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="162.0" text="Tags" />
+            <TableColumn fx:id="studentIDColumn" minWidth="0.0" prefWidth="120.0" text="studentID" />
         </columns>
          <cursor>
             <Cursor fx:constant="HAND" />

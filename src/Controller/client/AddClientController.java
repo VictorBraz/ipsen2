@@ -165,14 +165,13 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
-        documents.clear();
-        documentData = FXCollections.observableArrayList(documents);
-        showTable();
+
     }
+
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
     }
 
     @Override
@@ -190,6 +189,7 @@ public class AddClientController extends ContentLoader implements Initializable,
             this.addressDAO = new AddressDAO();
             this.documentDAO = new DocumentDAO();
             this.noteDAO = new NoteDAO();
+
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();

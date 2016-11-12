@@ -7,7 +7,7 @@ public class Company extends TableViewItem{
 
     private int id;
     private String companyName;
-    private Address companyAddressid;
+    private Address companyAddress;
     private String contactPerson;
     private String phoneNumber;
     private String emailAddress;
@@ -21,11 +21,11 @@ public class Company extends TableViewItem{
      * @param phoneNumber
      * @param emailAddress
      */
-    public Company(int id, String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
+    public Company(int id, String companyName, Address companyAddress, String contactPerson, String phoneNumber, String emailAddress, String tag){
 
         this.id = id;
         this.companyName = companyName;
-        this.companyAddressid = companyAddressid;
+        this.companyAddress = companyAddress;
         this.contactPerson = contactPerson;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
@@ -40,10 +40,10 @@ public class Company extends TableViewItem{
      * @param phoneNumber
      * @param emailAddress
      */
-    public Company( String companyName, Address companyAddressid, String contactPerson, String phoneNumber, String emailAddress, String tag){
+    public Company(String companyName, Address companyAddress, String contactPerson, String phoneNumber, String emailAddress, String tag){
 
         this.companyName = companyName;
-        this.companyAddressid = companyAddressid;
+        this.companyAddress = companyAddress;
         this.contactPerson = contactPerson;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
@@ -53,7 +53,7 @@ public class Company extends TableViewItem{
     public Company (){
         this.id = 0;
         this.companyName = new String();
-        this.companyAddressid = new Address();
+        this.companyAddress = new Address();
         this.contactPerson = new String();
         this.emailAddress = new String();
         this.phoneNumber = new String();
@@ -94,18 +94,18 @@ public class Company extends TableViewItem{
 
     /**
      * @author Victor
-     * @return companyAddressid
+     * @return companyAddress
      */
-    public Address getCompanyAddressid() {
-        return companyAddressid;
+    public Address getCompanyAddress() {
+        return companyAddress;
     }
 
     /**
      * @author Victor
-     * @param companyAddressid
+     * @param companyAddress
      */
-    public void setCompanyAddressid(Address companyAddressid) {
-        this.companyAddressid = companyAddressid;
+    public void setCompanyAddress(Address companyAddress) {
+        this.companyAddress = companyAddress;
     }
 
     /**

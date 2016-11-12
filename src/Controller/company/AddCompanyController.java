@@ -46,6 +46,8 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+    @FXML private JFXButton editButton;
+
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
@@ -107,6 +109,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
     }
 
+
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException {
 
@@ -126,7 +129,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
             address.setCity(cityTextField.getText());
             address.setZipCode(zipCodeTextfield.getText());
             addressDAO.addAddress(address);
-            company.setCompanyAddressid(address);
+            company.setCompanyAddress(address);
             company.setTag(tagsTextField.getText());
             companyDAO.addCompany(company);
             System.out.println(company.getId());
@@ -166,6 +169,8 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
+        editButton.setVisible(false);
+        editButton.setDisable(true);
         try {
             this.companyDAO = new CompanyDAO();
             this.addressDAO = new AddressDAO();

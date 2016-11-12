@@ -16,8 +16,51 @@ public class CompanyDAO extends DAO {
     ArrayList<Company> companies;
     PreparedStatement stmt;
 
+
     public CompanyDAO() throws Exception{
         super();
+    }
+
+    public Company selectCompany(int id) {
+        Company company = new Company();
+        Address address = new Address();
+
+        String sql = "SELECT * FROM company WHERE id = ?";
+        String sqlAddress = "SELECT * FROM address WHERE addressid = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt2 = conn.prepareStatement(sqlAddress);
+            stmt.setInt(1, id);
+
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                company.setId(resultSet.getInt(1));
+                //company.setCompanyAddress(new AddressDAO().selectAddress(resultSet.getInt("companyaddressid")));
+                company.setCompanyName(resultSet.getString(3));
+                company.setContactPerson(resultSet.getString(4));
+                company.setPhoneNumber(resultSet.getString(5));
+                company.setEmailAddress((resultSet.getString(6)));
+                company.setTag(resultSet.getString(7));
+
+                stmt2.setInt(1, resultSet.getInt(2));
+                ResultSet rs = stmt2.executeQuery();
+                while (rs.next()){
+                    address.setAddressID(rs.getInt(1));
+                    address.setAddress(rs.getString(2));
+                    address.setZipCode(rs.getString(3));
+                    address.setCity(rs.getString(4));
+                }
+                company.setCompanyAddress(address);
+
+            }
+            stmt.close();
+            stmt2.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return company;
     }
 
     public void addCompany(Company company) throws Exception{
@@ -71,17 +114,22 @@ public class CompanyDAO extends DAO {
         companies = new ArrayList<>();
 
         try {
+            AddressDAO dao = new AddressDAO();
+            Address address;
             stmt = conn.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 Company company = new Company();
                 company.setId(resultSet.getInt(1));
-                company.setCompanyAddressid(new Address(resultSet.getInt("companyaddressid")));
+                address = dao.selectAddress(resultSet.getInt(2));
+                //company.setCompanyAddress(new AddressDAO().selectAddress(resultSet.getInt("companyaddressid")));
                 company.setCompanyName(resultSet.getString(3));
                 company.setContactPerson(resultSet.getString(4));
                 company.setPhoneNumber(resultSet.getString(5));
                 company.setEmailAddress((resultSet.getString(6)));
                 company.setTag(resultSet.getString(7));
+
+                company.setCompanyAddress(address);
 
                 companies.add(company);
             }
@@ -105,8 +153,8 @@ public class CompanyDAO extends DAO {
         String sql = "INSERT INTO company(companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
                 "VALUES (?,?,?,?,?,?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        stmt.setInt(1, company.getCompanyAddressid().getAddressID());
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, company.getCompanyAddress().getAddressID());
         stmt.setString(2, company.getCompanyName());
         stmt.setString(3, company.getContactPerson());
         stmt.setString(4, company.getPhoneNumber());
@@ -141,26 +189,22 @@ public class CompanyDAO extends DAO {
     private void updateCompanyQuery(int companyID, Company company)throws Exception{
         String sql = "UPDATE company SET companyaddressid=?, companyname=?, contactperson=?, phonenumber=?, email=?, tag=?" +
                 "WHERE id =?";
-        PreparedStatement stmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-        ResultSet resultSet = stmt.getGeneratedKeys();
-        while(resultSet.next()){
-            if(resultSet.equals(companyID)){
-                stmt.setInt(1, company.getCompanyAddressid().getAddressID());
-                stmt.setString(2, company.getCompanyName());
-                stmt.setString(3, company.getContactPerson());
-                stmt.setString(4, company.getPhoneNumber());
-                stmt.setString(5, company.getEmailAddress());
-                stmt.setString(6, company.getTag());
+        PreparedStatement stmt = conn.prepareStatement(sql);
 
-                int rowUpdated = stmt.executeUpdate();
-                if(rowUpdated > 0){
-                    System.out.print("Company updated successfully!");
-                }
-            }else
-                System.out.println("No matching ID found!");
+        stmt.setInt(1, company.getCompanyAddress().getAddressID());
+        stmt.setString(2, company.getCompanyName());
+        stmt.setString(3, company.getContactPerson());
+        stmt.setString(4, company.getPhoneNumber());
+        stmt.setString(5, company.getEmailAddress());
+        stmt.setString(6, company.getTag());
+        stmt.setInt(7, company.getId());
+
+        int rowUpdated = stmt.executeUpdate();
+        if(rowUpdated > 0){
+            System.out.print("Company updated successfully!");
         }
         stmt.close();
+        }
 
-    }
 
 }

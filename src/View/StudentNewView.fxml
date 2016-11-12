@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
@@ -165,6 +165,7 @@
                     <columns>
                         <TableColumn fx:id="checkBoxColumn" prefWidth="46.0" />
                       <TableColumn fx:id="fileNameColumn" prefWidth="279.0" text="Bestandnaam" />
+                        <TableColumn fx:id="fileIDColumn" prefWidth="75.0" visible="false" />
                     </columns>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
@@ -188,6 +189,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="openFileButton" buttonType="RAISED" disable="true" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Roboto" size="15.0" />
+                     </font>
                   </JFXButton>
                </children>
             </AnchorPane>
