@@ -1,6 +1,7 @@
 
 package Controller.company;
 
+import Controller.Student.EditStudentController;
 import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
@@ -52,7 +53,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent(resources.getString("NEW_COMPANY_DIALOG"));
+        addContent(new AddCompanyController(), resources.getString("NEW_COMPANY_DIALOG"));
 
     }
 
@@ -72,7 +73,13 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleZoominButton(MouseEvent event) {
-        addContent(resources.getString("EDIT_COMPANY_DIALOG"));
+        /*ArrayList <CompanyEditController> controller = new ArrayList<>();
+        controller.add(new CompanyEditController());
+        controller.get(0).setSelectedItem(selectedCompanyID);*/
+        CompanyEditController ctrl = new CompanyEditController();
+        ctrl.setSelectedItem(selectedCompanyID);
+        addContent(ctrl, resources.getString("NEW_COMPANY_DIALOG"));
+        //controller.remove(true);
     }
 
     @Override
@@ -89,9 +96,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @Override
     public void openEditMenu() {
-        if(this.selectedCompanyID != 0){
-            addContent(resources.getString("EDIT_COMPANY_DIALOG"));
-        }
+
     }
 
     private void showTable(){
@@ -100,9 +105,9 @@ public class CompanyController extends ContentLoader implements Initializable, T
         tableViewSelectHandler.createSelectAllCheckBox();
 
         companyNameColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyName"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyAddressId"));
-        zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("zipcode"));
-        cityColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("city"));
+        //addressColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("companyAddressId"));
+        //zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("zipcode"));
+        //cityColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("city"));
         contactPersonColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("contactPerson"));
         phoneNumberColum.setCellValueFactory(new PropertyValueFactory<Company, String>("phoneNumber"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("emailAddress"));

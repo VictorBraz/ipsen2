@@ -8,20 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.company.CompanyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.company.CompanyController">
    <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
             <TableColumn fx:id="checkBoxColumn" prefWidth="50.0" />
-          <TableColumn fx:id="companyNameColumn" prefWidth="150.00003051757812" text="Bedrijfsnaam" />
-          <TableColumn fx:id="addressColumn" prefWidth="148.0" text="Adres" />
-            <TableColumn fx:id="zipCodeColumn" prefWidth="116.0" text="Postcode" />
-            <TableColumn fx:id="cityColumn" minWidth="3.0" prefWidth="153.0" text="Woonplaats" />
-            <TableColumn fx:id="contactPersonColumn" prefWidth="186.0" text="Contactpersoon" />
-            <TableColumn fx:id="phoneNumberColum" prefWidth="123.0" text="Telefoon" />
-            <TableColumn fx:id="emailColumn" prefWidth="153.0" text="Email" />
-            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="215.0" text="Tags" />
-            <TableColumn fx:id="companyIdCol" minWidth="0.0" prefWidth="120.0" text="companyId" />
+          <TableColumn fx:id="companyNameColumn" prefWidth="212.99993896484375" text="Bedrijfsnaam" />
+            <TableColumn fx:id="contactPersonColumn" prefWidth="226.0" text="Contactpersoon" />
+            <TableColumn fx:id="phoneNumberColum" prefWidth="209.0" text="Telefoon" />
+            <TableColumn fx:id="emailColumn" prefWidth="253.0" text="Email" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="319.0" text="Tags" />
+            <TableColumn fx:id="companyIdCol" minWidth="0.0" prefWidth="0.0" text="companyId" />
         </columns>
       </TableView>
       <Group layoutX="862.0" layoutY="680.0" />
