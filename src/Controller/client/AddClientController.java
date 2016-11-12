@@ -53,6 +53,7 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+    @FXML private JFXButton openFileButton;
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn<?, ?> checkBoxColumn;
     @FXML private TableColumn<Document, String> documentIDColumn;
@@ -165,8 +166,13 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
-
+        documents.clear();
+        documentData = FXCollections.observableArrayList(documents);
+        showTable();
     }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event) throws IOException {}
 
 
     @Override
@@ -184,6 +190,8 @@ public class AddClientController extends ContentLoader implements Initializable,
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
+        openFileButton.setVisible(false);
+        openFileButton.setDisable(true);
         try {
             this.clientDAO = new ClientDAO();
             this.addressDAO = new AddressDAO();

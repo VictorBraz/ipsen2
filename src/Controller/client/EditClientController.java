@@ -158,7 +158,7 @@ public class EditClientController extends ContentLoader implements Initializable
         editButton.setVisible(!editBoolean);
         editButton.setDisable(editBoolean);
         openFileButton.setVisible(editBoolean);
-        openFileButton.setVisible(!editBoolean);
+        openFileButton.setDisable(!editBoolean);
 
     }
 

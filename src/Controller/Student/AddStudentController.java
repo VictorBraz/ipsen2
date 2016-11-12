@@ -52,6 +52,7 @@ public class AddStudentController extends ContentLoader implements Initializable
     @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+    @FXML private JFXButton openFileButton;
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
@@ -187,6 +188,8 @@ public class AddStudentController extends ContentLoader implements Initializable
         this.resources = resources;
         editButton.setVisible(false);
         editButton.setDisable(true);
+        openFileButton.setVisible(false);
+        openFileButton.setDisable(true);
         try {
             this.studentDAO = new StudentDAO();
             this.addressDAO = new AddressDAO();

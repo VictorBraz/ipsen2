@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -44,8 +45,8 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
-    @FXML private JFXButton editButton;
-
+    @FXML private Pane editButton;
+    @FXML private JFXButton openFileButton;
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
@@ -108,6 +109,9 @@ public class AddCompanyController extends ContentLoader implements Initializable
         addContent(resources.getString("COMPANIES"));
 
     }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event) throws IOException {}
 
 
     @FXML
@@ -182,6 +186,8 @@ public class AddCompanyController extends ContentLoader implements Initializable
         this.resources = resources;
         editButton.setVisible(false);
         editButton.setDisable(true);
+        openFileButton.setVisible(false);
+        openFileButton.setDisable(true);
         try {
             this.companyDAO = new CompanyDAO();
             this.addressDAO = new AddressDAO();
@@ -190,6 +196,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 }
