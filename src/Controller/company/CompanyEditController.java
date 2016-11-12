@@ -21,8 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -49,8 +51,8 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     @FXML private JFXTextField tagsTextField;
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
-    @FXML private JFXButton editButton;
     @FXML private JFXButton openFileButton;
+    @FXML private Pane editButton;
 
 
     @FXML private TableView<TableViewItem> tableView;
@@ -119,14 +121,16 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         tagsTextField.setEditable(editBoolean);
         fileAddButton.setDisable(!editBoolean);
         fileAddButton.setVisible(editBoolean);
-        deleteFileButton.setDisable(!editBoolean);
-        deleteFileButton.setVisible(editBoolean);
+        deleteFileButton.setDisable(editBoolean);
+        deleteFileButton.setVisible(!editBoolean);
         cancelButton.setDisable(!editBoolean);
         cancelButton.setVisible(editBoolean);
         submitButton.setDisable(!editBoolean);
         submitButton.setVisible(editBoolean);
         editButton.setVisible(!editBoolean);
         editButton.setDisable(editBoolean);
+        openFileButton.setVisible(editBoolean);
+        openFileButton.setVisible(!editBoolean);
     }
 
     private void updateCompany(){
@@ -195,10 +199,10 @@ public class CompanyEditController extends ContentLoader implements Initializabl
                     e.printStackTrace();
                 }
             });
-            ArrayList <EditClientController> controller= new ArrayList<>();
-            controller.add(new EditClientController());
+            ArrayList <CompanyEditController> controller= new ArrayList<>();
+            controller.add(new CompanyEditController());
             controller.get(0).setSelectedItem(currentCompany.getId());
-            addContent(controller.get(0),resources.getString("NEW_STUDENT_DIALOG"));
+            addContent(controller.get(0),resources.getString("NEW_COMPANY_DIALOG"));
             controller.remove(true);
             currentDocuments = documentDAO.selectAllDocuments(currentCompany.getId());
             documentData = FXCollections.observableArrayList(currentDocuments);
@@ -226,6 +230,26 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         editable(true);
         bedrijfLabel.setText("Bedrijfsgegevens Aanpassen");
     }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event) throws IOException {
+        if (selectedRows.size() != 0) {
+
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    File file = documentDAO.selectDocument(row).getFile();
+                    System.out.println("file: " + file.toString());
+                    Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
 
 
     private void showTable() {
@@ -264,7 +288,6 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         this.resources = resources;
         fillFields();
         bedrijfLabel.setText("Bedrijfsgegevens Bekijken");
-//        openFileButton.setVisible(true);//       openFileButton.setDisable(false);
         editable(false);
 
     }

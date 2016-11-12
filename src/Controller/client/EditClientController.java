@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -56,8 +57,10 @@ public class EditClientController extends ContentLoader implements Initializable
 
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
+    @FXML private JFXButton openFileButton;
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn<?, ?> checkBoxColumn;
+    @FXML private TableColumn fileIDColumn;
     @FXML private TableColumn<Document, String> documentIDColumn;
     @FXML private TableColumn<Document, String> fileNameColumn;
 
@@ -103,11 +106,6 @@ public class EditClientController extends ContentLoader implements Initializable
         editable(false);
     }
 
-    @FXML
-    void handleDeleteFileButton(MouseEvent event){
-
-    }
-
     private void fillFields(){
         currentClient = clientDAO.selectClient(id);
 
@@ -132,7 +130,9 @@ public class EditClientController extends ContentLoader implements Initializable
             e.printStackTrace();
         }
         noteTextField.setText(currentNote.getText());
+        System.out.print(currentDocuments.size());
         documentData = FXCollections.observableArrayList(currentDocuments);
+        showTable();
 
     }
     private void editable(boolean editBoolean){
@@ -149,14 +149,16 @@ public class EditClientController extends ContentLoader implements Initializable
         tagsTextField.setEditable(editBoolean);
         fileAddButton.setDisable(!editBoolean);
         fileAddButton.setVisible(editBoolean);
-        deleteFileButton.setDisable(!editBoolean);
-        deleteFileButton.setVisible(editBoolean);
+        deleteFileButton.setDisable(editBoolean);
+        deleteFileButton.setVisible(!editBoolean);
         cancelButton.setDisable(!editBoolean);
         cancelButton.setVisible(editBoolean);
         submitButton.setDisable(!editBoolean);
         submitButton.setVisible(editBoolean);
         editButton.setVisible(!editBoolean);
         editButton.setDisable(editBoolean);
+        openFileButton.setVisible(editBoolean);
+        openFileButton.setVisible(!editBoolean);
 
     }
 
@@ -188,13 +190,12 @@ public class EditClientController extends ContentLoader implements Initializable
     }
 
     @FXML
-    void handleAddFileButton(MouseEvent event) throws IOException {
+    void handleAddFileButton(MouseEvent event) throws IOException, SQLException {
         Document document = new Document();
-
-        FileChooser fileChooser = new FileChooser();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
@@ -205,19 +206,62 @@ public class EditClientController extends ContentLoader implements Initializable
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-            //documents.add(document);
+            document.setOwnerID(currentClient.getId());
+            documentDAO.addDocument(document);
         }
-        //documentData = FXCollections.observableArrayList(documents);
+        currentDocuments = documentDAO.selectAllDocuments(currentClient.getId());
+        documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
     }
 
-    private void showTable() {
+    @FXML
+    void handleOpenFileButton(MouseEvent event) throws IOException {
+        System.out.println(selectedRows);
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    File file = documentDAO.selectDocument(row).getFile();
+                    System.out.println("file: " + file.toString());
+                    Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
 
+    @FXML
+    void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
+        System.out.println(selectedRows);
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    documentDAO.deleteDocument(row);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+            ArrayList <EditClientController> controller= new ArrayList<>();
+            controller.add(new EditClientController());
+            controller.get(0).setSelectedItem(currentClient.getId());
+            addContent(controller.get(0),resources.getString("NEW_CLIENT_DIALOG"));
+            controller.remove(true);
+            currentDocuments = documentDAO.selectAllDocuments(currentClient.getId());
+            documentData = FXCollections.observableArrayList(currentDocuments);
+            showTable();
+        }
+    }
+
+    private void showTable() {
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
-
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
         System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
@@ -226,7 +270,7 @@ public class EditClientController extends ContentLoader implements Initializable
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
     }
 
     @Override
@@ -242,6 +286,7 @@ public class EditClientController extends ContentLoader implements Initializable
             this.addressDAO = new AddressDAO();
             this.documentDAO = new DocumentDAO();
             this.noteDAO = new NoteDAO();
+            selectedRows = new ArrayList<>();
 
         }catch (IllegalAccessException e){
             e.printStackTrace();

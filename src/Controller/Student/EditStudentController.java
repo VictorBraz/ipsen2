@@ -133,11 +133,12 @@ public class EditStudentController extends ContentLoader implements Initializabl
         submitButton.setVisible(editBoolean);
         editButton.setVisible(!editBoolean);
         editButton.setDisable(editBoolean);
-
+        openFileButton.setVisible(editBoolean);
+        openFileButton.setVisible(!editBoolean);
     }
 
     private void updateStudent(){
-        // werkt nog niet
+
         Address address = currentStudent.getAddress();
         address.setAddress(adresTextField.getText());
         address.setZipCode(zipCodeTextField.getText());
@@ -292,10 +293,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
         }
         this.resources = resources;
         fillFields();
-
         medewerkerLabel.setText("Medewerker Informatie");
-        openFileButton.setVisible(true);
-        openFileButton.setDisable(false);
         editable(false);
     }
 }
