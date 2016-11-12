@@ -1,9 +1,11 @@
 package Controller.company;
 
+import Controller.client.EditClientController;
 import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
+import DAO.DocumentDAO;
 import DAO.NoteDAO;
 import Model.*;
 import com.jfoenix.controls.JFXButton;
@@ -22,7 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,11 +50,12 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     @FXML private JFXButton fileAddButton;
     @FXML private JFXButton deleteFileButton;
     @FXML private JFXButton editButton;
+    @FXML private JFXButton openFileButton;
 
 
     @FXML private TableView<TableViewItem> tableView;
     @FXML private TableColumn checkBoxColumn;
-    @FXML private TableColumn documentIDColumn;
+    @FXML private TableColumn fileIDColumn;
     @FXML private TableColumn fileNameColumn;
 
     @FXML private JFXButton cancelButton;
@@ -59,16 +64,17 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     private ResourceBundle resources;
     private Company currentCompany;
     private Address currentAddress;
-    private Note note;
+    private Note currentNote;
     private int id;
     private ArrayList<Integer> selectedRows;
 
     private CompanyDAO companyDAO;
     private NoteDAO noteDAO;
     private AddressDAO addressDAO;
+    private DocumentDAO documentDAO;
 
     private ObservableList<TableViewItem> documentData;
-    private ArrayList<Document> documents = new ArrayList<>();
+    private ArrayList<Document> currentDocuments = new ArrayList<>();
 
 
     private void fillFields(){
@@ -85,14 +91,20 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         emailTextField.setText(currentCompany.getEmailAddress());
         tagsTextField.setText(currentCompany.getTag());
 
-        try{
-            note = noteDAO.selectNote(currentCompany.getId());
-
-        }catch (Exception e){
+        try {
+            currentNote = noteDAO.selectNote(currentCompany.getId());
+            currentDocuments = documentDAO.selectAllDocuments(currentCompany.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
-        noteTextField.setText(note.getText());
-        documentData = FXCollections.observableArrayList(documents);
+        noteTextField.setText(currentNote.getText());
+        System.out.print("currentdocuments: " + currentDocuments.size());
+        System.out.print("currentcompanyid: " + currentCompany.getId());
+//        System.out.print("currentdocuments: " + currentDocuments.size());
+        documentData = FXCollections.observableArrayList(currentDocuments);
+        showTable();
     }
 
     private void editable(boolean editBoolean){
@@ -134,9 +146,9 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         currentCompany.setTag(tagsTextField.getText());
 
         try{
-            note = noteDAO.selectNote(currentCompany.getId());
-            note.setText(noteTextField.getText());
-            noteDAO.update(note);
+            currentNote = noteDAO.selectNote(currentCompany.getId());
+            currentNote.setText(noteTextField.getText());
+            noteDAO.update(currentNote);
             addressDAO = new AddressDAO();
             companyDAO.updateCompany(currentCompany);
         }catch (Exception e){
@@ -163,15 +175,35 @@ public class CompanyEditController extends ContentLoader implements Initializabl
             document.setFile(selectedFile);
             document.setDocumentName(selectedFile.getName());
             document.setDate(date);
-            documents.add(document);
+            document.setOwnerID(currentCompany.getId());
+            documentDAO.addDocument(document);
         }
-        documentData = FXCollections.observableArrayList(documents);
+        currentDocuments = documentDAO.selectAllDocuments(currentCompany.getId());
+        documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
     }
 
     @FXML
-    void handleDeleteFileButton(MouseEvent event){
-
+    void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
+        System.out.println(selectedRows);
+        if (selectedRows.size() != 0) {
+            selectedRows.forEach(row -> {
+                System.out.println(row);
+                try {
+                    documentDAO.deleteDocument(row);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+            ArrayList <EditClientController> controller= new ArrayList<>();
+            controller.add(new EditClientController());
+            controller.get(0).setSelectedItem(currentCompany.getId());
+            addContent(controller.get(0),resources.getString("NEW_STUDENT_DIALOG"));
+            controller.remove(true);
+            currentDocuments = documentDAO.selectAllDocuments(currentCompany.getId());
+            documentData = FXCollections.observableArrayList(currentDocuments);
+            showTable();
+        }
     }
 
     @FXML
@@ -197,12 +229,11 @@ public class CompanyEditController extends ContentLoader implements Initializabl
 
 
     private void showTable() {
-
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
-
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
+        fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
         System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
@@ -221,15 +252,19 @@ public class CompanyEditController extends ContentLoader implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.resources = resources;
         try {
             this.companyDAO = new CompanyDAO();
+            this.addressDAO = new AddressDAO();
+            this.documentDAO = new DocumentDAO();
             this.noteDAO = new NoteDAO();
+            selectedRows = new ArrayList<>();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.resources = resources;
         fillFields();
         bedrijfLabel.setText("Bedrijfsgegevens Bekijken");
+//        openFileButton.setVisible(true);//       openFileButton.setDisable(false);
         editable(false);
 
     }

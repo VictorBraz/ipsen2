@@ -5,10 +5,8 @@ import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import DAO.DocumentDAO;
-import Model.Address;
-import Model.Company;
-import Model.Document;
-import Model.TableViewItem;
+import DAO.NoteDAO;
+import Model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -56,6 +54,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
+    @FXML private JFXButton handleEditButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -66,6 +65,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
     private AddressDAO addressDAO;
     private ResourceBundle resources;
     private DocumentDAO documentDAO;
+    private NoteDAO noteDAO;
     private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
@@ -116,6 +116,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
         Company company = new Company();
         Address address = new Address();
         Document document = new Document();
+        Note note = new Note();
 
         try {
             companyDAO = new CompanyDAO();
@@ -131,14 +132,19 @@ public class AddCompanyController extends ContentLoader implements Initializable
             addressDAO.addAddress(address);
             company.setCompanyAddress(address);
             company.setTag(tagsTextField.getText());
-            companyDAO.addCompany(company);
+            company.setId(companyDAO.addCompany(company).getId());
             System.out.println(company.getId());
+            note.setOwnerID(company.getId());
+            note.setText(noteTextField.getText());
+            note.setNoteID(noteDAO.addNote(note).getNoteID());
+            System.out.println(company.getId());
+
 
             for(int i =0; i < documents.size(); i++) {
                 documents.get(i).setOwnerID(company.getId());
-                System.out.println(documents.get(i).getOwnerID());
                 documentDAO.addDocument(documents.get(i));
             }
+            documents.clear();
 
             documents.clear();
             addContent(resources.getString("COMPANIES"));
@@ -153,6 +159,11 @@ public class AddCompanyController extends ContentLoader implements Initializable
         documents.clear();
         documentData = FXCollections.observableArrayList(documents);
         showTable();
+    }
+
+    @FXML
+    void handleEditButton(MouseEvent event){
+
     }
 
     @Override
@@ -175,6 +186,7 @@ public class AddCompanyController extends ContentLoader implements Initializable
             this.companyDAO = new CompanyDAO();
             this.addressDAO = new AddressDAO();
             this.documentDAO = new DocumentDAO();
+            this.noteDAO = new NoteDAO();
         } catch (Exception e) {
             e.printStackTrace();
         }

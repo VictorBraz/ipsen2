@@ -145,6 +145,7 @@
                     <columns>
                         <TableColumn fx:id="checkBoxColumn" prefWidth="46.0" />
                       <TableColumn fx:id="fileNameColumn" prefWidth="261.0" text="Bestandnaam" />
+                        <TableColumn prefWidth="75.0" visible="false" />
                     </columns>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />

@@ -141,7 +141,6 @@ public class AddStudentController extends ContentLoader implements Initializable
 
         for(int i =0; i < documents.size(); i++) {
             documents.get(i).setOwnerID(student.getId());
-            System.out.println(documents.get(i).getOwnerID());
             documentDAO.addDocument(documents.get(i));
         }
         documents.clear();
@@ -174,7 +173,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
     }
 
     @Override
