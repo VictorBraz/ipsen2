@@ -11,10 +11,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Cursor?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
+             <Pane fx:id="editButton" layoutX="1233.0" layoutY="74.0" onMouseClicked="#handleEditButton" prefHeight="75.0" prefWidth="85.0" visible="false">
+                 <children>
+                     <ImageView fitHeight="75.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../mediaMap/EditButton.png" />
+                         </image>
+                     </ImageView>
+                 </children>
+                 <cursor>
+                     <Cursor fx:constant="HAND" />
+                 </cursor>
+             </Pane>
             <Label fx:id="bedrijfLabel" layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Bedrijf Toevoegen">
                <font>
                   <Font name="Roboto Light" size="36.0" />
@@ -115,9 +130,13 @@
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="openFileButton" buttonType="RAISED" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="15.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
-            <JFXButton fx:id="editButton" buttonType="RAISED" disable="true" layoutX="1127.0" layoutY="68.0" onMouseClicked="#handleEditButton" style="-fx-background-color: #00BCD4;" text="Aanpassen" textFill="WHITE" visible="false" />
          </children>
       </Pane>
    </children>

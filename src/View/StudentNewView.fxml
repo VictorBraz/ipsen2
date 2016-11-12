@@ -190,7 +190,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="openFileButton" buttonType="RAISED" disable="true" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE" visible="false">
+                  <JFXButton fx:id="openFileButton" buttonType="RAISED" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="15.0" />
                      </font>

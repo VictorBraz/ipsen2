@@ -18,6 +18,18 @@
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
+            <Pane fx:id="editButton" layoutX="1233.0" layoutY="74.0" onMouseClicked="#handleEditButton" prefHeight="75.0" prefWidth="74.0" visible="false">
+               <children>
+                  <ImageView fitHeight="75.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mediaMap/EditButton.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
             <Label fx:id="clientLabel" layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Client toevoegen">
                <font>
                   <Font name="Roboto Light" size="36.0" />
@@ -141,6 +153,11 @@
                         <Font name="Roboto" size="15.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="openFileButton" buttonType="RAISED" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto" size="15.0" />
+                     </font>
+                  </JFXButton>
                   <TableView fx:id="tableView" layoutX="800.0" layoutY="110.0" prefHeight="155.0" prefWidth="311.0" style="fx-hand: hand;">
                     <columns>
                         <TableColumn fx:id="checkBoxColumn" prefWidth="46.0" />
@@ -172,18 +189,6 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <Pane fx:id="editButton" layoutX="1233.0" layoutY="74.0" onMouseClicked="#handleEditButton" prefHeight="75.0" prefWidth="74.0" visible="false">
-               <children>
-                  <ImageView fitHeight="75.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../mediaMap/EditButton.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Pane>
          </children>
       </Pane>
    </children>
