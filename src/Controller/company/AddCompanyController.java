@@ -28,7 +28,6 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -163,10 +162,6 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

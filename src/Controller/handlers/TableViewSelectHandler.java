@@ -76,7 +76,7 @@ public class  TableViewSelectHandler extends ContentLoader {
                 }
                 if (count == 2) {
                     listener.setSelectedItem(item.getId());
-                    listener.openEditMenu();
+
                 }
                 sequentialClickCount.set(0);
             });

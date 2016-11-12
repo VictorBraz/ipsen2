@@ -49,6 +49,7 @@ public class ProjectController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
+        addContent( new AddProjectController(), resources.getString("NEW_PROJECT_DIALOG"));
 
     }
 
@@ -78,10 +79,6 @@ public class ProjectController extends ContentLoader implements Initializable, T
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

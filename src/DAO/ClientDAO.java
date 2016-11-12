@@ -46,14 +46,18 @@ public class ClientDAO extends DAO {
     /**
      * Select client client.
      *
-     * @param clientID the client id
+     * @param id the client id
      * @return the client
      */
-    public Client selectClient(int clientID) throws SQLException {
-        Client client = selectClientQuery(clientID);
-        System.out.println(client.toString());
-        return client;
+    public Client selectClient(int id) {
+        Client client = null;
+        try {
+            client = selectClientQuery(id);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
     }
 
     /**
@@ -78,12 +82,11 @@ public class ClientDAO extends DAO {
     /**
      * Update client.
      *
-     * @param clientID the client id
      * @param client   the client
      */
-    public void updateClient(int clientID, Client client) {
+    public void updateClient(Client client) {
         try {
-            updateClientQuery(clientID, client);
+            updateClientQuery(client);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,25 +114,39 @@ public class ClientDAO extends DAO {
         statement.close();
     }
 
-    private Client selectClientQuery(int clientID) throws SQLException{
-        String sql = "SELECT * FROM client WHERE clientid = ?";
-        PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet result = statement.executeQuery();
-        Client client = null;
+    private Client selectClientQuery(int id) throws SQLException{
+        Client client = new Client();
+        Address address = new Address();
 
-        while(result.next()) {
-            if(result.equals(client)) {
-                client = new Client();
-                client.setFirstName(result.getString(2));
-                client.setLastName(result.getString(3));
-                client.setBirthDate(result.getString(4));
-                client.setStudy(result.getString(5));
-                client.setEmailAddress(result.getString(6));
-                client.setPhoneNumber(result.getString(7));
-                client.setTag(result.getString(8));
+        String sql1 = "SELECT * FROM client WHERE id = ?";
+        String sql2 = "SELECT * FROM Address WHERE addressid=?";
+        PreparedStatement statement1 = conn.prepareStatement(sql1);
+        PreparedStatement statement2 = conn.prepareStatement(sql2);
+
+        statement1.setInt(1,id);
+        ResultSet resultSet1 = statement1.executeQuery();
+        while (resultSet1.next()){
+            statement2.setInt(1,resultSet1.getInt(2));
+            ResultSet resultSet2 = statement2.executeQuery();
+            client.setId(resultSet1.getInt(1));
+            client.setFirstName(resultSet1.getString(3));
+            client.setLastName(resultSet1.getString(4));
+            client.setBirthDate(resultSet1.getString(5));
+            client.setStudy(resultSet1.getString(6));
+            client.setEmailAddress(resultSet1.getString(7));
+            client.setPhoneNumber(resultSet1.getString(8));
+            client.setTag(resultSet1.getString(9));
+            while (resultSet2.next()){
+                address.setAddressID(resultSet2.getInt(1));
+                address.setAddress(resultSet2.getString(2));
+                address.setZipCode(resultSet2.getString(3));
+                address.setCity(resultSet2.getString(4));
             }
+            client.setAddress(address);
         }
-        statement.close();
+
+        statement1.close();
+        statement2.close();
         return client;
     }
 
@@ -192,26 +209,31 @@ public class ClientDAO extends DAO {
         return client;
     }
 
-    private void updateClientQuery(int clientID, Client client) throws Exception {
+    private void updateClientQuery(Client client) throws Exception {
         String sql = "UPDATE client SET clientaddressid=?, firstname=?, lastname=?, " +
-                "birthdate=?, study=?, email=?, phonenumber=?, tag=? WHERE clientid=?";
+                "birthdate=?, study=?, email=?, phonenumber=?, tag=? WHERE id=?";
 
-        PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        ResultSet keyResultSet = statement.getGeneratedKeys();
-        while (keyResultSet.next()) {
-            if(keyResultSet.equals(clientID)) {
-                statement.setInt(1, client.getAddress().getAddressID());
-                statement.setString(2, client.getFirstName());
-                statement.setString(3, client.getLastName());
-                statement.setString(4, client.getBirthDate());
-                statement.setString(5, client.getStudy());
-                statement.setString(6, client.getEmailAddress());
-                statement.setString(7, client.getPhoneNumber());
-                statement.setString(8, client.getTag());
+        PreparedStatement statement = conn.prepareStatement(sql);
 
-                int rowsUpdated = statement.executeUpdate();
-                statement.close();
-            }
+        statement.setInt(1, client.getAddress().getAddressID());
+        statement.setString(2, client.getFirstName());
+        statement.setString(3, client.getLastName());
+        statement.setString(4, client.getBirthDate());
+        statement.setString(5, client.getStudy());
+        statement.setString(6, client.getEmailAddress());
+        statement.setString(7, client.getPhoneNumber());
+        statement.setString(8, client.getTag());
+
+        //waarom?
+        statement.setInt(9, client.getId());
+        int rowInserted = statement.executeUpdate();
+
+        if (rowInserted > 0){
+            System.out.println("The Student Has Been updated succesfully!");
         }
+
+        statement.close();
+
+
     }
 }

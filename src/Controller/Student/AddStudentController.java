@@ -5,7 +5,6 @@ import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
-
 import DAO.StudentDAO;
 import Model.*;
 import com.jfoenix.controls.JFXButton;
@@ -22,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -60,7 +60,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
-    @FXML private JFXButton editButton;
+    @FXML private Pane editButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -178,10 +178,6 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

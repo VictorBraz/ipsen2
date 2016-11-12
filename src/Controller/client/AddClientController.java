@@ -8,12 +8,9 @@ import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
-import Model.Address;
-import Model.Client;
-import Model.Note;
 import DAO.DocumentDAO;
-import Model.Document;
-import Model.TableViewItem;
+import DAO.NoteDAO;
+import Model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -28,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -62,6 +60,7 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
+    @FXML private Pane editButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -70,9 +69,12 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     private ClientDAO clientDAO;
     private AddressDAO addressDAO;
+    private NoteDAO noteDAO;
+    private DocumentDAO documentDAO;
+
     private ResourceBundle resources;
 
-    private DocumentDAO documentDAO;
+
     private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
@@ -124,6 +126,7 @@ public class AddClientController extends ContentLoader implements Initializable,
         Client client = new Client();
         Address address = new Address();
         Note note = new Note();
+        Document document = new Document();
 
         address.setAddress(addressTextField.getText());
         address.setZipCode(zipCodeTextField.getText());
@@ -140,17 +143,25 @@ public class AddClientController extends ContentLoader implements Initializable,
         client.setId(clientDAO.addClient(client).getId());
         System.out.println(client.getId());
 
-        for(int i =0; i < documents.size(); i++) {
-            documents.get(i).setOwnerID(client.getId());
-            System.out.println(documents.get(i).getOwnerID());
-            documentDAO.addDocument(documents.get(i));
-        }
+        note.setOwnerID(client.getId());
+        note.setText(noteTextField.getText());
+        note.setNoteID(noteDAO.addNote(note).getNoteID());
 
+        for(int i =0; i < documents.size(); i++) {
+            document.setOwnerID(client.getId());
+            documentDAO.addDocument(document);
+        }
         documents.clear();
 
         addContent(resources.getString("CLIENTS"));
 
     }
+
+    @FXML
+    void handleEditButton(MouseEvent event) {
+
+    }
+
 
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
@@ -169,10 +180,6 @@ public class AddClientController extends ContentLoader implements Initializable,
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
 
     @Override
@@ -182,6 +189,7 @@ public class AddClientController extends ContentLoader implements Initializable,
             this.clientDAO = new ClientDAO();
             this.addressDAO = new AddressDAO();
             this.documentDAO = new DocumentDAO();
+            this.noteDAO = new NoteDAO();
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();

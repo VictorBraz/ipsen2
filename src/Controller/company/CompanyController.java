@@ -7,8 +7,10 @@ import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import Model.Company;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +43,10 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @FXML private TableColumn emailColumn;
     @FXML private TableColumn tagColumn;
     @FXML private TableColumn companyIdCol;
+
+    @FXML private Pane deleteAlert;
+    @FXML private JFXButton confirmButton;
+    @FXML private Pane zoominAlert;
 
     public int selectedCompanyID;
     private ObservableList<TableViewItem> companyData;
@@ -65,16 +73,36 @@ public class CompanyController extends ContentLoader implements Initializable, T
             selectedRows.clear();
             addContent(resources.getString("COMPANIES"));
         } else {
-            System.out.println("geen bedrijf geselecteerd");
+            deleteAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(deleteAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
         }
 
     }
 
     @FXML
     void handleZoominButton(MouseEvent event) {
-        addContent(resources.getString("EDIT_COMPANY_DIALOG"));
+        if (this.selectedCompanyID != 0) {
+            //TODO
+        } else {
+            zoominAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(zoominAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
+        }
     }
 
+    @FXML
+    void handleComfirmButton(MouseEvent event) {
+        deleteAlert.setVisible(false);
+        zoominAlert.setVisible(false);
+
+    }
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
@@ -87,12 +115,6 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     }
 
-    @Override
-    public void openEditMenu() {
-        if(this.selectedCompanyID != 0){
-            addContent(resources.getString("EDIT_COMPANY_DIALOG"));
-        }
-    }
 
     private void showTable(){
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
@@ -128,6 +150,8 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
         companyData = FXCollections.observableArrayList(dao.getCompanies());
         showTable();
+        deleteAlert.setVisible(false);
+        zoominAlert.setVisible(false);
 
     }
 

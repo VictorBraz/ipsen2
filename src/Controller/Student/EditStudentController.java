@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
-    @FXML private JFXButton editButton;
+    @FXML private Pane editButton;
 
 
     private ResourceBundle resources;
@@ -224,10 +225,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
         id = selectedItemId;
     }
 
-    @Override
-    public void openEditMenu() {
 
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
@@ -245,7 +243,7 @@ public class EditStudentController extends ContentLoader implements Initializabl
         }
         this.resources = resources;
         fillFields();
-        medewerkerLabel.setText("Medewerker Bekijken");
+        medewerkerLabel.setText("Medewerker Informatie");
         editable(false);
     }
 }

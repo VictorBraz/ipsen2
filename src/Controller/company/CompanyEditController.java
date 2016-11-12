@@ -69,10 +69,6 @@ public class CompanyEditController extends ContentLoader implements Initializabl
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     @Override
     public void setSelectedRows(ArrayList selectedRows){

@@ -33,6 +33,7 @@ public class LoginController extends ContentLoader implements Initializable {
     @FXML private StackPane stackpane;
     @FXML private Pane forgotPasswordAlert;
     @FXML private JFXButton submitButton;
+    @FXML private Pane loginFailAlert;
 
 
     private ResourceBundle resources;
@@ -57,8 +58,13 @@ public class LoginController extends ContentLoader implements Initializable {
             if (username.equals(account.getUserName()) && password.equals(account.getPassword())) {
                 addContent(resources.getString("MAINMENU"));
                 System.out.println("Welcome");
-            } else if (username.equals(account.getUserName())) {
-
+            } else {
+                loginFailAlert.setVisible(true);
+                FadeTransition animation = new FadeTransition(Duration.millis(3000));
+                animation.setNode(loginFailAlert);
+                animation.setFromValue(0.0);
+                animation.setFromValue(1.0);
+                animation.play();
             }
 
 
@@ -69,7 +75,7 @@ public class LoginController extends ContentLoader implements Initializable {
     }
     @FXML
     void forgotPasswordLink(MouseEvent event) {
-        setForgotPasswordAlert(true);
+        forgotPasswordAlert.setVisible(true);
         FadeTransition animation = new FadeTransition(Duration.millis(3000));
         animation.setNode(forgotPasswordAlert);
 
@@ -79,13 +85,11 @@ public class LoginController extends ContentLoader implements Initializable {
 
 
     }
-    protected void setForgotPasswordAlert(boolean editBoolean) {
-        forgotPasswordAlert.setVisible(editBoolean);
-    }
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
         forgotPasswordAlert.setVisible(false);
+        loginFailAlert.setVisible(false);
 
     }
 
@@ -100,8 +104,8 @@ public class LoginController extends ContentLoader implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setHamburgerMenuVisible(false);
-        forgotPasswordAlert.isVisible();
         forgotPasswordAlert.setVisible(false);
+        loginFailAlert.setVisible(false);
 
 
     }
