@@ -5,10 +5,11 @@ import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import Model.Client;
-import Model.Messaging;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +37,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn firstNameColumn;
     @FXML private TableColumn lastNameColumn;
     @FXML private TableColumn birthDateColumn;
-    @FXML private TableColumn adresColumn;
+    @FXML private TableColumn addressColumn;
     @FXML private TableColumn zipCodeColumn;
     @FXML private TableColumn cityColum;
     @FXML private TableColumn emailColumn;
@@ -42,6 +45,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn  phoneNumberColumn;
     @FXML private TableColumn tagColumn;
     @FXML private TableColumn clientIdColumn;
+    @FXML private Pane deleteAlert;
+    @FXML private JFXButton confirmButton;
+    @FXML private Pane zoominAlert;
 
 
 
@@ -64,51 +70,43 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     void handleDeleteButton(MouseEvent event) {
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> clientDAO.deleteClient(row));
-            //clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
             System.out.println(selectedRows.toString());
             addContent(resources.getString("CLIENTS"));
         } else {
-            Messaging message = new Messaging();
-            message.loadDialog();
-
+            deleteAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(deleteAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
         }
     }
 
     @FXML
     void handleZoominButton(MouseEvent event) {
-        if (this.selectedClientID != 0) {
-            addContent(new EditClientController(selectedClientID), resources.getString("EDIT_CLIENT_DIALOG"));
+        if (selectedRows.size() != 0) {
+            ArrayList<EditClientController> controller = new ArrayList<>();
+            controller.add(new EditClientController());
+            controller.get(0).setSelectedItem(selectedClientID);
+            addContent(controller.get(0), resources.getString("NEW_CLIENT_DIALOG"));
+            controller.remove(true);
+        } else {
+            zoominAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(zoominAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
         }
 
     }
+    @FXML
+    void handleComfirmButton(MouseEvent event) {
+        deleteAlert.setVisible(false);
+        zoominAlert.setVisible(false);
 
+    }
 
-
-//TODO clientenlijst ophalen uit de dao
-//    Public ObserverableList <Client> cmdGetClients() {
-//        ArrayList<Client> clients = new ArrayList<>();
-//        try {
-//            clients.addAll(dao.selectAllClients());
-//            return FXCollections.observableArrayList(clients);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-
-//    public void cmdAddClient(Client client) {
-//        clientDAO.addClient(client);
-//    }
-//
-//    public void cmdDeleteClient(int clientID) {
-//        this.clientDAO.deleteClient(clientID);
-//    }
-//
-//    public void cmdEditClient(int clientID, Client client) {
-//        this.clientDAO.updateClient(clientID, client);
-//    }
 
 
     @Override
@@ -120,51 +118,31 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     @Override
     public void setSelectedItem(int selectedItemId) {
-        this.selectedClientID = selectedClientID;
+        this.selectedClientID = selectedItemId;
 
     }
 
-    @Override
-    public void openEditMenu() {
-        if (this.selectedClientID != 0) {
-            addContent(new EditClientController(selectedClientID), resources.getString("CLIENT_EDIT_VIEW"));
-        } else {
-
-        }
 
 
-    }
+
 
     private void showTable() {
-
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
         tableViewSelectHandler.createCheckBoxColumn();
         tableViewSelectHandler.createSelectAllCheckBox();
 
-        //checkBoxColumn.setCellFactory(new PropertyValueFactory<Client, Integer>("clientID"));
-
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("lastName"));
         birthDateColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
-        //adresColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
-        //zipCodeColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("zipcode"));
-        //cityColum.setCellValueFactory(new PropertyValueFactory<Client, String>("city"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("emailAddress"));
         studyColum.setCellValueFactory(new PropertyValueFactory<Client, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phoneNumber"));
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<Client, Integer>("clientID"));
-//        clientIdColumn.setVisible(false);
 
-        //TODO werkt nog niet
         tableView.setItems(clientData);
-
-
-        System.out.println(firstNameColumn.getCellValueFactory().toString());
-        System.out.println(clientData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
-
-
     }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -173,7 +151,6 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
         try {
             clientDAO = new ClientDAO();
-            addressDAO = new AddressDAO();
             selectedRows = new ArrayList<>();
 
         } catch (IllegalAccessException e) {
@@ -185,6 +162,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         }
         clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
         showTable();
+        deleteAlert.setVisible(false);
+        zoominAlert.setVisible(false);
+
 
 
     }

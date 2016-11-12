@@ -18,8 +18,5 @@ public interface TableViewListener {
      */
     void setSelectedItem(int selectedItemId);
 
-    /**
-     * Open edit menu.
-     */
-    void openEditMenu();
+
 }

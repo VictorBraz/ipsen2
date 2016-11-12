@@ -2,7 +2,6 @@ package Controller.search;
 
 import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
-import DAO.AccountDAO;
 import DAO.ClientDAO;
 import DAO.CompanyDAO;
 import DAO.StudentDAO;
@@ -97,10 +96,6 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         this.selectedCompanyID = selectedItemId;
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     public void showCompanyTagTable(){
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -11,52 +13,34 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
          <children>
-            <Label fx:id="bedrijfLabel" layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Bedrijf Toevoegen">
+            <Label layoutX="68.0" layoutY="37.0" prefHeight="62.0" prefWidth="406.0" text="Project toevoegen">
                <font>
                   <Font name="Roboto Light" size="36.0" />
                </font>
             </Label>
             <AnchorPane layoutX="68.0" layoutY="111.0" prefHeight="530.0" prefWidth="1133.0" stylesheets="@../mediaMap/styles.css">
                <children>
-                  <Label layoutX="44.0" layoutY="45.0" prefHeight="27.0" prefWidth="105.0" text="Bedrijfsnaam">
+                  <Label layoutX="44.0" layoutY="45.0" prefHeight="27.0" prefWidth="105.0" text="Projectnaam">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="101.0" layoutY="90.0" prefHeight="27.0" prefWidth="47.0" text="Adres">
+                  <Label layoutX="43.0" layoutY="90.0" prefHeight="27.0" prefWidth="105.0" text="Medewerker">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="companyNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="39.0" maxWidth="259.0" minWidth="259.0" prefHeight="37.0" prefWidth="259.0" promptText="Bedrijfsnaam" />
-                  <JFXTextField fx:id="addressNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="85.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Adres" />
-                  <Label layoutX="75.0" layoutY="135.0" prefHeight="27.0" prefWidth="74.0" text="Postcode">
+                  <JFXTextField fx:id="projectNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="39.0" maxWidth="259.0" minWidth="259.0" prefHeight="37.0" prefWidth="259.0" promptText="Projectnaam" />
+                  <Label layoutX="88.0" layoutY="136.0" prefHeight="27.0" prefWidth="56.0" text="Bedrijf">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="52.0" layoutY="180.0" prefHeight="27.0" prefWidth="97.0" text="Woonplaats">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="21.0" layoutY="225.0" prefHeight="27.0" prefWidth="128.0" text="Contactpersoon">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="103.0" layoutY="315.0" prefHeight="27.0" prefWidth="47.0" text="Email">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="77.0" layoutY="270.0" prefHeight="27.0" prefWidth="74.0" text="Telefoon">
+                  <Label layoutX="79.0" layoutY="282.0" prefHeight="27.0" prefWidth="74.0" text="Clienten">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -66,11 +50,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="zipCodeTextfield" focusColor="#b2ebf2" layoutX="190.0" layoutY="130.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Postcode" />
-                  <JFXTextField fx:id="cityTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="175.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Woonplaats" />
-                  <JFXTextField fx:id="contactPersonTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="220.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Contactpersoon" />
-                  <JFXTextField fx:id="phoneNumberTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="265.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Telefoon" />
-                  <JFXTextField fx:id="emailTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="310.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Email" />
                   <JFXTextArea fx:id="noteTextField" layoutX="670.0" layoutY="295.0" maxWidth="523.0" minWidth="442.0" prefHeight="131.0" prefWidth="442.0" promptText="Vul hier een notitie in">
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
@@ -116,9 +95,13 @@
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
                   </JFXButton>
+                  <JFXComboBox fx:id="studentComboBox" layoutX="198.0" layoutY="88.0" prefHeight="31.0" prefWidth="243.0" promptText="Medewerker" />
+                  <JFXComboBox fx:id="companyComboBox" layoutX="198.0" layoutY="134.0" prefHeight="31.0" prefWidth="243.0" promptText="Bedrijf" />
+                  <JFXComboBox fx:id="clientComboBox" layoutX="198.0" layoutY="274.0" prefHeight="31.0" prefWidth="243.0" promptText="Clienten" />
+                  <JFXListView fx:id="clientProjectList" layoutX="190.0" layoutY="316.0" prefHeight="178.0" prefWidth="259.0" />
+                  <JFXListView fx:id="companyProjectList" layoutX="198.0" layoutY="173.0" prefHeight="90.0" prefWidth="243.0" />
                </children>
             </AnchorPane>
-            <JFXButton fx:id="editButton" buttonType="RAISED" disable="true" layoutX="1127.0" layoutY="68.0" onMouseClicked="#handleEditButton" style="-fx-background-color: #00BCD4;" text="Aanpassen" textFill="WHITE" visible="false" />
          </children>
       </Pane>
    </children>

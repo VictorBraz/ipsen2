@@ -34,7 +34,7 @@
                   <DropShadow blurType="GAUSSIAN" height="17.89" radius="9.2225" />
                </effect>
             </Pane>
-            <Pane fx:id="forgotPasswordAlert" layoutX="45.0" layoutY="148.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;">
+            <Pane fx:id="forgotPasswordAlert" layoutX="45.0" layoutY="148.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;" visible="false">
                <children>
                   <Label layoutX="17.0" layoutY="-6.0" onMouseClicked="#forgotPasswordLink" prefHeight="82.0" prefWidth="259.0" text="Wachtwoord vergeten?" textOverrun="CLIP">
                      <font>
@@ -47,6 +47,29 @@
                      </font>
                   </Label>
                   <JFXButton fx:id="submitButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <Group />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+            <Pane fx:id="loginFailAlert" layoutX="132.0" layoutY="145.0" prefHeight="175.0" prefWidth="292.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Label layoutX="17.0" layoutY="-6.0" onMouseClicked="#forgotPasswordLink" prefHeight="82.0" prefWidth="259.0" text="Inloggen mislukt" textOverrun="CLIP">
+                     <font>
+                        <Font name="Roboto" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="17.0" layoutY="35.0" prefHeight="102.0" prefWidth="259.0" text="De combinatie van gebruikersnaam&#10;en wachtwoord is niet correct." textFill="#979797" textOverrun="CLIP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitButton" layoutX="188.0" layoutY="122.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
                      <font>
                         <Font name="Roboto Medium" size="18.0" />
                      </font>

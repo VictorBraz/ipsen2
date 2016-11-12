@@ -6,8 +6,10 @@ import DAO.AddressDAO;
 import DAO.StudentDAO;
 import Model.Student;
 import Model.TableViewItem;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +18,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,7 +37,12 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
     @FXML private TableColumn tagColumn;
-    @FXML
+
+    @FXML private TableColumn studentIDColumn;
+
+    @FXML private Pane deleteAlert;
+    @FXML private JFXButton confirmButton;
+    @FXML private Pane zoominAlert;
 
     private int selectedStudentID;
     private ObservableList<TableViewItem> studentData;
@@ -56,6 +65,7 @@ public class StudentController extends ContentLoader implements Initializable, T
         studyColum.setCellValueFactory(new PropertyValueFactory<Student, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("phoneNumber"));
         tagColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("tag"));
+        studentIDColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("studentID"));
 
         tableView.setItems(studentData);
     }
@@ -71,20 +81,48 @@ public class StudentController extends ContentLoader implements Initializable, T
         if (selectedRows.size() != 0){
             selectedRows.forEach(row -> studentDAO.deleteStudent(row));
             addContent(resources.getString("STUDENTS"));
+        } else {
+            deleteAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(deleteAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
+
         }
-//        if(this.selectedStudentID != 0){
-//            deleteStudent();
-//        }
+    }
+
+    @FXML
+    void handleOpenFileButton(MouseEvent event){
+
     }
 
     @FXML
     void handleZoominButton(MouseEvent event){
-        ArrayList <EditStudentController> controller = new ArrayList<>();
-        controller.add(new EditStudentController());
-        controller.get(0).setSelectedItem(selectedStudentID);
-        addContent(controller.get(0), resources.getString("NEW_STUDENT_DIALOG"));
-        controller.remove(true);
+        if(selectedRows.size() != 0) {
+            ArrayList <EditStudentController> controller = new ArrayList<>();
+            controller.add(new EditStudentController());
+            controller.get(0).setSelectedItem(selectedStudentID);
+            addContent(controller.get(0), resources.getString("NEW_STUDENT_DIALOG"));
+            controller.remove(true);
+        } else {
+            zoominAlert.setVisible(true);
+            FadeTransition animation = new FadeTransition(Duration.millis(3000));
+            animation.setNode(zoominAlert);
+            animation.setFromValue(0.0);
+            animation.setFromValue(1.0);
+            animation.play();
+        }
+
     }
+
+    @FXML
+    void handleComfirmButton(MouseEvent event) {
+        deleteAlert.setVisible(false);
+        zoominAlert.setVisible(false);
+
+    }
+
 
 
     @Override
@@ -98,16 +136,14 @@ public class StudentController extends ContentLoader implements Initializable, T
         this.selectedStudentID = selectedItemId;
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         setMainFrameTitle(resources.getString("STUDENT_TITLE"));
+        this.deleteAlert.setVisible(false);
+        this.zoominAlert.setVisible(false);
 
         try{
             studentDAO = new StudentDAO();

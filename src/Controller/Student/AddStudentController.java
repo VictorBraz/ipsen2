@@ -5,7 +5,6 @@ import Controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
-
 import DAO.StudentDAO;
 import Model.*;
 import com.jfoenix.controls.JFXButton;
@@ -22,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -60,7 +60,7 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     @FXML private JFXButton cancelButton;
     @FXML private JFXButton submitButton;
-    @FXML private JFXButton editButton;
+    @FXML private Pane editButton;
 
     private int selectedDocumentID;
     private ObservableList<TableViewItem> documentData;
@@ -78,11 +78,10 @@ public class AddStudentController extends ContentLoader implements Initializable
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
-
-        FileChooser fileChooser = new FileChooser();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.pdf"),
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
@@ -140,9 +139,10 @@ public class AddStudentController extends ContentLoader implements Initializable
         note.setNoteID(noteDAO.addNote(note).getNoteID());
         System.out.println(student.getId());
 
-        for(int i= 0; i < documents.size(); i++ ) {
-            document.setOwnerID(student.getId());
-            documentDAO.addDocument(document);
+        for(int i =0; i < documents.size(); i++) {
+            documents.get(i).setOwnerID(student.getId());
+            System.out.println(documents.get(i).getOwnerID());
+            documentDAO.addDocument(documents.get(i));
         }
         documents.clear();
 
@@ -167,6 +167,10 @@ public class AddStudentController extends ContentLoader implements Initializable
         documentData = FXCollections.observableArrayList(documents);
         showTable();
     }
+    @FXML
+    void handleOpenFileButton(MouseEvent event){
+
+    }
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
@@ -178,10 +182,6 @@ public class AddStudentController extends ContentLoader implements Initializable
 
     }
 
-    @Override
-    public void openEditMenu() {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
