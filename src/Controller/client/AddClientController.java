@@ -148,8 +148,8 @@ public class AddClientController extends ContentLoader implements Initializable,
         note.setNoteID(noteDAO.addNote(note).getNoteID());
 
         for(int i =0; i < documents.size(); i++) {
-            document.setOwnerID(client.getId());
-            documentDAO.addDocument(document);
+            documents.get(i).setOwnerID(client.getId());
+            documentDAO.addDocument(documents.get(i));
         }
         documents.clear();
 

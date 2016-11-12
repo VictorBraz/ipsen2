@@ -63,13 +63,13 @@ public class CompanyDAO extends DAO {
         return company;
     }
 
-    public void addCompany(Company company) throws Exception{
+    public Company addCompany(Company company) throws Exception{
         try{
             addCompanyQuery(company);
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        return company;
     }
 
     /**
@@ -153,7 +153,7 @@ public class CompanyDAO extends DAO {
         String sql = "INSERT INTO company(companyaddressid, companyname, contactperson, phonenumber, email, tag)"+
                 "VALUES (?,?,?,?,?,?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, company.getCompanyAddress().getAddressID());
         stmt.setString(2, company.getCompanyName());
         stmt.setString(3, company.getContactPerson());

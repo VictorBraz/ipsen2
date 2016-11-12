@@ -47,6 +47,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     @FXML private Pane deleteAlert;
     @FXML private JFXButton confirmButton;
+    @FXML private JFXButton handleEditButton;
     @FXML private Pane zoominAlert;
 
     public int selectedCompanyID;
@@ -65,6 +66,10 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     }
 
+    @FXML
+    void handleEditButton(MouseEvent event){
+
+    }
     @FXML
     void handleDeleteButton(MouseEvent event) {
 

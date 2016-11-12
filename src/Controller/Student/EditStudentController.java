@@ -261,9 +261,6 @@ public class EditStudentController extends ContentLoader implements Initializabl
                 }
             });
         }
-
-
-//        myFile.delete();
     }
 
     @Override
