@@ -223,14 +223,9 @@ public class ClientDAO extends DAO {
         statement.setString(6, client.getEmailAddress());
         statement.setString(7, client.getPhoneNumber());
         statement.setString(8, client.getTag());
-
-        //waarom?
+        
         statement.setInt(9, client.getId());
         int rowInserted = statement.executeUpdate();
-
-        if (rowInserted > 0){
-            System.out.println("The Student Has Been updated succesfully!");
-        }
 
         statement.close();
 

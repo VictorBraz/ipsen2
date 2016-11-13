@@ -179,7 +179,7 @@ public class EditClientController extends ContentLoader implements Initializable
             currentNote = noteDAO.selectNote(currentClient.getId());
             currentNote.setText(noteTextField.getText());
             noteDAO.update(currentNote);
-          //  addressDAO.updateAddress(address);
+            addressDAO.updateAddress(address);
             clientDAO.updateClient(currentClient);
         } catch (SQLException e) {
             e.printStackTrace();
