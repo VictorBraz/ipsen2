@@ -8,11 +8,14 @@ public class Account extends TableViewItem {
     private String password;
     private int privilege;
     private int id;
+    private int userId;
 
     public Account(){
         userName = "";
         password = "";
         privilege = 0;
+        id = 0;
+        userId = 0;
     }
 
     public Account(String userName, String password, int privilege, int id){
@@ -47,10 +50,14 @@ public class Account extends TableViewItem {
     }
 
     public void setUserID(int userId){
-        this.id = userId;
+        this.userId = userId;
     }
 
     public  int getId(){
         return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 }

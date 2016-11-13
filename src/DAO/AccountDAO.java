@@ -26,18 +26,14 @@ public class AccountDAO extends DAO{
         }
     }
 
-    public void deleteAccount(Account account) {
+    public void deleteAccount(int accountid) {
         try {
-            String sql = "DELETE FROM account WHERE accountname =?";
+            String sql = "DELETE FROM account WHERE id =?";
             stmt = conn.prepareStatement(sql);
-            ResultSet resultSet = stmt.getGeneratedKeys();
-
-            while(resultSet.next()){
-                if(resultSet.equals(account.getUserName())){
-                    int rowDeleted = stmt.executeUpdate();
-                    if (rowDeleted > 0)
-                        System.out.println("Account deleted!");
-                }
+            stmt.setInt(1, accountid);
+            int row = stmt.executeUpdate();
+            if (row > 0){
+                System.out.println("Account deleted!");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -71,10 +67,12 @@ public class AccountDAO extends DAO{
             ResultSet resultSet = stmt.executeQuery();
             while(resultSet.next()){
                 Account account = new Account();
-                account.setUserName(resultSet.getString(1));
-                account.setPassword(resultSet.getString(2));
-                account.setRightName(resultSet.getInt(3));
-                account.setUserID(resultSet.getInt(4));
+                account.setId(resultSet.getInt(1));
+                System.out.println("id opgehaald" + account.getId());
+                account.setUserName(resultSet.getString(2));
+                account.setPassword(resultSet.getString(3));
+                account.setRightName(resultSet.getInt(4));
+                account.setUserID(resultSet.getInt(5));
 
                 accounts.add(account);
 
@@ -83,7 +81,9 @@ public class AccountDAO extends DAO{
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        for(Account acc : accounts){
+            System.out.println("wel id?: " + acc.getId());
+        }
         return accounts;
 
     }
