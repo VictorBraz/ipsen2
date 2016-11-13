@@ -37,14 +37,11 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn firstNameColumn;
     @FXML private TableColumn lastNameColumn;
     @FXML private TableColumn birthDateColumn;
-    @FXML private TableColumn addressColumn;
-    @FXML private TableColumn zipCodeColumn;
-    @FXML private TableColumn cityColum;
     @FXML private TableColumn emailColumn;
     @FXML private TableColumn studyColum;
     @FXML private TableColumn  phoneNumberColumn;
     @FXML private TableColumn tagColumn;
-    @FXML private TableColumn clientIdColumn;
+
     @FXML private Pane deleteAlert;
     @FXML private JFXButton confirmButton;
     @FXML private Pane zoominAlert;
@@ -54,7 +51,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     public int selectedClientID;
     private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
-    private ArrayList<Client> clientdata;
+
     private JFXCheckBox selectAllCheckBox;
 
     private ClientDAO clientDAO;
@@ -137,6 +134,7 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         emailColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("emailAddress"));
         studyColum.setCellValueFactory(new PropertyValueFactory<Client, String>("study"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("phoneNumber"));
+        tagColumn.setCellValueFactory(new PropertyValueFactory<Client, String>("tag"));
 
         tableView.setItems(clientData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));

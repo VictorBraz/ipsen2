@@ -85,13 +85,14 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
 
     private void fillFields(){
+
         currentStudent = studentDAO.selectStudent(id);
-        firstNameTextField.setText(currentStudent.getFirstName());
-        lastNameTextField.setText(currentStudent.getLastName());
-        birthDateTextfield.setText(currentStudent.getBirthDate());
         adresTextField.setText(currentStudent.getAddress().getAddress());
         zipCodeTextField.setText(currentStudent.getAddress().getZipCode());
         cityTextField.setText(currentStudent.getAddress().getCity());
+        firstNameTextField.setText(currentStudent.getFirstName());
+        lastNameTextField.setText(currentStudent.getLastName());
+        birthDateTextfield.setText(currentStudent.getBirthDate());
         studyTextField.setText(currentStudent.getStudy());
         emailTextfield.setText(currentStudent.getEmailAddress());
         tagsTextField.setText(currentStudent.getTag());
@@ -138,17 +139,16 @@ public class EditStudentController extends ContentLoader implements Initializabl
     }
 
     private void updateStudent(){
-
-        Address address = currentStudent.getAddress();
-        address.setAddress(adresTextField.getText());
-        address.setZipCode(zipCodeTextField.getText());
-        address.setCity(cityTextField.getText());
         currentStudent.setFirstName(firstNameTextField.getText());
         currentStudent.setLastName(lastNameTextField.getText());
         currentStudent.setBirthDate(birthDateTextfield.getText());
         currentStudent.setEmailAddress(emailTextfield.getText());
         currentStudent.setPhoneNumber(phoneTextField.getText());
         currentStudent.setStudy(studyTextField.getText());
+        Address address = currentStudent.getAddress();
+        address.setAddress(adresTextField.getText());
+        address.setZipCode(zipCodeTextField.getText());
+        address.setCity(cityTextField.getText());
         currentStudent.setAddress(address);
         currentStudent.setTag(tagsTextField.getText());
 

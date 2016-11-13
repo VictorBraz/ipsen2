@@ -47,8 +47,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="companyNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="39.0" maxWidth="259.0" minWidth="259.0" prefHeight="37.0" prefWidth="259.0" promptText="Bedrijfsnaam" />
-                  <JFXTextField fx:id="addressNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="85.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Adres" />
                   <Label layoutX="75.0" layoutY="135.0" prefHeight="27.0" prefWidth="74.0" text="Postcode">
                      <font>
                         <Font size="18.0" />
@@ -79,41 +77,79 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="zipCodeTextfield" focusColor="#b2ebf2" layoutX="190.0" layoutY="130.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Postcode" />
-                  <JFXTextField fx:id="cityTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="175.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Woonplaats" />
-                  <JFXTextField fx:id="contactPersonTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="220.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Contactpersoon" />
-                  <JFXTextField fx:id="phoneNumberTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="265.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Telefoon" />
-                  <JFXTextField fx:id="emailTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="310.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Email" />
-                  <JFXTextArea fx:id="noteTextField" layoutX="670.0" layoutY="295.0" maxWidth="523.0" minWidth="442.0" prefHeight="131.0" prefWidth="442.0" promptText="Vul hier een notitie in">
+                  <JFXTextField fx:id="companyNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="39.0" maxWidth="259.0" minWidth="259.0" prefHeight="37.0" prefWidth="259.0" promptText="Bedrijfsnaam">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="addressNameTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="85.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Adres">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="zipCodeTextfield" focusColor="#b2ebf2" layoutX="190.0" layoutY="130.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Postcode">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="cityTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="175.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Woonplaats">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="contactPersonTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="220.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Contactpersoon">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="phoneNumberTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="265.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Telefoon">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="emailTextField" focusColor="#b2ebf2" layoutX="190.0" layoutY="310.0" maxWidth="259.0" minWidth="187.0" prefHeight="37.0" prefWidth="259.0" promptText="Email">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="tagsTextField" focusColor="#b2ebf2" layoutX="670.0" layoutY="40.0" maxWidth="442.0" minWidth="259.0" prefHeight="37.0" prefWidth="442.0" promptText="Tags">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
+                  <JFXTextArea fx:id="noteTextField" focusColor="#b2ebf2" layoutX="670.0" layoutY="295.0" maxWidth="523.0" minWidth="442.0" prefHeight="131.0" prefWidth="442.0" promptText="Vul hier een notitie in">
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
                      </effect>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
                   </JFXTextArea>
                   <Label layoutX="561.0" layoutY="289.0" prefHeight="27.0" prefWidth="65.0" text="Notities">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="551.0" layoutY="149.0" prefHeight="27.0" prefWidth="85.0" text="Bestanden">
+                  <Label layoutX="551.0" layoutY="116.0" prefHeight="27.0" prefWidth="85.0" text="Bestanden">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="tagsTextField" focusColor="#b2ebf2" layoutX="670.0" layoutY="40.0" maxWidth="442.0" minWidth="259.0" prefHeight="37.0" prefWidth="442.0" promptText="Tags" />
                   <JFXButton fx:id="fileAddButton" buttonType="RAISED" layoutX="669.0" layoutY="115.0" onMouseClicked="#handleAddFileButton" style="-fx-background-color: #00BCD4;" text="Toevoegen" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="deleteFileButton" buttonType="RAISED" layoutX="667.0" layoutY="165.0" onMouseClicked="#handleDeleteFileButton" style="-fx-background-color: #00BCD4;" text="Verwijderen" textFill="WHITE">
+                  <JFXButton fx:id="deleteFileButton" buttonType="RAISED" layoutX="669.0" layoutY="165.0" onMouseClicked="#handleDeleteFileButton" style="-fx-background-color: #00BCD4;" text="Verwijderen" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="openFileButton" buttonType="RAISED" layoutX="680.0" layoutY="210.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE">
+                  <JFXButton fx:id="openFileButton" buttonType="RAISED" layoutX="669.0" layoutY="115.0" onMouseClicked="#handleOpenFileButton" style="-fx-background-color: #00BCD4;" text="Openen" textFill="WHITE">
                      <font>
                         <Font name="Roboto" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <TableView fx:id="tableView" layoutX="800.0" layoutY="110.0" prefHeight="155.0" prefWidth="311.0">
                     <columns>
@@ -124,16 +160,25 @@
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
                      </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </TableView>
                   <JFXButton fx:id="cancelButton" layoutX="892.0" layoutY="457.0" onMouseClicked="#handleCancelButton" prefHeight="51.0" prefWidth="128.0" text="ANNULEREN" textFill="#00acc1">
                      <font>
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="submitButton" layoutX="1021.0" layoutY="457.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" text="GEREED" textFill="#00acc1">
                      <font>
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
             </AnchorPane>

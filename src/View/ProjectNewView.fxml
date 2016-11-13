@@ -60,7 +60,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="551.0" layoutY="149.0" prefHeight="27.0" prefWidth="85.0" text="Bestanden">
+                  <Label layoutX="551.0" layoutY="116.0" prefHeight="27.0" prefWidth="85.0" text="Bestanden">
                      <font>
                         <Font size="18.0" />
                      </font>

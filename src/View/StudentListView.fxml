@@ -21,11 +21,11 @@
             <TableColumn fx:id="checkBoxColumn" prefWidth="45.999969482421875" />
             <TableColumn fx:id="firstNameColumn" prefWidth="97.00003051757812" text="Voornaam" />
             <TableColumn fx:id="lastNameColumn" prefWidth="152.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" minWidth="0.0" prefWidth="255.0" text="Geboortedatum" />
-            <TableColumn fx:id="emailColumn" prefWidth="248.0" text="Email" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="142.0" text="Telefoon" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="168.0" text="Studie" />
-            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="162.0" text="Tags" />
+            <TableColumn fx:id="birthDateColumn" minWidth="0.0" prefWidth="121.0" text="Geboortedatum" />
+            <TableColumn fx:id="emailColumn" prefWidth="227.0" text="Email" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="138.0" text="Telefoon" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="171.0" text="Studie" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="318.0" text="Tags" />
             <TableColumn fx:id="studentIDColumn" minWidth="0.0" prefWidth="120.0" text="studentID" />
         </columns>
          <cursor>

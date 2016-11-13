@@ -108,18 +108,16 @@ public class EditClientController extends ContentLoader implements Initializable
 
     private void fillFields(){
         currentClient = clientDAO.selectClient(id);
-
+        addressTextField.setText(currentClient.getAddress().getAddress());
+        zipCodeTextField.setText(currentClient.getAddress().getZipCode());
+        cityTextField.setText(currentClient.getAddress().getCity());
         firstNameTextField.setText(currentClient.getFirstName());
         lastNameTextField.setText(currentClient.getLastName());
         birthDateTextfield.setText(currentClient.getBirthDate());
-
-        zipCodeTextField.setText(currentClient.getAddress().getZipCode());
-        cityTextField.setText(currentClient.getAddress().getCity());
         studyTextField.setText(currentClient.getStudy());
         emailTextfield.setText(currentClient.getEmailAddress());
         tagsTextField.setText(currentClient.getTag());
         phoneTextField.setText(currentClient.getPhoneNumber());
-        addressTextField.setText(currentClient.getAddress().getAddress());
 
         try {
             currentNote = noteDAO.selectNote(currentClient.getId());
@@ -158,12 +156,11 @@ public class EditClientController extends ContentLoader implements Initializable
         editButton.setVisible(!editBoolean);
         editButton.setDisable(editBoolean);
         openFileButton.setVisible(editBoolean);
-        openFileButton.setDisable(!editBoolean);
+        openFileButton.setVisible(!editBoolean);
 
     }
 
     private void updateClient(){
-        // werkt nog niet
         Address address = currentClient.getAddress();
         address.setAddress(addressTextField.getText());
         address.setZipCode(zipCodeTextField.getText());
@@ -182,6 +179,7 @@ public class EditClientController extends ContentLoader implements Initializable
             currentNote = noteDAO.selectNote(currentClient.getId());
             currentNote.setText(noteTextField.getText());
             noteDAO.update(currentNote);
+          //  addressDAO.updateAddress(address);
             clientDAO.updateClient(currentClient);
         } catch (SQLException e) {
             e.printStackTrace();
