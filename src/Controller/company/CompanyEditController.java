@@ -153,7 +153,7 @@ public class CompanyEditController extends ContentLoader implements Initializabl
             currentNote = noteDAO.selectNote(currentCompany.getId());
             currentNote.setText(noteTextField.getText());
             noteDAO.update(currentNote);
-            addressDAO = new AddressDAO();
+            addressDAO.updateAddress(currentAddress);
             companyDAO.updateCompany(currentCompany);
         }catch (Exception e){
             e.printStackTrace();

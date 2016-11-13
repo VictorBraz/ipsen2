@@ -26,9 +26,9 @@ public class AddressDAO extends DAO {
         return address;
     }
 
-    public void updateAddress(int addressID, Address address) {
+    public void updateAddress(Address address) {
         try {
-            updateAddressQuery(addressID, address);
+            updateAddressQuery(address);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,21 +74,17 @@ public class AddressDAO extends DAO {
 
     }
 
-    private void updateAddressQuery(int addressID, Address address) throws SQLException {
-        String sql = "UPDATE address SET address=?, zipcode=?, city=? ";
-        PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        ResultSet keyResultSet = statement.getGeneratedKeys();
-        while (keyResultSet.next()) {
-            if(keyResultSet.equals(addressID)) {
-                statement.setString(1, address.getAddress());
-                statement.setString(2, address.getZipCode());
-                statement.setString(3, address.getCity());
+    private void updateAddressQuery(Address address) throws SQLException {
 
-                int rowsUpdated = statement.executeUpdate();
-                if(rowsUpdated > 0) {
-                    System.out.println("An existing address was updated");
-                }
-            }
+        String sql = "UPDATE address SET address=?, zipcode=?, city=? WHERE addressid=? ";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, address.getAddress());
+        statement.setString(2, address.getZipCode());
+        statement.setString(3, address.getCity());
+        statement.setInt(4, address.getAddressID());
+        int rowUpdated = statement.executeUpdate();
+        if(rowUpdated > 0){
+            System.out.println("Address updated successfully!");
         }
     }
 
