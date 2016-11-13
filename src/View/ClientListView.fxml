@@ -18,13 +18,13 @@
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
             <TableColumn fx:id="checkBoxColumn" prefWidth="50.000030517578125" text="checkboxColumn" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="173.99996948242188" text="Voornaam" />
-          <TableColumn fx:id="lastNameColumn" prefWidth="225.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" prefWidth="137.0" text="Geboortedatum" />
-            <TableColumn fx:id="emailColumn" prefWidth="289.0" text="Email" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="220.0" text="Studie" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="174.0" text="Telefoon" />
-            <TableColumn fx:id="clientIdColumn" minWidth="0.0" prefWidth="225.0" text="Telefoon" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="100.99996948242188" text="Voornaam" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="199.0" text="Achternaam" />
+            <TableColumn fx:id="birthDateColumn" prefWidth="103.0" text="Geboortedatum" />
+            <TableColumn fx:id="emailColumn" prefWidth="227.0" text="Email" />
+            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="119.0" text="Telefoon" />
+            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="180.0" text="Studie" />
+            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="289.0" text="Tags" />
         </columns>
          <cursor>
             <Cursor fx:constant="HAND" />

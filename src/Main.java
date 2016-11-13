@@ -12,13 +12,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        new QueryUpdater().update();
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(ContentLoader.loadMainFrame());
         primaryStage.setScene(scene);
         primaryStage.show();
 
-    //    new QueryUpdater().update();
 
 
     }
