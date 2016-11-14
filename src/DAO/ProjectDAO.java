@@ -13,28 +13,67 @@ import java.util.ArrayList;
  */
 public class ProjectDAO extends DAO {
 
+    /**
+     * Instantiates a new Project dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws InstantiationException the instantiation exception
+     * @throws SQLException           the sql exception
+     */
     public ProjectDAO() throws IllegalAccessException, InstantiationException, SQLException {
     }
 
+    /**
+     * Add project.
+     *
+     * @param project the project
+     * @throws SQLException the sql exception
+     */
     public void addProject(Project project) throws SQLException {
         addProjectQuery(project);
     }
 
+    /**
+     * Select project project.
+     *
+     * @param projectID the project id
+     * @return the project
+     * @throws SQLException the sql exception
+     */
     public Project selectProject(int projectID) throws SQLException {
         Project project = selectProjectQuery(projectID);
         return project;
     }
 
+    /**
+     * Select all projects array list.
+     *
+     * @return the array list
+     * @throws Exception the exception
+     */
     public ArrayList<Project> selectAllProjects() throws Exception {
         ArrayList<Project> projects;
         projects = selectAllProjectsQuery();
         return projects;
     }
 
+    /**
+     * Update project.
+     *
+     * @param projectid the projectid
+     * @param project   the project
+     * @throws SQLException the sql exception
+     */
     public void updateProject(int projectid, Project project) throws SQLException {
         updateProjectQuery(projectid, project);
     }
 
+    /**
+     * Delete project.
+     *
+     * @param projectID the project id
+     * @throws SQLException the sql exception
+     */
     public void deleteProject(int projectID) throws SQLException {
         deleteProjectQuery(projectID);
     }
@@ -48,9 +87,7 @@ public class ProjectDAO extends DAO {
         statement.setString(3, project.getTag());
 
         int rowsInserted = statement.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("A new project was inserted succesfully!");
-        }
+
     }
 
 
@@ -66,9 +103,7 @@ public class ProjectDAO extends DAO {
             }
 
             int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("An existing project was updated successfully!");
-            }
+
         }
     }
 
@@ -119,9 +154,7 @@ public class ProjectDAO extends DAO {
         while (keyResultSet.next()) {
             if(keyResultSet.equals(projectID)) {
                 int rowsDeleted = statement.executeUpdate();
-                if(rowsDeleted > 0) {
-                    System.out.println("A project was deleted succesfully");
-                }
+
             }
         }
     }

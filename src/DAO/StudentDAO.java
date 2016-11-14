@@ -67,9 +67,7 @@ public class StudentDAO extends DAO {
             int id = rs.getInt(1);
             student.setId(id);
         }
-        if (rowInserted > 0) {
-            System.out.println("A new student was inserted succesfully!");
-        }
+
         statement.close();
         return student;
     }
@@ -104,9 +102,6 @@ public class StudentDAO extends DAO {
         statement.setInt(9,student.getId());
         int rowInserted = statement.executeUpdate();
 
-        if (rowInserted > 0){
-            System.out.println("The student Has Been updated succesfully!");
-        }
 
         statement.close();
     }

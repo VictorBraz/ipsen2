@@ -87,9 +87,6 @@ public class NoteDAO extends DAO{
             note.setNoteID(id);
         }
 
-        if (rowInserted > 0) {
-            System.out.println("A new Note was inserted succesfully!");
-        }
         statement.close();
         return note;
     }
@@ -102,9 +99,7 @@ public class NoteDAO extends DAO{
         statement.setInt(2,note.getNoteID());
         int rowInserted = statement.executeUpdate();
 
-        if (rowInserted > 0){
-            System.out.println("The note Has Been updated succesfully!");
-        }
+
         statement.close();
         return note;
     }

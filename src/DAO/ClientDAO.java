@@ -15,7 +15,6 @@ public class ClientDAO extends DAO {
 
     private AddressDAO addressDAO;
 
-    //TODO testen en notitieid toevoegen in de logica van client
 
     /**
      * Instantiates a new Client dao.
@@ -99,7 +98,6 @@ public class ClientDAO extends DAO {
      * @param clientID the client id
      */
     public void deleteClient(int clientID) {
-        System.out.println(clientID);
         try {
             deleteClientQuery(clientID);
         } catch (Exception e) {
@@ -203,9 +201,7 @@ public class ClientDAO extends DAO {
             int id = rs.getInt(1);
             client.setId(id);
         }
-        if(rowsInserted > 0) {
-            System.out.println("A new document was inserted succesfully!");
-        }
+
         statement.close();
         return client;
     }

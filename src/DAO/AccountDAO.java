@@ -11,13 +11,29 @@ import java.util.ArrayList;
  */
 public class AccountDAO extends DAO{
 
+    /**
+     * The Accounts.
+     */
     ArrayList<Account> accounts = new ArrayList<>();
+    /**
+     * The Stmt.
+     */
     PreparedStatement stmt = null;
 
+    /**
+     * Instantiates a new Account dao.
+     *
+     * @throws Exception the exception
+     */
     public AccountDAO() throws Exception{
         super();
     }
 
+    /**
+     * Create account.
+     *
+     * @param account the account
+     */
     public void createAccount(Account account) {
         try{
             createAccountQuery(account);
@@ -26,20 +42,28 @@ public class AccountDAO extends DAO{
         }
     }
 
+    /**
+     * Delete account.
+     *
+     * @param accountid the accountid
+     */
     public void deleteAccount(int accountid) {
         try {
             String sql = "DELETE FROM account WHERE id =?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, accountid);
             int row = stmt.executeUpdate();
-            if (row > 0){
-                System.out.println("Account deleted!");
-            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Edit account.
+     *
+     * @param account the account
+     */
     public void editAccount(Account account) {
         try{
             String sql = "UPDATE account SET accountname=?, password=?, privilege=?" +
@@ -58,6 +82,11 @@ public class AccountDAO extends DAO{
         }
     }
 
+    /**
+     * Gets all accounts.
+     *
+     * @return the all accounts
+     */
     public ArrayList<Account> getAllAccounts() {
 
         String sql = "SELECT * FROM account";
@@ -68,7 +97,6 @@ public class AccountDAO extends DAO{
             while(resultSet.next()){
                 Account account = new Account();
                 account.setId(resultSet.getInt(1));
-                System.out.println("id opgehaald" + account.getId());
                 account.setUserName(resultSet.getString(2));
                 account.setPassword(resultSet.getString(3));
                 account.setRightName(resultSet.getInt(4));
@@ -81,13 +109,17 @@ public class AccountDAO extends DAO{
         }catch (Exception e){
             e.printStackTrace();
         }
-        for(Account acc : accounts){
-            System.out.println("wel id?: " + acc.getId());
-        }
+
         return accounts;
 
     }
 
+    /**
+     * Create account query.
+     *
+     * @param account the account
+     * @throws Exception the exception
+     */
     public void createAccountQuery(Account account) throws Exception{
         String sql = "INSERT INTO account(accountName, password, privilege, userid)" +
                 "VALUES (?,?,?,?)";
@@ -99,9 +131,6 @@ public class AccountDAO extends DAO{
         stmt.setInt(4, account.getId());
 
         int rowInserted = stmt.executeUpdate();
-        if (rowInserted > 0){
-            System.out.println("Account created!");
-        }
 
     }
 }
