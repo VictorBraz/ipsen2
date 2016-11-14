@@ -107,7 +107,6 @@ public class EditStudentController extends ContentLoader implements Initializabl
             e.printStackTrace();
         }
         noteTextField.setText(currentNote.getText());
-        System.out.print(currentDocuments.size());
         documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
     }
@@ -164,6 +163,13 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
     }
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException, SQLException {
         Document document = new Document();
@@ -196,10 +202,15 @@ public class EditStudentController extends ContentLoader implements Initializabl
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     * @throws InvocationTargetException the invocation target exception
+     */
     @FXML
     void handleCancelButton(MouseEvent event)throws InvocationTargetException{
 //        documentData.clear();
@@ -209,12 +220,26 @@ public class EditStudentController extends ContentLoader implements Initializabl
         medewerkerLabel.setText("Medewerker Bekijken");
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleEditButton(MouseEvent event) throws SQLException{
         editable(true);
         medewerkerLabel.setText("Medewerker Aanpassen");
 
     }
+
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
         updateStudent();
@@ -222,12 +247,17 @@ public class EditStudentController extends ContentLoader implements Initializabl
         editable(false);
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
-        System.out.println(selectedRows);
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     documentDAO.deleteDocument(row);
                 } catch (SQLException e) {
@@ -245,15 +275,19 @@ public class EditStudentController extends ContentLoader implements Initializabl
         }
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {
         if (selectedRows.size() != 0) {
 
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     File file = documentDAO.selectDocument(row).getFile();
-                    System.out.println("file: " + file.toString());
                     Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
                 } catch (SQLException e) {
                     e.printStackTrace();

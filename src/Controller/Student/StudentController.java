@@ -26,6 +26,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Roel on 1-11-2016.
+ */
 public class StudentController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML private TableView<TableViewItem> tableView;
@@ -70,12 +73,22 @@ public class StudentController extends ContentLoader implements Initializable, T
         tableView.setItems(studentData);
     }
 
+    /**
+     * Handle add button.
+     *
+     * @param event the event
+     */
     @FXML
 
     void handleAddButton(MouseEvent event) {
         addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
     }
 
+    /**
+     * Handle delete button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteButton(MouseEvent event) {
         if (selectedRows.size() != 0){
@@ -92,11 +105,21 @@ public class StudentController extends ContentLoader implements Initializable, T
         }
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event){
 
     }
 
+    /**
+     * Handle zoomin button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleZoominButton(MouseEvent event){
         if(selectedRows.size() != 0) {
@@ -116,6 +139,11 @@ public class StudentController extends ContentLoader implements Initializable, T
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         deleteAlert.setVisible(false);

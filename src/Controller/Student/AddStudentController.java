@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
- * Created by Bernd on 1-11-2016.
+ * Created by Roel on 1-11-2016.
  */
 public class AddStudentController extends ContentLoader implements Initializable, TableViewListener {
 
@@ -76,6 +76,12 @@ public class AddStudentController extends ContentLoader implements Initializable
     private DocumentDAO documentDAO;
     private ArrayList<Document> documents = new ArrayList<Document>();
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
@@ -107,10 +113,14 @@ public class AddStudentController extends ContentLoader implements Initializable
 
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event) {
         addContent(resources.getString("STUDENTS"));
@@ -134,11 +144,9 @@ public class AddStudentController extends ContentLoader implements Initializable
         student.setStudy(studyTextField.getText());
         student.setTag(tagsTextField.getText());
         student.setId(studentDAO.addStudent(student).getId());
-        System.out.println(student.getId());
         note.setOwnerID(student.getId());
         note.setText(noteTextField.getText());
         note.setNoteID(noteDAO.addNote(note).getNoteID());
-        System.out.println(student.getId());
 
         for(int i =0; i < documents.size(); i++) {
             documents.get(i).setOwnerID(student.getId());
@@ -146,27 +154,50 @@ public class AddStudentController extends ContentLoader implements Initializable
         }
         documents.clear();
 
-        // note, documents en tags nog toevoegen.
-        // relatie nog volledig doen.
-
     }
+
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleEditButton(MouseEvent event) throws SQLException{
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
         addStudent();
         addContent(resources.getString("STUDENTS"));
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
         documents.clear();
         documentData = FXCollections.observableArrayList(documents);
         showTable();
     }
+
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event){
 

@@ -8,14 +8,27 @@ import java.sql.SQLException;
 
 
 /**
- * Created by Bernd on 13-10-2016.
+ * Created by Roel on 13-10-2016.
  */
 public class NoteDAO extends DAO{
 
+    /**
+     * Instantiates a new Note dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws InstantiationException the instantiation exception
+     * @throws SQLException           the sql exception
+     */
     public NoteDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
     }
-    
+
+    /**
+     * Add note note.
+     *
+     * @param note the note
+     * @return the note
+     */
     public Note addNote(Note note){
         try{
             note = addNoteQuery(note);
@@ -24,16 +37,36 @@ public class NoteDAO extends DAO{
         }
         return note;
     }
-    
+
+    /**
+     * Update note.
+     *
+     * @param note the note
+     * @return the note
+     * @throws SQLException the sql exception
+     */
     public Note update(Note note) throws SQLException{
         return updateNoteQuery(note);
     }
 
+    /**
+     * Select note note.
+     *
+     * @param ownerID the owner id
+     * @return the note
+     * @throws SQLException the sql exception
+     */
     public Note selectNote(int ownerID) throws SQLException{
         Note note = selectNoteQuery(ownerID);
         return note;
     }
 
+    /**
+     * Delete note.
+     *
+     * @param note the note
+     * @throws SQLException the sql exception
+     */
     public void deleteNote(Note note) throws  SQLException{
         deleteNoteQuery(note);
     }
