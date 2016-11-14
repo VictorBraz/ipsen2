@@ -14,6 +14,9 @@ public class PropertiesLoader implements PropertiesLoaderInterface {
     private static String userName;
     private static String password;
 
+    /**
+     * Instantiates a new Properties loader.
+     */
     public PropertiesLoader () {
         InputStream in = ContentLoader.class.getResourceAsStream("/resources/database.properties");
         Properties config = new Properties();

@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Victor on 2-11-2016
+ */
 public class AddCompanyController extends ContentLoader implements Initializable, TableViewListener {
 
     @FXML private JFXTextField companyNameTextField;
@@ -69,6 +72,12 @@ public class AddCompanyController extends ContentLoader implements Initializable
     private NoteDAO noteDAO;
     private ArrayList<Document> documents = new ArrayList<Document>();
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
@@ -100,20 +109,36 @@ public class AddCompanyController extends ContentLoader implements Initializable
 
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event) {
         addContent(resources.getString("COMPANIES"));
 
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {}
 
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException {
 
@@ -140,11 +165,9 @@ public class AddCompanyController extends ContentLoader implements Initializable
                 company.setCompanyAddress(address);
                 company.setTag(tagsTextField.getText());
                 company.setId(companyDAO.addCompany(company).getId());
-                System.out.println(company.getId());
                 note.setOwnerID(company.getId());
                 note.setText(noteTextField.getText());
                 note.setNoteID(noteDAO.addNote(note).getNoteID());
-                System.out.println(company.getId());
 
 
                 for (int i = 0; i < documents.size(); i++) {
@@ -162,6 +185,11 @@ public class AddCompanyController extends ContentLoader implements Initializable
         }
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) {
         documents.clear();
@@ -169,6 +197,11 @@ public class AddCompanyController extends ContentLoader implements Initializable
         showTable();
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleEditButton(MouseEvent event){
 

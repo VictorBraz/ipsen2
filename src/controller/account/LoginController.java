@@ -42,9 +42,11 @@ public class LoginController extends ContentLoader implements Initializable {
     private AccountController controller;
 
     /**
+     * Cmd login.
+     *
+     * @param event the event
+     * @throws Exception the exception
      * @author Bernd, Victor
-     * @param event
-     * @throws Exception
      */
     @FXML
     public void cmdLogin(ActionEvent event) throws Exception {
@@ -57,7 +59,6 @@ public class LoginController extends ContentLoader implements Initializable {
         for(Account account : accounts) {
             if (username.equals(account.getUserName()) && password.equals(account.getPassword())) {
                 addContent(resources.getString("MAINMENU"));
-                System.out.println("Welcome");
             } else {
                 loginFailAlert.setVisible(true);
                 FadeTransition animation = new FadeTransition(Duration.millis(3000));
@@ -73,6 +74,12 @@ public class LoginController extends ContentLoader implements Initializable {
 
 
     }
+
+    /**
+     * Forgot password link.
+     *
+     * @param event the event
+     */
     @FXML
     void forgotPasswordLink(MouseEvent event) {
         forgotPasswordAlert.setVisible(true);
@@ -86,6 +93,11 @@ public class LoginController extends ContentLoader implements Initializable {
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         forgotPasswordAlert.setVisible(false);
@@ -93,6 +105,11 @@ public class LoginController extends ContentLoader implements Initializable {
 
     }
 
+    /**
+     * Cmd close application.
+     *
+     * @param event the event
+     */
     @FXML
     void cmdCloseApplication(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
