@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import sun.invoke.empty.Empty;
 
 import java.io.File;
 import java.io.IOException;
@@ -176,8 +177,13 @@ public class AddStudentController extends ContentLoader implements Initializable
      */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
-        addStudent();
-        addContent(resources.getString("STUDENTS"));
+        if(!firstNameTextField.getText().trim().isEmpty() && !lastNameTextField.getText().trim().isEmpty() && !birthDateTextfield.getText().trim().isEmpty() &&
+                !adresTextField.getText().trim().isEmpty() && !zipCodeTextField.getText().trim().isEmpty() && !cityTextField.getText().trim().isEmpty() &&
+                !studyTextField.getText().trim().isEmpty() && !emailTextfield.getText().trim().isEmpty() && !phoneTextField.getText().trim().isEmpty()){
+            addStudent();
+            addContent(resources.getString("STUDENTS"));
+        }
+
     }
 
     /**

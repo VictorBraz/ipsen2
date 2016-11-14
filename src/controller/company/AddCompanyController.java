@@ -117,44 +117,48 @@ public class AddCompanyController extends ContentLoader implements Initializable
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException {
 
-        Company company = new Company();
-        Address address = new Address();
-        Document document = new Document();
-        Note note = new Note();
+        if(!companyNameTextField.getText().trim().isEmpty() && !addressNameTextField.getText().trim().isEmpty() && !zipCodeTextfield.getText().trim().isEmpty() &&
+                !cityTextField.getText().trim().isEmpty() && !contactPersonTextField.getText().trim().isEmpty() && !phoneNumberTextField.getText().trim().isEmpty() &&
+                !emailTextField.getText().trim().isEmpty()) {
+            Company company = new Company();
+            Address address = new Address();
+            Document document = new Document();
+            Note note = new Note();
 
-        try {
-            companyDAO = new CompanyDAO();
-            AddressDAO addressDAO = new AddressDAO();
-            company.setCompanyName(companyNameTextField.getText());
-            company.setContactPerson(contactPersonTextField.getText());
-            company.setPhoneNumber(phoneNumberTextField.getText());
-            company.setEmailAddress(emailTextField.getText());
+            try {
+                companyDAO = new CompanyDAO();
+                AddressDAO addressDAO = new AddressDAO();
+                company.setCompanyName(companyNameTextField.getText());
+                company.setContactPerson(contactPersonTextField.getText());
+                company.setPhoneNumber(phoneNumberTextField.getText());
+                company.setEmailAddress(emailTextField.getText());
 
-            address.setAddress(addressNameTextField.getText());
-            address.setCity(cityTextField.getText());
-            address.setZipCode(zipCodeTextfield.getText());
-            addressDAO.addAddress(address);
-            company.setCompanyAddress(address);
-            company.setTag(tagsTextField.getText());
-            company.setId(companyDAO.addCompany(company).getId());
-            System.out.println(company.getId());
-            note.setOwnerID(company.getId());
-            note.setText(noteTextField.getText());
-            note.setNoteID(noteDAO.addNote(note).getNoteID());
-            System.out.println(company.getId());
+                address.setAddress(addressNameTextField.getText());
+                address.setCity(cityTextField.getText());
+                address.setZipCode(zipCodeTextfield.getText());
+                addressDAO.addAddress(address);
+                company.setCompanyAddress(address);
+                company.setTag(tagsTextField.getText());
+                company.setId(companyDAO.addCompany(company).getId());
+                System.out.println(company.getId());
+                note.setOwnerID(company.getId());
+                note.setText(noteTextField.getText());
+                note.setNoteID(noteDAO.addNote(note).getNoteID());
+                System.out.println(company.getId());
 
 
-            for(int i =0; i < documents.size(); i++) {
-                documents.get(i).setOwnerID(company.getId());
-                documentDAO.addDocument(documents.get(i));
+                for (int i = 0; i < documents.size(); i++) {
+                    documents.get(i).setOwnerID(company.getId());
+                    documentDAO.addDocument(documents.get(i));
+                }
+                documents.clear();
+
+                documents.clear();
+                addContent(resources.getString("COMPANIES"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            documents.clear();
-
-            documents.clear();
-            addContent(resources.getString("COMPANIES"));
-
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 

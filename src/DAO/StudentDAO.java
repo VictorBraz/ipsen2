@@ -14,7 +14,7 @@ public class StudentDAO extends DAO {
     private PreparedStatement selectAllStudentsQuery;
 
     /**
-     * Instantiates a new Student dao.
+     * Instantiates a new student dao.
      *
      * @throws IllegalAccessException the illegal access exception
      * @throws InstantiationException the instantiation exception

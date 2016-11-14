@@ -119,38 +119,42 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
 
-        Client client = new Client();
-        Address address = new Address();
-        Note note = new Note();
-        Document document = new Document();
+        if(!firstNameTextField.getText().trim().isEmpty() && !lastNameTextField.getText().trim().isEmpty() && !birthDateTextfield.getText().trim().isEmpty() &&
+                !addressTextField.getText().trim().isEmpty() && !zipCodeTextField.getText().trim().isEmpty() && !cityTextField.getText().trim().isEmpty() &&
+                !studyTextField.getText().trim().isEmpty() && !emailTextfield.getText().trim().isEmpty() && !phoneTextField.getText().trim().isEmpty()) {
+            Client client = new Client();
 
-        address.setAddress(addressTextField.getText());
-        address.setZipCode(zipCodeTextField.getText());
-        address.setCity(cityTextField.getText());
-        client.setAddress(addressDAO.addAddress(address));
-        client.setFirstName(firstNameTextField.getText());
-        client.setLastName(lastNameTextField.getText());
-        client.setBirthDate(birthDateTextfield.getText());
-        client.setStudy(studyTextField.getText());
-        client.setEmailAddress(emailTextfield.getText());
-        client.setPhoneNumber(phoneTextField.getText());
-        client.setTag(tagsTextField.getText());
+            Address address = new Address();
+            Note note = new Note();
+            Document document = new Document();
 
-        client.setId(clientDAO.addClient(client).getId());
-        System.out.println(client.getId());
+            address.setAddress(addressTextField.getText());
+            address.setZipCode(zipCodeTextField.getText());
+            address.setCity(cityTextField.getText());
+            client.setAddress(addressDAO.addAddress(address));
+            client.setFirstName(firstNameTextField.getText());
+            client.setLastName(lastNameTextField.getText());
+            client.setBirthDate(birthDateTextfield.getText());
+            client.setStudy(studyTextField.getText());
+            client.setEmailAddress(emailTextfield.getText());
+            client.setPhoneNumber(phoneTextField.getText());
+            client.setTag(tagsTextField.getText());
 
-        note.setOwnerID(client.getId());
-        note.setText(noteTextField.getText());
-        note.setNoteID(noteDAO.addNote(note).getNoteID());
+            client.setId(clientDAO.addClient(client).getId());
+            System.out.println(client.getId());
 
-        for(int i =0; i < documents.size(); i++) {
-            documents.get(i).setOwnerID(client.getId());
-            documentDAO.addDocument(documents.get(i));
+            note.setOwnerID(client.getId());
+            note.setText(noteTextField.getText());
+            note.setNoteID(noteDAO.addNote(note).getNoteID());
+
+            for (int i = 0; i < documents.size(); i++) {
+                documents.get(i).setOwnerID(client.getId());
+                documentDAO.addDocument(documents.get(i));
+            }
+            documents.clear();
+
+            addContent(resources.getString("CLIENTS"));
         }
-        documents.clear();
-
-        addContent(resources.getString("CLIENTS"));
-
     }
 
     @FXML
