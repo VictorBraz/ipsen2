@@ -1,5 +1,7 @@
 package Controller.settings;
 
+import Controller.AccountController;
+import Controller.company.AddCompanyController;
 import Controller.handlers.TableViewListener;
 import Controller.handlers.TableViewSelectHandler;
 import DAO.AccountDAO;
@@ -68,6 +70,7 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     @FXML
     void handleAddAccountsButton(MouseEvent event) {
+        addContent(new AccountController(), resources.getString("NEW_ACCOUNT_DIALOG"));
 
     }
 
@@ -75,7 +78,6 @@ public class SettingsController extends ContentLoader implements Initializable, 
     void handleCancelButton(MouseEvent event) {
         fillFields();
         editable(false);
-
     }
 
     @FXML

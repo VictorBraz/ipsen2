@@ -104,7 +104,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         tableViewSelectHandler.createSelectAllCheckBox();
 
         for (Company company : companyDAO.getCompanies()){
-            if(company.getTag().contains(searchTextField.getText())){
+            if(company.getTag().toLowerCase().contains(searchTextField.getText().toLowerCase())){
                 companies.add(company);
             }
         }
@@ -121,7 +121,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         tableViewSelectHandler.createSelectAllCheckBox();
 
         for (Student student : studentDAO.selectAllStudents()){
-            if(student.getTag().contains(searchTextField.getText())){
+            if(student.getTag().toLowerCase().contains(searchTextField.getText().toLowerCase())){
                 students.add(student);
             }
         }
@@ -137,7 +137,7 @@ public class SearchController extends ContentLoader implements Initializable, Ta
         tableViewSelectHandler.createSelectAllCheckBox();
 
         for (Client client : clientDAO.selectAllClients()){
-            if(client.getTag().contains(searchTextField.getText())){
+            if(client.getTag().toLowerCase().contains(searchTextField.getText().toLowerCase())){
                 clients.add(client);
             }
         }
