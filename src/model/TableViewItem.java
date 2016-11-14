@@ -1,6 +1,9 @@
 package model;
 
 
+/**
+ * Created by Bernd on 29-10-2016
+ */
 public class TableViewItem {
 
     /**

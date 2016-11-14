@@ -13,14 +13,31 @@ import java.util.ArrayList;
  */
 public class CompanyDAO extends DAO {
 
+    /**
+     * The Companies.
+     */
     ArrayList<Company> companies;
+    /**
+     * The Stmt.
+     */
     PreparedStatement stmt;
 
 
+    /**
+     * Instantiates a new Company dao.
+     *
+     * @throws Exception the exception
+     */
     public CompanyDAO() throws Exception{
         super();
     }
 
+    /**
+     * Select company company.
+     *
+     * @param id the id
+     * @return the company
+     */
     public Company selectCompany(int id) {
         Company company = new Company();
         Address address = new Address();
@@ -63,6 +80,13 @@ public class CompanyDAO extends DAO {
         return company;
     }
 
+    /**
+     * Add company company.
+     *
+     * @param company the company
+     * @return the company
+     * @throws Exception the exception
+     */
     public Company addCompany(Company company) throws Exception{
         try{
             addCompanyQuery(company);
@@ -73,9 +97,11 @@ public class CompanyDAO extends DAO {
     }
 
     /**
+     * Update company.
+     *
+     * @param company the company
+     * @throws Exception the exception
      * @author Victor
-     * @param company
-     * @throws Exception
      */
     public void updateCompany(Company company) throws Exception{
 
@@ -87,11 +113,12 @@ public class CompanyDAO extends DAO {
     }
 
     /**
+     * Delete company.
+     *
+     * @param id the id
      * @author Victor
-     * @param id
      */
     public void deleteCompany(int id){
-        System.out.println(id);
         String sql = "DELETE FROM company WHERE id=?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -104,9 +131,11 @@ public class CompanyDAO extends DAO {
     }
 
     /**
-     * @author Victor
-     * @return
+     * Gets companies.
+     *
+     * @return companies
      * @throws Exception
+     * @author Victor
      */
     public ArrayList<Company> getCompanies() {
 
@@ -170,9 +199,7 @@ public class CompanyDAO extends DAO {
             company.setId(id);
         }
 
-        if (rowsInserted > 0){
-            System.out.print("New company inserted succesfully!");
-        }
+
 
         stmt.close();
 
@@ -200,9 +227,7 @@ public class CompanyDAO extends DAO {
         stmt.setInt(7, company.getId());
 
         int rowUpdated = stmt.executeUpdate();
-        if(rowUpdated > 0){
-            System.out.print("Company updated successfully!");
-        }
+
         stmt.close();
         }
 

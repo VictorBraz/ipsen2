@@ -14,12 +14,29 @@ public class DocumentDAO extends DAO{
     private File file;
     private FileInputStream fis;
     private String outputStream;
+    /**
+     * The My file.
+     */
     File myFile;
 
+    /**
+     * Instantiates a new Document dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws InstantiationException the instantiation exception
+     * @throws SQLException           the sql exception
+     */
     public DocumentDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
     }
 
+    /**
+     * Add document document.
+     *
+     * @param document the document
+     * @return the document
+     * @throws SQLException the sql exception
+     */
     public Document addDocument(Document document) throws SQLException{
         try {
             addDocumentQuery(document);
@@ -29,16 +46,38 @@ public class DocumentDAO extends DAO{
         return document;
     }
 
+    /**
+     * Select all documents array list.
+     *
+     * @param ownerID the owner id
+     * @return the array list
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public ArrayList<Document> selectAllDocuments(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = selectAllDocumentsQuery(ownerID);
         return documents;
     }
 
+    /**
+     * Select document document.
+     *
+     * @param id the id
+     * @return the document
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public Document selectDocument(int id) throws SQLException, IOException {
         Document document = selectDocumentQuery(id);
         return document;
     }
 
+    /**
+     * Delete document.
+     *
+     * @param id the id
+     * @throws SQLException the sql exception
+     */
     public void deleteDocument(int id) throws SQLException{
         try {
             deleteDocumentQuery(id);
@@ -68,6 +107,14 @@ public class DocumentDAO extends DAO{
     }
 
 
+    /**
+     * Select all documents query array list.
+     *
+     * @param ownerID the owner id
+     * @return the array list
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public ArrayList<Document> selectAllDocumentsQuery(int ownerID) throws SQLException, IOException {
         ArrayList<Document> documents = new ArrayList<Document>();
             String sql = "SELECT * FROM document WHERE ownerid = ?";
@@ -81,7 +128,6 @@ public class DocumentDAO extends DAO{
                 document.setDocumentName(result.getString(3));
                 documents.add(document);
             }
-            System.out.println(documents.size());
         statement.close();
         return documents;
     }
@@ -125,9 +171,7 @@ public class DocumentDAO extends DAO{
         while (keyResultSet.next()) {
             if(keyResultSet.equals(id)) {
                 int rowsDeleted = statement.executeUpdate();
-                if(rowsDeleted > 0) {
-                    System.out.println("A document was deleted succesfully");
-                }
+
             }
         }
         statement.executeUpdate();

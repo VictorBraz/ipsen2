@@ -75,10 +75,6 @@ public class AddressDAO extends DAO {
         }
     }
 
-//    public void deleteFlagAddress(int addressID) {
-//        deleteFlagAddressQuery();
-//    }
-
 
     private Address addAddressQuery(Address address) throws SQLException {
         String sql = "INSERT INTO address (address, zipcode, city) VALUES (?,?,?)";
@@ -106,9 +102,7 @@ public class AddressDAO extends DAO {
         statement.setString(3, address.getCity());
         statement.setInt(4, address.getAddressID());
         int rowUpdated = statement.executeUpdate();
-        if(rowUpdated > 0){
-            System.out.println("Address updated successfully!");
-        }
+
     }
 
     private Address selectAddressQuery(int addressID) throws SQLException {
@@ -136,9 +130,6 @@ public class AddressDAO extends DAO {
         while(keyResultSet.next()) {
             if(keyResultSet.equals(addressID)) {
                 int rowsDeleted = statement.executeUpdate();
-                if(rowsDeleted > 0) {
-                    System.out.println("A client was deleted succesfully!");
-                }
             }
         }
     }
