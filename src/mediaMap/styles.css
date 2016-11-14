@@ -134,6 +134,17 @@
         -fx-cursor:hand;
     }
 
+    .table-view > .virtual-flow > .scroll-bar:vertical,
+    .table-view > .virtual-flow > .scroll-bar:vertical > .track,
+    .table-view > .virtual-flow > .scroll-bar:vertical > .track-background {
+        -fx-background-color: transparent;
+    }
+
+    .table-view > .virtual-flow > .scroll-bar > .increment-button,
+    .table-view > .virtual-flow > .scroll-bar > .decrement-button {
+        -fx-opacity: 0;
+    }
+
 
 
 

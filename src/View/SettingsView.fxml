@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.settings.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.settings.SettingsController">
 
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="322.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
@@ -96,6 +97,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="14.78" radius="6.89" width="14.78" />
+                     </effect>
                   </TableView>
                   <Pane layoutX="951.0" layoutY="170.0" onMouseClicked="#handleAddAccountsButton" prefHeight="82.0" prefWidth="83.0" />
                   <Pane layoutX="1034.0" layoutY="170.0" prefHeight="82.0" prefWidth="83.0">
@@ -105,7 +109,7 @@
                               <Image url="@../mediaMap/zoominButton.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="94.0" fitWidth="83.0" onMouseClicked="#handleAddAccountsButton" layoutX="-35.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                        <ImageView fitHeight="94.0" fitWidth="83.0" onMouseClicked="#handleAddAccountsButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                            <image>
                               <Image url="@../mediaMap/AddButton.png" />
                            </image>
