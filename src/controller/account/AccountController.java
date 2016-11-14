@@ -57,6 +57,8 @@ public class AccountController extends ContentLoader implements Initializable, T
     @FXML
     public void handleAddAccount(MouseEvent event) throws Exception{
 
+        if(!usernameTextField.getText().isEmpty() & !passwordTextField.getText().isEmpty()){
+
         account = new Account();
         account.setUserName(usernameTextField.getText());
         account.setPassword(passwordTextField.getText());
@@ -69,6 +71,10 @@ public class AccountController extends ContentLoader implements Initializable, T
             e.printStackTrace();
         }
         addContent(resources.getString("SETTINGS"));
+        } else {
+            System.out.println("niet alle velden zijn ingevuld");
+            addContent(resources.getString("SETTINGS"));
+        }
     }
 
     @FXML
