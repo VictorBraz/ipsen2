@@ -13,96 +13,96 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.client.ClientController">
-   <children>
-      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
-        <columns>
-            <TableColumn fx:id="checkBoxColumn" prefWidth="50.000030517578125" text="checkboxColumn" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="100.99996948242188" text="Voornaam" />
-          <TableColumn fx:id="lastNameColumn" prefWidth="199.0" text="Achternaam" />
-            <TableColumn fx:id="birthDateColumn" prefWidth="103.0" text="Geboortedatum" />
-            <TableColumn fx:id="emailColumn" prefWidth="227.0" text="Email" />
-            <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="119.0" text="Telefoon" />
-            <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="180.0" text="Studie" />
-            <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="289.0" text="Tags" />
-        </columns>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </TableView>
-      <Group layoutX="862.0" layoutY="680.0" />
-      <Pane layoutX="1172.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
-         <children>
-            <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@../mediaMap/zoominButton.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-       <Pane layoutX="1240.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
-         <children>
-               <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-                   <image>
-                       <Image url="@../mediaMap/deleteButton.png" />
-                   </image>
-               </ImageView>
-         </children>
-       </Pane>
-       <Pane layoutX="1105.0" layoutY="700.0" onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
-         <children>
-               <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-                   <image>
-                       <Image url="@../mediaMap/AddButton.png" />
-                   </image>
-               </ImageView>
-         </children>
-       </Pane>
-      <Pane fx:id="deleteAlert" layoutX="1045.0" layoutY="480.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;" visible="false">
-         <children>
-            <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="259.0" text="Client verwijderen?" textOverrun="CLIP">
-               <font>
-                  <Font name="Roboto" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="17.0" layoutY="35.0" prefHeight="144.0" prefWidth="259.0" text="Selecteer eerst een client uit&#10;de lijst. Klik vervolgens op &#10;het verwijder icoon.&#10;" textFill="#979797" textOverrun="CLIP">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="confirmButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
-               <font>
-                  <Font name="Roboto Medium" size="18.0" />
-               </font>
-            </JFXButton>
-            <Group />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
-      <Pane fx:id="zoominAlert" layoutX="1055.0" layoutY="490.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;" visible="false">
-         <children>
-            <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="259.0" text="Client bekijken?" textOverrun="CLIP">
-               <font>
-                  <Font name="Roboto" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="17.0" layoutY="50.0" prefHeight="129.0" prefWidth="259.0" text="Om een client te kunnen bekijken&#10;of wijzigen moet deze eerst &#10;geselecteerd worden. klik &#10;vervolgens op het vergrootglas&#10;icoon.&#10;" textFill="#979797" textOverrun="CLIP">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="confirmButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
-               <font>
-                  <Font name="Roboto Medium" size="18.0" />
-               </font>
-            </JFXButton>
-            <Group />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.client.ClientController">
+    <children>
+        <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
+            <columns>
+                <TableColumn fx:id="checkBoxColumn" prefWidth="50.000030517578125" text="checkboxColumn" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="100.99996948242188" text="Voornaam" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="199.0" text="Achternaam" />
+                <TableColumn fx:id="birthDateColumn" prefWidth="103.0" text="Geboortedatum" />
+                <TableColumn fx:id="emailColumn" prefWidth="227.0" text="Email" />
+                <TableColumn fx:id="phoneNumberColumn" minWidth="0.0" prefWidth="119.0" text="Telefoon" />
+                <TableColumn fx:id="studyColum" minWidth="0.0" prefWidth="180.0" text="Studie" />
+                <TableColumn fx:id="tagColumn" minWidth="0.0" prefWidth="289.0" text="Tags" />
+            </columns>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </TableView>
+        <Group layoutX="862.0" layoutY="680.0" />
+        <Pane layoutX="1172.0" layoutY="700.0" onMouseClicked="#handleZoominButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+            <children>
+                <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@../mediaMap/zoominButton.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <Pane layoutX="1240.0" layoutY="700.0" onMouseClicked="#handleDeleteButton" prefHeight="69.0" prefWidth="70.0" styleClass="buttonWithoutHover">
+            <children>
+                <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@../mediaMap/deleteButton.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <Pane layoutX="1105.0" layoutY="700.0" onMouseClicked="#handleAddButton" prefHeight="65.0" prefWidth="72.0" styleClass="buttonWithoutHover">
+            <children>
+                <ImageView fitHeight="69.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@../mediaMap/AddButton.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <Pane fx:id="deleteAlert" layoutX="1045.0" layoutY="480.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;" visible="false">
+            <children>
+                <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="259.0" text="Client verwijderen?" textOverrun="CLIP">
+                    <font>
+                        <Font name="Roboto" size="20.0" />
+                    </font>
+                </Label>
+                <Label layoutX="17.0" layoutY="35.0" prefHeight="144.0" prefWidth="259.0" text="Selecteer eerst een client uit&#10;de lijst. Klik vervolgens op &#10;het verwijder icoon.&#10;" textFill="#979797" textOverrun="CLIP">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="confirmButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+                    <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                    </font>
+                </JFXButton>
+                <Group />
+            </children>
+            <effect>
+                <DropShadow />
+            </effect>
+        </Pane>
+        <Pane fx:id="zoominAlert" layoutX="1055.0" layoutY="490.0" prefHeight="214.0" prefWidth="292.0" style="-fx-background-color: #ffffff;" visible="false">
+            <children>
+                <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="259.0" text="Client bekijken?" textOverrun="CLIP">
+                    <font>
+                        <Font name="Roboto" size="20.0" />
+                    </font>
+                </Label>
+                <Label layoutX="17.0" layoutY="50.0" prefHeight="129.0" prefWidth="259.0" text="Om een client te kunnen bekijken&#10;of wijzigen moet deze eerst &#10;geselecteerd worden. klik &#10;vervolgens op het vergrootglas&#10;icoon.&#10;" textFill="#979797" textOverrun="CLIP">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="confirmButton" layoutX="188.0" layoutY="154.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+                    <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                    </font>
+                </JFXButton>
+                <Group />
+            </children>
+            <effect>
+                <DropShadow />
+            </effect>
+        </Pane>
+    </children>
 </AnchorPane>

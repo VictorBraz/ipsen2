@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 
 /**
@@ -17,7 +17,7 @@ public class Student extends TableViewItem{
     private String tag;
 
     /**
-     * Instantiates a new Student.
+     * Instantiates a new student.
      */
     public Student(){
 
@@ -36,7 +36,7 @@ public class Student extends TableViewItem{
     }
 
     /**
-     * Instantiates a new Student.
+     * Instantiates a new student.
      *
      * @param id the student id
      */
@@ -54,7 +54,7 @@ public class Student extends TableViewItem{
     }
 
     /**
-     * Instantiates a new Student.
+     * Instantiates a new student.
      *
      * @param id
      * @param firstName

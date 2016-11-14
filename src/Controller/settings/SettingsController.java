@@ -1,9 +1,9 @@
-package Controller.settings;
+package controller.settings;
 
-import Controller.handlers.TableViewListener;
+import controller.handlers.TableViewListener;
 import DAO.AccountDAO;
-import Model.Account;
-import Model.TableViewItem;
+import model.Account;
+import model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;

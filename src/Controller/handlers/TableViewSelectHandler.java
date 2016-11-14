@@ -1,6 +1,6 @@
-package Controller.handlers;
+package controller.handlers;
 
-import Model.TableViewItem;
+import model.TableViewItem;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
 import javafx.animation.PauseTransition;

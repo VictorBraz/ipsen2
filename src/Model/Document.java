@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import DAO.DocumentDAO;
 import java.io.*;

@@ -1,4 +1,4 @@
-package Controller.menu;
+package controller.menu;
 
 
 import contentloader.ContentLoader;

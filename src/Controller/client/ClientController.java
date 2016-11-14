@@ -1,13 +1,10 @@
-package Controller.client;
+package controller.client;
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
-import DAO.AddressDAO;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.ClientDAO;
-import Model.Client;
-import Model.TableViewItem;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
+import model.Client;
+import model.TableViewItem;
 import contentloader.ContentLoader;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
@@ -33,7 +30,6 @@ import java.util.ResourceBundle;
 public class ClientController extends ContentLoader implements Initializable, TableViewListener{
 
     @FXML  TableView<TableViewItem> tableView;
-    @FXML private TableColumn checkBoxColumn;
     @FXML private TableColumn firstNameColumn;
     @FXML private TableColumn lastNameColumn;
     @FXML private TableColumn birthDateColumn;
@@ -43,19 +39,13 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private TableColumn tagColumn;
 
     @FXML private Pane deleteAlert;
-    @FXML private JFXButton confirmButton;
     @FXML private Pane zoominAlert;
-
-
 
     public int selectedClientID;
     private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
 
-    private JFXCheckBox selectAllCheckBox;
-
     private ClientDAO clientDAO;
-    private AddressDAO addressDAO;
     private ResourceBundle resources;
 
     @FXML
@@ -104,24 +94,15 @@ public class ClientController extends ContentLoader implements Initializable, Ta
 
     }
 
-
-
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
-
-
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
         this.selectedClientID = selectedItemId;
-
     }
-
-
-
-
 
     private void showTable() {
         TableViewSelectHandler tableViewSelectHandler = new TableViewSelectHandler(tableView, this);
@@ -140,8 +121,6 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
@@ -158,13 +137,11 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+
         clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
         showTable();
         deleteAlert.setVisible(false);
         zoominAlert.setVisible(false);
-
-
-
     }
 
 }

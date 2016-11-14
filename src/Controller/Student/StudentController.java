@@ -1,11 +1,11 @@
-package Controller.Student;
+package controller.student;
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.StudentDAO;
-import Model.Student;
-import Model.TableViewItem;
+import model.Student;
+import model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
@@ -37,7 +37,6 @@ public class StudentController extends ContentLoader implements Initializable, T
     @FXML private TableColumn studyColum;
     @FXML private TableColumn phoneNumberColumn;
     @FXML private TableColumn tagColumn;
-
     @FXML private TableColumn studentIDColumn;
 
     @FXML private Pane deleteAlert;
@@ -71,7 +70,6 @@ public class StudentController extends ContentLoader implements Initializable, T
     }
 
     @FXML
-
     void handleAddButton(MouseEvent event) {
         addContent(new AddStudentController(), resources.getString("NEW_STUDENT_DIALOG"));
     }
@@ -88,7 +86,6 @@ public class StudentController extends ContentLoader implements Initializable, T
             animation.setFromValue(0.0);
             animation.setFromValue(1.0);
             animation.play();
-
         }
     }
 

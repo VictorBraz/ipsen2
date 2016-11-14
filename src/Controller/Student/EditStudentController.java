@@ -1,12 +1,12 @@
-package Controller.Student;
+package controller.student;
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
 import DAO.StudentDAO;
-import Model.*;
+import model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -206,13 +206,13 @@ public class EditStudentController extends ContentLoader implements Initializabl
 
         fillFields();
         editable(false);
-        medewerkerLabel.setText("Medewerker Bekijken");
+        medewerkerLabel.setText("Medewerker Informatie");
     }
 
     @FXML
     void handleEditButton(MouseEvent event) throws SQLException{
         editable(true);
-        medewerkerLabel.setText("Medewerker Aanpassen");
+        medewerkerLabel.setText("Medewerker Bewerken");
 
     }
     @FXML

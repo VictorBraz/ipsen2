@@ -1,16 +1,16 @@
-package Controller.client;
+package controller.client;
 
 /**
  * Created by Bernd on 31-10-2016.
  */
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
-import Model.*;
+import model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -74,8 +74,6 @@ public class AddClientController extends ContentLoader implements Initializable,
     private DocumentDAO documentDAO;
 
     private ResourceBundle resources;
-
-
     private ArrayList<Document> documents = new ArrayList<Document>();
 
     @FXML
@@ -99,8 +97,6 @@ public class AddClientController extends ContentLoader implements Initializable,
          }
         documentData = FXCollections.observableArrayList(documents);
         showTable();
-
-
     }
 
     private void showTable() {
@@ -118,7 +114,6 @@ public class AddClientController extends ContentLoader implements Initializable,
     @FXML
     void handleCancelButton(MouseEvent event) {
         addContent(resources.getString("CLIENTS"));
-
     }
 
     @FXML
