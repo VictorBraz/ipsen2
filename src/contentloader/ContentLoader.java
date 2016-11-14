@@ -1,6 +1,6 @@
 package contentloader;
 
-import Controller.menu.MainFrameController;
+import controller.menu.MainFrameController;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,13 +15,9 @@ import java.util.ResourceBundle;
  * Created by Bernd on 28-10-2016.
  */
 
-
 public abstract class ContentLoader {
 
     private static MainFrameController mainController;
-    /**
-     * The constant primaryStage.
-     */
     protected static Stage primaryStage;
     private static FXMLLoader loader;
 
@@ -124,10 +120,13 @@ public abstract class ContentLoader {
         mainController.setTitle(title);
     }
 
+    /**
+     * Sets hamburger menu visible.
+     *
+     * @param editBoolean the edit boolean
+     */
     protected void setHamburgerMenuVisible(boolean editBoolean) {
         mainController.hamburgerMenuVisible(editBoolean);
     }
-
-
 }
 

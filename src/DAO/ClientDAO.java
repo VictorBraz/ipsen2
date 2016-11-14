@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.Address;
-import Model.Client;
+import model.Address;
+import model.Client;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +33,7 @@ public class ClientDAO extends DAO {
      * Add client.
      *
      * @param client the client
+     * @return the client
      */
     public Client addClient(Client client) {
         try {
@@ -82,7 +83,7 @@ public class ClientDAO extends DAO {
     /**
      * Update client.
      *
-     * @param client   the client
+     * @param client the client
      */
     public void updateClient(Client client) {
         try {

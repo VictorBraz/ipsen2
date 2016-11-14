@@ -1,6 +1,6 @@
-package Controller;
+package controller.account;
 
-import Model.Account;
+import model.Account;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;

@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Note;
+import model.Note;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

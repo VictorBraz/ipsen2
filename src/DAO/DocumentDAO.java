@@ -1,8 +1,6 @@
 package DAO;
 
-import Model.Document;
-import org.postgresql.largeobject.LargeObject;
-import sun.misc.IOUtils;
+import model.Document;
 
 import java.io.*;
 import java.sql.*;
