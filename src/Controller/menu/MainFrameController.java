@@ -51,7 +51,7 @@ public class MainFrameController extends ContentLoader implements Initializable 
 
     @FXML
     void handleMinimizeButton(MouseEvent event) {
-        getPrimaryStage(event).toBack();
+        getPrimaryStage(event).setIconified(true);
     }
 
     @FXML
