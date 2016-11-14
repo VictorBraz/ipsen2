@@ -1,22 +1,33 @@
 package DAO;
 
-import Model.Address;
+import model.Address;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 
 /**
  * Created by Bernd on 13-10-2016.
  */
 public class AddressDAO extends DAO {
 
+    /**
+     * Instantiates a new Address dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws InstantiationException the instantiation exception
+     * @throws SQLException           the sql exception
+     */
     public AddressDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
     }
 
+    /**
+     * Add address address.
+     *
+     * @param address the address
+     * @return the address
+     */
     public Address addAddress(Address address) {
         try {
             address = addAddressQuery(address);
@@ -26,6 +37,11 @@ public class AddressDAO extends DAO {
         return address;
     }
 
+    /**
+     * Update address.
+     *
+     * @param address the address
+     */
     public void updateAddress(Address address) {
         try {
             updateAddressQuery(address);
@@ -34,11 +50,23 @@ public class AddressDAO extends DAO {
         }
     }
 
+    /**
+     * Select address address.
+     *
+     * @param addressID the address id
+     * @return the address
+     * @throws Exception the exception
+     */
     public Address selectAddress(int addressID) throws Exception {
         Address address = selectAddressQuery(addressID);
         return address;
     }
 
+    /**
+     * Delete address.
+     *
+     * @param addressID the address id
+     */
     public void deleteAddress(int addressID) {
         try {
             deleteAddressQuery(addressID);
@@ -66,12 +94,7 @@ public class AddressDAO extends DAO {
             int id = rs.getInt(1);
             address.setAddressID(id);
         }
-
-        if (rowInserted > 0) {
-            System.out.println("A new address was inserted succesfully!");
-        }
         return address;
-
     }
 
     private void updateAddressQuery(Address address) throws SQLException {
@@ -119,8 +142,4 @@ public class AddressDAO extends DAO {
             }
         }
     }
-
-//    private void deleteFlagAddressQuery() {
-//    }
-
 }

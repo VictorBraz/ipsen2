@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.Address;
-import Model.Student;
+import model.Address;
+import model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,11 +13,24 @@ public class StudentDAO extends DAO {
     private PreparedStatement deleteStudentQuery;
     private PreparedStatement selectAllStudentsQuery;
 
+    /**
+     * Instantiates a new Student dao.
+     *
+     * @throws IllegalAccessException the illegal access exception
+     * @throws InstantiationException the instantiation exception
+     * @throws SQLException           the sql exception
+     */
     public StudentDAO() throws IllegalAccessException, InstantiationException, SQLException {
         super();
     }
 
 
+    /**
+     * Add student student.
+     *
+     * @param student the student
+     * @return the student
+     */
     public Student addStudent(Student student) {
         try {
             student = addStudentQuery(student);
@@ -27,6 +40,13 @@ public class StudentDAO extends DAO {
         return student;
     }
 
+    /**
+     * Add student query student.
+     *
+     * @param student the student
+     * @return the student
+     * @throws SQLException the sql exception
+     */
     public Student addStudentQuery(Student student) throws SQLException{
         String sql = "insert into Student(firstname,lastname,birthdate,study,email,phoneNumber, studentaddressid, tag) VALUES(?,?,?,?,?,?,?,?);";
         PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -48,12 +68,18 @@ public class StudentDAO extends DAO {
             student.setId(id);
         }
         if (rowInserted > 0) {
-            System.out.println("A new Student was inserted succesfully!");
+            System.out.println("A new student was inserted succesfully!");
         }
         statement.close();
         return student;
     }
 
+    /**
+     * Update student.
+     *
+     * @param student the student
+     * @throws SQLException the sql exception
+     */
     public void updateStudent(Student student) throws  SQLException{
         try{
             updateStudentQuery(student);
@@ -79,12 +105,17 @@ public class StudentDAO extends DAO {
         int rowInserted = statement.executeUpdate();
 
         if (rowInserted > 0){
-            System.out.println("The Student Has Been updated succesfully!");
+            System.out.println("The student Has Been updated succesfully!");
         }
 
         statement.close();
     }
 
+    /**
+     * Delete student.
+     *
+     * @param studentID the student id
+     */
     public void deleteStudent(int studentID){
         try {
             deleteStudentQuery(studentID);
@@ -111,6 +142,11 @@ public class StudentDAO extends DAO {
         statement.close();
     }
 
+    /**
+     * Select all students array list .
+     *
+     * @return the array list
+     */
     public ArrayList <Student> selectAllStudents() {
 
         ArrayList<Student> students = null;
@@ -148,6 +184,13 @@ public class StudentDAO extends DAO {
         statement.close();
         return students;
     }
+
+    /**
+     * Select student student.
+     *
+     * @param id the id
+     * @return the student
+     */
     public Student selectStudent(int id) {
         Student student = null;
         try {
