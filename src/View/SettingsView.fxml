@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.settings.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.settings.SettingsController">
 
    <children>
       <Pane layoutX="46.0" layoutY="97.0" prefHeight="322.0" prefWidth="1270.0" style="-fx-background-color: #ffffff;" stylesheets="@../mediaMap/styles.css">
@@ -87,31 +86,28 @@
             </Label>
             <AnchorPane layoutX="68.0" layoutY="111.0" prefHeight="209.0" prefWidth="1133.0" stylesheets="@../mediaMap/styles.css">
                <children>
-                  <TableView fx:id="tableView" prefHeight="177.0" prefWidth="803.0">
+                  <TableView fx:id="tableView" prefHeight="177.0" prefWidth="693.0">
                      <columns>
                         <TableColumn fx:id="checkBoxColumn" prefWidth="38.0" />
                         <TableColumn fx:id="userNameColumn" prefWidth="307.0" text="Gebruikersnaam" />
                         <TableColumn fx:id="passwordColumn" prefWidth="354.0" text="Wachtwoord" />
-                        <TableColumn fx:id="accountIdColumn" prefWidth="141.0" text="id" />
+                        <TableColumn fx:id="accountIdColumn" prefWidth="141.0" text="id" visible="false" />
                      </columns>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </TableView>
-                  <Pane layoutX="951.0" layoutY="170.0" onMouseClicked="#handleAddAccountsButton" prefHeight="82.0" prefWidth="83.0">
-                     <children>
-                        <ImageView fitHeight="94.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-                           <image>
-                              <Image url="@../mediaMap/AddButton.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
+                  <Pane layoutX="951.0" layoutY="170.0" onMouseClicked="#handleAddAccountsButton" prefHeight="82.0" prefWidth="83.0" />
                   <Pane layoutX="1034.0" layoutY="170.0" prefHeight="82.0" prefWidth="83.0">
                      <children>
-                        <ImageView fitHeight="94.0" fitWidth="83.0" onMouseClicked="#handleZoominAccountButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                        <ImageView fitHeight="94.0" fitWidth="83.0" onMouseClicked="#handleZoominAccountButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
                            <image>
                               <Image url="@../mediaMap/zoominButton.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="94.0" fitWidth="83.0" onMouseClicked="#handleAddAccountsButton" layoutX="-35.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                           <image>
+                              <Image url="@../mediaMap/AddButton.png" />
                            </image>
                         </ImageView>
                      </children>
