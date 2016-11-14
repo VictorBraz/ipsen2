@@ -2,6 +2,9 @@ package Controller;
 
 import DAO.AccountDAO;
 import Model.Account;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 
@@ -10,10 +13,11 @@ import java.util.ArrayList;
  */
 public class AccountController {
 
+    @FXML private JFXTextField usernameTextField;
+    @FXML private JFXPasswordField passwordTextField;
+
     private AccountDAO accountDAO;
-//    private AccountView accountView;
-//    private AccountCreatorView accountCreatorView;
-//    private LoginView.fxml loginView;
+
 
     public AccountController(){
         try{
