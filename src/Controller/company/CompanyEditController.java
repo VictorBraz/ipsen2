@@ -1,13 +1,12 @@
-package Controller.company;
+package controller.company;
 
-import Controller.client.EditClientController;
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
-import Model.*;
+import model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -214,7 +213,7 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     void handleCancelButton(MouseEvent event){
         fillFields();
         editable(false);
-        bedrijfLabel.setText("Bedrijf Bekijken");
+        bedrijfLabel.setText("Bedrijf Informatie");
         addContent(resources.getString("COMPANIES"));
     }
 
@@ -228,7 +227,7 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     @FXML
     void handleEditButton(MouseEvent event){
         editable(true);
-        bedrijfLabel.setText("Bedrijfsgegevens Aanpassen");
+        bedrijfLabel.setText("Bedrijf Bewerken");
     }
 
     @FXML
@@ -287,7 +286,7 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         }
         this.resources = resources;
         fillFields();
-        bedrijfLabel.setText("Bedrijfsgegevens Bekijken");
+        bedrijfLabel.setText("Bedrijf Informatie");
         editable(false);
 
     }

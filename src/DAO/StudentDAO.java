@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.Address;
-import Model.Student;
+import model.Address;
+import model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class StudentDAO extends DAO {
             student.setId(id);
         }
         if (rowInserted > 0) {
-            System.out.println("A new Student was inserted succesfully!");
+            System.out.println("A new student was inserted succesfully!");
         }
         statement.close();
         return student;
@@ -105,7 +105,7 @@ public class StudentDAO extends DAO {
         int rowInserted = statement.executeUpdate();
 
         if (rowInserted > 0){
-            System.out.println("The Student Has Been updated succesfully!");
+            System.out.println("The student Has Been updated succesfully!");
         }
 
         statement.close();

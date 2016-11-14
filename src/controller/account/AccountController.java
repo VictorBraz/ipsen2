@@ -1,7 +1,7 @@
-package Controller;
+package controller.account;
 
 import DAO.AccountDAO;
-import Model.Account;
+import model.Account;
 
 import java.util.ArrayList;
 

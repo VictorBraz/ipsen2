@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.project.ProjectController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.project.ProjectController">
    <children>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="46.0" layoutY="97.0" prefHeight="640.0" prefWidth="1270.0" styleClass="table-view" stylesheets="@../mediaMap/styles.css">
         <columns>
@@ -48,5 +52,28 @@
                </ImageView>
          </children>
        </Pane>
+      <Pane fx:id="functionAlert" layoutX="450.0" layoutY="300.0" prefHeight="196.0" prefWidth="450.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="426.0" text="Deze functionaliteit is nog niet beschikbaar" textOverrun="CLIP">
+               <font>
+                  <Font name="Roboto" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="35.0" prefHeight="106.0" prefWidth="340.0" text="Projecten toevoegen, aanpassen en bekijken&#10;is nog niet functioneel.&#10;" textFill="#979797" textOverrun="CLIP">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="confirmButton" layoutX="346.0" layoutY="131.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+               <font>
+                  <Font name="Roboto Medium" size="18.0" />
+               </font>
+            </JFXButton>
+            <Group />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
    </children>
 </AnchorPane>

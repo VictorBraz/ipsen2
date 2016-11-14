@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.Address;
-import Model.Company;
+import model.Address;
+import model.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

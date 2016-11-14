@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Project;
+import model.Project;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

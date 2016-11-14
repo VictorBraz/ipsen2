@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;

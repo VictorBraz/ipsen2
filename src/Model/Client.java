@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * Created by Bernd on 12-10-2016.
@@ -13,19 +13,26 @@ public class Client extends TableViewItem {
     private String study;
     private Address address;
     private Note note;
-
-
     private int clientAddressid;
-
     private String tag;
 
     /**
      * Instantiates a new Client.
      */
     public Client() {
-
     }
 
+    /**
+     * Instantiates a new Client.
+     *
+     * @param firstName    the first name
+     * @param lastName     the last name
+     * @param birthDate    the birth date
+     * @param study        the study
+     * @param emailAddress the email address
+     * @param phoneNumber  the phone number
+     * @param tag          the tag
+     */
     public Client(String firstName, String lastName, String birthDate, String study,
                   String emailAddress, String phoneNumber, String tag) {
         this.firstName = firstName;
@@ -58,15 +65,16 @@ public class Client extends TableViewItem {
     /**
      * Instantiates a new Client.
      *
-     * @param id        the client id
-     * @param firstName       the first name
-     * @param lastName        the last name
-     * @param birthDate       the birth date
-     * @param emailAddress    the email address
-     * @param phoneNumber the telephone number
-     * @param addressID       the address id
-     * @param noteID          the note id
-     * @param study           the study
+     * @param id           the client id
+     * @param firstName    the first name
+     * @param lastName     the last name
+     * @param birthDate    the birth date
+     * @param emailAddress the email address
+     * @param phoneNumber  the telephone number
+     * @param addressID    the address id
+     * @param noteID       the note id
+     * @param study        the study
+     * @param tag          the tag
      */
     public Client(int id, String firstName, String lastName, String birthDate,
                   String emailAddress, String phoneNumber, int addressID, int noteID, String study, String tag ) {
@@ -245,18 +253,38 @@ public class Client extends TableViewItem {
     }
 
 
+    /**
+     * Gets client addressid.
+     *
+     * @return the client addressid
+     */
     public int getClientAddressid() {
         return clientAddressid;
     }
 
+    /**
+     * Sets client addressid.
+     *
+     * @param clientAddressid the client addressid
+     */
     public void setClientAddressid(int clientAddressid) {
         this.clientAddressid = clientAddressid;
     }
 
+    /**
+     * Gets tag.
+     *
+     * @return the tag
+     */
     public String getTag() {
         return tag;
     }
 
+    /**
+     * Sets tag.
+     *
+     * @param tag the tag
+     */
     public void setTag(String tag) {
         this.tag = tag;
     }

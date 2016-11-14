@@ -1,9 +1,9 @@
-package Controller.project;
+package controller.project;
 
-import Controller.handlers.TableViewListener;
+import controller.handlers.TableViewListener;
 import DAO.*;
-import Model.Document;
-import Model.TableViewItem;
+import model.Document;
+import model.TableViewItem;
 import com.jfoenix.controls.*;
 import contentloader.ContentLoader;
 import javafx.collections.ObservableList;

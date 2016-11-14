@@ -1,12 +1,12 @@
-package Controller.Student;
+package controller.student;
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
 import DAO.StudentDAO;
-import Model.*;
+import model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;

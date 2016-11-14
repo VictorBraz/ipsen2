@@ -1,12 +1,12 @@
-package Controller.client;
+package controller.client;
 
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.ClientDAO;
 import DAO.DocumentDAO;
 import DAO.NoteDAO;
-import Model.*;
+import model.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -44,9 +44,6 @@ public class EditClientController extends ContentLoader implements Initializable
     @FXML private JFXTextField lastNameTextField;
     @FXML private JFXTextField birthDateTextfield;
     @FXML private JFXTextField addressTextField;
-
-
-
     @FXML private JFXTextField zipCodeTextField;
     @FXML private JFXTextField cityTextField;
     @FXML private JFXTextField studyTextField;
@@ -83,9 +80,13 @@ public class EditClientController extends ContentLoader implements Initializable
     private int id;
 
     private ResourceBundle resources;
-
     private ArrayList<Document> currentDocuments = new ArrayList<Document>();
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event){
         fillFields();
@@ -93,12 +94,25 @@ public class EditClientController extends ContentLoader implements Initializable
         clientLabel.setText("Cliënt Informatie");
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleEditButton(MouseEvent event) throws SQLException{
         editable(true);
-        clientLabel.setText("Cliënt Aanpassen");
-
+        clientLabel.setText("Cliënt Bewerken");
     }
+
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
         updateClient();
@@ -131,8 +145,8 @@ public class EditClientController extends ContentLoader implements Initializable
         System.out.print(currentDocuments.size());
         documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
-
     }
+
     private void editable(boolean editBoolean){
         firstNameTextField.setEditable(editBoolean);
         lastNameTextField.setEditable(editBoolean);
@@ -157,7 +171,6 @@ public class EditClientController extends ContentLoader implements Initializable
         editButton.setDisable(editBoolean);
         openFileButton.setVisible(editBoolean);
         openFileButton.setVisible(!editBoolean);
-
     }
 
     private void updateClient(){
@@ -174,7 +187,6 @@ public class EditClientController extends ContentLoader implements Initializable
         currentClient.setAddress(address);
         currentClient.setTag(tagsTextField.getText());
 
-
         try {
             currentNote = noteDAO.selectNote(currentClient.getId());
             currentNote.setText(noteTextField.getText());
@@ -184,9 +196,15 @@ public class EditClientController extends ContentLoader implements Initializable
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException, SQLException {
         Document document = new Document();
@@ -212,6 +230,12 @@ public class EditClientController extends ContentLoader implements Initializable
         showTable();
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {
         System.out.println(selectedRows);
@@ -231,6 +255,13 @@ public class EditClientController extends ContentLoader implements Initializable
         }
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
         System.out.println(selectedRows);
@@ -265,7 +296,6 @@ public class EditClientController extends ContentLoader implements Initializable
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
-
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
@@ -274,7 +304,6 @@ public class EditClientController extends ContentLoader implements Initializable
     @Override
     public void setSelectedItem(int selectedItemId) {
         id = selectedItemId;
-
     }
 
     @Override
@@ -296,7 +325,6 @@ public class EditClientController extends ContentLoader implements Initializable
         this.resources = resources;
         fillFields();
         editable(false);
-        this.clientLabel.setText("Client Informatie");
-
+        this.clientLabel.setText("Cliënt Informatie");
     }
 }

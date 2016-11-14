@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -85,21 +86,34 @@
                         <DropShadow blurType="GAUSSIAN" height="5.0" radius="3.25" width="10.0" />
                      </effect>
                   </TableView>
-                  <JFXButton fx:id="cancelButton" layoutX="892.0" layoutY="457.0" onMouseClicked="#handleCancelButton" prefHeight="51.0" prefWidth="128.0" text="ANNULEREN" textFill="#00acc1">
-                     <font>
-                        <Font name="Roboto Medium" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="submitButton" layoutX="1021.0" layoutY="457.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" text="GEREED" textFill="#00acc1">
-                     <font>
-                        <Font name="Roboto Medium" size="18.0" />
-                     </font>
-                  </JFXButton>
                   <JFXComboBox fx:id="studentComboBox" layoutX="198.0" layoutY="88.0" prefHeight="31.0" prefWidth="243.0" promptText="Medewerker" />
                   <JFXComboBox fx:id="companyComboBox" layoutX="198.0" layoutY="134.0" prefHeight="31.0" prefWidth="243.0" promptText="Bedrijf" />
                   <JFXComboBox fx:id="clientComboBox" layoutX="198.0" layoutY="274.0" prefHeight="31.0" prefWidth="243.0" promptText="Clienten" />
                   <JFXListView fx:id="clientProjectList" layoutX="190.0" layoutY="316.0" prefHeight="178.0" prefWidth="259.0" />
                   <JFXListView fx:id="companyProjectList" layoutX="198.0" layoutY="173.0" prefHeight="90.0" prefWidth="243.0" />
+                  <Pane fx:id="deleteAlert" layoutX="320.0" layoutY="120.0" prefHeight="196.0" prefWidth="450.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Label layoutX="17.0" layoutY="-6.0" prefHeight="82.0" prefWidth="426.0" text="Deze functionaliteit is nog niet beschikbaar" textOverrun="CLIP">
+                           <font>
+                              <Font name="Roboto" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="17.0" layoutY="35.0" prefHeight="106.0" prefWidth="340.0" text="Projecten toevoegen, aanpassen en bekijken&#10;is nog niet functioneel.&#10;" textFill="#979797" textOverrun="CLIP">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="confirmButton" layoutX="346.0" layoutY="131.0" onMouseClicked="#handleComfirmButton" prefHeight="51.0" prefWidth="90.0" style="-fx-cursor: hand;" text="GEREED" textFill="#00acc1">
+                           <font>
+                              <Font name="Roboto Medium" size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <Group />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Pane>
                </children>
             </AnchorPane>
          </children>

@@ -1,9 +1,4 @@
-package Model;
-
-import DAO.ClientDAO;
-import DAO.NoteDAO;
-
-import java.util.HashMap;
+package model;
 
 /**
  * Created by Bernd on 13-10-2016.

@@ -1,14 +1,13 @@
-package Controller.project;
+package controller.project;
 
-import Controller.handlers.TableViewListener;
 import DAO.ClientDAO;
 import DAO.CompanyDAO;
 import DAO.ProjectDAO;
 import DAO.StudentDAO;
-import Model.Project;
-import Model.TableViewItem;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
+import controller.handlers.TableViewListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import model.Project;
+import model.TableViewItem;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,6 +35,9 @@ public class ProjectController extends ContentLoader implements Initializable, T
     @FXML private TableColumn clientNamesColumn;
     @FXML private TableColumn companyColum;
     @FXML private TableColumn tagsColumn;
+    @FXML private Pane functionAlert;
+    @FXML private JFXButton confirmButton;
+
 
     public int selectedProjectID;
     private ObservableList<TableViewItem> projectData;
@@ -49,23 +54,22 @@ public class ProjectController extends ContentLoader implements Initializable, T
 
     @FXML
     void handleAddButton(MouseEvent event) {
-        addContent( new AddProjectController(), resources.getString("NEW_PROJECT_DIALOG"));
 
     }
 
     @FXML
     void handleDeleteButton(MouseEvent event) {
-        if (selectedRows.size() != 0) {
-            selectedRows.forEach(row -> clientDAO.deleteClient(row));
-            //clientData = FXCollections.observableArrayList(clientDAO.selectAllClients());
-            System.out.println(selectedRows.toString());
-            addContent(resources.getString("PROJECTS"));
-        }
+
     }
 
     @FXML
     void handleZoominButton(MouseEvent event) {
 
+    }
+
+    @FXML
+    void handleComfirmButton(MouseEvent event) {
+        addContent(resources.getString("MAINMENU"));
 
     }
 
@@ -78,7 +82,6 @@ public class ProjectController extends ContentLoader implements Initializable, T
     public void setSelectedItem(int selectedItemId) {
 
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,13 +1,12 @@
 
-package Controller.company;
+package controller.company;
 
-import Controller.Student.EditStudentController;
-import Controller.handlers.TableViewListener;
-import Controller.handlers.TableViewSelectHandler;
+import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
 import DAO.AddressDAO;
 import DAO.CompanyDAO;
-import Model.Company;
-import Model.TableViewItem;
+import model.Company;
+import model.TableViewItem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import contentloader.ContentLoader;
