@@ -127,7 +127,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @Override
     public void setSelectedItem(int selectedItemId) {
         this.selectedCompanyID = selectedItemId;
-
+        System.out.println(selectedItemId);
     }
 
 
@@ -145,7 +145,7 @@ public class CompanyController extends ContentLoader implements Initializable, T
         phoneNumberColum.setCellValueFactory(new PropertyValueFactory<Company, String>("phoneNumber"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("emailAddress"));
         tagColumn.setCellValueFactory(new PropertyValueFactory<Company, String>("tag"));
-        companyIdCol.setCellValueFactory(new PropertyValueFactory<Company, Integer>("companyId"));
+        companyIdCol.setCellValueFactory(new PropertyValueFactory<Company, Integer>("id"));
         tableView.setItems(companyData);
 
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));

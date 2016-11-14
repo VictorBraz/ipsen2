@@ -33,7 +33,7 @@ public class AccountController {
 
     public void cmdDeleteAccount(Account account){
         try{
-            accountDAO.deleteAccount(account);
+            accountDAO.deleteAccount(account.getId());
         }catch(Exception e){
             e.printStackTrace();
         }

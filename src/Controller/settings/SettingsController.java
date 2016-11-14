@@ -1,6 +1,8 @@
 package controller.settings;
 
 import controller.handlers.TableViewListener;
+import controller.handlers.TableViewSelectHandler;
+
 import DAO.AccountDAO;
 import model.Account;
 import model.TableViewItem;
@@ -16,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import services.Database;
@@ -41,11 +44,12 @@ public class SettingsController extends ContentLoader implements Initializable, 
     @FXML private TableColumn checkBoxColumn;
     @FXML private TableColumn userNameColumn;
     @FXML private TableColumn passwordColumn;
+    @FXML private TableColumn accountIdColumn;
 
     private int selectedAccountID;
     private ObservableList<TableViewItem> accountData;
     private ArrayList<Integer> selectedRows;
-    private ArrayList<Account> accountdata;
+    //private ArrayList<Account> accountdata;
     private JFXCheckBox selectAllCheckBox;
     PropertiesLoaderInterface properties;
 
@@ -56,7 +60,11 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     @FXML
     void handleAccountDeleteButton(MouseEvent event) {
-
+        if(selectedRows.size() != 0){
+            selectedRows.forEach(row -> accountDAO.deleteAccount(row));
+            selectedRows.clear();
+            addContent(resources.getString("SETTINGS"));
+        }
     }
 
     @FXML
@@ -87,6 +95,18 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     @FXML
     void handleZoominAccountButton(MouseEvent event) {
+
+    }
+
+    private void showTable(){
+        TableViewSelectHandler handler = new TableViewSelectHandler(tableView, this);
+        handler.createCheckBoxColumn();
+        handler.createSelectAllCheckBox();
+
+        accountIdColumn.setCellValueFactory(new PropertyValueFactory<Account, Integer>("id"));
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<Account, String>("userName"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<Account, String>("password"));
+        tableView.setItems(accountData);
 
     }
 
@@ -124,11 +144,14 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
-
+        this.selectedRows = selectedRows;
+        System.out.println("Selected rowss: " + selectedRows);
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
+        this.selectedAccountID = selectedItemId;
+        System.out.println(selectedAccountID);
 
     }
 
@@ -152,6 +175,8 @@ public class SettingsController extends ContentLoader implements Initializable, 
         editable(false);
 
         accountData = FXCollections.observableArrayList(accountDAO.getAllAccounts());
+        accountData.forEach(row -> System.out.println(row.getId()));
+        showTable();
     }
 
 }
