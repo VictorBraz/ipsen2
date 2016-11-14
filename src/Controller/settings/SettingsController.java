@@ -82,9 +82,12 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     @FXML
     void handleComfirmButton(MouseEvent event) {
-        updateSettings();
-        fillFields();
-        editable(false);
+        if(!hostAddressTextField.getText().trim().isEmpty() && !portNumberTextField.getText().trim().isEmpty() &&
+                !serverNameTextfield.getText().trim().isEmpty()) {
+            updateSettings();
+            fillFields();
+            editable(false);
+        }
 
     }
 
