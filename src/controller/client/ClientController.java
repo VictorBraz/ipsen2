@@ -24,11 +24,15 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 /**
  * Created by Bernd on 12-10-2016.
  */
 public class ClientController extends ContentLoader implements Initializable, TableViewListener{
 
+    /**
+     * The Table view.
+     */
     @FXML  TableView<TableViewItem> tableView;
     @FXML private TableColumn firstNameColumn;
     @FXML private TableColumn lastNameColumn;
@@ -41,6 +45,9 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     @FXML private Pane deleteAlert;
     @FXML private Pane zoominAlert;
 
+    /**
+     * The Selected client id.
+     */
     public int selectedClientID;
     private ObservableList<TableViewItem> clientData;
     private ArrayList<Integer> selectedRows;
@@ -48,16 +55,26 @@ public class ClientController extends ContentLoader implements Initializable, Ta
     private ClientDAO clientDAO;
     private ResourceBundle resources;
 
+    /**
+     * Handle add button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleAddButton(MouseEvent event) throws IOException {
         addContent(new AddClientController(), resources.getString("NEW_CLIENT_DIALOG"));
     }
 
+    /**
+     * Handle delete button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteButton(MouseEvent event) {
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> clientDAO.deleteClient(row));
-            System.out.println(selectedRows.toString());
             addContent(resources.getString("CLIENTS"));
         } else {
             deleteAlert.setVisible(true);
@@ -69,6 +86,11 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         }
     }
 
+    /**
+     * Handle zoomin button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleZoominButton(MouseEvent event) {
         if (selectedRows.size() != 0) {
@@ -87,6 +109,12 @@ public class ClientController extends ContentLoader implements Initializable, Ta
         }
 
     }
+
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         deleteAlert.setVisible(false);

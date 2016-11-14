@@ -52,6 +52,9 @@ public class SettingsController extends ContentLoader implements Initializable, 
     private ArrayList<Integer> selectedRows;
     //private ArrayList<Account> accountdata;
     private JFXCheckBox selectAllCheckBox;
+    /**
+     * The Properties.
+     */
     PropertiesLoaderInterface properties;
 
     private Database database;
@@ -59,6 +62,11 @@ public class SettingsController extends ContentLoader implements Initializable, 
     private AccountDAO accountDAO;
     private ResourceBundle resources;
 
+    /**
+     * Handle account delete button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAccountDeleteButton(MouseEvent event) {
         if(selectedRows.size() != 0){
@@ -68,18 +76,33 @@ public class SettingsController extends ContentLoader implements Initializable, 
         }
     }
 
+    /**
+     * Handle add accounts button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAddAccountsButton(MouseEvent event) {
         addContent(new AccountController(), resources.getString("NEW_ACCOUNT_DIALOG"));
 
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event) {
         fillFields();
         editable(false);
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         updateSettings();
@@ -88,12 +111,22 @@ public class SettingsController extends ContentLoader implements Initializable, 
 
     }
 
+    /**
+     * Handle edit settings button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleEditSettingsButton(MouseEvent event) {
         editable(true);
 
     }
 
+    /**
+     * Handle zoomin account button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleZoominAccountButton(MouseEvent event) {
 
@@ -146,13 +179,11 @@ public class SettingsController extends ContentLoader implements Initializable, 
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
-        System.out.println("Selected rowss: " + selectedRows);
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
         this.selectedAccountID = selectedItemId;
-        System.out.println(selectedAccountID);
 
     }
 
@@ -176,7 +207,6 @@ public class SettingsController extends ContentLoader implements Initializable, 
         editable(false);
 
         accountData = FXCollections.observableArrayList(accountDAO.getAllAccounts());
-        accountData.forEach(row -> System.out.println(row.getId()));
         showTable();
     }
 

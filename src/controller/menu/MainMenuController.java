@@ -9,6 +9,9 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Bernd on 2-11-2016
+ */
 public class MainMenuController extends ContentLoader implements Initializable {
 
     @FXML private Pane companyButton;
@@ -21,6 +24,11 @@ public class MainMenuController extends ContentLoader implements Initializable {
 
     private ResourceBundle resources;
 
+    /**
+     * Handle shortcut button.
+     *
+     * @param event the event
+     */
     @FXML void handleShortcutButton(MouseEvent event) {
         Object selectedPane = event.getSource();
         if (selectedPane == studentButton) {

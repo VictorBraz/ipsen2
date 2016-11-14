@@ -79,7 +79,6 @@ public class CompanyEditController extends ContentLoader implements Initializabl
 
 
     private void fillFields(){
-        System.out.println("selected company id:" + id);
         currentCompany = companyDAO.selectCompany(id);
         Address address = currentCompany.getCompanyAddress();
 
@@ -101,9 +100,6 @@ public class CompanyEditController extends ContentLoader implements Initializabl
             e.printStackTrace();
         }
         noteTextField.setText(currentNote.getText());
-        System.out.print("currentdocuments: " + currentDocuments.size());
-        System.out.print("currentcompanyid: " + currentCompany.getId());
-//        System.out.print("currentdocuments: " + currentDocuments.size());
         documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
     }
@@ -133,8 +129,6 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     }
 
     private void updateCompany(){
-
-        System.out.println(currentCompany.getCompanyAddress());
         currentAddress = currentCompany.getCompanyAddress();
 
         currentAddress.setAddress(addressNameTextField.getText());
@@ -161,6 +155,12 @@ public class CompanyEditController extends ContentLoader implements Initializabl
     }
 
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws Exception{
         Document document = new Document();
@@ -186,12 +186,17 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         showTable();
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
-        System.out.println(selectedRows);
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     documentDAO.deleteDocument(row);
                 } catch (SQLException e) {
@@ -209,6 +214,11 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         }
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event){
         fillFields();
@@ -217,6 +227,11 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         addContent(resources.getString("COMPANIES"));
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event){
         updateCompany();
@@ -224,21 +239,30 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         editable(false);
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleEditButton(MouseEvent event){
         editable(true);
         bedrijfLabel.setText("Bedrijf Bewerken");
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {
         if (selectedRows.size() != 0) {
 
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     File file = documentDAO.selectDocument(row).getFile();
-                    System.out.println("file: " + file.toString());
                     Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -258,14 +282,12 @@ public class CompanyEditController extends ContentLoader implements Initializabl
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
     @Override
     public void setSelectedRows(ArrayList selectedRows){
         this.selectedRows = selectedRows;
-        System.out.println("rows selected:" + selectedRows);
     }
 
     @Override

@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * The type Add client controller.
+ */
 public class AddClientController extends ContentLoader implements Initializable, TableViewListener {
 
     @FXML private JFXTextField firstNameTextField;
@@ -76,6 +79,12 @@ public class AddClientController extends ContentLoader implements Initializable,
     private ResourceBundle resources;
     private ArrayList<Document> documents = new ArrayList<Document>();
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) throws IOException {
         Document document = new Document();
@@ -107,15 +116,26 @@ public class AddClientController extends ContentLoader implements Initializable,
 
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event) {
         addContent(resources.getString("CLIENTS"));
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) throws IOException, SQLException {
 
@@ -141,7 +161,6 @@ public class AddClientController extends ContentLoader implements Initializable,
             client.setTag(tagsTextField.getText());
 
             client.setId(clientDAO.addClient(client).getId());
-            System.out.println(client.getId());
 
             note.setOwnerID(client.getId());
             note.setText(noteTextField.getText());
@@ -157,12 +176,23 @@ public class AddClientController extends ContentLoader implements Initializable,
         }
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleEditButton(MouseEvent event) {
 
     }
 
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     * @throws SQLException the sql exception
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws SQLException {
         documents.clear();
@@ -170,6 +200,12 @@ public class AddClientController extends ContentLoader implements Initializable,
         showTable();
     }
 
+    /**
+     * Handle open file button.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {}
 

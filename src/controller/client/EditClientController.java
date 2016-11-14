@@ -142,7 +142,6 @@ public class EditClientController extends ContentLoader implements Initializable
             e.printStackTrace();
         }
         noteTextField.setText(currentNote.getText());
-        System.out.print(currentDocuments.size());
         documentData = FXCollections.observableArrayList(currentDocuments);
         showTable();
     }
@@ -238,13 +237,10 @@ public class EditClientController extends ContentLoader implements Initializable
      */
     @FXML
     void handleOpenFileButton(MouseEvent event) throws IOException {
-        System.out.println(selectedRows);
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     File file = documentDAO.selectDocument(row).getFile();
-                    System.out.println("file: " + file.toString());
                     Desktop.getDesktop().open(documentDAO.selectDocument(row).getFile());
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -264,10 +260,8 @@ public class EditClientController extends ContentLoader implements Initializable
      */
     @FXML
     void handleDeleteFileButton(MouseEvent event) throws IOException, SQLException {
-        System.out.println(selectedRows);
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> {
-                System.out.println(row);
                 try {
                     documentDAO.deleteDocument(row);
                 } catch (SQLException e) {
@@ -292,7 +286,6 @@ public class EditClientController extends ContentLoader implements Initializable
         fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("documentName"));
         fileIDColumn.setCellValueFactory(new PropertyValueFactory<Document,Integer>("id"));
         tableView.setItems(documentData);
-        System.out.println(documentData);
         tableView.setPlaceholder(new Label("Er is geen data beschikbaar"));
     }
 

@@ -39,6 +39,9 @@ public class ProjectController extends ContentLoader implements Initializable, T
     @FXML private JFXButton confirmButton;
 
 
+    /**
+     * The Selected project id.
+     */
     public int selectedProjectID;
     private ObservableList<TableViewItem> projectData;
     private ArrayList<Integer> selectedRows;
@@ -52,21 +55,41 @@ public class ProjectController extends ContentLoader implements Initializable, T
 
     private ResourceBundle resources;
 
+    /**
+     * Handle add button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAddButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle delete button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle zoomin button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleZoominButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         addContent(resources.getString("MAINMENU"));

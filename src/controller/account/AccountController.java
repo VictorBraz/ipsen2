@@ -32,6 +32,9 @@ public class AccountController extends ContentLoader implements Initializable, T
     @FXML private JFXComboBox bedrijfComboBox;
 
     private ArrayList<Integer> selectedRows;
+    /**
+     * The Selected id.
+     */
     public int selectedID;
 
     private ArrayList<Company> companyData;
@@ -46,6 +49,9 @@ public class AccountController extends ContentLoader implements Initializable, T
     private ClientDAO clientDAO;
 
 
+    /**
+     * Instantiates a new Account controller.
+     */
     public AccountController(){
         try{
             accountDAO = new AccountDAO();
@@ -54,6 +60,12 @@ public class AccountController extends ContentLoader implements Initializable, T
         }
     }
 
+    /**
+     * Handle add account.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     public void handleAddAccount(MouseEvent event) throws Exception{
 
@@ -72,16 +84,26 @@ public class AccountController extends ContentLoader implements Initializable, T
         }
         addContent(resources.getString("SETTINGS"));
         } else {
-            System.out.println("niet alle velden zijn ingevuld");
             addContent(resources.getString("SETTINGS"));
         }
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     public void handleCancelButton(MouseEvent event) throws Exception{
         addContent(resources.getString("SETTINGS"));
     }
 
+    /**
+     * Cmd delete account.
+     *
+     * @param account the account
+     */
     @FXML
     public void cmdDeleteAccount(Account account){
         try{
@@ -91,6 +113,11 @@ public class AccountController extends ContentLoader implements Initializable, T
         }
     }
 
+    /**
+     * Cmd edit account.
+     *
+     * @param account the account
+     */
     public void cmdEditAccount(Account account){
         try{
             accountDAO.editAccount(account);
@@ -99,6 +126,11 @@ public class AccountController extends ContentLoader implements Initializable, T
         }
     }
 
+    /**
+     * Cmd select all accounts array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Account> cmdSelectAllAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         try{
@@ -112,43 +144,19 @@ public class AccountController extends ContentLoader implements Initializable, T
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
-        System.out.println("rows selected:" + selectedRows);
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
         this.selectedID = selectedItemId;
-        System.out.println(selectedItemId);
     }
-//
-//    public void fillComboBoxes(){
-//        for(Client client : clientData){
-//            clientComboBox.getItems().add(client);
-//        }
-//        for(Student student : studentData){
-//            medewerkerComboBox.getItems().add(student);
-//        }
-//        for(Company company : companyData){
-//            bedrijfComboBox.getItems().add(company);
-//        }
-//    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         this.resources = resources;
-//        try{
-//            companyDAO = new CompanyDAO();
-//            clientDAO = new ClientDAO();
-//            studentDAO = new StudentDAO();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        companyData = companyDAO.getCompanies();
-//        clientData = clientDAO.selectAllClients();
-//        studentData = studentDAO.selectAllStudents();
 
-        //fillComboBoxes();
 
     }
 

@@ -49,6 +49,9 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @FXML private JFXButton handleEditButton;
     @FXML private Pane zoominAlert;
 
+    /**
+     * The Selected company id.
+     */
     public int selectedCompanyID;
     private ObservableList<TableViewItem> companyData;
     private ArrayList<Integer> selectedRows;
@@ -59,21 +62,36 @@ public class CompanyController extends ContentLoader implements Initializable, T
     private ResourceBundle resources;
 
 
+    /**
+     * Handle add button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAddButton(MouseEvent event) {
         addContent(new AddCompanyController(), resources.getString("NEW_COMPANY_DIALOG"));
     }
 
+    /**
+     * Handle edit button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleEditButton(MouseEvent event){
 
     }
+
+    /**
+     * Handle delete button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteButton(MouseEvent event) {
 
         if (selectedRows.size() != 0) {
             selectedRows.forEach(row -> dao.deleteCompany(row));
-            System.out.println(selectedRows.toString());
             selectedRows.clear();
             addContent(resources.getString("COMPANIES"));
         } else {
@@ -87,6 +105,11 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     }
 
+    /**
+     * Handle zoomin button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleZoominButton(MouseEvent event) {
 
@@ -111,6 +134,11 @@ public class CompanyController extends ContentLoader implements Initializable, T
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
         deleteAlert.setVisible(false);
@@ -120,13 +148,11 @@ public class CompanyController extends ContentLoader implements Initializable, T
     @Override
     public void setSelectedRows(ArrayList selectedRows) {
         this.selectedRows = selectedRows;
-        System.out.println("rows selected:" + selectedRows);
     }
 
     @Override
     public void setSelectedItem(int selectedItemId) {
         this.selectedCompanyID = selectedItemId;
-        System.out.println(selectedItemId);
     }
 
 

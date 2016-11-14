@@ -17,6 +17,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 
+/**
+ * Created by Bernd on 2-11-2016
+ */
 public class  TableViewSelectHandler extends ContentLoader {
 
     private TableView<TableViewItem> tableView;
@@ -27,6 +30,7 @@ public class  TableViewSelectHandler extends ContentLoader {
 
     /**
      * Instantiates a new Table view select handler.
+     *
      * @param tableView the table view
      * @param listener  the listener
      */

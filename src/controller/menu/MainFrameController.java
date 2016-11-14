@@ -18,6 +18,9 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Bernd on 2-11-2016
+ */
 public class MainFrameController extends ContentLoader implements Initializable {
 
     @FXML private StackPane contentHolder;
@@ -38,28 +41,51 @@ public class MainFrameController extends ContentLoader implements Initializable 
     private ResourceBundle resources;
 
 
-
-
+    /**
+     * Set title.
+     *
+     * @param titel the titel
+     */
     public void setTitle(String titel){
         titelLabel.setText(titel);
     }
 
+    /**
+     * Handle close button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCloseButton(MouseEvent event) {
         getPrimaryStage(event).close();
     }
 
+    /**
+     * Handle minimize button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleMinimizeButton(MouseEvent event) {
         getPrimaryStage(event).setIconified(true);
     }
 
+    /**
+     * Handle mouse dragged.
+     *
+     * @param event the event
+     */
     @FXML
     void handleMouseDragged(MouseEvent event) {
         primaryStage.setX(event.getScreenX() + xOffset);
         primaryStage.setY(event.getScreenY() + yOffset);
     }
 
+    /**
+     * Handle mouse pressed.
+     *
+     * @param event the event
+     */
     @FXML
     void handleMousePressed(MouseEvent event) {
         primaryStage = getPrimaryStage(event);
@@ -67,6 +93,11 @@ public class MainFrameController extends ContentLoader implements Initializable 
         yOffset = primaryStage.getY() - event.getScreenY();
     }
 
+    /**
+     * Handle nav button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleNavButton(MouseEvent event) {
         Object selectedPane = event.getSource();
@@ -88,7 +119,12 @@ public class MainFrameController extends ContentLoader implements Initializable 
         closeNavMenu();
         }
 
-        public void setContent(Node node) {
+    /**
+     * Sets content.
+     *
+     * @param node the node
+     */
+    public void setContent(Node node) {
         contentHolder.getChildren().setAll(node);
         FadeTransition animation = new FadeTransition(Duration.millis(400), node);
         animation.setFromValue(0);
@@ -129,6 +165,9 @@ public class MainFrameController extends ContentLoader implements Initializable 
         animation.play();
     }
 
+    /**
+     * Remove all content.
+     */
     public void removeAllContent() {
         contentHolder.getChildren().removeAll();
     }
@@ -139,6 +178,11 @@ public class MainFrameController extends ContentLoader implements Initializable 
         prepareSlideMenuAnimation();
     }
 
+    /**
+     * Hamburger menu visible.
+     *
+     * @param editBoolean the edit boolean
+     */
     public void hamburgerMenuVisible(boolean editBoolean) {
         menuButton.setVisible(editBoolean);
     }

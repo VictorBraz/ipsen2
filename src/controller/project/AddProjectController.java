@@ -53,21 +53,41 @@ public class AddProjectController extends ContentLoader implements Initializable
     private ArrayList<Document> documents = new ArrayList<Document>();
 
 
+    /**
+     * Handle add file button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAddFileButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle cancel button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleCancelButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle comfirm button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleComfirmButton(MouseEvent event) {
 
     }
 
+    /**
+     * Handle delete file button.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteFileButton(MouseEvent event) {
 
